@@ -1,0 +1,34 @@
+.logo_ue {
+  padding-bottom:59px;
+  padding-left:103px;
+  background:url('/assets/img/logos/ue.jpg');
+}
+.logo_lr {
+  padding-bottom:59px;
+  padding-left:47px;
+  background:url('/assets/img/logos/lr.jpg');
+}
+.logo_nd {
+  padding-bottom:55px;
+  padding-left:148px;
+  background:url('/assets/img/logos/nd.jpg');
+}
+.logo_nh {
+  padding-bottom:46px;
+  padding-left:59px;
+  background:url('/assets/img/logos/fnh.png');
+}
+.logo_nh:hover {
+  padding-bottom:46px;
+  padding-left:59px;
+  background:url('/assets/img/logos/fnh-hover.png');
+}
+.logo_ue:hover {
+  background:url('/assets/img/logos/ue_hover.jpg');
+}
+.logo_lr:hover {
+  background:url('/assets/img/logos/lr_hover.jpg');
+}
+.logo_nd:hover {
+  background:url('/assets/img/logos/nd_hover.jpg');
+}

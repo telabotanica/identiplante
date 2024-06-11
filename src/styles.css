@@ -1,1 +1,193 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../public/assets/style/fonts.css";
+@import "../public/assets/style/colors.css";
+@import "../public/assets/style/card.css";
+
+:root {
+  --static: rgba(0, 0, 0, 0.5);
+  --xsmall: 390px;
+  --small: 768px;
+  --medium: 1024px;
+  --large: 1280px;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--background);
+  color: var(--text);
+}
+body {
+  margin: 0;
+  font-family: "Muli", sans-serif;
+  font-size: 1rem;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+  padding: 0 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Ubuntu", sans-serif;
+  text-transform: capitalize;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+h5 {
+  font-size: 1.6rem;
+}
+
+h6 {
+  font-size: 1.4rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0 0 2rem;
+}
+
+button {
+  background: var(--primary);
+  padding: 0.5em 2em;
+  border-radius: 0.5rem;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.flex-center-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+}
+
+.flex-evenly {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2rem;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.mt-0-5 {
+  margin-top: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mt-1-5 {
+  margin-top: 1.5rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+.mr-ml-2{
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.p-1{
+  padding: 1rem;
+}
+
+.pt-1 {
+  padding-top: 1rem;
+}
+
+.pb-1 {
+  padding-bottom: 1rem;
+}
+
+.pr-1 {
+  padding-right: 1rem;
+}
+
+.pl-1 {
+  padding-left: 1rem;
+}
+
+.pl-2{
+  padding-left: 2rem;
+}
+
+.pr-1-5 {
+  padding-right: 1.5rem;
+}
+
+.border-30 {
+  border-radius: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.justify {
+  text-align: justify;
+}
