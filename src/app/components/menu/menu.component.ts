@@ -10,20 +10,29 @@ import {CommonService} from "../../services/common.service";
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
-  isMenuOpen = false;
-  selectedOnglet = "";
+  commonService = inject(CommonService)
 
-  private commonService = inject(CommonService)
+  isMenuOpen = false;
+  selectedOnglet = this.commonService.selectedOnglet();
 
   ngOnInit(): void {
     let urlParams: { name: string, value: string }[] = this.commonService.readUrlParameters()
     const masqueTypeParam = urlParams.find((param: { name: string, value: string }) => param.name === 'masque.type');
     if (masqueTypeParam) {
-      this.selectedOnglet = masqueTypeParam.value;
+      this.commonService.setOnglet(masqueTypeParam.value)
+      this.selectedOnglet = this.commonService.selectedOnglet();
     }
   }
 
   toggleMenu(){
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  handleButtonClick(onglet: string) {
+    this.commonService.setOnglet(onglet)
+    this.selectedOnglet = this.commonService.selectedOnglet();
+    if (this.isMenuOpen) {
+      this.toggleMenu();
+    }
   }
 }

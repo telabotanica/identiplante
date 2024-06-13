@@ -1,5 +1,6 @@
 import {Component, effect, inject, input} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
+import {CommonService} from "../../services/common.service";
 
 @Component({
   selector: 'app-contenu',
@@ -10,11 +11,15 @@ import {AuthService} from "../../services/auth.service";
 })
 export class ContenuComponent {
   authService = inject(AuthService);
+  commonService = inject(CommonService)
+
   userId = this.authService.userId();
+  selectedOnglet = this.commonService.selectedOnglet();
 
   constructor() {
     effect(() => {
       this.userId = this.authService.userId();
+      this.selectedOnglet = this.commonService.selectedOnglet();
     });
   }
 }

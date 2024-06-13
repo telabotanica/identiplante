@@ -3,11 +3,40 @@
 <nav class="nav-div" [class.is-open]="isMenuOpen">
   <div class="menu-div">
     <div class="w-100">
-      <button [class.button-selected]="selectedOnglet === 'tous'" class="mt-2 w-100" (click)="isMenuOpen && toggleMenu()">Tout</button>
-      <button [class.button-selected]="selectedOnglet === 'adeterminer' || selectedOnglet === ''" class="button-selected mt-2 w-100" (click)="isMenuOpen && toggleMenu()">A déterminer</button>
-      <button [class.button-selected]="selectedOnglet === 'aconfirmer'" class="mt-2 w-100" (click)="isMenuOpen && toggleMenu()">A confirmer</button>
-      <button [class.button-selected]="selectedOnglet === 'validees'" class="mt-2 w-100" (click)="isMenuOpen && toggleMenu()">Vérifiées</button>
-      <button [class.button-selected]="selectedOnglet === 'monactivite'" class="mt-2 w-100" (click)="isMenuOpen && toggleMenu()">Mon activité</button>
+      <button
+        [class.button-selected]="selectedOnglet === 'tous'"
+        class="mt-2 w-100"
+        (click)="handleButtonClick('tous')">
+        Tout
+      </button>
+
+      <button
+        [class.button-selected]="selectedOnglet === 'adeterminer' || selectedOnglet === ''"
+        class="button-selected mt-2 w-100"
+        (click)="handleButtonClick('adeterminer')">
+        A déterminer
+      </button>
+
+      <button
+        [class.button-selected]="selectedOnglet === 'aconfirmer'"
+        class="mt-2 w-100"
+        (click)="handleButtonClick('aconfirmer')">
+        A confirmer
+      </button>
+
+      <button
+        [class.button-selected]="selectedOnglet === 'validees'"
+        class="mt-2 w-100"
+        (click)="handleButtonClick('validees')">
+        Vérifiées
+      </button>
+
+      <button
+        [class.button-selected]="selectedOnglet === 'monactivite'"
+        class="mt-2 w-100"
+        (click)="handleButtonClick('monactivite')">
+        Mon activité
+      </button>
     </div>
 
     <app-login class="mb-2 mr-ml-1"></app-login>

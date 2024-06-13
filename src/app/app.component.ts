@@ -7,6 +7,7 @@ import {AuthService} from "./services/auth.service";
 import {ContenuComponent} from "./components/contenu/contenu.component";
 import {TopSectionComponent} from "./components/top-section/top-section.component";
 import {MenuComponent} from "./components/menu/menu.component";
+import {CommonService} from "./services/common.service";
 
 @Component({
   selector: 'app-root',
@@ -19,11 +20,15 @@ export class AppComponent {
   title = 'identiplante';
 
   authService = inject(AuthService);
+  commonService = inject(CommonService)
+
   userId = this.authService.userId();
+  selectedOnglet = this.commonService.selectedOnglet();
 
   constructor() {
     effect(() => {
       this.userId = this.authService.userId();
+      this.selectedOnglet = this.commonService.selectedOnglet();
     });
   }
 

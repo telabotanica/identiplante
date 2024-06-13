@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
+  selectedOnglet = signal("");
 
   constructor() { }
 
@@ -20,5 +21,16 @@ export class CommonService {
     }
 
     return urlParams;
+  }
+
+  setOnglet(onglet: string) {
+    this.selectedOnglet.set(onglet);
+    this.updateUrlParameter('masque.type', onglet);
+  }
+
+  private updateUrlParameter(key: string, value: string): void {
+    const url = new URL(window.location.href);
+    url.searchParams.set(key, value);
+    window.history.replaceState({}, '', url.toString());
   }
 }
