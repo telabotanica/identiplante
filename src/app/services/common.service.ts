@@ -5,6 +5,8 @@ import {Injectable, signal} from '@angular/core';
 })
 export class CommonService {
   selectedOnglet = signal("");
+  url = new URL(window.location.href)
+  urlParamsString = signal(this.url.search)
 
   constructor() { }
 
@@ -26,11 +28,18 @@ export class CommonService {
   setOnglet(onglet: string) {
     this.selectedOnglet.set(onglet);
     this.updateUrlParameter('masque.type', onglet);
+
+    let url = new URL(window.location.href)
+    this.setUrlParamsString(url.search)
   }
 
   private updateUrlParameter(key: string, value: string): void {
     const url = new URL(window.location.href);
     url.searchParams.set(key, value);
     window.history.replaceState({}, '', url.toString());
+  }
+
+  setUrlParamsString(params: string){
+    this.urlParamsString.set(params)
   }
 }
