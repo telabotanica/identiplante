@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import { environment } from '../../environments/environment';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -12,6 +12,7 @@ export class AuthService {
 
   private authUrl = environment.serviceAuthBaseUrl;
   private delUser = environment.serviceUtilisateursBaseUrl;
+  userId = signal("");
 
   http = inject(HttpClient)
   router = inject(Router)
@@ -31,6 +32,10 @@ export class AuthService {
 
   identite(){
     return this.http.get<any>(this.authUrl + 'identite')
+  }
+
+  setUserId(id: string) {
+    this.userId.set(id);
   }
 
 }

@@ -1,15 +1,20 @@
-<section id="zoneEntete" class="limitMax">
-  <h1 id="zoneTitre">
-        <a id="titreLien" href="{{baseUrl}}">IdentiPlanteQ</a>
-  </h1>
+<section id="zoneEntete">
+  <div class="flex-evenly">
+    <h1 id="zoneTitre">
+      <a id="titreLien" href="{{baseUrl}}">IdentiPlante</a>
+    </h1>
 
-  <div id="zoneLogos">
-    <a class="logo_tela" href="https://www.tela-botanica.org" target="_blank"></a>
-    <a class="logo_pn" href="https://plantnet.org/" target="_blank"></a>
+    <div>
+      <a class="logo_tela" href="https://www.tela-botanica.org" target="_blank"><img src="/assets/img/logos/tela.jpg" alt="logo_tela" ></a>
+    </div>
+
+    <div>
+      <a class="logo_pn" href="https://plantnet.org/" target="_blank"><img src="/assets/img/logos/pn.jpg" alt="logo_Plantnet" ></a>
+    </div>
   </div>
 
-  <div id="zoneChapeau">
-    <ul class="traitTela">
+  <div id="zoneChapeau" class="flex-evenly">
+    <ul>
       <li>Cet espace vous permet d'échanger sur la détermination d'espèces.</li>
       <li>
         Vous ne parvenez pas à déterminer une plante ? <br />
@@ -20,10 +25,9 @@
         Postez un commentaire ou proposez une nouvelle détermination.
       </li>
     </ul>
+
+<!--    <app-login></app-login>-->
   </div>
 
-  <div id="zoneEnteteContenu">
-    <app-login></app-login>
-  </div>
   <hr />
 </section>

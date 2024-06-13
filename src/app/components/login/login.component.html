@@ -1,32 +1,39 @@
-<h2>Identifiez vous</h2>
+<div class="flex-center-column">
+  <h6 *ngIf="!isLoggedIn" class="w-100 mt-0-5 mb-1">Identifiez vous</h6>
 
-<div class="login-card">
+  <div class="w-100">
+    <div class="">
+      S'inscrire
+      <!--    <span>You don't have an account? <a routerLink="/signup">Sign up</a></span>-->
+    </div>
 
-  <div class="card-title">
-<!--    <span>You don't have an account? <a routerLink="/signup">Sign up</a></span>-->
+    <form *ngIf="!isLoggedIn"
+          class="flex-start-column"
+          [formGroup]="loginForm"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm">
+      <input name="username" type="username" formControlName="username" placeholder="email" class="">
+      <div *ngIf="!loginForm.get('username')?.valid && f.submitted" class="invalid-feedback w-100">
+        Le nom d'utilisateur est obligatoire !
+      </div>
+
+      <input type="password" formControlName="password" placeholder="Mot de passe" class="">
+      <div *ngIf="!loginForm.get('password')?.valid && f.submitted" class="invalid-feedback w-100">
+        Un mot de passe est obligatoire !
+      </div>
+
+      <button>OK</button>
+      <div *ngIf="f.submitted && globalError" class="invalid-feedback">
+        <p>Erreur: {{globalError}}</p>
+      </div>
+    </form>
+
+    <div *ngIf="isLoggedIn">
+      <p>{{displayName}}</p>
+      <!--    <div><button>Préférences</button></div>-->
+      <div>
+        <button (click)="logout()">Se déconnecter</button>
+      </div>
+    </div>
   </div>
-
-  <form *ngIf="!isLoggedIn"  class="form-group" [formGroup]="loginForm" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
-    <input name="username" type="username" formControlName="username" placeholder="username">
-    <div *ngIf="!loginForm.get('username')?.valid && f.submitted" class="invalid-feedback" >
-      Le nom d'utilisateur est obligatoire !
-    </div>
-
-    <input type="password" formControlName="password" placeholder="Password">
-    <div *ngIf="!loginForm.get('password')?.valid && f.submitted" class="invalid-feedback" >
-      Un mot de passe est obligatoire !
-    </div>
-
-    <button>OK</button>
-    <div *ngIf="f.submitted && globalError" class="invalid-feedback" >
-      <p>Erreur: {{globalError}}</p>
-    </div>
-  </form>
-
-  <div *ngIf="isLoggedIn">
-    <p>{{displayName}}</p>
-<!--    <div><button>Préférences</button></div>-->
-    <div><button (click)="logout()">Se déconnecter</button></div>
-  </div>
-
 </div>

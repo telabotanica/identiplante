@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {CommonModule} from "@angular/common";
@@ -40,10 +40,11 @@ export class LoginComponent {
     if (cookie){
       this.isLoggedIn = true;
       this.authService.identite().subscribe((data) => {
-        this.authService.getUser(data.token).subscribe((userData)=>{
-              this.user = userData
-              this.displayName = this.user.prenom && this.user.nom ? this.user.prenom + " " + this.user.nom : this.user.intitule;
-            })
+        this.authService.getUser(data.token).subscribe((userData) => {
+          this.user = userData
+          this.displayName = this.user.prenom && this.user.nom ? this.user.prenom + " " + this.user.nom : this.user.intitule;
+          this.authService.setUserId(this.user.id_utilisateur)
+        })
       })
     }
   }
@@ -58,6 +59,7 @@ export class LoginComponent {
               this.user = userData
               this.isLoggedIn = this.user.connecte
               this.displayName = this.user.prenom && this.user.nom ? this.user.prenom + " " + this.user.nom : this.user.intitule;
+              this.authService.setUserId(this.user.id_utilisateur)
             })
           },
           error: (err : any) => {
@@ -73,6 +75,7 @@ export class LoginComponent {
         this.user = userData
         this.isLoggedIn = this.user.connecte
         this.displayName = "";
+        this.authService.setUserId("")
       })
     })
   }

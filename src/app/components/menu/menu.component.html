@@ -1,0 +1,15 @@
+<div class="burger-logo-div mr-ml-1 mt-0-5" (click)="toggleMenu()" [class.is-open]="isMenuOpen"><span class="material-symbols-outlined burger-logo">{{ isMenuOpen ? "close" : "menu"}}</span></div>
+
+<nav class="nav-div" [class.is-open]="isMenuOpen">
+  <div class="menu-div">
+    <div class="w-100">
+      <button [class.button-selected]="selectedOnglet === 'tous'" class="mt-2 w-100" (click)="isMenuOpen && toggleMenu()">Tout</button>
+      <button [class.button-selected]="selectedOnglet === 'adeterminer' || selectedOnglet === ''" class="button-selected mt-2 w-100" (click)="isMenuOpen && toggleMenu()">A déterminer</button>
+      <button [class.button-selected]="selectedOnglet === 'aconfirmer'" class="mt-2 w-100" (click)="isMenuOpen && toggleMenu()">A confirmer</button>
+      <button [class.button-selected]="selectedOnglet === 'validees'" class="mt-2 w-100" (click)="isMenuOpen && toggleMenu()">Vérifiées</button>
+      <button [class.button-selected]="selectedOnglet === 'monactivite'" class="mt-2 w-100" (click)="isMenuOpen && toggleMenu()">Mon activité</button>
+    </div>
+
+    <app-login class="mb-2 mr-ml-1"></app-login>
+  </div>
+</nav>

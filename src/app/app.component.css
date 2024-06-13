@@ -1,0 +1,37 @@
+#main {
+  display: flex;
+  width: 100%;
+}
+
+#menu{
+  width: 20%;
+  height: 100vh;
+  z-index: 10;
+  max-width: 200px;
+}
+
+#content-div {
+  width: 80%;
+  height: 100vh;
+}
+
+@media (width <= 768px) {
+  #content-div {
+    width: 100%;
+    height: 100%;
+  }
+
+  #main {
+    display: block;
+  }
+
+  #menu {
+    max-width: none;
+  }
+}
+
+@media (width <= 390px) {
+  #content-div {
+    width: 100%
+  }
+}

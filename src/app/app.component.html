@@ -1,21 +1,11 @@
-<noscript>
-  <p style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-    <span class="attention">ATTENTION : </span>
-    il semblerait que le Javascript ne soit pas activé sur votre navigateur.
-    Veuillez l'activer pour utiliser cette application.
-  </p>
-</noscript>
+<div id="main">
+  <app-menu id="menu" class="pr-1"></app-menu>
+  <section id="content-div">
+    <app-header></app-header>
+    <app-top-section></app-top-section>
+    <app-contenu></app-contenu>
+    <app-footer></app-footer>
+  </section>
+</div>
 
-<app-header></app-header>
-
-<section id="main">
-  <div id="zoneLiens"></div>
-</section>
-
-<section id="contenu">
-
-</section>
-
-<app-footer></app-footer>
-
-<router-outlet />
+<!--<router-outlet />-->
