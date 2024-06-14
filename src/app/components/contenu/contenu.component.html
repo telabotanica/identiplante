@@ -1,4 +1,12 @@
 <section id="contenu">
-  <p>userId dans contenuComponent: {{userId}}</p>
-  <p>selected Onglet dans contenuComponent: {{selectedOnglet}}</p>
+  @if(!isLoading){
+  <p>{{observationsEntete.total}} résultats</p>
+  } @else {
+  <!--TODO: Loader-->
+  }
+
+  @if (errorMessage){
+  {{errorMessage}}
+  }
 </section>
+

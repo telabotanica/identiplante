@@ -1,6 +1,7 @@
-import {Component, inject} from '@angular/core';
+import {Component, effect, inject} from '@angular/core';
 import {LoginComponent} from "../login/login.component";
 import {CommonService} from "../../services/common.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-menu',
@@ -11,9 +12,17 @@ import {CommonService} from "../../services/common.service";
 })
 export class MenuComponent {
   commonService = inject(CommonService)
+  authService = inject(AuthService);
 
   isMenuOpen = false;
   selectedOnglet = this.commonService.selectedOnglet();
+  userId = this.authService.userId();
+
+  constructor() {
+    effect(() => {
+      this.userId = this.authService.userId();
+    });
+  }
 
   ngOnInit(): void {
     let urlParams: { name: string, value: string }[] = this.commonService.readUrlParameters()

@@ -31,12 +31,14 @@
         Vérifiées
       </button>
 
+      @if (userId){
       <button
         [class.button-selected]="selectedOnglet === 'monactivite'"
         class="mt-2 w-100"
         (click)="handleButtonClick('monactivite')">
         Mon activité
       </button>
+      }
     </div>
 
     <app-login class="mb-2 mr-ml-1"></app-login>

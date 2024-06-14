@@ -29,10 +29,6 @@ export class LoginComponent {
 
   authService = inject(AuthService);
   cookieService = inject(CookieService);
-  cookiesService = inject(CookiesService)
-
-
-  // TODO: check cookie on init -> identite puis get User
 
   ngOnInit(){
     let cookie = this.cookieService.get(this.cookieName)

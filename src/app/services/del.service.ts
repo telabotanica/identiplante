@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import { environment } from '../../environments/environment';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -17,8 +17,14 @@ export class DelService {
 
   constructor() { }
 
-  getObservations(params: string){
-    return this.http.get<any>(this.observationsService + params);
+  getObservations(params: string, token?: string){
+    let headers = new HttpHeaders();
+    // Ajouter l'en-tête Authorization si le jeton est fourni
+    if (token) {
+      headers = headers.set('Authorization', token);
+    }
+    
+    return this.http.get<any>(this.observationsService + params, {headers});
   }
 
   getOntologie(){
