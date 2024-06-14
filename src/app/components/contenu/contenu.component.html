@@ -1,12 +1,12 @@
 <section id="contenu">
   @if(!isLoading){
-  <p>{{observationsEntete.total}} résultats</p>
+  <p>{{nbObservations}} résultats</p>
   } @else {
   <!--TODO: Loader-->
   }
 
   @if (errorMessage){
-  {{errorMessage}}
+  <p class="invalid-feedback">{{errorMessage}}</p>
   }
 </section>
 

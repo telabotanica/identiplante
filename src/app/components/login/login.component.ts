@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, effect, inject, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {CommonModule} from "@angular/common";
@@ -6,6 +6,7 @@ import {User} from "../../models/user";
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
 import {CookiesService} from "../../services/cookies.service";
+import {CommonService} from "../../services/common.service";
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,16 @@ export class LoginComponent {
 
   authService = inject(AuthService);
   cookieService = inject(CookieService);
+  commonService = inject(CommonService)
+
+  selectedOnglet = this.commonService.selectedOnglet();
+
+
+  constructor() {
+    effect(()=> {
+      this.selectedOnglet = this.commonService.selectedOnglet();
+    })
+  }
 
   ngOnInit(){
     let cookie = this.cookieService.get(this.cookieName)
@@ -67,11 +78,15 @@ export class LoginComponent {
 
   logout(){
     this.authService.logout().subscribe(()=>{
+      if (this.selectedOnglet == "monactivite"){
+        this.commonService.setOnglet("adeterminer")
+      }
       this.authService.getUser("").subscribe((userData)=>{
         this.user = userData
         this.isLoggedIn = this.user.connecte
         this.displayName = "";
         this.authService.setUserId("")
+
       })
     })
   }

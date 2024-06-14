@@ -21,6 +21,7 @@ export class MenuComponent {
   constructor() {
     effect(() => {
       this.userId = this.authService.userId();
+      this.selectedOnglet = this.commonService.selectedOnglet()
     });
   }
 

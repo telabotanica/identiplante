@@ -32,3 +32,13 @@
 .logo_nd:hover {
   background:url('/assets/img/logos/nd_hover.jpg');
 }
+
+footer {
+  padding-right: 1rem;
+}
+
+@media (width <= 768px) {
+  footer {
+    padding: 0 1rem;
+  }
+}

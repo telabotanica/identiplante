@@ -27,6 +27,7 @@ export class ContenuComponent {
   pays: Ontologie[] = [];
   protocoles: Protocole[] = []
   observationsEntete: any;
+  nbObservations = 0;
   isLoading = true;
   errorMessage = "";
 
@@ -35,6 +36,7 @@ export class ContenuComponent {
     effect(() => {
       this.userId = this.authService.userId();
       if (this.selectedOnglet == 'monactivite'){
+        this.errorMessage = "";
         this.loadObservations();
       }
     });
@@ -43,6 +45,7 @@ export class ContenuComponent {
     effect(()=> {
       this.selectedOnglet = this.commonService.selectedOnglet();
       this.urlParamsString = this.commonService.urlParamsString();
+      this.errorMessage = "";
       this.loadObservations();
     })
   }
@@ -69,8 +72,11 @@ export class ContenuComponent {
 
   private loadObservations(): void {
     this.isLoading = true;
+    this.observations = [];
+    this.observationsEntete = []
+    this.nbObservations = 0;
 
-    if (this.userId){
+    if (this.userId && this.selectedOnglet == 'monactivite'){
       /*
       * Si l'utilisateur est connecté on récupère un token avec le service identité
       * puis on récupère les obs avec ce token dans le header authorization
@@ -83,6 +89,7 @@ export class ContenuComponent {
             next: (data) => {
               this.observations = data["resultats"];
               this.observationsEntete = data["entete"];
+              this.nbObservations = this.observationsEntete.total
               this.isLoading = false;
             },
             error:(err) => {
@@ -93,7 +100,7 @@ export class ContenuComponent {
         },
         error: (err) => {
           this.isLoading = false;
-          this.errorMessage = err.error.error
+          this.errorMessage = 'Erreur: veuillez vous reconnecter'
         }
 
       })
@@ -103,6 +110,7 @@ export class ContenuComponent {
         next: (data) => {
           this.observations = data["resultats"];
           this.observationsEntete = data["entete"];
+          this.nbObservations = this.observationsEntete.total
           this.isLoading = false;
         },
         error: (err) => {

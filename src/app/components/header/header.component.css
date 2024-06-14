@@ -1,3 +1,12 @@
+header {
+  padding-right: 1rem;
+}
+
+@media (width <= 768px) {
+  header {
+    padding: 0 1rem;
+  }
+}
 /*.logo_tela {*/
 /*  padding-bottom:44px;*/
 /*  padding-left:145px;*/
