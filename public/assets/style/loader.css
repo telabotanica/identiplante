@@ -1,0 +1,36 @@
+.loader-container{
+  position: absolute;
+  top: 30%;
+  left: 40%;
+}
+
+.loadership_COHKO {
+  display: flex;
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.loadership_COHKO div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 70px;
+  height: 70px;
+  border: 10px solid var(--primary33);
+  border-radius: 50%;
+}
+
+.loadership_COHKO div:nth-child(2) {
+  clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 20.00%);
+  animation: loadership_COHKO_spin 1.2s infinite;
+  animation-timing-function: linear;
+  border: 10px solid var(--primary);
+}
+
+@keyframes loadership_COHKO_spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+

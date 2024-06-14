@@ -1,12 +1,25 @@
 <section id="contenu">
   @if(!isLoading){
-  <p>{{nbObservations}} résultats</p>
+
+    <p>{{nbObservations}} résultats</p>
+
+    <div class="cards-container">
+      @for (observation of observations; track observation.id_observation){
+        <app-card [obs]="observation"></app-card>
+      }
+    </div>
+
   } @else {
-  <!--TODO: Loader-->
+    <div class="loader-container">
+      <div class="loadership_COHKO">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   }
 
   @if (errorMessage){
-  <p class="invalid-feedback">{{errorMessage}}</p>
+    <p class="invalid-feedback">{{errorMessage}}</p>
   }
 </section>
 

@@ -2,6 +2,9 @@
   --text: #232323;
   --background: #fcfaf5;
   --primary: #a2b93b;
+  --primary33: #a2b93b33;
+  --primary39: #a2b93b39;
+  --primary40: #a2b93b40;
   --secondary: #E16E38;
   --accent: #b2cb43;
   --error-color: hsl(12, 74%, 44%);
@@ -13,4 +16,6 @@
   --info-color: hsl(195, 90%, 68%);
   --info-text: hsl(195, 90%, 8%);
   --blanc: hsl(262, 20%, 92%);
+  --gradient-card: linear-gradient(180deg, rgba(178,203,67,0.2) 0%, rgba(162,185,59,0.2) 100%);
+  --gradient-background: linear-gradient(180deg, rgba(252,250,245,1) 0%, rgba(233,231,239,1) 100%);
 }

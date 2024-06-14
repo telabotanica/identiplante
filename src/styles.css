@@ -1,6 +1,6 @@
 @import "../public/assets/style/fonts.css";
 @import "../public/assets/style/colors.css";
-@import "../public/assets/style/card.css";
+@import "../public/assets/style/loader.css";
 
 :root {
   --static: rgba(0, 0, 0, 0.5);
