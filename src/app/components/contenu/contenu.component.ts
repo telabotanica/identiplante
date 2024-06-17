@@ -135,7 +135,7 @@ export class ContenuComponent {
             console.error('Expected object for protocoles data but got:', observationsData);
             this.observations = [];
           }
-
+console.log(this.observations)
           this.observationsEntete = data["entete"];
           this.nbObservations = this.observationsEntete.total
           this.isLoading = false;

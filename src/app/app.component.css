@@ -13,6 +13,19 @@
 #content-div {
   width: 80%;
   height: 100vh;
+  margin: 0 10%;
+}
+
+@media (width <= 1280px){
+  #content-div {
+    margin: 0 5%;
+  }
+}
+
+@media (width <= 1080px){
+  #content-div {
+    margin: 0 1rem;
+  }
 }
 
 @media (width <= 768px) {

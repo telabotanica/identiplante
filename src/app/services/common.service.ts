@@ -42,4 +42,10 @@ export class CommonService {
   setUrlParamsString(params: string){
     this.urlParamsString.set(params)
   }
+
+  formatDateString(dateString: string): string {
+    const [datePart, timePart] = dateString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    return `${day}/${month}/${year}`;
+  }
 }
