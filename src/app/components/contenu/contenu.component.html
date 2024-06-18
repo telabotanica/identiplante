@@ -1,7 +1,7 @@
 <section id="contenu">
   @if(!isLoading){
 
-    <p>{{nbObservations}} résultats</p>
+    <app-pagination [entetes]="observationsEntete"></app-pagination>
 
     <div class="cards-container">
       @for (observation of observations; track observation.id_observation){

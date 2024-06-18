@@ -1,0 +1,33 @@
+<div class="flex-start">
+  <p>{{entetes.total}} résultats</p>
+
+  <div *ngIf="entetes['href.precedent']" (click)="goToFirstPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
+    <img class="svg-icon" alt="1" title="1er page" src="assets/icons/first_page_white.png">
+  </div>
+
+  <div *ngIf="entetes['href.precedent']" (click)="previousPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
+    <img class="svg-icon" alt="1" title="page précédente" src="assets/icons/chevron_left_white.png">
+  </div>
+
+  <p>Page:
+  <input [value]="page" (keyup)="onPageInputKeyup($event)" type="number" min="1" max="{{lastPage}}" role=”navigation” aria-label=”Pagination”>
+  <span> / {{lastPage}}</span></p>
+
+  <div *ngIf="entetes['href.suivant']" (click)="nextPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
+    <img class="svg-icon" alt="1" title="page précédente" src="assets/icons/chevron_right_white.png">
+  </div>
+
+  <div *ngIf="entetes['href.suivant']" (click)="goToLastPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
+    <img class="svg-icon" alt="1" title="page précédente" src="assets/icons/last_page_white.png">
+  </div>
+
+  <div>
+    <select [ngModel]="pas" (ngModelChange)="onPasChange($event)">
+      <option value="12">12</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+    <span> éléments par page</span>
+  </div>
+
+</div>

@@ -7,12 +7,14 @@ import {Observation} from "../../models/observation";
 import {Ontologie} from "../../models/ontologie";
 import {Protocole} from "../../models/protocole";
 import {CardComponent} from "../card/card.component";
+import {PaginationComponent} from "../pagination/pagination.component";
 
 @Component({
   selector: 'app-contenu',
   standalone: true,
   imports: [
-    CardComponent
+    CardComponent,
+    PaginationComponent
   ],
   templateUrl: './contenu.component.html',
   styleUrl: './contenu.component.css'
@@ -35,6 +37,8 @@ export class ContenuComponent {
   errorMessage = "";
 
   constructor() {
+    this.addDefaultUrlParams()
+
     // Actions lors de la connexion / deconnexion d'un utilisateur
     effect(() => {
       this.userId = this.authService.userId();
@@ -127,7 +131,7 @@ export class ContenuComponent {
       // Si l'utilisateur n'est pas connecté, on va récupérer les obs sans header authorization
       this.delService.getObservations(this.urlParamsString).subscribe({
         next: (data) => {
-          // On convertir les données reçu au format de notre objet
+          // On converti les données reçu au format de notre objet
           const observationsData = data["resultats"];
           if (observationsData && typeof observationsData === 'object') {
             this.observations = this.mapObservations(Object.values(observationsData));
@@ -135,7 +139,7 @@ export class ContenuComponent {
             console.error('Expected object for protocoles data but got:', observationsData);
             this.observations = [];
           }
-console.log(this.observations)
+
           this.observationsEntete = data["entete"];
           this.nbObservations = this.observationsEntete.total
           this.isLoading = false;
@@ -185,5 +189,25 @@ console.log(this.observations)
       item["station"],
       item["zone_geo"]
     ))
+  }
+
+  private addDefaultUrlParams(){
+    const url = new URL(window.location.href);
+    const urlParams = new URLSearchParams(url.searchParams);
+
+    const defaultParams = {
+      'masque.type': 'adeterminer',
+      'page': '1',
+      'pas': '12',
+      'masque.pninscritsseulement': '1',
+      'tri': 'date_transmission',
+      'ordre': 'desc'
+    };
+
+    Object.entries(defaultParams).forEach(([key, value]) => {
+      if (!urlParams.has(key)) {
+        this.commonService.setAnyParmam(key, value);
+      }
+    });
   }
 }

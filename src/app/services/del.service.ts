@@ -2,6 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import { environment } from '../../environments/environment';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {CommonService} from "./common.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ export class DelService {
   private ontologieService = environment.serviceBaseUrl + "ontologie/pays/";
   private observationsService = environment.serviceBaseUrl + "observations";
 
-  http = inject(HttpClient)
-  router = inject(Router)
+  http = inject(HttpClient);
+  router = inject(Router);
+  commonService = inject(CommonService);
 
   constructor() { }
 
@@ -23,8 +25,11 @@ export class DelService {
     if (token) {
       headers = headers.set('Authorization', token);
     }
-    
-    return this.http.get<any>(this.observationsService + params, {headers});
+
+    // On transforme les params page et pas en navigation.depart et navigation.limite
+    params = this.commonService.mapPagination(params)
+
+    return this.http.get<any>(this.observationsService + '?' + params, {headers});
   }
 
   getOntologie(){

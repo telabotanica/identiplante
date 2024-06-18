@@ -27,8 +27,19 @@ export class CommonService {
 
   setOnglet(onglet: string) {
     this.selectedOnglet.set(onglet);
-    this.updateUrlParameter('masque.type', onglet);
+    this.setAnyParmam('masque.type', onglet)
+  }
 
+  setAnyParmam(param: string, value: string){
+    // if (param == 'pas'){
+    //   param = 'navigation.limite'
+    // }
+    //
+    // if (param == 'page'){
+    //   param = 'navigation.depart'
+    // }
+
+    this.updateUrlParameter(param, value);
     let url = new URL(window.location.href)
     this.setUrlParamsString(url.search)
   }
@@ -47,5 +58,35 @@ export class CommonService {
     const [datePart, timePart] = dateString.split(' ');
     const [year, month, day] = datePart.split('-');
     return `${day}/${month}/${year}`;
+  }
+
+  mapPagination(params: any){
+    const urlParams = new URLSearchParams(params);
+    const page = urlParams.get('page');
+    let pas = urlParams.get('pas');
+
+    if (!pas){
+      pas = '12';
+    } else {
+      urlParams.set('navigation.limite', pas);
+      urlParams.delete('pas');
+    }
+
+    if (page) {
+      const pageNumber = parseInt(page, 10);
+      if (pageNumber <= 1) {
+        urlParams.set('navigation.depart', '0');
+      } else {
+        const pasNumber = parseInt(pas, 10);
+        const depart = (pageNumber - 1) * pasNumber;
+        urlParams.set('navigation.depart', depart.toString());
+      }
+      urlParams.delete('page');
+    }
+
+    const newParams = urlParams.toString();
+
+    return newParams;
+
   }
 }

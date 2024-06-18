@@ -1,0 +1,16 @@
+.icon-div{
+  height: 25px;
+  width: 25px;
+  background-color: var(--primary);
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.svg-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+}

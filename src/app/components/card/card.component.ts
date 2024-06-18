@@ -17,8 +17,13 @@ export class CardComponent {
   commonService = inject(CommonService)
 
   ngOnInit(){
-    this.dateObservation = this.commonService.formatDateString(this.obs.date_observation)
-    this.dateTransmission = this.commonService.formatDateString(this.obs.date_transmission)
-    console.log(this.obs)
+    if (this.obs.date_observation){
+      this.dateObservation = this.commonService.formatDateString(this.obs.date_observation)
+    }
+
+    if (this.obs.date_transmission){
+      this.dateTransmission = this.commonService.formatDateString(this.obs.date_transmission)
+    }
+
   }
 }
