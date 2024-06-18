@@ -31,14 +31,6 @@ export class CommonService {
   }
 
   setAnyParmam(param: string, value: string){
-    // if (param == 'pas'){
-    //   param = 'navigation.limite'
-    // }
-    //
-    // if (param == 'page'){
-    //   param = 'navigation.depart'
-    // }
-
     this.updateUrlParameter(param, value);
     let url = new URL(window.location.href)
     this.setUrlParamsString(url.search)

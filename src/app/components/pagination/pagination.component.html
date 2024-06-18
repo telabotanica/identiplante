@@ -2,11 +2,11 @@
   <p>{{entetes.total}} résultats</p>
 
   <div *ngIf="entetes['href.precedent']" (click)="goToFirstPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
-    <img class="svg-icon" alt="1" title="1er page" src="assets/icons/first_page_white.png">
+    <img class="icon" alt="1" title="1er page" src="assets/icons/first_page_white.png">
   </div>
 
   <div *ngIf="entetes['href.precedent']" (click)="previousPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
-    <img class="svg-icon" alt="1" title="page précédente" src="assets/icons/chevron_left_white.png">
+    <img class="icon" alt="1" title="page précédente" src="assets/icons/chevron_left_white.png">
   </div>
 
   <p>Page:
@@ -14,11 +14,11 @@
   <span> / {{lastPage}}</span></p>
 
   <div *ngIf="entetes['href.suivant']" (click)="nextPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
-    <img class="svg-icon" alt="1" title="page précédente" src="assets/icons/chevron_right_white.png">
+    <img class="icon" alt="1" title="page précédente" src="assets/icons/chevron_right_white.png">
   </div>
 
   <div *ngIf="entetes['href.suivant']" (click)="goToLastPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
-    <img class="svg-icon" alt="1" title="page précédente" src="assets/icons/last_page_white.png">
+    <img class="icon" alt="1" title="page précédente" src="assets/icons/last_page_white.png">
   </div>
 
   <div>

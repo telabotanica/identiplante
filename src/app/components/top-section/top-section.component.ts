@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-top-section',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class TopSectionComponent {
 
+  proposezObservationLink = environment.appliSaisieUrl + encodeURI("Ajouter une photo à déterminer");
+
+  ngOnInit(){
+    console.log(this.proposezObservationLink)
+  }
 }

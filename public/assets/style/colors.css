@@ -16,6 +16,6 @@
   --info-color: hsl(195, 90%, 68%);
   --info-text: hsl(195, 90%, 8%);
   --blanc: hsl(262, 20%, 92%); /*E9E7EF*/
-  --gradient-card: linear-gradient(180deg, rgba(178,203,67,0.2) 0%, rgba(162,185,59,0.2) 100%);
+  --gradient-card: linear-gradient(180deg, rgba(178, 203, 67, 0.2) 18.75%, rgba(162, 185, 59, 0) 100%);
   --gradient-background: linear-gradient(180deg, rgba(252,250,245,1) 0%, rgba(233,231,239,1) 100%);
 }

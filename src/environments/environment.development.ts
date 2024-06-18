@@ -9,7 +9,7 @@ export const environment: any = {
   // delUrl:"http://www.tela-botanica.org/appli:del",
   identiplanteUrl: "https://beta.tela-botanica.org/appli:identiplante",
   pictofloraUrl: "https://beta.tela-botanica.org/appli:pictoflora",
-  appliSaisieUrl: "https:/beta.tela-botanica.org/widget:cel:saisie?tag-img=aDeterminer&tag-obs=aDeterminer",
+  appliSaisieUrl: "https:/beta.tela-botanica.org/widget:cel:saisie?tag-img=aDeterminer&tag-obs=aDeterminer&titre=",
   appliSaisieProjetUrl: "https://beta.tela-botanica.org/widget:cel:saisie?tag-img={projet}&tag-obs={projet}",
   efloreTaxonUrl: "https://www.tela-botanica.org/referentiel-nn-num_nom",
   efloreUrl: "https://www.tela-botanica.org/eflore?referentiel=bdtfx",
