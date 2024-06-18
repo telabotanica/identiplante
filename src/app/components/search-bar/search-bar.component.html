@@ -1,0 +1,12 @@
+<div id="searchBar">
+  <div >
+    <img (click)="updateSearch()" class="search-icon" title="recherchez" src="assets/icons/search_white.png">
+  </div>
+  <input class="search-bar" [value]="search" (keyup)="onPageInputKeyup($event)" type="text" placeholder="Recherchez une plante à identifier">
+  <div >
+    <img (click)="resetSearch()" class="cancel-icon" alt="X" title="Effacer la recherche" src="assets/icons/cancel_white.png">
+  </div>
+</div>
+<div class="flex-center">
+  <img (click)="openAdvancedSearchPopUp()" class="advanced-search-icon" alt="Recherche avancée" title="recherche avancée" src="assets/icons/keyboard_arrow_down_green.png">
+</div>

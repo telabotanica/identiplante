@@ -14,3 +14,7 @@
   height: 25px;
   width: 25px;
 }
+
+.pageNumber-input {
+  max-width: 50px;
+}

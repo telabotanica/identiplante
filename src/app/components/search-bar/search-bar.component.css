@@ -1,0 +1,44 @@
+#searchBar {
+  width: 100%;
+  height: 35px;
+  position: relative;
+}
+
+.search-bar {
+  height: 100%;
+  border-radius: 17px;
+  border: none;
+  background-color: var(--primary);
+  color: var(--blanc);
+  padding: 0 1rem 0 2.5rem;
+}
+
+.search-bar::placeholder{
+  color: var(--blanc);
+  opacity: 1;
+}
+
+.search-bar::-ms-input-placeholder{ /*Edge 12 -18 */
+  color: var(--blanc);
+}
+
+.search-icon, .cancel-icon {
+  width: 29px;
+  height: 29px;
+  position: absolute;
+  cursor: pointer;
+  top: 3px;
+}
+
+.search-icon {
+  left: 3px;
+}
+
+.cancel-icon {
+  right: 3px;
+}
+
+.advanced-search-icon {
+  width: 50px;
+  cursor: pointer;
+}

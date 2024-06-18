@@ -22,7 +22,8 @@
         Un mot de passe est obligatoire !
       </div>
 
-      <button>OK</button>
+      <button class="button-selected">OK</button>
+
       <div *ngIf="f.submitted && globalError" class="invalid-feedback">
         <p>Erreur: {{globalError}}</p>
       </div>
@@ -30,9 +31,8 @@
 
     <div *ngIf="isLoggedIn">
       <p>{{displayName}}</p>
-      <!--    <div><button>Préférences</button></div>-->
       <div>
-        <button (click)="logout()">Se déconnecter</button>
+        <button class="button-selected" (click)="logout()">Se déconnecter</button>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<div class="flex-start">
+<div class="flex-start mb-1">
   <p>{{entetes.total}} résultats</p>
 
   <div *ngIf="entetes['href.precedent']" (click)="goToFirstPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
@@ -10,7 +10,7 @@
   </div>
 
   <p>Page:
-  <input [value]="page" (keyup)="onPageInputKeyup($event)" type="number" min="1" max="{{lastPage}}" role=”navigation” aria-label=”Pagination”>
+  <input class="pageNumber-input" [value]="page" (keyup)="onPageInputKeyup($event)" type="number" min="1" max="{{lastPage}}" role=”navigation” aria-label=”Pagination”>
   <span> / {{lastPage}}</span></p>
 
   <div *ngIf="entetes['href.suivant']" (click)="nextPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
@@ -27,7 +27,9 @@
       <option value="25">25</option>
       <option value="50">50</option>
     </select>
-    <span> éléments par page</span>
+    <span> par page</span>
   </div>
+
+  <div>Différents tris à ajouter</div>
 
 </div>
