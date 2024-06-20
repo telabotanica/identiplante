@@ -68,44 +68,14 @@ export class PopupAdvancedSearchComponent {
 
   onSubmit() {
     let formData = this.form.value;
-
-    if (this.useYearOnly && formData.year) {
-      formData.date = formData.year.toString();
-    } else if (formData.date) {
-      formData.date = this.formatDateToString(new Date(formData.date));
-    }
-    delete formData.year;
-
-    if (formData.pninscritsseulement == 0){
-      formData.pninscritsseulement = '0'
-    } else {
-      formData.pninscritsseulement = '1'
-    }
+    formData = this.transformFormData(formData)
 
     Object.entries(formData).forEach(([key, value]) => {
-      if (value && typeof value === 'string' && value !== ""){
-        if (key === 'masque'){
-          this.commonService.setAnyParmam(key, encodeURI(value))
-        } else if (key === 'referentiel' && value === 'tous'){
-          value = null;
-          this.commonService.deleteParam('masque.' + key)
-        } else {
-          this.commonService.setAnyParmam('masque.' + key, encodeURI(value))
-        }
-
-      } else if(this.urlParams.get('masque.' + key)) { // s'il y avait un parametre à l'ouverture et plus au submit, on efface la recherche
-        this.commonService.deleteParam('masque.' + key)
-      } else if (this.urlParams.get(key)){ // s'il y avait une recherche libre et plus au submit, on efface la recherche
-        this.commonService.deleteParam(key)
-      }
+      this.updateParamsInUrl(key,  value)
     });
 
     this.commonService.setAnyParmam('page', '1')
     this.close()
-  }
-
-  checkParamStatus(key: string, value: string){
-
   }
 
   close() {
@@ -124,6 +94,40 @@ export class PopupAdvancedSearchComponent {
       }
     })
     this.closePopupEmitter.emit();
+  }
+
+  transformFormData(formData: any){
+    // Transformation du paramètre date
+    if (this.useYearOnly && formData.year) {
+      formData.date = formData.year.toString();
+    } else if (formData.date) {
+      formData.date = this.formatDateToString(new Date(formData.date));
+    }
+    // Paramètre year devient inutile car passé dans le paramètre date donc on le supprime
+    delete formData.year;
+
+    // Transformation de pnInscrit
+    if (formData.pninscritsseulement == 0){
+      formData.pninscritsseulement = '0'
+    } else {
+      formData.pninscritsseulement = '1'
+    }
+
+    return formData
+  }
+
+  updateParamsInUrl(key: string, value: any){
+    let nomParametre = key === 'masque' ? key : 'masque.' + key
+    if (value && typeof value === 'string' && value !== ""){ // Si on a des données
+      if (key === 'referentiel' && value === 'tous'){ // Si tous les référentiels sont sélectionnés on ne veut pas de paramètre de recherche spécifique
+        value = null;
+        this.commonService.deleteParam(nomParametre)
+      } else {
+        this.commonService.setAnyParmam(nomParametre, encodeURI(value))
+      }
+    } else if(this.urlParams.get(nomParametre)) { // s'il y avait un parametre à l'ouverture et plus au submit, on efface la recherche
+      this.commonService.deleteParam(nomParametre)
+    }
   }
 
   toggleUseYearOnly() {

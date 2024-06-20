@@ -50,6 +50,7 @@
       <div>
         <label for="pays">Pays</label>
         <select id="pays" formControlName="pays">
+          <option [value]=""></option>
           @for(pays of paysList; track pays.code_iso_3166_1){
           <option [value]="pays.code_iso_3166_1">
           {{ pays.nom_fr }}
