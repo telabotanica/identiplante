@@ -1,16 +1,22 @@
 import {Component, inject} from '@angular/core';
 import {CommonService} from "../../services/common.service";
+import {PopupAdvancedSearchComponent} from "../popup-advanced-search/popup-advanced-search.component";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [],
+  imports: [
+    PopupAdvancedSearchComponent,
+    NgIf
+  ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css'
 })
 export class SearchBarComponent {
   search = "";
   private pageInputTimeout: any;
+  displayAdvancedPopup = false;
 
   commonService = inject(CommonService)
 
@@ -43,10 +49,20 @@ export class SearchBarComponent {
 
   resetSearch(){
     this.search = "";
-    this.updateSearch();
+    this.commonService.deleteParam('masque')
   }
 
   openAdvancedSearchPopUp(){
-    console.log('ouvre le popup')
+    this.displayAdvancedPopup = true
+  }
+
+  closeAdvancedSearchPopUp() {
+    this.displayAdvancedPopup = false
+    const url = new URL(window.location.href);
+    const urlParams = new URLSearchParams(url.searchParams);
+
+    // On récupère la recherche libre car peut avoir changer dans le popup
+    const pageParam = urlParams.get('masque');
+    this.search = pageParam ?? "";
   }
 }

@@ -1,4 +1,5 @@
 import {Injectable, signal} from '@angular/core';
+import {Referentiel} from "../models/referentiel";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,17 @@ export class CommonService {
     this.updateUrlParameter(param, value);
     let url = new URL(window.location.href)
     this.setUrlParamsString(url.search)
+  }
+
+  deleteParam(param: string) {
+    const url = new URL(window.location.href);
+    const urlParams = new URLSearchParams(url.search);
+    if (urlParams.has(param)) {
+      url.searchParams.delete(param)
+      urlParams.delete(param);
+      this.setUrlParamsString(urlParams.toString());
+      window.history.replaceState({}, '', url.toString());
+    }
   }
 
   private updateUrlParameter(key: string, value: string): void {
@@ -80,5 +92,21 @@ export class CommonService {
 
     return newParams;
 
+  }
+
+  getReferentiels(){
+    return [
+      new Referentiel("tous", "Tous les référentiels"),
+      new Referentiel("bdtfx", "France métropolitaine (BDTFX)"),
+      new Referentiel("bdtxa", "Antilles françaises (BDTXA)"),
+      new Referentiel("bdtre", "la Réunion (BDTRE)"),
+      new Referentiel("aublet", "Guyane (AUBLET2)"),
+      new Referentiel("florical", "Nouvelle-Calédonie (FLORICAL)"),
+      new Referentiel("isfan", "Afrique du Nord (ISFAN)"),
+      new Referentiel("apd", "Afrique tropicale (APD)"),
+      new Referentiel("lbf", "Liban (LEF)"),
+      new Referentiel("taxreflich", "Lichens (TaxRef)"),
+      new Referentiel("taxref", "France (TaxRef)")
+    ];
   }
 }

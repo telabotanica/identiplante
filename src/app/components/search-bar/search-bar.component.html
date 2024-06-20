@@ -9,4 +9,5 @@
 </div>
 <div class="flex-center">
   <img (click)="openAdvancedSearchPopUp()" class="advanced-search-icon" alt="Recherche avancée" title="recherche avancée" src="assets/icons/keyboard_arrow_down_green.png">
+  <app-popup-advanced-search *ngIf="displayAdvancedPopup" (closePopupEmitter)="closeAdvancedSearchPopUp()"></app-popup-advanced-search>
 </div>

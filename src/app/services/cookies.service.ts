@@ -26,7 +26,7 @@ export class CookiesService {
     if (parts.length !== 3) {
       throw new Error('Invalid token');
     }
-console.log(parts)
+
     const payload = parts[0];
 
     return payload;

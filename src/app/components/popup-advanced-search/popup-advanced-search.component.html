@@ -1,0 +1,85 @@
+<div id="popup-advanced-search">
+  <div class="popup-header">
+    <button (click)="close()">close</button>
+  </div>
+
+  <div class="popup-header">
+    <button (click)="clearSearch()">vider</button>
+  </div>
+
+  <div class="popup-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="masque">Masque</label>
+        <input id="masque" formControlName="masque">
+      </div>
+      <div>
+        <label for="referentiel">Référentiel</label>
+        <select id="referentiel" formControlName="referentiel">
+          @for(referentiel of referentiels; ; track referentiel.code){
+          <option [value]="referentiel.code">
+          {{ referentiel.nom }}
+          </option>
+          }
+        </select>
+      </div>
+      <div>
+        <label for="famille">Famille</label>
+        <input id="famille" formControlName="famille">
+      </div>
+      <div>
+        <label for="genre">Genre</label>
+        <input id="genre" formControlName="genre">
+      </div>
+      <div>
+        <label for="ns">NS</label>
+        <input id="ns" formControlName="ns">
+      </div>
+      <div *ngIf="!useYearOnly">
+        <label for="date">Date</label>
+        <input id="date" formControlName="date" type="date">
+      </div>
+      <div *ngIf="useYearOnly">
+        <label for="year">Année</label>
+        <input id="year" formControlName="year" type="number">
+      </div>
+      <div>
+        <label for="useYearOnly">Rechercher seulement par année</label>
+        <input id="useYearOnly" type="checkbox" (change)="toggleUseYearOnly()" [checked]="useYearOnly">
+      </div>
+      <div>
+        <label for="pays">Pays</label>
+        <select id="pays" formControlName="pays">
+          @for(pays of paysList; track pays.code_iso_3166_1){
+          <option [value]="pays.code_iso_3166_1">
+          {{ pays.nom_fr }}
+          </option>
+          }
+        </select>
+      </div>
+      <div>
+        <label for="departement">Département</label>
+        <input id="departement" formControlName="departement">
+      </div>
+      <div>
+        <label for="commune">Commune</label>
+        <input id="commune" formControlName="commune">
+      </div>
+      <div>
+        <label for="auteur">Auteur</label>
+        <input id="auteur" formControlName="auteur">
+      </div>
+      <div>
+        <label for="tag">Tag</label>
+        <input id="tag" formControlName="tag">
+      </div>
+      <div>
+        <label for="pninscritsseulement">P.N. Inscrits Seulement</label>
+        <input id="pninscritsseulement" type="checkbox" formControlName="pninscritsseulement" checked>
+      </div>
+      <button type="submit">Rechercher</button>
+    </form>
+
+  </div>
+
+</div>
