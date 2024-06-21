@@ -1,0 +1,13 @@
+<div id="popup-bigImage">
+  <div class="popup-header">
+    <button (click)="close()">close</button>
+  </div>
+
+  <div class="popup-image-div">
+    <a target="_blank" href="{{selectedImage['binaire.href']}}" title="cliquez pour ouvrir l'image originale dans un nouvel onglet"><img class="popup-full-image" alt="{{obs.determination_ns}}"  src="{{selectedImage['binaire.href']}}"></a>
+  </div>
+
+  <div class="popup-bigImage-info-div">
+    <p>Image {{selectedImage['id_image']}} {{obs.determination_ns}} ({{obs.determination_referentiel}}) par {{obs.auteur_nom}}. Publiée le {{dateTransmission}} - {{obs.zone_geo}} {{obs.station}}, {{obs.pays}}</p>
+  </div>
+</div>

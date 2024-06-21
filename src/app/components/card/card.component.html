@@ -1,13 +1,18 @@
 <div class="card">
   <div class="card-image-div">
-    <img class="card-image" src="{{obs.images[0]['binaire.href']}}"/>
+    <img (click)="openBigImage()" class="card-image" src="{{selectedImage['binaire.href']}}"/>
   </div>
   <div class="card-body">
-    <h5 class="card-title w-100">{{obs.determination_ns}}</h5>
+    <h5 class="card-title w-100">{{nomScientifique}}</h5>
     <p class="card-texte">Référentiel: {{obs.determination_referentiel}}</p>
     <p class="card-texte">Observée le {{dateObservation}}</p>
     <p class="card-texte">Observateur: {{obs.auteur_nom}}</p>
     <p class="card-texte">Lieu: {{obs.zone_geo}} {{obs.station}}, {{obs.pays}}</p>
     <p class="card-texte">Publiée le {{dateTransmission}}</p>
   </div>
+
+  @if (popupBigImage){
+  <app-popup-big-image [obs]="obs" [selectedImage]="selectedImage" (closePopupEmitter)="closeBigImagePopup()"></app-popup-big-image>
+  }
+
 </div>

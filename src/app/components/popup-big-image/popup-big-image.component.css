@@ -1,0 +1,19 @@
+#popup-bigImage {
+  height: 90%;
+  width: 90%;
+  background: var(--accent);
+  border-radius: 16px;
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  z-index: 20;
+}
+
+.popup-image-div{
+  width: 100%;
+}
+
+.popup-full-image {
+  width: 100%;
+  max-height: 80vh;
+}

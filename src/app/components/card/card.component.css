@@ -10,7 +10,7 @@
 }
 
 .card-image-div{
-  width: 100%;
+  width: 350px;
   height: 200px;
   background: var(--accent);
   border-top-left-radius: 16px;
@@ -20,8 +20,9 @@
 .card-image{
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  width: 100%;
+  width: 350px;
   height: 100%;
+  cursor: pointer;
 }
 
 .card-body {
