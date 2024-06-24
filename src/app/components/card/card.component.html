@@ -1,18 +1,67 @@
-<div class="card">
-  <div class="card-image-div">
-    <img (click)="openBigImage()" class="card-image" src="{{selectedImage['binaire.href']}}"/>
+<div [ngClass]="{'card-extended': extendedObs.includes(obs.id_observation)}" class="card">
+  <div class="card-left">
+    <div class="card-image-div">
+      <img (click)="openBigImage()" class="card-image" src="{{selectedImage['binaire.href']}}"/>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title w-100">{{nomScientifique}}</h5>
+      <p class="card-texte">Référentiel: {{obs.determination_referentiel}}</p>
+      <p class="card-texte">Observée le {{dateObservation}}</p>
+      <p class="card-texte">Observateur: {{obs.auteur_nom}}</p>
+      <p class="card-texte">Lieu: {{obs.zone_geo}} {{obs.station}}, {{obs.pays}}</p>
+      <p class="card-texte">Publiée le {{dateTransmission}}</p>
+    </div>
+    <!--    TODO: mettre des icones-->
+    @if (!isCardExtended){
+    <button (click)="extendObs()">Extend</button>
+    } @else {
+    <button (click)="reduceObs()">Reduce</button>
+    }
   </div>
-  <div class="card-body">
-    <h5 class="card-title w-100">{{nomScientifique}}</h5>
-    <p class="card-texte">Référentiel: {{obs.determination_referentiel}}</p>
-    <p class="card-texte">Observée le {{dateObservation}}</p>
-    <p class="card-texte">Observateur: {{obs.auteur_nom}}</p>
-    <p class="card-texte">Lieu: {{obs.zone_geo}} {{obs.station}}, {{obs.pays}}</p>
-    <p class="card-texte">Publiée le {{dateTransmission}}</p>
+
+  @if (isCardExtended){
+  <div class="card-right">
+    <h5 class="card-title w-100">Proposition des membres du réseau</h5>
+
+    @if(commentaires.length < 1){
+      <p class="card-texte">{{nomScientifique}}
+        <button (click)="voter('1', '0')">Pour</button>
+        <button (click)="voter('0', '0')">Contre</button>
+      </p>
+      <p class="card-texte">Score: 0</p>
+    } @else {
+      @for(commentaire of commentaires; track commentaire.id_commentaire){
+        <p class="card-texte">Proposition: {{commentaire.nom_sel}}</p>
+          <div class="flex-center"><button (click)="voter('1', commentaire.id_commentaire )">Pour</button>
+          <button (click)="voter('0', commentaire.id_commentaire )">Contre</button></div>
+
+        <p class="card-texte">Score: {{commentaire.score}} ({{commentaire.votes.length}} vote(s))</p>
+
+        @if(commentaire.texte){
+        <p class="card-texte">Commentaire: {{commentaire.texte}}</p>
+        }
+
+      <hr class="w-100"/>
+      }
+    }
+
+    @if(voteErrorMessage){
+    <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>
+    }
+
+  <div>
+  <button>Proposer une détermination</button>
+    <button>Ajouter un commentaire</button>
+    <button>Voir tous les commentaires</button></div>
+
   </div>
+  }
+</div>
 
   @if (popupBigImage){
-  <app-popup-big-image [obs]="obs" [selectedImage]="selectedImage" (closePopupEmitter)="closeBigImagePopup()"></app-popup-big-image>
+  <app-popup-big-image
+    [obs]="obs"
+    [selectedImage]="selectedImage"
+    (closePopupEmitter)="closeBigImagePopup()">
+  </app-popup-big-image>
   }
-
-</div>

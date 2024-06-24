@@ -39,4 +39,18 @@ export class DelService {
   getProtocoles(){
     return this.http.get<any>(this.protocolesService);
   }
+
+  getVoteDetail(voteId: string, obsId: string){
+    const url = this.observationsService + "/" + obsId + "/" + voteId + "/vote/";
+    return this.http.get<any>(url);
+  }
+
+  saveVote(voteInfos: {obsId: string, voteId: string, user: string, value: string}, token?: string){
+    const headers = token ? new HttpHeaders().set('Authorization', token) : new HttpHeaders().set('Authorization', "");
+
+    const url = this.observationsService + "/" + voteInfos.obsId + "/" + voteInfos.voteId + "/vote/";
+    const body = {utilisateur: voteInfos.user, valeur: voteInfos.value}
+
+    return this.http.put<any>(url, body, {headers})
+  }
 }

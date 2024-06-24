@@ -8,13 +8,15 @@ import {Ontologie} from "../../models/ontologie";
 import {Protocole} from "../../models/protocole";
 import {CardComponent} from "../card/card.component";
 import {PaginationComponent} from "../pagination/pagination.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-contenu',
   standalone: true,
   imports: [
     CardComponent,
-    PaginationComponent
+    PaginationComponent,
+    CommonModule
   ],
   templateUrl: './contenu.component.html',
   styleUrl: './contenu.component.css'
@@ -27,6 +29,7 @@ export class ContenuComponent {
   userId = this.authService.userId();
   selectedOnglet = this.commonService.selectedOnglet();
   urlParamsString = this.commonService.urlParamsString();
+  extendedObs = this.commonService.extendedObs();
 
   observations: Observation[] = [];
   pays: Ontologie[] = [];
@@ -54,6 +57,10 @@ export class ContenuComponent {
       this.urlParamsString = this.commonService.urlParamsString();
       this.errorMessage = "";
       this.loadObservations();
+    })
+
+    effect(()=>{
+      this.extendedObs = this.commonService.extendedObs();
     })
   }
 

@@ -8,6 +8,7 @@ export class CommonService {
   selectedOnglet = signal("");
   url = new URL(window.location.href)
   urlParamsString = signal(this.url.search)
+  extendedObs = signal<string[]>([]);
 
   constructor() { }
 
@@ -109,4 +110,17 @@ export class CommonService {
       new Referentiel("taxref", "France (TaxRef)")
     ];
   }
+
+  setExtendedObs(id: string){
+    let extendedObsArray = this.extendedObs();
+    extendedObsArray.push(id)
+    this.extendedObs.set(extendedObsArray);
+  }
+
+  reduceExtendedObs(id: string){
+    let extendedObsArray = this.extendedObs();
+    extendedObsArray = extendedObsArray.filter(obsId => obsId !== id);
+    this.extendedObs.set(extendedObsArray);
+  }
+
 }

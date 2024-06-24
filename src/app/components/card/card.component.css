@@ -5,6 +5,12 @@
   box-shadow: 15px 15px 8px 0 var(--primary40), 0 6px 20px 0 var(--primary39);
   border-radius: 16px;
   display: flex;
+  gap: 1rem;
+  background: var(--gradient-card);
+}
+
+.card-left, .card-right{
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -26,7 +32,7 @@
 }
 
 .card-body {
-  background: var(--gradient-card);
+
   height: 100%;
   width: 100%;
   border-bottom-left-radius: 16px;
@@ -53,6 +59,10 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.card-extended{
+  width: 100%;
 }
 
 /*@media (width <= 768px) {*/

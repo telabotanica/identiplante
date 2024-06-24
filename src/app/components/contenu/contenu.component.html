@@ -5,7 +5,11 @@
 
     <div class="cards-container">
       @for (observation of observations; track observation.id_observation){
-        <app-card [obs]="observation"></app-card>
+        <app-card
+          [obs]="observation"
+          id="{{observation.id_observation}}"
+          [ngClass]="{'w-100': extendedObs.includes(observation.id_observation)}">
+        </app-card>
       }
     </div>
 
