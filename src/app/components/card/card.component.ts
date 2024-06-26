@@ -7,6 +7,7 @@ import {AuthService} from "../../services/auth.service";
 import {CookieService} from "ngx-cookie-service";
 import { environment } from '../../../environments/environment';
 import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-ajout-commentaire.component";
+import {PopupDetailVotesComponent} from "../popup-detail-votes/popup-detail-votes.component";
 
 @Component({
   selector: 'app-card',
@@ -14,7 +15,8 @@ import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-a
   imports: [
     PopupBigImageComponent,
     CommonModule,
-    PopupAjoutCommentaireComponent
+    PopupAjoutCommentaireComponent,
+    PopupDetailVotesComponent
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
@@ -26,7 +28,7 @@ export class CardComponent {
   dateTransmission = "";
   popupBigImage = false;
   popupAddComment = false;
-  popupDetailVotes = false;
+  popupDetailVotes = "";
   commentType="";
   selectedImage: any;
   nomScientifique= '';
@@ -62,6 +64,7 @@ export class CardComponent {
 
     this.transformCommentaireAndVotes();
     // console.log(this.obs)
+    // console.log(this.commentaires)
   }
 
   changeMainPicture(imageHref: string){
@@ -194,5 +197,13 @@ export class CardComponent {
   closeAddComment(){
     this.popupAddComment = false
     this.commentType = ""
+  }
+
+  openDetailVotes(id: string){
+    this.popupDetailVotes = id;
+  }
+
+  closeDetailVotes(){
+    this.popupDetailVotes = "";
   }
 }

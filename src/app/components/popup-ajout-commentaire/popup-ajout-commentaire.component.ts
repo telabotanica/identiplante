@@ -40,7 +40,6 @@ export class PopupAjoutCommentaireComponent {
     });
   }
 
-
   ngOnInit(){
     this.referentiels = this.commonService.getReferentiels()
     this.referentiels.shift()
@@ -48,7 +47,6 @@ export class PopupAjoutCommentaireComponent {
     const nom  =  (this.user && this.user.nom) ? this.user.nom : null
     const prenom =  (this.user && this.user.prenom) ? this.user.prenom : null
     const courriel =  (this.user && this.user.courriel) ? this.user.courriel : null
-
 
     if (this.commentType == 'commentaire'){
       this.form = this.fb.group({
@@ -70,6 +68,8 @@ export class PopupAjoutCommentaireComponent {
     }
 
     this.getTaxonsList()
+
+    // On cache la liste si on click dans le popup
     window.addEventListener('click', this.onGlobalClick.bind(this));
   }
 
@@ -84,7 +84,7 @@ export class PopupAjoutCommentaireComponent {
 
   onSubmit() {
     if (this.commentType == 'determination' && !this.form.value.nom_sel_nn) {
-      this.showWarningPopup = true; // Affiche la popup si nom_sel_nn est null
+      this.showWarningPopup = true; // Affiche la popup de confirmation si nom_sel_nn est null dans le cas d'une proposition de détermination
     } else {
       this.submitForm(); // Soumet le formulaire directement
     }
@@ -115,6 +115,7 @@ export class PopupAjoutCommentaireComponent {
       nom_sel_nn: ""
     }
 
+    // On ajoute les infos supplémentaire pour le cas d'une proposition de détermination
     if (this.commentType == 'determination'){
       formData.nom_referentiel = this.form.value.referentiel
       formData.nom_sel = this.form.value.nom_sel
@@ -130,13 +131,14 @@ export class PopupAjoutCommentaireComponent {
 
     if (this.form.valid){
       formData = this.removeEmptyProperties(formData) as FormData;
-      console.log(formData)
-/*
+
       // Envoie vers le web service
       if (!this.user){
         this.delService.saveCommentaire(formData).subscribe({
           next: (data) => {
             console.log(data)
+            this.close()
+            location.reload()
           },
           error: (err) => {
             console.log(err)
@@ -149,6 +151,8 @@ export class PopupAjoutCommentaireComponent {
             this.delService.saveCommentaire(formData, token).subscribe({
               next: (data) => {
                 console.log(data)
+                this.close()
+                location.reload()
               },
               error: (err) => {
                 console.log(err.error)
@@ -162,16 +166,18 @@ export class PopupAjoutCommentaireComponent {
           }
         })
       }
-*/
+
       this.close()
-      // TODO mettre à jour la card
+      location.reload()
     }
   }
 
+  // Clean l'objet à envoyer au service pour ne pas avoir de paramètres vide
   removeEmptyProperties(obj: any):Partial<FormData> {
     return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== "" && v !== null && v !== undefined));
   }
 
+  // Ferme le popup
   close() {
     this.closePopupEmitter.emit();
   }
@@ -200,12 +206,14 @@ export class PopupAjoutCommentaireComponent {
     });
   }
 
+  //Récupération des suggestions de taxon
   getNomsTaxons(masque: string, referentiel: string) {
     return this.delService.getNomsTaxons(masque, referentiel).pipe(
       map(response => response["resultats"] || [])
     );
   }
 
+  // Sélection du taxon voulu dans la liste de suggestions
   selectProposition(proposition: any) {
     this.skipNextValueChange = true; // Ignorer le prochain changement de valeur
     this.form.patchValue({
@@ -215,6 +223,7 @@ export class PopupAjoutCommentaireComponent {
     this.hidePropositions();
   }
 
+  // Fermeture de la liste de suggestions de taxons
   hidePropositions() {
     this.taxonsList = [];
   }

@@ -1,0 +1,31 @@
+<div id="popup-detail-vote">
+  <div class="popup-header">
+    <button (click)="close()">close</button>
+    <h5>{{nomScientifique}} <span>({{obs.determination_referentiel}}) proposé par {{commentaire['auteur.prenom']}} {{commentaire['auteur.nom']}} le {{dateTransmission}}</span></h5>
+  </div>
+  <div class="popup-body">
+    <h6>Votes contre ({{contreStat}}%)</h6>
+    @for (vote of votesGrouped.contre; track vote['vote.id']){
+    <p>
+      @if(!vote['auteur.nom']){
+        Anonyme
+      }
+    {{vote['auteur.prenom']}} {{vote['auteur.nom']}} le {{vote.date}}
+    </p>
+    }
+
+    <h6>Votes pour ({{pourStat}}%)</h6>
+    @for (vote of votesGrouped.pour; track vote['vote.id']){
+    <p>
+      @if(!vote['auteur.nom']){
+    Anonyme
+    }
+    {{vote['auteur.prenom']}} {{vote['auteur.nom']}} le {{vote.date}}
+    </p>
+    }
+
+    <p>Ces votes permettent de confirmer ou non une détermination proposée par un membre du réseau.<br />
+       Vous pouvez changer à tout moment votre vote à l'aide des boutons pour ou contre.<br />
+       Une pondération s'opère pour le calcul des votes : vote en tant que membre identifié (3 points) / non identifié (1 point).</p>
+  </div>
+</div>

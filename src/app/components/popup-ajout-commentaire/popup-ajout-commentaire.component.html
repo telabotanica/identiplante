@@ -82,6 +82,9 @@
 
       <button type="submit" [disabled]="form.invalid">Envoyer</button>
 
+      @if(commentErrorMessage){
+      <div><p class="invalid-feedback">{{commentErrorMessage}}</p></div>
+      }
 
 
     </form>
