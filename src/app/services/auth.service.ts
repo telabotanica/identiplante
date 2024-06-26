@@ -13,6 +13,7 @@ export class AuthService {
   private authUrl = environment.serviceAuthBaseUrl;
   private delUser = environment.serviceUtilisateursBaseUrl;
   userId = signal("");
+  user = signal(null);
 
   http = inject(HttpClient)
   router = inject(Router)
@@ -36,6 +37,10 @@ export class AuthService {
 
   setUserId(id: string) {
     this.userId.set(id);
+  }
+
+  setUser(user: any){
+    this.user.set(user)
   }
 
 }

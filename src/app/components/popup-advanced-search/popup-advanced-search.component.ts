@@ -35,7 +35,6 @@ export class PopupAdvancedSearchComponent {
   pninscritsseulement = true
 
   ngOnInit(): void {
-
     this.referentiels = this.commonService.getReferentiels()
     this.checkIfDateOrYear();
     this.pninscritsseulement = this.urlParams.get('masque.pninscritsseulement') == '1' ? true : false;

@@ -1,0 +1,91 @@
+<div id="popup-addComment">
+  <div class="popup-header">
+    <button (click)="close()">close</button>
+  </div>
+
+  <div class="popup-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" formControlName="nom" required>
+        <div *ngIf="form.controls['nom'].invalid && form.controls['nom'].touched" class="invalid-feedback">
+          Un nom est requis.
+        </div>
+      </div>
+      <div>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" formControlName="prenom" required>
+        <div *ngIf="form.controls['prenom'].invalid && form.controls['prenom'].touched" class="invalid-feedback">
+          Un prénom est requis.
+        </div>
+      </div>
+      <div>
+        <label for="courriel">Email :</label>
+        <input type="courriel" id="courriel" formControlName="courriel" required>
+        <div *ngIf="form.controls['courriel'].invalid && form.controls['courriel'].touched" class="invalid-feedback">
+          Une adresse email valide est requise.
+        </div>
+      </div>
+
+      @if (commentType === 'determination'){
+      <div>
+        <label for="referentiel">Référentiel</label>
+        <select id="referentiel" formControlName="referentiel">
+          @for(referentiel of referentiels; ; track referentiel.code){
+            <option [value]="referentiel.code">
+              {{ referentiel.nom }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label for="nom_sel">Taxon :</label>
+        <input type="text" id="nom_sel" formControlName="nom_sel" required (input)="clearNomSelNn()">
+        <div *ngIf="form.controls['nom_sel'].invalid && form.controls['nom_sel'].touched" class="invalid-feedback">
+            Taxon est requis.
+        </div>
+
+         <ul *ngIf="taxonsList && taxonsList.length > 0" class="propositions-list">
+            <li *ngFor="let proposition of taxonsList" (click)="selectProposition(proposition)">
+            {{ proposition.ns }}
+            </li>
+        </ul>
+
+        </div>
+
+        <div>
+          <label for="texte">Commentaire :</label>
+          <textarea id="texte" formControlName="texte"></textarea>
+        </div>
+
+      } @else {
+      <div>
+        <label for="texte">Commentaire :</label>
+        <textarea id="texte" formControlName="texte" required></textarea>
+        <div *ngIf="form.controls['texte'].invalid && form.controls['texte'].touched" class="invalid-feedback">
+          Un commentaire est requis.
+        </div>
+      </div>
+      }
+
+      @if(showWarningPopup){
+      <div class="warning-popup">
+        <p>Attention : le taxon saisi n'est pas lié à un élément du référentiel.
+           La proposition pourra être votée mais pas acceptée par l'auteur de l'observation.
+           Avez-vous sélectionné le nom à partir de l'auto completion ?</p>
+        <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour corriger votre proposition.</p>
+        <button type="button" (click)="confirmSubmit()">OK</button>
+        <button type="button" (click)="cancelSubmit()" class="button-selected">Annuler</button>
+      </div>
+      }
+
+      <button type="submit" [disabled]="form.invalid">Envoyer</button>
+
+
+
+    </form>
+
+
+  </div>
+</div>

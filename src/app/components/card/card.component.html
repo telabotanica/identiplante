@@ -35,7 +35,11 @@
           <div class="flex-center"><button (click)="voter('1', commentaire.id_commentaire )">Pour</button>
           <button (click)="voter('0', commentaire.id_commentaire )">Contre</button></div>
 
-        <p class="card-texte">Score: {{commentaire.score}} ({{commentaire.votes.length}} vote(s))</p>
+        @if (commentaire.votes){
+          <p class="card-texte">Score: {{commentaire.score}} ({{commentaire.votes.length}} vote(s))</p>
+        } @else {
+          <p class="card-texte">Score: {{commentaire.score}} (0) vote)</p>
+        }
 
         @if(commentaire.texte){
         <p class="card-texte">Commentaire: {{commentaire.texte}}</p>
@@ -50,18 +54,26 @@
     }
 
   <div>
-  <button>Proposer une détermination</button>
-    <button>Ajouter un commentaire</button>
-    <button>Voir tous les commentaires</button></div>
+  <button (click)="openAddComment('determination')">Proposer une détermination</button>
+    <button (click)="openAddComment('commentaire')">Ajouter un commentaire</button>
+    <button>Voir tous les commentaires ({{obs.nb_commentaires}})</button></div>
 
   </div>
   }
 </div>
 
-  @if (popupBigImage){
-  <app-popup-big-image
-    [obs]="obs"
-    [selectedImage]="selectedImage"
-    (closePopupEmitter)="closeBigImagePopup()">
-  </app-popup-big-image>
-  }
+@if (popupBigImage){
+<app-popup-big-image
+  [obs]="obs"
+  [selectedImage]="selectedImage"
+  (closePopupEmitter)="closeBigImagePopup()">
+</app-popup-big-image>
+}
+
+@if (popupAddComment){
+<app-popup-ajout-commentaire
+  [obsId]="obs.id_observation"
+  [commentType]="commentType"
+  (closePopupEmitter)="closeAddComment()">
+</app-popup-ajout-commentaire>
+}

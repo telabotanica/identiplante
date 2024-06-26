@@ -67,6 +67,8 @@ export class LoginComponent {
               this.isLoggedIn = this.user.connecte
               this.displayName = this.user.prenom && this.user.nom ? this.user.prenom + " " + this.user.nom : this.user.intitule;
               this.authService.setUserId(this.user.id_utilisateur)
+              this.authService.setUser(this.user)
+              // console.log(token)
             })
           },
           error: (err : any) => {
@@ -86,7 +88,7 @@ export class LoginComponent {
         this.isLoggedIn = this.user.connecte
         this.displayName = "";
         this.authService.setUserId("")
-
+        this.authService.setUser(null)
       })
     })
   }

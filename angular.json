@@ -27,7 +27,11 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "public/assets/style/colors.css",
+              "public/assets/style/fonts.css",
+              "src/styles.css",
+              "public/assets/style/loader.css",
+              "public/assets/style/popup.css"
             ],
             "scripts": []
           },

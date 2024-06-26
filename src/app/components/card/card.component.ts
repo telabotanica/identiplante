@@ -6,13 +6,15 @@ import {DelService} from "../../services/del.service";
 import {AuthService} from "../../services/auth.service";
 import {CookieService} from "ngx-cookie-service";
 import { environment } from '../../../environments/environment';
+import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-ajout-commentaire.component";
 
 @Component({
   selector: 'app-card',
   standalone: true,
   imports: [
     PopupBigImageComponent,
-    CommonModule
+    CommonModule,
+    PopupAjoutCommentaireComponent
   ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
@@ -23,6 +25,9 @@ export class CardComponent {
   dateObservation = "";
   dateTransmission = "";
   popupBigImage = false;
+  popupAddComment = false;
+  popupDetailVotes = false;
+  commentType="";
   selectedImage: any;
   nomScientifique= '';
   isCardExtended = false;
@@ -56,6 +61,7 @@ export class CardComponent {
     this.selectedImage = this.obs.images[0]
 
     this.transformCommentaireAndVotes();
+    // console.log(this.obs)
   }
 
   changeMainPicture(imageHref: string){
@@ -178,5 +184,15 @@ export class CardComponent {
         }
       })
     })
+  }
+
+  openAddComment(commentType: string){
+    this.popupAddComment = true;
+    this.commentType = commentType
+  }
+
+  closeAddComment(){
+    this.popupAddComment = false
+    this.commentType = ""
   }
 }

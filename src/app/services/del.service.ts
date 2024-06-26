@@ -12,6 +12,8 @@ export class DelService {
   private protocolesService = environment.serviceBaseUrl + "protocoles";
   private ontologieService = environment.serviceBaseUrl + "ontologie/pays/";
   private observationsService = environment.serviceBaseUrl + "observations";
+  private commentairesService = environment.serviceBaseUrl + "commentaires/";
+  private nomsTaxonsService = environment.serviceBaseUrl + "nomstaxons";
 
   http = inject(HttpClient);
   router = inject(Router);
@@ -52,5 +54,15 @@ export class DelService {
     const body = {utilisateur: voteInfos.user, valeur: voteInfos.value}
 
     return this.http.put<any>(url, body, {headers})
+  }
+
+  saveCommentaire(commentaireInfos: any, token?: string){
+    const headers = token ? new HttpHeaders().set('Authorization', token) : new HttpHeaders().set('Authorization', "");
+
+    return this.http.put<any>(this.commentairesService, commentaireInfos, {headers})
+  }
+
+  getNomsTaxons(masque: string, referentiel: string){
+    return this.http.get<any>(this.nomsTaxonsService + "?masque.nom=" + masque + "&masque.referentiel=" + referentiel)
   }
 }
