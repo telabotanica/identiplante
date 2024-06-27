@@ -4,6 +4,32 @@
   padding-right: 1rem;
 }
 
+#detail-image-container {
+  width: 300px;
+  height: 300px;
+}
+
+#detail-image-miniatures-container {
+  width: 100%;
+  height: 20%;
+}
+
+#detail-image-selected {
+  width: 100%;
+  height: 80%;
+}
+
+.detail-image {
+  width: 100%;
+  height: 100%;
+}
+
+.miniature-image {
+  height: 100%;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
 @media (width <= 768px) {
   #detail{
     padding: 0 1rem;

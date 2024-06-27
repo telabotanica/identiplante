@@ -41,6 +41,7 @@ export class DetailComponent {
   popupAddCommentOnDetailId: string | null = null;
   commentType= "";
   commentairesGrouped = <any>{ proposition: [], commentaire: [] };
+  imageSelected: any;
 
   urlParamsString = this.commonService.urlParamsString();
   userId = this.authService.userId();
@@ -73,6 +74,7 @@ export class DetailComponent {
             this.dateObservation = this.obs.date_observation ? this.commonService.formatDateString(this.obs.date_observation) : '';
             this.nomScientifique = this.obs["determination.ns"] ?? 'Indéterminé';
             this.profilUrl = this.obs['auteur.id'] ? environment.profilUrl + this.obs['auteur.id'] : "";
+            this.imageSelected = this.obs.images[0]
 
             this.grouperReponses()
 
@@ -116,24 +118,19 @@ export class DetailComponent {
             ** Si id_parent == proposition -> on met direct dans réponses
             ** Sinon on va chercher un niveau au dessous et ainsi de suite
              */
-            //Niveau 1:
-            // const index = this.commentairesGrouped.proposition.findIndex(
-            //   (prop: any) => prop.id_commentaire === commentaire.proposition
-            // );
-            // if (index !== -1) { // Sous niveaux de manière récursive
-              let parent = this.trouverParent(this.commentairesGrouped.proposition, commentaire.id_parent)
-              if (!parent.reponses){
-                parent.reponses = []
-              }
-              parent.reponses.push(commentaire)
-            // }
+            let parent = this.trouverParent(this.commentairesGrouped.proposition, commentaire.id_parent)
+            if (!parent.reponses){
+              parent.reponses = []
+            }
+            parent.reponses.push(commentaire)
+
           } else { //C'est un commentaire non lié à une détermination
-              // On recherche niveau par niveau si id_parent == id_commentaire
-                let parent = this.trouverParent(this.commentairesGrouped.commentaire, commentaire.id_parent)
-                if (!parent.reponses){
-                  parent.reponses = []
-                }
-                parent.reponses.push(commentaire)
+            // On recherche niveau par niveau si id_parent == id_commentaire
+            let parent = this.trouverParent(this.commentairesGrouped.commentaire, commentaire.id_parent)
+            if (!parent.reponses){
+              parent.reponses = []
+            }
+            parent.reponses.push(commentaire)
           }
         }
       }
@@ -268,6 +265,10 @@ export class DetailComponent {
     this.popupAddCommentOnDetail = false
     this.popupAddCommentOnDetailId = null;
     this.commentType = ""
+  }
+
+  changeSelectedImage(image: any){
+    this.imageSelected = image
   }
 
 }
