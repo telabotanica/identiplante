@@ -1,5 +1,6 @@
 import {Injectable, signal} from '@angular/core';
 import {Referentiel} from "../models/referentiel";
+import {Observation} from "../models/observation";
 
 @Injectable({
   providedIn: 'root'

@@ -1,0 +1,11 @@
+#detail {
+  position: relative;
+  min-height: 300px;
+  padding-right: 1rem;
+}
+
+@media (width <= 768px) {
+  #detail{
+    padding: 0 1rem;
+  }
+}

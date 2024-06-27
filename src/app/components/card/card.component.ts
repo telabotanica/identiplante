@@ -8,6 +8,7 @@ import {CookieService} from "ngx-cookie-service";
 import { environment } from '../../../environments/environment';
 import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-ajout-commentaire.component";
 import {PopupDetailVotesComponent} from "../popup-detail-votes/popup-detail-votes.component";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-card',
@@ -41,9 +42,12 @@ export class CardComponent {
   delService = inject(DelService)
   authService = inject(AuthService);
   cookieService = inject(CookieService);
+  route = inject(ActivatedRoute)
+  router = inject(Router)
 
   extendedObs = this.commonService.extendedObs();
   userId = this.authService.userId();
+  urlParamsString = this.commonService.urlParamsString();
 
   constructor() {
     effect(()=>{
@@ -53,6 +57,10 @@ export class CardComponent {
     effect(() => {
       this.userId = this.authService.userId();
     });
+
+    effect(()=> {
+      this.urlParamsString = this.commonService.urlParamsString();
+    })
   }
 
   ngOnInit(){

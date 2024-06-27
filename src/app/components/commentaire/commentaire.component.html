@@ -1,0 +1,25 @@
+<div *ngFor="let commentaire of commentaires" [ngStyle]="{'margin-left.px': niveau * 20}">
+
+  <div class="flex-start">
+  <p class="card-texte">{{ commentaire.texte }}</p>
+  @if(commentaire.texte){
+    <button (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre</button>
+  }
+  </div>
+  <div *ngIf="commentaire.reponses">
+    <app-commentaire [commentaires]="commentaire.reponses" [niveau]="niveau + 1"></app-commentaire>
+  </div>
+
+  @if (popupAddComment && popupAddCommentId == commentaire.id_commentaire){
+  <app-popup-ajout-commentaire
+    [obsId]="commentaire.observation"
+    [commentType]="commentType"
+    [id_parent]="commentaire.id_commentaire"
+    [proposition]="commentaire.proposition"
+    (closePopupEmitter)="closeAddComment()">
+  </app-popup-ajout-commentaire>
+  }
+</div>
+
+
+

@@ -34,6 +34,10 @@ export class DelService {
     return this.http.get<any>(this.observationsService + '?' + params, {headers});
   }
 
+  getObservation(id: string){
+    return this.http.get(this.observationsService + "/" + id)
+  }
+
   getOntologie(){
     return this.http.get<any>(this.ontologieService);
   }

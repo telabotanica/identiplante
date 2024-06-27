@@ -19,6 +19,8 @@ export class PopupAjoutCommentaireComponent {
   @Output() closePopupEmitter = new EventEmitter<void>()
   @Input() obsId: any;
   @Input() commentType: any;
+  @Input() id_parent: string = "";
+  @Input() proposition: string = "";
 
   fb = inject(FormBuilder)
   commonService = inject(CommonService)
@@ -43,12 +45,11 @@ export class PopupAjoutCommentaireComponent {
   ngOnInit(){
     this.referentiels = this.commonService.getReferentiels()
     this.referentiels.shift()
-
     const nom  =  (this.user && this.user.nom) ? this.user.nom : null
     const prenom =  (this.user && this.user.prenom) ? this.user.prenom : null
     const courriel =  (this.user && this.user.courriel) ? this.user.courriel : null
 
-    if (this.commentType == 'commentaire'){
+    if (this.commentType == 'commentaire' || this.commentType == 'reponse'){
       this.form = this.fb.group({
         nom: [nom, [Validators.required]],
         prenom: [prenom, [Validators.required]],
@@ -101,6 +102,8 @@ export class PopupAjoutCommentaireComponent {
       nom_referentiel: string;
       nom_sel: string;
       nom_sel_nn: string;
+      id_parent: string;
+      proposition: string;
     }
 
     let formData: FormData = {
@@ -112,7 +115,9 @@ export class PopupAjoutCommentaireComponent {
       texte: this.form.value.texte,
       nom_referentiel: "",
       nom_sel: "",
-      nom_sel_nn: ""
+      nom_sel_nn: "",
+      id_parent: "",
+      proposition: "",
     }
 
     // On ajoute les infos supplémentaire pour le cas d'une proposition de détermination
@@ -123,6 +128,10 @@ export class PopupAjoutCommentaireComponent {
       if (this.form.value.nom_sel_nn){
         formData.nom_sel_nn = this.form.value.nom_sel_nn
       }
+    }
+    if (this.commentType == 'reponse'){
+      formData.id_parent = this.id_parent
+      formData.proposition = this.proposition
     }
 
     if (this.user){
@@ -166,9 +175,6 @@ export class PopupAjoutCommentaireComponent {
           }
         })
       }
-
-      this.close()
-      location.reload()
     }
   }
 

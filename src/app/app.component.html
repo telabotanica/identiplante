@@ -3,7 +3,12 @@
   <section id="content-div">
     <app-header></app-header>
     <app-top-section></app-top-section>
-    <app-contenu></app-contenu>
+    <ng-container *ngIf="isDetail; else contenuTemplate">
+      <app-detail></app-detail>
+    </ng-container>
+    <ng-template #contenuTemplate>
+      <app-contenu></app-contenu>
+    </ng-template>
     <app-footer></app-footer>
   </section>
 </div>

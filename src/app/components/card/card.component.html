@@ -4,7 +4,7 @@
       <img (click)="openBigImage()" class="card-image" src="{{selectedImage['binaire.href']}}"/>
     </div>
     <div class="card-body">
-      <h5 class="card-title w-100">{{nomScientifique}}</h5>
+      <h5 class="card-title w-100"><a href="{{urlParamsString}}#obs~{{obs.id_observation}}">{{nomScientifique}}</a></h5>
       <p class="card-texte">Référentiel: {{obs.determination_referentiel}}</p>
       <p class="card-texte">Observée le {{dateObservation}}</p>
       <p class="card-texte">Observateur: {{obs.auteur_nom}}</p>
