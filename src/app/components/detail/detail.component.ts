@@ -36,6 +36,8 @@ export class DetailComponent {
   departement = "";
   profilUrl = ""
   voteErrorMessage = "";
+  validationErrorMessage = "";
+  popupAddComment = false;
   popupDetailVotes = "";
   popupAddCommentOnDetail = false;
   popupAddCommentOnDetailId: string | null = null;
@@ -45,10 +47,12 @@ export class DetailComponent {
 
   urlParamsString = this.commonService.urlParamsString();
   userId = this.authService.userId();
+  isVerificateur = this.authService.isVerificateur()
 
   constructor() {
     effect(() => {
       this.userId = this.authService.userId();
+      this.isVerificateur = this.authService.isVerificateur()
     });
 
     effect(()=> {
@@ -267,8 +271,37 @@ export class DetailComponent {
     this.commentType = ""
   }
 
+  openAddCommentOnObs(commentType: string){
+    this.popupAddComment = true;
+    this.commentType = commentType
+  }
+
+  closeAddCommentOnObs(){
+    this.popupAddComment = false
+    this.commentType = ""
+  }
+
   changeSelectedImage(image: any){
     this.imageSelected = image
+  }
+
+  validerProposition(propositionId: string, auteurId: string){
+    let validationInfos = {
+      ['auteur.id']: auteurId,
+      ['validateur.id']: this.userId
+    }
+
+    this.delService.validerProposition(propositionId, validationInfos).subscribe({
+      next: (data) => {
+        console.log(data)
+        location.reload()
+      },
+      error: (err) => {
+        console.log(err)
+        this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter."
+      }
+    })
+    console.log(propositionId)
   }
 
 }

@@ -14,6 +14,7 @@ export class DelService {
   private observationsService = environment.serviceBaseUrl + "observations";
   private commentairesService = environment.serviceBaseUrl + "commentaires/";
   private nomsTaxonsService = environment.serviceBaseUrl + "nomstaxons";
+  private determinationsService = environment.serviceBaseUrl + "determinations/valider-determination/";
 
   http = inject(HttpClient);
   router = inject(Router);
@@ -60,13 +61,15 @@ export class DelService {
     return this.http.put<any>(url, body, {headers})
   }
 
-  saveCommentaire(commentaireInfos: any, token?: string){
-    const headers = token ? new HttpHeaders().set('Authorization', token) : new HttpHeaders().set('Authorization', "");
-
-    return this.http.put<any>(this.commentairesService, commentaireInfos, {headers})
+  saveCommentaire(commentaireInfos: any){
+    return this.http.put<any>(this.commentairesService, commentaireInfos)
   }
 
   getNomsTaxons(masque: string, referentiel: string){
     return this.http.get<any>(this.nomsTaxonsService + "?masque.nom=" + masque + "&masque.referentiel=" + referentiel)
+  }
+
+  validerProposition(commentaireId: string, validationInfos: any){
+    return this.http.post(this.determinationsService + commentaireId, validationInfos)
   }
 }

@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CookiesService} from "./cookies.service";
+import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   private authUrl = environment.serviceAuthBaseUrl;
   private delUser = environment.serviceUtilisateursBaseUrl;
   userId = signal("");
-  user = signal(null);
+  user = signal<User | null>(null);
 
   http = inject(HttpClient)
   router = inject(Router)
@@ -41,6 +42,23 @@ export class AuthService {
 
   setUser(user: any){
     this.user.set(user)
+  }
+
+  isVerificateur(){
+    const user: User | null = this.user();
+    if (user === null) {
+      return false;
+    }
+
+    switch (user.admin){
+      case '0':
+        return false;
+      case '1':
+      case '2':
+        return true;
+      default:
+        return false
+    }
   }
 
 }

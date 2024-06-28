@@ -142,7 +142,6 @@ export class PopupAjoutCommentaireComponent {
       formData = this.removeEmptyProperties(formData) as FormData;
 
       // Envoie vers le web service
-      if (!this.user){
         this.delService.saveCommentaire(formData).subscribe({
           next: (data) => {
             console.log(data)
@@ -153,28 +152,6 @@ export class PopupAjoutCommentaireComponent {
             console.log(err)
           }
         })
-      } else {
-        this.authService.identite().subscribe({
-          next: (data) => {
-            const token = data.token ?? "";
-            this.delService.saveCommentaire(formData, token).subscribe({
-              next: (data) => {
-                console.log(data)
-                this.close()
-                location.reload()
-              },
-              error: (err) => {
-                console.log(err.error)
-                this.commentErrorMessage = "Un problème est survenu, veuillez vous reconnecter."
-              }
-            })
-          },
-          error: (err) => {
-            console.log(err.error.error)
-            this.commentErrorMessage = "Un problème est survenu, veuillez vous reconnecter."
-          }
-        })
-      }
     }
   }
 

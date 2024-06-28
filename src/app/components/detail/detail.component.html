@@ -49,9 +49,15 @@
       <p class="card-texte">Score: 0</p>
     } @else {
       @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
+
         <hr class="w-100"/>
         <p class="card-texte">Proposition: {{commentaire.nom_sel}}</p>
+        <div class="flex-start">
+          @if(isVerificateur && commentaire.nom_sel_nn){<button (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])" class="button-selected">Valider</button>}
+        </div>
+
         <button (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre à la proposition</button>
+
         <div class="flex-center">
           @if (commentaire.votes){
             <p class="card-texte">Score: {{commentaire.score}} ({{commentaire.votes.length}} vote(s))</p>
@@ -91,6 +97,7 @@
             (closePopupEmitter)="closeDetailVotes()">
           </app-popup-detail-votes>
         }
+
       }
 
       <hr class="w-100"/>
@@ -98,10 +105,7 @@
 
       @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
         @if(commentaire.texte){
-        <!--        <p class="card-texte">Commentaire: {{commentaire.texte}}</p>-->
-          @if(commentaire.reponses){
             <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
-          }
         }
       }
     }
@@ -110,13 +114,25 @@
       <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>
     }
 
+    @if(validationErrorMessage){
+    <div><p class="invalid-feedback">{{validationErrorMessage}}</p></div>
+    }
+
     <hr class="w-100"/>
     <hr class="w-100"/>
 
     <div>
-      <button (click)="openAddComment('determination')">Proposer une détermination</button>
-      <button (click)="openAddComment('commentaire')">Ajouter un commentaire</button>
+      <button (click)="openAddCommentOnObs('determination')">Proposer une détermination</button>
+      <button (click)="openAddCommentOnObs('commentaire')">Ajouter un commentaire</button>
     </div>
+
+    @if (popupAddComment){
+      <app-popup-ajout-commentaire
+        [obsId]="obs.id_observation"
+        [commentType]="commentType"
+        (closePopupEmitter)="closeAddCommentOnObs()">
+      </app-popup-ajout-commentaire>
+    }
   </div>
 
   } @else {
