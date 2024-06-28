@@ -47,6 +47,7 @@ export class DetailComponent {
   commentairesGrouped = <any>{ proposition: [], commentaire: [] };
   imageSelected: any;
   showWarningPopup = false;
+  fluxRssUrl = environment.rssUrl + '&masque.observation=';
 
   urlParamsString = this.commonService.urlParamsString();
   userId = this.authService.userId();
@@ -76,12 +77,13 @@ export class DetailComponent {
             this.obs = data
             this.isLoading = false;
             this.transformCommentaireAndVotes();
-            //TODO bouton dépublier (admin 1 ou 2 ?)
+
             this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
             this.dateObservation = this.obs.date_observation ? this.commonService.formatDateString(this.obs.date_observation) : '';
             this.nomScientifique = this.obs["determination.ns"] ?? 'Indéterminé';
             this.profilUrl = this.obs['auteur.id'] ? environment.profilUrl + this.obs['auteur.id'] : "";
-            this.imageSelected = this.obs.images[0]
+            this.imageSelected = this.obs.images[0];
+            this.fluxRssUrl += this.obs.id_observation;
 
             this.grouperReponses()
 

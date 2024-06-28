@@ -72,7 +72,7 @@
     <div>
       <button (click)="openAddComment('determination')">Proposer une détermination</button>
       <button (click)="openAddComment('commentaire')">Ajouter un commentaire</button>
-      <button>Voir tous les commentaires ({{obs.nb_commentaires}})</button>
+      <button><a href="{{urlParamsString}}#obs~{{obs.id_observation}}">Voir tous les commentaires ({{obs.nb_commentaires || '0'}})</a></button>
     </div>
   </div>
   }

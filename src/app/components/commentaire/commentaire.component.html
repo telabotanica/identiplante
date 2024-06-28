@@ -2,6 +2,11 @@
 
   <div class="flex-start">
   <p class="card-texte">{{ commentaire.texte }}</p>
+
+  @if(userId && userId == commentaire['auteur.id']){
+    <button class="button-selected" (click)="affichagePopupConfirmation(commentaire.id_commentaire)">Supprimer</button>
+  }
+
   @if(commentaire.texte){
     <button (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre</button>
   }
@@ -19,7 +24,21 @@
     (closePopupEmitter)="closeAddComment()">
   </app-popup-ajout-commentaire>
   }
+
+  @if(showWarningPopup && warningPopUpId == commentaire.id_commentaire){
+  <div class="warning-popup">
+    <p>Etes-vous sûr de vouloir supprimer ce commentaire ?</p>
+    <p>"{{commentaire.texte}}"</p>
+    <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
+    <button type="button" (click)="confirmerDeleteComment(commentaire.id_commentaire)">OK</button>
+    <button type="button" (click)="cancelDeleteComment()" class="button-selected">Annuler</button>
+  </div>
+  }
 </div>
+
+@if(deleteCommentErrorMessage){
+  <div><p class="invalid-feedback">{{deleteCommentErrorMessage}}</p></div>
+}
 
 
 

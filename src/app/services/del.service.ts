@@ -65,6 +65,10 @@ export class DelService {
     return this.http.put<any>(this.commentairesService, commentaireInfos)
   }
 
+  deleteComment(id: string){
+    return this.http.delete(this.commentairesService + id)
+  }
+
   getNomsTaxons(masque: string, referentiel: string){
     return this.http.get<any>(this.nomsTaxonsService + "?masque.nom=" + masque + "&masque.referentiel=" + referentiel)
   }

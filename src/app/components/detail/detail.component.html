@@ -2,7 +2,7 @@
   <button><a href="{{urlParamsString}}">Retour</a></button>
   @if(!isLoading){
 
-    <div class="flex-start">
+    <div class="flex-evenly mt-2">
       @if(isAdmin){
         <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected">Dépublier</button>
       }
