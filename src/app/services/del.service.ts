@@ -72,4 +72,8 @@ export class DelService {
   validerProposition(commentaireId: string, validationInfos: any){
     return this.http.post(this.determinationsService + commentaireId, validationInfos)
   }
+
+  depublier(obsId: string){
+    return this.http.post(this.observationsService + "/" + obsId, {transmission:0})
+  }
 }

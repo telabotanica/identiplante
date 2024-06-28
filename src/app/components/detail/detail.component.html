@@ -2,10 +2,16 @@
   <button><a href="{{urlParamsString}}">Retour</a></button>
   @if(!isLoading){
 
-  <div id="detail-image-container">
-     <div id="detail-image-selected">
-        <img class="detail-image" alt="{{nomScientifique}}"  src="{{imageSelected['binaire.href']}}">
-     </div>
+    <div class="flex-start">
+      @if(isAdmin){
+        <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected">Dépublier</button>
+      }
+    </div>
+
+    <div id="detail-image-container">
+    <div id="detail-image-selected">
+      <img class="detail-image" alt="{{nomScientifique}}"  src="{{imageSelected['binaire.href']}}">
+    </div>
 
      <div id="detail-image-miniatures-container">
         @for (image of obs.images; track image.id_image){
@@ -115,7 +121,11 @@
     }
 
     @if(validationErrorMessage){
-    <div><p class="invalid-feedback">{{validationErrorMessage}}</p></div>
+      <div><p class="invalid-feedback">{{validationErrorMessage}}</p></div>
+    }
+
+    @if(depublierErrorMessage){
+      <div><p class="invalid-feedback">{{depublierErrorMessage}}</p></div>
     }
 
     <hr class="w-100"/>
@@ -133,6 +143,16 @@
         (closePopupEmitter)="closeAddCommentOnObs()">
       </app-popup-ajout-commentaire>
     }
+
+    @if(showWarningPopup){
+    <div class="warning-popup">
+      <p>Etes-vous sûr de vouloir dépublier cette observation ?</p>
+      <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
+      <button type="button" (click)="confirmerDepublier(obs.id_observation)">OK</button>
+      <button type="button" (click)="cancelDepublier()" class="button-selected">Annuler</button>
+    </div>
+    }
+
   </div>
 
   } @else {

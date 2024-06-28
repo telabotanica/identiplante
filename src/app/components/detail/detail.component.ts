@@ -1,5 +1,5 @@
 import {Component, effect, inject} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
 import {Observation} from "../../models/observation";
@@ -25,6 +25,7 @@ export class DetailComponent {
   commonService = inject(CommonService)
   delService = inject(DelService)
   authService = inject(AuthService);
+  router = inject(Router)
 
   obsId: string = "";
   obs!: any;
@@ -37,6 +38,7 @@ export class DetailComponent {
   profilUrl = ""
   voteErrorMessage = "";
   validationErrorMessage = "";
+  depublierErrorMessage = "";
   popupAddComment = false;
   popupDetailVotes = "";
   popupAddCommentOnDetail = false;
@@ -44,15 +46,18 @@ export class DetailComponent {
   commentType= "";
   commentairesGrouped = <any>{ proposition: [], commentaire: [] };
   imageSelected: any;
+  showWarningPopup = false;
 
   urlParamsString = this.commonService.urlParamsString();
   userId = this.authService.userId();
   isVerificateur = this.authService.isVerificateur()
+  isAdmin = this.authService.isAdmin()
 
   constructor() {
     effect(() => {
       this.userId = this.authService.userId();
       this.isVerificateur = this.authService.isVerificateur()
+      this.isAdmin = this.authService.isAdmin()
     });
 
     effect(()=> {
@@ -71,8 +76,6 @@ export class DetailComponent {
             this.obs = data
             this.isLoading = false;
             this.transformCommentaireAndVotes();
-            //TODO Afficher image principale + miniatures
-            //TODO bouton accepter cette proposition
             //TODO bouton dépublier (admin 1 ou 2 ?)
             this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
             this.dateObservation = this.obs.date_observation ? this.commonService.formatDateString(this.obs.date_observation) : '';
@@ -302,6 +305,39 @@ export class DetailComponent {
       }
     })
     console.log(propositionId)
+  }
+
+  depublier(obsId: string){
+    //TODO ajouter une fenêtre d econfirmation
+    this.delService.depublier(obsId).subscribe({
+      next: (data) => {
+        const urlParams = new URLSearchParams(this.urlParamsString);
+        const queryParams: any = {};
+
+        urlParams.forEach((value, key) => {
+          queryParams[key] = value;
+        });
+        // Rediriger vers la page d'accueil avec les paramètres d'URL et supprimer le fragment
+        this.router.navigate(['/'], { queryParams, fragment: undefined });
+      },
+      error: (err) => {
+        console.log(err)
+        this.depublierErrorMessage = "Une erreur s'est produite durant la dépublication de l'obs."
+      }
+    })
+  }
+
+  confirmerDepublier(obsId: string) {
+    this.showWarningPopup = false;
+    this.depublier(obsId);
+  }
+
+  cancelDepublier() {
+    this.showWarningPopup = false;
+  }
+
+  affichagePopupConfirmation(obsId: string){
+    this.showWarningPopup = true;
   }
 
 }

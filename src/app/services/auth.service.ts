@@ -61,4 +61,21 @@ export class AuthService {
     }
   }
 
+  isAdmin(){
+    const user: User | null = this.user();
+    if (user === null) {
+      return false;
+    }
+
+    switch (user.admin){
+      case '0':
+      case '1':
+        return false;
+      case '2':
+        return true;
+      default:
+        return false
+    }
+  }
+
 }
