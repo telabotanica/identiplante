@@ -60,7 +60,13 @@
         <p class="card-texte">Proposition: {{commentaire.nom_sel}}</p>
         <div class="flex-start">
           @if(isVerificateur && commentaire.nom_sel_nn){<button (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])" class="button-selected">Valider</button>}
+
+          @if(userId && userId == commentaire['auteur.id'] && commentaire.proposition_retenue == "0"){
+            <button (click)="affichageConfirmationDeleteProposition(commentaire.id_commentaire)" class="button-selected">Supprimer la proposition</button>
+          }
         </div>
+
+
 
         <button (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre à la proposition</button>
 
@@ -102,6 +108,20 @@
             [obs]="obs"
             (closePopupEmitter)="closeDetailVotes()">
           </app-popup-detail-votes>
+        }
+
+        @if(warningDeleteProposition && deletePropositionId == commentaire.id_commentaire){
+        <div class="warning-popup">
+          <p>Etes-vous sûr de vouloir supprimer cette proposition ?</p>
+          <p>"{{commentaire.nom_sel}}"</p>
+          <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
+          <button type="button" (click)="confirmerDeleteProposition(commentaire.id_commentaire)">OK</button>
+          <button type="button" (click)="cancelDeleteProposition()" class="button-selected">Annuler</button>
+        </div>
+        }
+
+        @if(deletePropositionErrorMessage){
+        <div><p class="invalid-feedback">{{deletePropositionErrorMessage}}</p></div>
         }
 
       }

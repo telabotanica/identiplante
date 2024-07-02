@@ -63,7 +63,7 @@ export class CommentaireComponent {
       },
       error: (err) => {
         console.log(err)
-        this.deleteCommentErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter."
+        this.deleteCommentErrorMessage = "Une erreur s'est produite durant la suppression de votre commentaire, veuillez réessayer ultérieurement ou essayer de vous reconnecter."
       }
     })
   }

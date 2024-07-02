@@ -39,6 +39,7 @@ export class DetailComponent {
   voteErrorMessage = "";
   validationErrorMessage = "";
   depublierErrorMessage = "";
+  deletePropositionErrorMessage = "";
   popupAddComment = false;
   popupDetailVotes = "";
   popupAddCommentOnDetail = false;
@@ -47,6 +48,8 @@ export class DetailComponent {
   commentairesGrouped = <any>{ proposition: [], commentaire: [] };
   imageSelected: any;
   showWarningPopup = false;
+  warningDeleteProposition = false;
+  deletePropositionId: string | null = null;
   fluxRssUrl = environment.rssUrl + '&masque.observation=';
 
   urlParamsString = this.commonService.urlParamsString();
@@ -310,7 +313,6 @@ export class DetailComponent {
   }
 
   depublier(obsId: string){
-    //TODO ajouter une fenêtre d econfirmation
     this.delService.depublier(obsId).subscribe({
       next: (data) => {
         const urlParams = new URLSearchParams(this.urlParamsString);
@@ -340,6 +342,34 @@ export class DetailComponent {
 
   affichagePopupConfirmation(obsId: string){
     this.showWarningPopup = true;
+  }
+
+  affichageConfirmationDeleteProposition(propositionId: string){
+    this.warningDeleteProposition = true;
+    this.deletePropositionId = propositionId ? propositionId : null;
+  }
+
+
+  confirmerDeleteProposition(propositionId: string){
+    this.warningDeleteProposition = false;
+    this.deleteProposition(propositionId)
+  }
+
+  cancelDeleteProposition(){
+    this.warningDeleteProposition = false;
+  }
+
+  deleteProposition(propositionId: string){
+    this.delService.deleteComment(propositionId).subscribe({
+      next: (data) => {
+        console.log(data)
+        location.reload()
+      },
+      error: (err) => {
+        console.log(err)
+        this.deletePropositionErrorMessage = "Une erreur s'est produite durant la suppression de votre proposition de détermination, veuillez réessayer ultérieurement ou essayer de vous reconnecter."
+      }
+    })
   }
 
 }
