@@ -177,11 +177,11 @@ export class DetailComponent {
             commentaire.votes.forEach((vote: any) => {
               let scoreValue = 3;
 
-              if (!vote['auteur_courriel']){ // Si le vote est anonyme
+              if (!vote['auteur.courriel']){ // Si le vote est anonyme
                 scoreValue = 1
               }
 
-              if (parseInt(vote.vote, 10) == 1){
+              if (vote.vote == "1"){
                 score += scoreValue
               } else {
                 score -= scoreValue
