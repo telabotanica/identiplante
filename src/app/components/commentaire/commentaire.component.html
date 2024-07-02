@@ -3,11 +3,11 @@
   <div class="flex-start">
   <p class="card-texte">{{ commentaire.texte }}</p>
 
-  @if(userId && userId == commentaire['auteur.id']){
+  @if(userId && userId == commentaire['auteur.id'] && !commentaire.reponses){
     <button class="button-selected" (click)="affichagePopupConfirmation(commentaire.id_commentaire)">Supprimer</button>
   }
 
-  @if(commentaire.texte){
+  @if(commentaire.texte ){
     <button (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre</button>
   }
   </div>
