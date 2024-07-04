@@ -100,9 +100,9 @@ export class DetailComponent {
 
             this.grouperReponses()
 
-            console.log(this.obs)
-            console.log(this.commentaires)
-            console.log(this.commentairesGrouped)
+            // console.log(this.obs)
+            // console.log(this.commentaires)
+            // console.log(this.commentairesGrouped)
           },
           error: (err) => {
             console.log(err)
@@ -382,9 +382,6 @@ export class DetailComponent {
     const redirectUrl = `${this.urlParamsString}#comparateur`;
     this.router.navigateByUrl(redirectUrl);
   }
-
-
-
 }
 
 

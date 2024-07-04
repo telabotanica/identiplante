@@ -37,6 +37,7 @@ export class CardComponent {
   commentaires = <any>[];
   cookieName = environment.cookieName;
   voteErrorMessage = "";
+  profilUrl = ""
 
   commonService = inject(CommonService)
   delService = inject(DelService)
@@ -69,10 +70,11 @@ export class CardComponent {
     this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé'
     //TODO: gérer quand plusieurs images
     this.selectedImage = this.obs.images[0]
+    this.profilUrl = this.obs.auteur_id ? environment.profilUrl + this.obs.auteur_id : "";
 
     this.transformCommentaireAndVotes();
     // console.log(this.obs)
-    console.log(this.commentaires)
+    // console.log(this.commentaires)
   }
 
   changeMainPicture(imageHref: string){

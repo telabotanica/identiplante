@@ -7,9 +7,18 @@
       <h5 class="card-title w-100"><a href="{{urlParamsString}}#obs~{{obs.id_observation}}">{{nomScientifique}}</a></h5>
       <p class="card-texte">Référentiel: {{obs.determination_referentiel}}</p>
       <p class="card-texte">Observée le {{dateObservation}}</p>
-      <p class="card-texte">Observateur: {{obs.auteur_nom}}</p>
+
+      <p class="card-texte">Observateur:
+        @if(profilUrl){
+        <a href="{{profilUrl}}" target="_blank">{{obs.auteur_nom}}</a>
+        } @else {
+        {{obs.auteur_nom}}
+        }
+      </p>
+
       <p class="card-texte">Lieu: {{obs.zone_geo}} {{obs.station}}, {{obs.pays}}</p>
       <p class="card-texte">Publiée le {{dateTransmission}}</p>
+
     </div>
     <!--    TODO: mettre des icones-->
     @if (!isCardExtended){
