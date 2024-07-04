@@ -4,7 +4,13 @@
   </div>
 
   <div class="popup-image-div">
-    <a target="_blank" href="{{selectedImage['binaire.href']}}" title="cliquez pour ouvrir l'image originale dans un nouvel onglet"><img class="popup-full-image" alt="{{obs.determination_ns}}"  src="{{selectedImage['binaire.href']}}"></a>
+    <a target="_blank" href="{{selectedImage['binaire.href']}}" title="cliquez pour ouvrir l'image originale dans un nouvel onglet">
+      <img
+        class="popup-full-image"
+        alt="{{obs.determination_ns}}"
+        src="{{selectedImage['binaire.href']}}"
+        (error)="onImageError($event)">
+    </a>
   </div>
 
   <div class="popup-bigImage-info-div">

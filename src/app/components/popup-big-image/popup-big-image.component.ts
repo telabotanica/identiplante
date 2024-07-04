@@ -27,4 +27,8 @@ export class PopupBigImageComponent {
   close() {
     this.closePopupEmitter.emit();
   }
+
+  onImageError(event: Event): void {
+    (event.target as HTMLImageElement).src = 'assets/img/pasdephoto.jpg';
+  }
 }

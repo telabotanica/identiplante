@@ -220,4 +220,9 @@ export class CardComponent {
   closeDetailVotes(){
     this.popupDetailVotes = "";
   }
+
+  onImageError(event: Event): void {
+    (event.target as HTMLImageElement).src = 'assets/img/pasdephoto.jpg';
+  }
+
 }
