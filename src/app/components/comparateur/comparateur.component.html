@@ -1,0 +1,25 @@
+<section id="comparateur" class="flex-center">
+  <div id="comparateur-gauche">
+    <div class="comparateur-image-container">
+      <div class="comparateur-image-selected">
+        <img class="comparateur-image" alt="{{nomScientifique}}"  src="{{imageSelected}}">
+      </div>
+    </div>
+<!--    TODO ajouter infos obs-->
+  </div>
+
+  <div id="comparateur-droit">
+    <div class="comparateur-image-container">
+<!--     TODO carousel-->
+      <div class="comparateur-image-selected">
+        @if (imagesList.length > 0){
+          <img class="comparateur-image" alt=""  src="{{imagesList[0]['binaire.href']}}">
+          <p>{{imagesList[0]["observation"]["determination.ns"]}}</p>
+          <p>{{imagesList[0]["observation"]["auteur.nom"]}}</p>
+        }
+      </div>
+    </div>
+  </div>
+
+
+</section>

@@ -10,6 +10,8 @@ export class CommonService {
   url = new URL(window.location.href)
   urlParamsString = signal(this.url.search)
   extendedObs = signal<string[]>([]);
+  obsAComparer = signal<any>([]);
+  comparerImage = signal("")
 
   constructor() { }
 
@@ -122,6 +124,14 @@ export class CommonService {
     let extendedObsArray = this.extendedObs();
     extendedObsArray = extendedObsArray.filter(obsId => obsId !== id);
     this.extendedObs.set(extendedObsArray);
+  }
+
+  setObsAComparer(obs: any){
+    this.obsAComparer.set(obs)
+  }
+
+  setComparerImage(masque: string){
+    this.comparerImage.set(masque)
   }
 
 }

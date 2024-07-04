@@ -372,6 +372,15 @@ export class DetailComponent {
     })
   }
 
+  comparer(inputValue: string): void {
+    this.commonService.setObsAComparer(this.obs);
+    this.commonService.setComparerImage(inputValue)
+
+    const redirectUrl = `${this.urlParamsString}#comparateur`;
+    this.router.navigateByUrl(redirectUrl);
+  }
+
+
 }
 
 

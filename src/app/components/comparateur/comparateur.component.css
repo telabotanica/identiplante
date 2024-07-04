@@ -1,0 +1,30 @@
+#comparateur {
+  position: relative;
+  min-height: 300px;
+  padding-right: 1rem;
+}
+
+#comparateur-gauche {
+  width: 48%;
+}
+
+.comparateur-image-container {
+  width: 100%;
+  height: 300px;
+}
+
+.comparateur-image-selected {
+  width: 100%;
+  height: 80%;
+}
+
+.comparateur-image {
+  width: 100%;
+  height: 100%;
+}
+
+@media (width <= 768px) {
+  #comparateur{
+    padding: 0 1rem;
+  }
+}

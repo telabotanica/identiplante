@@ -10,11 +10,12 @@ import {MenuComponent} from "./components/menu/menu.component";
 import {CommonService} from "./services/common.service";
 import {DetailComponent} from "./components/detail/detail.component";
 import {NgIf} from "@angular/common";
+import {ComparateurComponent} from "./components/comparateur/comparateur.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, LoginComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, NgIf],
+  imports: [RouterOutlet, FooterComponent, LoginComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, NgIf, ComparateurComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -28,6 +29,7 @@ export class AppComponent {
   userId = this.authService.userId();
   selectedOnglet = this.commonService.selectedOnglet();
   isDetail = false;
+  isComparateur = false;
 
   constructor() {
     effect(() => {
@@ -42,6 +44,12 @@ export class AppComponent {
         this.isDetail = true;
       } else {
         this.isDetail = false;
+      }
+
+      if (fragment && fragment.startsWith('comparateur')) {
+        this.isComparateur = true;
+      } else {
+        this.isComparateur = false;
       }
     });
   }

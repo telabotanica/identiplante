@@ -15,6 +15,7 @@ export class DelService {
   private commentairesService = environment.serviceBaseUrl + "commentaires/";
   private nomsTaxonsService = environment.serviceBaseUrl + "nomstaxons";
   private determinationsService = environment.serviceBaseUrl + "determinations/valider-determination/";
+  private imagesService = environment.serviceBaseUrl + "images";
 
   http = inject(HttpClient);
   router = inject(Router);
@@ -79,5 +80,10 @@ export class DelService {
 
   depublier(obsId: string){
     return this.http.post(this.observationsService + "/" + obsId, {transmission:0})
+  }
+
+  getImages(search: string, depart = 1, limite = 9){
+    const url = this.imagesService + "?navigation.depart=" + depart + "&navigation.limite=" + limite + "&masque.pninscritsseulement=0&masque.ns=" + search
+    return this.http.get(url)
   }
 }

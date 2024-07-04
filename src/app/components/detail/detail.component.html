@@ -9,20 +9,20 @@
     </div>
 
     <div id="detail-image-container">
-    <div id="detail-image-selected">
-      <img class="detail-image" alt="{{nomScientifique}}"  src="{{imageSelected['binaire.href']}}">
-    </div>
+      <div id="detail-image-selected">
+        <img class="detail-image" alt="{{nomScientifique}}"  src="{{imageSelected['binaire.href']}}">
+      </div>
 
-     <div id="detail-image-miniatures-container">
-        @for (image of obs.images; track image.id_image){
-          <img
-            (click)="changeSelectedImage(image)"
-            class="miniature-image"
-            alt="Image: {{image.id_image}}"
-            src="{{image['binaire.href']}}">
-        }
-     </div>
-  </div>
+       <div id="detail-image-miniatures-container">
+          @for (image of obs.images; track image.id_image){
+            <img
+              (click)="changeSelectedImage(image)"
+              class="miniature-image"
+              alt="Image: {{image.id_image}}"
+              src="{{image['binaire.href']}}">
+          }
+       </div>
+    </div>
 
   <div id="detail-content">
     <h5>
@@ -171,6 +171,12 @@
     </div>
     }
 
+  </div>
+
+  <div id="comparer-image">
+    <h5>Comparer cette image</h5>
+    <input #inputElement type="text">
+    <button (click)="comparer(inputElement.value)">Comparer</button>
   </div>
 
   } @else {

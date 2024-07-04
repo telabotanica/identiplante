@@ -3,9 +3,14 @@
   <section id="content-div">
     <app-header></app-header>
     <app-top-section></app-top-section>
-    <ng-container *ngIf="isDetail; else contenuTemplate">
+    <ng-container *ngIf="isDetail; else comparateurTemplate">
       <app-detail></app-detail>
     </ng-container>
+    <ng-template #comparateurTemplate>
+      <ng-container *ngIf="isComparateur; else contenuTemplate">
+        <app-comparateur></app-comparateur>
+      </ng-container>
+    </ng-template>
     <ng-template #contenuTemplate>
       <app-contenu></app-contenu>
     </ng-template>
