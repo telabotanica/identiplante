@@ -3,6 +3,13 @@
 
     <app-pagination [entetes]="observationsEntete"></app-pagination>
 
+    <div class="flex-evenly">
+      <div>Tri: </div>
+      <div (click)="sortObsBy('date_observation')"><button>Date d'obs</button></div>
+      <div (click)="sortObsBy('date_transmission')"><button>Date publication</button></div>
+      <div (click)="sortObsBy('nb_commentaires')"><button>Nb Commentaires</button></div>
+    </div>
+
     <div class="cards-container">
       @for (observation of observations; track observation.id_observation){
         <app-card
