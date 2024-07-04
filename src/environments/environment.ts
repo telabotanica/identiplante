@@ -20,6 +20,7 @@ export const environment: any = {
   rssUrl: "https://api-test.tela-botanica.org/service:del:0.1/syndication/commentaires/rss2?navigation.depart=0&navigation.limite=150",
   iconeTagBaseUrl: "https://www.tela-botanica.org/del/appli/img/icones_tags/",
   profilUrl: "https://www.tela-botanica.org/profil:",
+  inscriptionUrl: "https://www.tela-botanica.org/inscription/",
   imagesUrl: "https://api-test.tela-botanica.org/img:",
   urlWidgetRemarques: 'https://www.tela-botanica.org/widget:reseau:remarques',
   cookieName: 'tb_auth'
