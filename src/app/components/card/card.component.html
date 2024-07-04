@@ -35,8 +35,12 @@
         <p class="card-texte">Proposition: {{commentaire.nom_sel}}</p>
 
         <div class="flex-center">
-          <button (click)="voter('1', commentaire.id_commentaire )">Pour</button>
-          <button (click)="voter('0', commentaire.id_commentaire )">Contre</button>
+          <button
+            (click)="voter('1', commentaire.id_commentaire )"
+            [ngClass]="{'button-selected': commentaire.userVote === '1'}">Pour</button>
+          <button
+            (click)="voter('0', commentaire.id_commentaire )"
+            [ngClass]="{'button-selected': commentaire.userVote === '0'}">Contre</button>
 
           @if(commentaire.votes && commentaire.votes.length > 0){
             <button (click)="openDetailVotes(commentaire.id_commentaire)">Détail</button>

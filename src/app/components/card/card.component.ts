@@ -72,7 +72,7 @@ export class CardComponent {
 
     this.transformCommentaireAndVotes();
     // console.log(this.obs)
-    // console.log(this.commentaires)
+    console.log(this.commentaires)
   }
 
   changeMainPicture(imageHref: string){
@@ -111,20 +111,13 @@ export class CardComponent {
         if (commentaire.votes){
           this.delService.getVoteDetail(commentaire["id_commentaire"], commentaire['observation']).subscribe((data) => {
             votesArray.push(...Object.values(data.resultats))
-            commentaire.votes = votesArray
+
+            commentaire.votes = this.commonService.deleteVotesDuplicate(votesArray);
+
             commentaire.votes.forEach((vote: any) => {
-              let scoreValue = 3;
-
-              if (!vote['auteur_courriel']){ // Si le vote est anonyme
-                scoreValue = 1
-              }
-
-              if (parseInt(vote.vote, 10) == 1){
-                score += scoreValue
-              } else {
-                score -= scoreValue
-              }
+              score = this.commonService.calculerScoreVotes(vote,  score)
             })
+
             commentaire.score = score
             this.commentaires.sort((a: any, b: any) => b.score - a.score);
           })
@@ -132,6 +125,17 @@ export class CardComponent {
         commentaire.score = score
       })
     }
+
+    // Pour affichage du vote existant pour users connectés
+    this.commentaires.forEach((proposition: any) => {
+      if (this.userId && proposition.votes != undefined) {
+        let votesArray = [];
+        votesArray.push(...Object.values(proposition.votes))
+        const userVote: any = votesArray.find((vote: any) => vote['auteur.id'] === this.userId);
+        proposition.userVote = userVote ? userVote.vote : null;
+        proposition.hasUserVoted = !!userVote;
+      }
+    });
   }
 
   voter(value: string, comId: string){

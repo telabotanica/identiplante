@@ -134,4 +134,40 @@ export class CommonService {
     this.comparerImage.set(masque)
   }
 
+  deleteVotesDuplicate(votesArray: []){
+    // Regrouper les votes par auteur.id
+    const groupedVotes: { [key: string]: any[] } = votesArray.reduce((acc: any, vote: any) => {
+      if (!acc[vote['auteur.id']]) {
+        acc[vote['auteur.id']] = [];
+      }
+      acc[vote['auteur.id']].push(vote);
+      return acc;
+    }, {});
+
+    // Conserver le vote avec le plus grand vote.id pour chaque auteur.id
+    const filteredVotes: any[] = Object.values(groupedVotes).map((votes: any[]) => {
+      return votes.reduce((maxVote, vote) => {
+        return parseInt(vote['vote.id'], 10) > parseInt(maxVote['vote.id'], 10) ? vote : maxVote;
+      });
+    });
+
+    return filteredVotes
+  }
+
+  calculerScoreVotes(vote: any, score: number){
+    let scoreValue = 3;
+
+    if (!vote['auteur.courriel']){ // Si le vote est anonyme
+      scoreValue = 1
+    }
+
+    if (vote.vote == "1"){
+      score += scoreValue
+    } else {
+      score -= scoreValue
+    }
+
+    return score;
+  }
+
 }

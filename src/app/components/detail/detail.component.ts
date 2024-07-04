@@ -8,6 +8,7 @@ import {PopupDetailVotesComponent} from "../popup-detail-votes/popup-detail-vote
 import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-ajout-commentaire.component";
 import {AuthService} from "../../services/auth.service";
 import {CommentaireComponent} from "../commentaire/commentaire.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-detail',
@@ -15,7 +16,8 @@ import {CommentaireComponent} from "../commentaire/commentaire.component";
   imports: [
     PopupAjoutCommentaireComponent,
     PopupDetailVotesComponent,
-    CommentaireComponent
+    CommentaireComponent,
+    CommonModule
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
@@ -62,6 +64,14 @@ export class DetailComponent {
       this.userId = this.authService.userId();
       this.isVerificateur = this.authService.isVerificateur()
       this.isAdmin = this.authService.isAdmin()
+
+      // Pour affichage du vote existant pour users connectés
+      this.commentairesGrouped.proposition.forEach((proposition: any) => {
+        const userVote = proposition.votes.find((vote: any) => vote['auteur.id'] === this.userId);
+        proposition.userVote = userVote ? userVote['vote'] : null;
+        proposition.hasUserVoted = userVote ? true : false;
+      });
+
     });
 
     effect(()=> {
@@ -173,19 +183,12 @@ export class DetailComponent {
         if (commentaire.votes){
           this.delService.getVoteDetail(commentaire["id_commentaire"], commentaire['observation']).subscribe((data) => {
             votesArray.push(...Object.values(data.resultats))
-            commentaire.votes = votesArray
+
+            commentaire.votes = this.commonService.deleteVotesDuplicate(votesArray);
+
+            // commentaire.votes = votesArray
             commentaire.votes.forEach((vote: any) => {
-              let scoreValue = 3;
-
-              if (!vote['auteur.courriel']){ // Si le vote est anonyme
-                scoreValue = 1
-              }
-
-              if (vote.vote == "1"){
-                score += scoreValue
-              } else {
-                score -= scoreValue
-              }
+              score = this.commonService.calculerScoreVotes(vote,  score)
             })
             commentaire.score = score
             this.commentaires.sort((a: any, b: any) => b.score - a.score);
@@ -379,6 +382,7 @@ export class DetailComponent {
     const redirectUrl = `${this.urlParamsString}#comparateur`;
     this.router.navigateByUrl(redirectUrl);
   }
+
 
 
 }

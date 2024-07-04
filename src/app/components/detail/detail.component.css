@@ -30,6 +30,12 @@
   cursor: pointer;
 }
 
+.userVote {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 @media (width <= 768px) {
   #detail{
     padding: 0 1rem;
