@@ -30,6 +30,10 @@
     <span> par page</span>
   </div>
 
-  <div>Différents tris à ajouter</div>
-
+</div>
+<div class="flex-start mb-1">
+  <div>Tri: </div>
+  <div (click)="commonService.sortObsBy('date_observation')"><button>Date d'obs</button></div>
+  <div (click)="commonService.sortObsBy('date_transmission')"><button>Date publication</button></div>
+  <div (click)="commonService.sortObsBy('nb_commentaires')"><button>Nb Commentaires</button></div>
 </div>

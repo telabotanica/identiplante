@@ -1,17 +1,27 @@
-<footer><br />
-  <span class="pictoplante-contact">
-				Vous avez remarqué un problème ou souhaitez nous suggérer des améliorations?
-				<a href="{{urlWidgetRemarque}}"
-           [attr.data-urlrapport]="urlWidgetRemarque"
-           target="_blank"
-           (click)="openWindow(urlWidgetRemarque)">
-				Contactez-nous</a>
+<footer class="mt-1 flex-evenly">
+  <div class="pictoplante-contact">
+    <ul>
+      <li><a href="{{urlWidgetRemarque}}"
+             [attr.data-urlrapport]="urlWidgetRemarque"
+             target="_blank"
+             (click)="openWindow(urlWidgetRemarque)">
+        Contactez-nous
+      </a></li>
+      <li><a href="http://www.tela-botanica.org/page:liste_projets?id_projet=95&act=wikini" target="_blank" title="Aide">Aide</a></li>
+      <li (click)="copyUrl()" class="share">Partager cette page</li>
+    </ul>
+  </div>
 
-			</span><br/><br/>
-  <p>Projet financ&eacute; par :</p>
-  <p>
-    <a class="logo_ue" href="http://europa.eu/index_fr.htm" target="_blank"></a>
-    <a class="logo_lr" href="http://www.laregion.fr/" target="_blank"></a>
-    <a class="logo_nd" href="http://www.fondation-natureetdecouvertes.com/" target="_blank"></a>
-  </p>
+  <div>
+    <p>Projet financ&eacute; par :</p>
+    <p>
+      <a class="logo_ue" href="http://europa.eu/index_fr.htm" target="_blank"></a>
+      <a class="logo_lr" href="http://www.laregion.fr/" target="_blank"></a>
+      <a class="logo_nd" href="http://www.fondation-natureetdecouvertes.com/" target="_blank"></a>
+    </p>
+  </div>
+
+  @if(showMessageUrlCopied){
+    <div class="message-url-copied">URL copiée !</div>
+  }
 </footer>

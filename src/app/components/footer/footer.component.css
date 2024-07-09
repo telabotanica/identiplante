@@ -33,6 +33,22 @@
   background:url('/assets/img/logos/nd_hover.jpg');
 }
 
+.share {
+  cursor: pointer;
+}
+
+.message-url-copied {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
 footer {
   padding-right: 1rem;
 }

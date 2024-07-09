@@ -218,21 +218,4 @@ export class ContenuComponent {
     });
   }
 
-  sortObsBy(tri: string){
-    const url = new URL(window.location.href);
-    const urlParams = new URLSearchParams(url.searchParams);
-    let ordre = "";
-
-    const existingOrder = urlParams.get('ordre');
-    const existingTri = urlParams.get('tri');
-
-    if (existingTri == tri){
-      ordre = existingOrder == 'desc' ? 'asc' : 'desc';
-    } else {
-      ordre = 'desc'
-    }
-
-    this.commonService.setAnyParmam("tri", tri)
-    this.commonService.setAnyParmam("ordre", ordre)
-  }
 }
