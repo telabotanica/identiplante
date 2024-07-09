@@ -49,8 +49,8 @@
     <!--  TODO: Faire un composant-->
     @if(commentaires.length < 1){
       <p class="card-texte">{{nomScientifique}}
-        <button (click)="voter('1', '0')">Pour</button>
-        <button (click)="voter('0', '0')">Contre</button>
+        <button (click)="voter('1', '0', obs.id_observation)">Pour</button>
+        <button (click)="voter('0', '0', obs.id_observation)">Contre</button>
       </p>
       <p class="card-texte">Score: 0</p>
     } @else {
@@ -77,10 +77,10 @@
           }
 
           <span
-            (click)="voter('1', commentaire.id_commentaire )"
+            (click)="voter('1', commentaire.id_commentaire, obs.id_observation )"
             [ngClass]="{'userVote': commentaire.userVote === '1'}">Pour</span>
           <span
-            (click)="voter('0', commentaire.id_commentaire )"
+            (click)="voter('0', commentaire.id_commentaire, obs.id_observation )"
             [ngClass]="{'userVote': commentaire.userVote === '0'}">Contre</span>
 
           @if(commentaire.votes && commentaire.votes.length > 0){

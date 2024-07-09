@@ -38,8 +38,8 @@
 
     @if(commentaires.length < 1){
       <p class="card-texte">{{nomScientifique}}
-        <button (click)="voter('1', '0')">Pour</button>
-        <button (click)="voter('0', '0')">Contre</button>
+        <button (click)="voter('1', '0', obs.id_observation)">Pour</button>
+        <button (click)="voter('0', '0', obs.id_observation)">Contre</button>
       </p>
       <p class="card-texte">Score: 0</p>
     } @else {
@@ -49,10 +49,10 @@
 
         <div class="flex-center">
           <button
-            (click)="voter('1', commentaire.id_commentaire )"
+            (click)="voter('1', commentaire.id_commentaire, obs.id_observation )"
             [ngClass]="{'button-selected': commentaire.userVote === '1'}">Pour</button>
           <button
-            (click)="voter('0', commentaire.id_commentaire )"
+            (click)="voter('0', commentaire.id_commentaire, obs.id_observation )"
             [ngClass]="{'button-selected': commentaire.userVote === '0'}">Contre</button>
 
           @if(commentaire.votes && commentaire.votes.length > 0){

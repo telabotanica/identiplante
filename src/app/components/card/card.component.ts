@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-ajout-commentaire.component";
 import {PopupDetailVotesComponent} from "../popup-detail-votes/popup-detail-votes.component";
 import {ActivatedRoute, Router} from "@angular/router";
+import {VoteService} from "../../services/vote.service";
 
 @Component({
   selector: 'app-card',
@@ -45,6 +46,7 @@ export class CardComponent {
   cookieService = inject(CookieService);
   route = inject(ActivatedRoute)
   router = inject(Router)
+  voteService = inject(VoteService)
 
   extendedObs = this.commonService.extendedObs();
   userId = this.authService.userId();
@@ -140,67 +142,25 @@ export class CardComponent {
     });
   }
 
-  voter(value: string, comId: string){
+  voter(value: string, comId: string, obsId: string) {
     let voteInfos = {
-      obsId: this.obs.id_observation,
+      obsId: obsId,
       voteId: comId,
       user: "",
       value: value
     }
-    this.voteErrorMessage = "";
 
     if (this.userId){
-        this.authService.identite().subscribe({
-          next: (data) => {
-            const token = data.token ?? "";
-            this.authService.getUser(token).subscribe({
-              next: (userData) =>{
-                voteInfos.user= userData.id_utilisateur
-                this.delService.saveVote(voteInfos, token).subscribe({
-                  next: (data) => {
-                    console.log(data)
-                    location.reload()
-                  },
-                  error: (err) => {
-                    console.log(err.error.error)
-                    this.voteErrorMessage = "Erreur, lors de l'enregistrement du vote"
-                  }
-                })
-              },
-              error: (err) => {
-                console.log(err.error.error)
-                this.voteErrorMessage = "Erreur, veuillez vous reconnecter"
-                // this.voteAnonyme(voteInfos)
-              }
-            })
-          },
-          error: (err) => {
-            console.log(err.error.error)
-            this.voteErrorMessage = "Erreur, veuillez vous reconnecter"
-            // this.voteAnonyme(voteInfos)
-          }
-        })
+      const voteErrorMessageSubject = this.voteService.voteUtilisateur(voteInfos);
+      voteErrorMessageSubject.subscribe((message: string) => {
+        this.voteErrorMessage = message;
+      });
     } else {
-      this.voteAnonyme(voteInfos)
+      const voteErrorMessageSubject = this.voteService.voteAnonyme(voteInfos);
+      voteErrorMessageSubject.subscribe((message: string) => {
+        this.voteErrorMessage = message;
+      });
     }
-  }
-
-  voteAnonyme(voteInfos: any){
-    this.voteErrorMessage = "";
-
-    this.authService.getUser("").subscribe((userData) => {
-      voteInfos.user= userData.id_utilisateur
-      this.delService.saveVote(voteInfos).subscribe({
-        next: (data) => {
-          location.reload()
-          console.log(data)
-        },
-        error: (err) => {
-          console.log(err.error.error)
-          this.voteErrorMessage = "Erreur, lors de l'enregistrement du vote"
-        }
-      })
-    })
   }
 
   openAddComment(commentType: string){

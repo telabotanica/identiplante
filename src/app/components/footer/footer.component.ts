@@ -1,6 +1,5 @@
 import {Component, inject} from '@angular/core';
 import { environment } from '../../../environments/environment';
-import {CommonService} from "../../services/common.service";
 
 @Component({
   selector: 'app-footer',
