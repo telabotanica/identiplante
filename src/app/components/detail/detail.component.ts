@@ -210,21 +210,14 @@ export class DetailComponent {
     let voteInfos = {
       obsId: obsId,
       voteId: comId,
-      user: "",
+      user: this.userId,
       value: value
     }
 
-    if (this.userId){
-      const voteErrorMessageSubject = this.voteService.voteUtilisateur(voteInfos);
-      voteErrorMessageSubject.subscribe((message: string) => {
-        this.voteErrorMessage = message;
-      });
-    } else {
-      const voteErrorMessageSubject = this.voteService.voteAnonyme(voteInfos);
-      voteErrorMessageSubject.subscribe((message: string) => {
-        this.voteErrorMessage = message;
-      });
-    }
+    const voteErrorMessageSubject = this.voteService.voteUtilisateur(voteInfos);
+    voteErrorMessageSubject.subscribe((message: string) => {
+      this.voteErrorMessage = message;
+    });
   }
 
   openDetailVotes(id: string){

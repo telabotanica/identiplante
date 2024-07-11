@@ -53,13 +53,11 @@ export class DelService {
     return this.http.get<any>(url);
   }
 
-  saveVote(voteInfos: {obsId: string, voteId: string, user: string, value: string}, token?: string){
-    const headers = token ? new HttpHeaders().set('Authorization', token) : new HttpHeaders().set('Authorization', "");
-
+  saveVote(voteInfos: {obsId: string, voteId: string, user: string, value: string}){
     const url = this.observationsService + "/" + voteInfos.obsId + "/" + voteInfos.voteId + "/vote/";
     const body = {utilisateur: voteInfos.user, valeur: voteInfos.value}
 
-    return this.http.put<any>(url, body, {headers})
+    return this.http.put<any>(url, body)
   }
 
   saveCommentaire(commentaireInfos: any){
