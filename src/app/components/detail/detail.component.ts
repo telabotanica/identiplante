@@ -33,6 +33,7 @@ export class DetailComponent {
 
   obsId: string = "";
   obs!: any;
+  obsToCompare!: any;
   commentaires = <any>[];
   dateObservation = "";
   nomScientifique= '';
@@ -89,7 +90,7 @@ export class DetailComponent {
         this.obsId = obsPart.split(/[?&]/)[0];
         this.delService.getObservation(this.obsId).subscribe({
           next: (data: any) => {
-            this.obs = data
+            this.obs = data;
             this.isLoading = false;
             this.transformCommentaireAndVotes();
 
@@ -101,6 +102,7 @@ export class DetailComponent {
             this.fluxRssUrl += this.obs.id_observation;
 
             this.grouperReponses()
+            this.obsToCompare = this.commonService.mapObservation(this.obs)
 
             // console.log(this.obs)
             // console.log(this.commentaires)
@@ -312,7 +314,6 @@ export class DetailComponent {
     this.deletePropositionId = propositionId ? propositionId : null;
   }
 
-
   confirmerDeleteProposition(propositionId: string){
     this.warningDeleteProposition = false;
     this.deleteProposition(propositionId)
@@ -336,7 +337,7 @@ export class DetailComponent {
   }
 
   comparer(inputValue: string): void {
-    this.commonService.setObsAComparer(this.obs);
+    this.commonService.setObsAComparer(this.obsToCompare);
     this.commonService.setComparerImage(inputValue)
 
     const redirectUrl = `${this.urlParamsString}#comparateur`;

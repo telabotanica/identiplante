@@ -1,8 +1,18 @@
 <section id="comparateur" class="flex-center">
+  <button class="button-selected"><a href="{{urlParamsString}}#obs~{{obs.id_observation}}" title="retour au détail de l'observation">Retour</a></button>
   <div id="comparateur-gauche">
     <div class="comparateur-image-container">
       <div class="comparateur-image-selected">
-        <img class="comparateur-image" alt="{{nomScientifique}}"  src="{{imageSelected}}">
+        @if(imageSelected){
+        <img
+          (click)="openBigImage()"
+          class="comparateur-image"
+          alt="{{nomScientifique}}"
+          src="{{imageSelected['binaire.href']}}"
+          style="cursor: pointer;">
+        }
+        <p>{{nomScientifique}} observée le {{dateObservation}} par {{obs.auteur_nom}}</p>
+
       </div>
     </div>
 <!--    TODO ajouter infos obs-->
@@ -14,12 +24,19 @@
       <div class="comparateur-image-selected">
         @if (imagesList.length > 0){
           <img class="comparateur-image" alt=""  src="{{imagesList[0]['binaire.href']}}">
-          <p>{{imagesList[0]["observation"]["determination.ns"]}}</p>
-          <p>{{imagesList[0]["observation"]["auteur.nom"]}}</p>
+          <p>{{imagesList[0]["observation"]["determination.ns"]}} observée par {{imagesList[0]["observation"]["auteur.nom"]}}</p>
         }
       </div>
     </div>
   </div>
+
+  @if (popupBigImage){
+  <app-popup-big-image
+    [obs]="obs"
+    [selectedImage]="imageSelected"
+    (closePopupEmitter)="closeBigImagePopup()">
+  </app-popup-big-image>
+  }
 
 
 </section>

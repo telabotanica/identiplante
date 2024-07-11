@@ -68,6 +68,32 @@ export class CommonService {
     return `${day}/${month}/${year}`;
   }
 
+  mapObservation(item: any): Observation{
+    return new Observation(item["auteur.courriel"],
+      item["auteur.id"],
+      item["auteur.nom"],
+      item["commentaires"],
+      item["date_observation"],
+      item["date_transmission"],
+      item["determination.famille"],
+      item["determination.nn"],
+      item["determination.ns"],
+      item["determination.nt"],
+      item["determination.referentiel"],
+      item["hauteur"],
+      item["id_image"],
+      item["id_observation"],
+      item["id_zone_geo"],
+      item["images"],
+      item["largeur"],
+      item["mots_cles_texte"],
+      item["nb_commentaires"],
+      item["nom_original"],
+      item["pays"],
+      item["station"],
+      item["zone_geo"])
+  }
+
   mapPagination(params: any){
     const urlParams = new URLSearchParams(params);
     const page = urlParams.get('page');
