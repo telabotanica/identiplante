@@ -4,7 +4,7 @@
   position: fixed;
   width: 20%;
   max-width: 200px;
-  background-color: var(--primary);
+  background-color: var(--background);
 }
 
 .menu-div {
@@ -27,6 +27,38 @@
   width: 50px;
 }
 
+#ip-image {
+  display: block;
+  height: fit-content;
+}
+
+.onglets-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.onglet {
+  padding: 0 1rem;
+  height: 80px;
+  align-content: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform .2s;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.onglet:hover{
+  background: var(--background-blanc);
+  padding: 10px 0 0 20px;
+}
+
+.onglet-selected{
+  background: var(--background-blanc);
+  border: 1px dashed var(--brown30);
+}
+
 @media (width <= 768px) {
   .nav-div {
     display: none;
@@ -39,6 +71,7 @@
        padding: 0;
        max-width: none;
        height: 100%;
+       z-index: 10;
      }
   }
 

@@ -4,42 +4,33 @@
 
 <nav class="nav-div" [class.is-open]="isMenuOpen">
   <div class="menu-div">
-    <div class="w-100">
-      <button
-        [class.button-selected]="selectedOnglet === 'tous'"
-        class="mt-2 w-100"
-        (click)="handleButtonClick('tous')">
-        Tout
-      </button>
+    <a id="ip-image" href="{{baseUrl}}" title="Accueil"><img class="w-100" src="assets/img/logos/logo_ip.png"></a>
 
-      <button
-        [class.button-selected]="selectedOnglet === 'adeterminer' || selectedOnglet === ''"
-        class="button-selected mt-2 w-100"
-        (click)="handleButtonClick('adeterminer')">
-        A déterminer
-      </button>
-
-      <button
-        [class.button-selected]="selectedOnglet === 'aconfirmer'"
-        class="mt-2 w-100"
-        (click)="handleButtonClick('aconfirmer')">
-        A confirmer
-      </button>
-
-      <button
-        [class.button-selected]="selectedOnglet === 'validees'"
-        class="mt-2 w-100"
-        (click)="handleButtonClick('validees')">
+    <div class="onglets-div">
+      <div [class.onglet-selected]="selectedOnglet === 'tous'"
+           class="onglet"
+           (click)="handleButtonClick('tous')">Toutes les observations
+      </div>
+      <div [class.onglet-selected]="selectedOnglet === 'adeterminer' || selectedOnglet === ''"
+           class="onglet"
+           (click)="handleButtonClick('adeterminer')">A determiner
+      </div>
+      <div [class.onglet-selected]="selectedOnglet === 'aconfirmer'"
+           class="onglet"
+           (click)="handleButtonClick('aconfirmer')">
+        A vérifier
+      </div>
+      <div [class.onglet-selected]="selectedOnglet === 'validees'"
+           class="onglet"
+           (click)="handleButtonClick('validees')">
         Vérifiées
-      </button>
-
+      </div>
       @if (userId){
-      <button
-        [class.button-selected]="selectedOnglet === 'monactivite'"
-        class="mt-2 w-100"
-        (click)="handleButtonClick('monactivite')">
-        Mon activité
-      </button>
+      <div [class.onglet-selected]="selectedOnglet === 'monactivite'"
+            class="onglet"
+            (click)="handleButtonClick('monactivite')">
+          Mon activité
+      </div>
       }
     </div>
 
