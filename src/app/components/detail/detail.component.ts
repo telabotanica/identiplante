@@ -10,6 +10,7 @@ import {AuthService} from "../../services/auth.service";
 import {CommentaireComponent} from "../commentaire/commentaire.component";
 import {CommonModule} from "@angular/common";
 import {VoteService} from "../../services/vote.service";
+import {TransformDataService} from "../../services/transform-data.service";
 
 @Component({
   selector: 'app-detail',
@@ -30,6 +31,7 @@ export class DetailComponent {
   authService = inject(AuthService);
   router = inject(Router)
   voteService = inject(VoteService)
+  transFormDataService = inject(TransformDataService)
 
   obsId: string = "";
   obs!: any;
@@ -92,7 +94,8 @@ export class DetailComponent {
           next: (data: any) => {
             this.obs = data;
             this.isLoading = false;
-            this.transformCommentaireAndVotes();
+            // this.transformCommentaireAndVotes();
+            this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
 
             this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
             this.dateObservation = this.obs.date_observation ? this.commonService.formatDateString(this.obs.date_observation) : '';

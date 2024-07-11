@@ -10,6 +10,7 @@ import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-a
 import {PopupDetailVotesComponent} from "../popup-detail-votes/popup-detail-votes.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {VoteService} from "../../services/vote.service";
+import {TransformDataService} from "../../services/transform-data.service";
 
 @Component({
   selector: 'app-card',
@@ -47,6 +48,7 @@ export class CardComponent {
   route = inject(ActivatedRoute)
   router = inject(Router)
   voteService = inject(VoteService)
+  transFormDataService = inject(TransformDataService)
 
   extendedObs = this.commonService.extendedObs();
   userId = this.authService.userId();
@@ -74,7 +76,7 @@ export class CardComponent {
     this.selectedImage = this.obs.images[0]
     this.profilUrl = this.obs.auteur_id ? environment.profilUrl + this.obs.auteur_id : "";
 
-    this.transformCommentaireAndVotes();
+    this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
     // console.log(this.obs)
     // console.log(this.commentaires)
   }
@@ -99,47 +101,6 @@ export class CardComponent {
   reduceObs() {
     this.commonService.reduceExtendedObs(this.obs.id_observation)
     this.isCardExtended = false;
-  }
-
-  transformCommentaireAndVotes(){
-    if (this.obs.commentaires) {
-      //On transforme les objets commentaires en array pour pouvoir boucler dessus
-      this.commentaires.push(...Object.values(this.obs.commentaires));
-
-      // Idem pour les votes de chaque commentaire
-      this.commentaires.forEach((commentaire: any) => {
-        let votesArray = <any>[];
-        let score = 0;
-        commentaire.score = score
-
-        if (commentaire.votes){
-          this.delService.getVoteDetail(commentaire["id_commentaire"], commentaire['observation']).subscribe((data) => {
-            votesArray.push(...Object.values(data.resultats))
-
-            commentaire.votes = this.commonService.deleteVotesDuplicate(votesArray);
-
-            commentaire.votes.forEach((vote: any) => {
-              score = this.commonService.calculerScoreVotes(vote,  score)
-            })
-
-            commentaire.score = score
-            this.commentaires.sort((a: any, b: any) => b.score - a.score);
-          })
-        }
-        commentaire.score = score
-      })
-    }
-
-    // Pour affichage du vote existant pour users connectés
-    this.commentaires.forEach((proposition: any) => {
-      if (this.userId && proposition.votes != undefined) {
-        let votesArray = [];
-        votesArray.push(...Object.values(proposition.votes))
-        const userVote: any = votesArray.find((vote: any) => vote['auteur.id'] === this.userId);
-        proposition.userVote = userVote ? userVote.vote : null;
-        proposition.hasUserVoted = !!userVote;
-      }
-    });
   }
 
   voter(value: string, comId: string, obsId: string) {
