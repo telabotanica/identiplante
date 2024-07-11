@@ -176,36 +176,6 @@ export class DetailComponent {
     }
   }
 
-  transformCommentaireAndVotes(){
-    if (this.obs.commentaires) {
-      //On transforme les objets commentaires en array pour pouvoir boucler dessus
-      this.commentaires.push(...Object.values(this.obs.commentaires));
-
-      // Idem pour les votes de chaque commentaire
-      this.commentaires.forEach((commentaire: any) => {
-        let votesArray = <any>[];
-        let score = 0;
-        commentaire.score = score
-
-        if (commentaire.votes){
-          this.delService.getVoteDetail(commentaire["id_commentaire"], commentaire['observation']).subscribe((data) => {
-            votesArray.push(...Object.values(data.resultats))
-
-            commentaire.votes = this.commonService.deleteVotesDuplicate(votesArray);
-
-            // commentaire.votes = votesArray
-            commentaire.votes.forEach((vote: any) => {
-              score = this.commonService.calculerScoreVotes(vote,  score)
-            })
-            commentaire.score = score
-            this.commentaires.sort((a: any, b: any) => b.score - a.score);
-          })
-        }
-        commentaire.score = score
-      })
-    }
-  }
-
   voter(value: string, comId: string, obsId: string) {
     let voteInfos = {
       obsId: obsId,

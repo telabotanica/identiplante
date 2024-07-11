@@ -103,65 +103,26 @@ export class ContenuComponent {
     this.observationsEntete = []
     this.nbObservations = 0;
 
-    if (this.userId && this.selectedOnglet == 'monactivite'){
-      /*
-      * Si l'utilisateur est connecté on récupère un token avec le service identité
-      * puis on récupère les obs avec ce token dans le header authorization
-      * pour avoir les obs de monactivite
-       */
-      this.authService.identite().subscribe( {
-        next: (data) => {
-          let token = data.token;
-          this.delService.getObservations(this.urlParamsString, token).subscribe( {
-            next: (data) => {
-              // On convertir les données reçu au format de notre objet
-              const observationsData = data["resultats"];
-              if (observationsData && typeof observationsData === 'object') {
-                this.observations = this.mapObservations(Object.values(observationsData));
-              } else {
-                console.error('Expected object for protocoles data but got:', observationsData);
-                this.observations = [];
-              }
-
-              this.observationsEntete = data["entete"];
-              this.nbObservations = this.observationsEntete.total
-              this.isLoading = false;
-            },
-            error:(err) => {
-              this.errorMessage = err.error.error
-              this.isLoading = false;
-            }
-          });
-        },
-        error: (err) => {
-          this.isLoading = false;
-          this.errorMessage = 'Erreur: veuillez vous reconnecter'
+    this.delService.getObservations(this.urlParamsString).subscribe({
+      next: (data) => {
+        // On converti les données reçu au format de notre objet
+        const observationsData = data["resultats"];
+        if (observationsData && typeof observationsData === 'object') {
+          this.observations = this.mapObservations(Object.values(observationsData));
+        } else {
+          console.error('Expected object for protocoles data but got:', observationsData);
+          this.observations = [];
         }
 
-      })
-    } else {
-      // Si l'utilisateur n'est pas connecté, on va récupérer les obs sans header authorization
-      this.delService.getObservations(this.urlParamsString).subscribe({
-        next: (data) => {
-          // On converti les données reçu au format de notre objet
-          const observationsData = data["resultats"];
-          if (observationsData && typeof observationsData === 'object') {
-            this.observations = this.mapObservations(Object.values(observationsData));
-          } else {
-            console.error('Expected object for protocoles data but got:', observationsData);
-            this.observations = [];
-          }
-
-          this.observationsEntete = data["entete"];
-          this.nbObservations = this.observationsEntete.total
-          this.isLoading = false;
-        },
-        error: (err) => {
-          this.isLoading = false;
-          this.errorMessage = err.error.error
-        }
-      });
-    }
+        this.observationsEntete = data["entete"];
+        this.nbObservations = this.observationsEntete.total
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage = err.error.error
+      }
+    });
   }
 
   private mapProtocoles(data: any[]): Protocole[] {

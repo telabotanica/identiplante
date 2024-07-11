@@ -41,6 +41,10 @@ export class MenuComponent {
   handleButtonClick(onglet: string) {
     this.commonService.setOnglet(onglet)
     this.selectedOnglet = this.commonService.selectedOnglet();
+
+    // Pour supprimer le fragment si il existe
+    window.location.hash = '';
+
     if (this.isMenuOpen) {
       this.toggleMenu();
     }

@@ -24,16 +24,16 @@ export class DelService {
   constructor() { }
 
   getObservations(params: string, token?: string){
-    let headers = new HttpHeaders();
+    // let headers = new HttpHeaders();
     // Ajouter l'en-tête Authorization si le jeton est fourni
-    if (token) {
-      headers = headers.set('Authorization', token);
-    }
+    // if (token) {
+    //   headers = headers.set('Authorization', token);
+    // }
 
     // On transforme les params page et pas en navigation.depart et navigation.limite
     params = this.commonService.mapPagination(params)
 
-    return this.http.get<any>(this.observationsService + '?' + params, {headers});
+    return this.http.get<any>(this.observationsService + '?' + params);
   }
 
   getObservation(id: string){
