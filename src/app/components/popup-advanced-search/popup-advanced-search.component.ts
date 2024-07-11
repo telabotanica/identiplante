@@ -1,5 +1,4 @@
 import {Component, EventEmitter, inject, Output} from '@angular/core';
-import {DelService} from "../../services/del.service";
 import {Ontologie} from "../../models/ontologie";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Referentiel} from "../../models/referentiel";
@@ -20,11 +19,10 @@ import {NgForOf, NgIf} from "@angular/common";
 export class PopupAdvancedSearchComponent {
   @Output() closePopupEmitter = new EventEmitter<void>()
 
-  delService = inject(DelService)
   commonService = inject(CommonService)
   fb = inject(FormBuilder)
 
-  paysList: Ontologie[] = [];
+  paysList: Ontologie[] = this.commonService.paysList();
   form!: FormGroup;
   referentiels: Referentiel[] = [];
   useYearOnly: boolean = false;
@@ -54,15 +52,6 @@ export class PopupAdvancedSearchComponent {
       tag: decodeURI(this.urlParams.get('masque.tag') || '') || null,
       pninscritsseulement: this.pninscritsseulement
     });
-
-    this.delService.getOntologie().subscribe({
-      next: (data) => {
-        this.paysList = data
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
   }
 
   onSubmit() {

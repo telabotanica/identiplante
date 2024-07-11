@@ -1,6 +1,8 @@
 import {Injectable, signal} from '@angular/core';
 import {Referentiel} from "../models/referentiel";
 import {Observation} from "../models/observation";
+import {Ontologie} from "../models/ontologie";
+import {Protocole} from "../models/protocole";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ export class CommonService {
   extendedObs = signal<string[]>([]);
   obsAComparer = signal<any>([]);
   comparerImage = signal("")
+  paysList = signal<Ontologie[]>([])
+  protocoles = signal<Protocole[]>([])
 
   constructor() { }
 
@@ -214,6 +218,12 @@ export class CommonService {
     this.setAnyParmam("ordre", ordre)
   }
 
+  setPaysList(list: Ontologie[]){
+    this.paysList.set(list)
+  }
 
+  setProtocoles(protocoles: Protocole[]){
+    this.protocoles.set(protocoles)
+  }
 
 }

@@ -94,7 +94,7 @@ export class DetailComponent {
           next: (data: any) => {
             this.obs = data;
             this.isLoading = false;
-            // this.transformCommentaireAndVotes();
+
             this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
 
             this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";

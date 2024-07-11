@@ -30,10 +30,10 @@ export class ContenuComponent {
   selectedOnglet = this.commonService.selectedOnglet();
   urlParamsString = this.commonService.urlParamsString();
   extendedObs = this.commonService.extendedObs();
+  pays: Ontologie[] = this.commonService.paysList();
+  protocoles: Protocole[] = this.commonService.protocoles()
 
   observations: Observation[] = [];
-  pays: Ontologie[] = [];
-  protocoles: Protocole[] = []
   observationsEntete: any;
   nbObservations = 0;
   isLoading = true;
@@ -62,6 +62,10 @@ export class ContenuComponent {
     effect(()=>{
       this.extendedObs = this.commonService.extendedObs();
     })
+
+    effect(()=>{
+      this.pays = this.commonService.paysList();
+    })
   }
 
   ngOnInit(): void {
@@ -74,15 +78,16 @@ export class ContenuComponent {
 
     forkJoin([getOntologie, getProtocoles]).subscribe({
       next: (data) => {
-        this.pays = data[0]
+        this.commonService.setPaysList(data[0])
 
         // On convertir les données reçu au format de notre objet
         const protocolesData = data[1]["resultats"];
         if (protocolesData && typeof protocolesData === 'object') {
-          this.protocoles = this.mapProtocoles(Object.values(protocolesData));
+          let protocoles = this.mapProtocoles(Object.values(protocolesData));
+          this.commonService.setProtocoles(protocoles)
         } else {
           console.error('Expected object for protocoles data but got:', protocolesData);
-          this.protocoles = [];
+          this.commonService.setProtocoles([]);
         }
       },
       error: (err) => {
