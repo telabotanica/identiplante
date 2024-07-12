@@ -1,7 +1,28 @@
 <header>
-    <h1 id="zoneTitre">
-      <a id="titreLien" href="{{baseUrl}}">IdentiPlante: l'aide collaborative à l'identification de plantes</a>
-    </h1>
+  <div id="zoneTitre">
+    <div class="section-titre">
+      <div>
+        <a id="titreLien" href="{{baseUrl}}" title="Retour à l'accueil"><h1 class="titre">IdentiPlante</h1></a>
+        <p class="">L'aide collaborative à l'identification de plantes</p>
+      </div>
+      <img class="help-icon" src="assets/icons/IPinterro_brown.png" (click)="showDescription()" title="Description d'identiplante">
+    </div>
 
-    <app-login class=""></app-login>
+  </div>
+
+  <app-login class=""></app-login>
+
+  @if(showDescriptionText){
+    <div id="popup-description-text" class="popup">
+      <div (click)="hideDescription()" class="close-section">
+        <img class="close-popup" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/cancel_white.png">
+      </div>
+
+      <p class="intro-text">Cet espace vous permet d'échanger sur la détermination d'espèces.</p>
+      <p class="intro-text">Vous ne parvenez pas à déterminer une plante ? <br />
+                            Soumettez-la aux membres du réseau.</p>
+      <p class="intro-text">Vous avez relevé des erreurs dans les images soumises par le réseau ? <br />
+                            Postez un commentaire ou proposez une nouvelle détermination.</p>
+    </div>
+  }
 </header>

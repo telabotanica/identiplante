@@ -1,5 +1,4 @@
 header {
-  /*padding-right: 1rem;*/
   margin: 2rem 0;
   display: flex;
   justify-content: space-between;
@@ -8,9 +7,33 @@ header {
   height: 60px;
 }
 
+.section-titre {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  height: fit-content;
+}
+
 #titreLien {
   display: block;
-  width: 100%;
+  margin-bottom: 4px;
+  height: 35px;
+}
+
+.titre {
+  width: fit-content;
+  transition: border-bottom 0.2s ease;
+}
+
+.titre:hover {
+  border-bottom: 4px solid var(--darkBrown);
+}
+
+.help-icon {
+  height: 20px;
+  cursor: pointer;
 }
 
 @media (width <= 768px) {
@@ -18,7 +41,9 @@ header {
     padding: 0 1rem;
     flex-direction: column;
     height: unset;
-    /*align-items: flex-end;*/
+    margin: 0;
+    padding: 60px 1rem 0 1rem;
+    gap: 0;
   }
 
   #zoneTitre {

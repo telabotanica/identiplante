@@ -26,13 +26,9 @@
   flex-wrap: wrap;
   height: 100%;
 
-  a{
+  a {
     color: var(--blanc);
   }
-}
-
-.intro-text {
-  margin: 0.5rem;
 }
 
 @media (width <= 1080px){

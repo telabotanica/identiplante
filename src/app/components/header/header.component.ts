@@ -10,6 +10,14 @@ import {LoginComponent} from "../login/login.component";
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
+  showDescriptionText = false;
   baseUrl = environment.identiplanteUrl
+
+  showDescription(){
+    this.showDescriptionText = true;
+  }
+
+  hideDescription(){
+    this.showDescriptionText = false;
+  }
 }

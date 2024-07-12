@@ -36,6 +36,10 @@
   #menu {
     max-width: none;
   }
+
+  #content-div {
+    width: 90%
+  }
 }
 
 @media (width <= 390px) {

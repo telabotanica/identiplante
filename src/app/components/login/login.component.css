@@ -1,7 +1,3 @@
-#login {
-  height: 60px;
-}
-
 .connexion {
   width: 100%;
   text-align: end;
@@ -12,7 +8,8 @@
   border-bottom: 4px solid var(--darkBrown);
 }
 
-.close-section {
-  width: 100%;
-  height: 70px;
+@media (width <= 768px) {
+  #login {
+    height: 60px;
+  }
 }
