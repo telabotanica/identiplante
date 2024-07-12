@@ -22,6 +22,8 @@ export class LoginComponent {
   user = new User("", "", "", "", "", "", false, "", "");
   displayName = "";
   cookieName = environment.cookieName;
+  inscriptionUrl = environment.inscriptionUrl
+  loginPopup = false;
 
   protected loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -68,6 +70,7 @@ export class LoginComponent {
               this.displayName = this.user.prenom && this.user.nom ? this.user.prenom + " " + this.user.nom : this.user.intitule;
               this.authService.setUserId(this.user.id_utilisateur)
               this.authService.setUser(this.user)
+              this.loginPopup = false;
               // console.log(token)
             })
           },
@@ -91,5 +94,13 @@ export class LoginComponent {
         this.authService.setUser(null)
       })
     })
+  }
+
+  openLoginPopup(){
+    this.loginPopup = true;
+  }
+
+  closeLoginPopup(){
+    this.loginPopup = false;
   }
 }

@@ -9,7 +9,6 @@
 * {
   margin: 0;
   padding: 0;
-  color: var(--text);
 }
 
 html,
@@ -25,6 +24,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-weight: 300;
+  color: var(--text);
   /*padding: 0 1rem;*/
 }
 
@@ -35,11 +35,18 @@ h4,
 h5,
 h6 {
   font-family: "Ubuntu", sans-serif;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-transform: capitalize;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 1.2rem;
 }
 
 h2 {
@@ -75,11 +82,7 @@ button {
   padding: 0.5em 2em;
   border-radius: 1rem;
   display: inline-block;
-  white-space: nowrap;
   font-size: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
   color: var(--brown);
   border: none;
@@ -102,8 +105,40 @@ input {
   width: -webkit-fill-available;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--blanc) inset !important;
+  box-shadow: 0 0 0 1000px var(--blanc) inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+input::placeholder {
+  color: var(--brown); /* Couleur du placeholder lorsque l'input est vide */
+}
+
+.input-filled {
+  background-color: var(--blanc) !important; /* Exemple de couleur lorsque l'input est rempli */
+}
+
+.input-empty::placeholder {
+  color: var(--brown) !important; /* Exemple de couleur du placeholder lorsque l'input est vide */
+}
+
+.input-text {
+  height: 40px;
+  border-radius: 10px;
+  padding: 0 1rem;
+  background-color: var(--background-blanc);
+}
+
 .underline {
   text-decoration: underline;
+}
+
+.text-white {
+  color: var(--blanc);
 }
 
 .flex-center {
@@ -162,6 +197,14 @@ input {
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+.wrap {
+  flex-wrap: wrap;
 }
 
 .img-fluid {
@@ -271,6 +314,10 @@ input {
   width: 20%;
 }
 
+.w-40 {
+  width: 40%;
+}
+
 .w-80 {
   width: 80%;
 }
@@ -284,8 +331,9 @@ input {
 }
 
 .invalid-feedback{
+  height: 30px;
   background-color: var(--error-color);
-  padding: 1rem;
+  padding: 0.5rem;
   color: var(--error-text);
   border-radius: 20px;
 }
@@ -303,6 +351,11 @@ input {
 .button-selected {
   background-color: var(--secondary);
   color: var(--blanc);
+}
+
+.button-accent {
+  background-color: var(--background-blanc);
+  color: var(--text);
 }
 
 .large-button {

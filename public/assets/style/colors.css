@@ -1,6 +1,6 @@
 :root {
   /*--text: #232323;*/
-  --text: #72654F;
+  --text: #72654F; /* texte marron*/
   --brown: #72654F;
   --brown30: #72654F30;
   --darkBrown: #606060;
@@ -12,7 +12,8 @@
   --primary40: #a2b93b40;
   /*--secondary: #E16E38;*/
   --secondary: #E99B77;
-  --accent: #b2cb43;
+  /*--accent: #b2cb43;*/
+  --accent: #72654F;
   --error-color: hsl(12, 74%, 44%);
   --error-text: hsl(0, 0%, 100%);
   --success-color: hsl(155, 81%, 64%);
