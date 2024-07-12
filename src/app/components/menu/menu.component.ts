@@ -20,6 +20,8 @@ export class MenuComponent {
   userId = this.authService.userId();
 
   baseUrl = environment.identiplanteUrl
+  logoTelaSrc: string = '/assets/img/logos/logo_tela.png';
+  logoPnSrc: string = '/assets/img/logos/logo_pn.png';
 
   constructor() {
     effect(() => {
@@ -50,6 +52,22 @@ export class MenuComponent {
 
     if (this.isMenuOpen) {
       this.toggleMenu();
+    }
+  }
+
+  onMouseOver(logo: string): void {
+    if (logo === 'tela') {
+      this.logoTelaSrc = '/assets/img/logos/logo_tela_hover.png';
+    } else if (logo === 'pn') {
+      this.logoPnSrc = '/assets/img/logos/logo_pn_hover.png';
+    }
+  }
+
+  onMouseOut(logo: string): void {
+    if (logo === 'tela') {
+      this.logoTelaSrc = '/assets/img/logos/logo_tela.png';
+    } else if (logo === 'pn') {
+      this.logoPnSrc = '/assets/img/logos/logo_pn.png';
     }
   }
 }

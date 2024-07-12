@@ -34,6 +34,22 @@
       }
     </div>
 
-    <app-login class="mb-2 mr-ml-1"></app-login>
+    <div class="logos-section">
+      <div class="logo-tela">
+        <a href="{{baseUrl}}" target="_blank">
+          <img [src]="logoTelaSrc" alt="logo_tela"
+               (mouseover)="onMouseOver('tela')"
+               (mouseout)="onMouseOut('tela')">
+        </a>
+      </div>
+
+      <div class="logo-pn">
+        <a href="https://plantnet.org/" target="_blank">
+          <img [src]="logoPnSrc" alt="logo_Plantnet"
+               (mouseover)="onMouseOver('pn')"
+               (mouseout)="onMouseOut('pn')">
+        </a>
+      </div>
+    </div>
   </div>
 </nav>

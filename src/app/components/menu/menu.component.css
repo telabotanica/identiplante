@@ -59,6 +59,64 @@
   border: 1px dashed var(--brown30);
 }
 
+.logos-section {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 10px;
+  overflow: hidden;
+}
+
+.logo-tela, .logo-pn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    transition: all 0.3s ease;
+  }
+}
+
+.logo-tela {
+  height: 23px;
+}
+
+.logo-pn {
+  height: 18px;
+}
+
+.logo-tela:hover, .logo-pn:hover {
+  padding-bottom: 5px;
+  border-bottom: 4px solid var(--darkBrown);
+}
+
+@media (width <= 1080px){
+  .logos-section {
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .logo-tela {
+    height: 40px;
+  }
+
+  .logo-pn {
+    height: 35px;
+  }
+
+  .logo-tela:hover, .logo-pn:hover {
+    padding-bottom: 0;
+    border-bottom: none;
+
+    padding-left: 5px;
+    border-left: 4px solid var(--darkBrown);
+  }
+}
+
 @media (width <= 768px) {
   .nav-div {
     display: none;
