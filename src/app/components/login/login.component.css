@@ -1,3 +1,10 @@
+#loginPopup {
+  height: 50%;
+  width: 60%;
+  top: 20%;
+  left: 20%;
+}
+
 .connexion {
   width: 100%;
   text-align: end;
@@ -9,6 +16,13 @@
 }
 
 @media (width <= 768px) {
+  #loginPopup {
+    height: 55%;
+    width: 80%;
+    top: 15%;
+    left: 10%;
+  }
+
   #login {
     height: 60px;
   }
