@@ -40,6 +40,6 @@
 
 @media (width <= 768px) {
   #top-section{
-    padding: 0 1rem;
+    /*padding: 0 1rem;*/
   }
 }

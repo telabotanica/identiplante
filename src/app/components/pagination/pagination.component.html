@@ -1,5 +1,5 @@
 <div class="flex-start mb-1">
-  <p>{{entetes.total}} résultats</p>
+  <p style="margin: 0">{{entetes.total}} résultats</p>
 
   <div *ngIf="entetes['href.precedent']" (click)="goToFirstPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
     <img class="icon" alt="1" title="1er page" src="assets/icons/first_page_white.png">
@@ -9,7 +9,7 @@
     <img class="icon" alt="1" title="page précédente" src="assets/icons/chevron_left_white.png">
   </div>
 
-  <p>Page:
+  <p class="m-0">Page:
   <input class="pageNumber-input" [value]="page" (keyup)="onPageInputKeyup($event)" type="number" min="1" max="{{lastPage}}" role=”navigation” aria-label=”Pagination”>
   <span> / {{lastPage}}</span></p>
 
@@ -31,9 +31,54 @@
   </div>
 
 </div>
-<div class="flex-start mb-1">
-  <div>Tri: </div>
-  <div (click)="commonService.sortObsBy('date_observation')"><button class="button-primary">Date d'obs</button></div>
-  <div (click)="commonService.sortObsBy('date_transmission')"><button class="button-primary">Date publication</button></div>
-  <div (click)="commonService.sortObsBy('nb_commentaires')"><button class="button-primary">Nb Commentaires</button></div>
+<div class="flex-start tri-div">
+  <div (click)="commonService.sortObsBy('date_observation')" class="flex-center gap-0-5">
+    <span class="tri"
+          [ngClass]="{'active-tri': tri === 'date_observation'}"
+          title="tri par date d'observation">
+
+      @if(tri !== 'date_observation' || ordre === 'desc'){
+      Récemment observées
+      } @else {
+      Anciennement observées
+      }
+
+    </span>
+    <img *ngIf="tri === 'date_observation'"
+         [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
+         class="ordre-icon"
+         [title]="ordre === 'desc' ? 'tri par ordre décroissant' : 'tri par ordre croissant'">
+  </div>
+
+  <div (click)="commonService.sortObsBy('date_transmission')" class="flex-center gap-0-5">
+    <span class="tri"
+          [ngClass]="{'active-tri': tri === 'date_transmission'}"
+          title="tri par date de transmission">
+      @if(tri !== 'date_transmission' || ordre === 'desc'){
+      Récemment transmises
+      } @else {
+      Anciennement transmises
+      }
+    </span>
+    <img *ngIf="tri === 'date_transmission'"
+         [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
+         class="ordre-icon"
+         [title]="ordre === 'desc' ? 'tri par ordre décroissant' : 'tri par ordre croissant'">
+  </div>
+
+  <div (click)="commonService.sortObsBy('nb_commentaires')" class="flex-center gap-0-5">
+    <span class="tri"
+          [ngClass]="{'active-tri': tri === 'nb_commentaires'}"
+          title="tri par le nombre de commentaires">
+       @if(tri !== 'nb_commentaires' || ordre === 'desc'){
+       Le + de commentaires
+      } @else {
+       Le - de commentaires
+      }
+    </span>
+    <img *ngIf="tri === 'nb_commentaires'"
+         [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
+         class="ordre-icon"
+         [title]="ordre === 'desc' ? 'tri par ordre décroissant' : 'tri par ordre croissant'">
+  </div>
 </div>

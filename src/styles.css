@@ -116,13 +116,32 @@ select {
   height: 40px;
   border-radius: 10px;
   padding: 0 1rem;
+  color: var(--brown);
+  background-color: var(--blanc);
+}
+
+select option {
+  background-color: var(--blanc);
+  color: var(--brown);
+}
+
+/* Survol des options: ne marche pas dans chrome */
+select option:hover {
+  background-color: var(--brown);
+  color: var(--blanc);
+}
+
+/* Option sélectionnée: n'a pas l'air de marcher dans firefox */
+select option:checked {
+  background-color: var(--brown);
+  color: var(--blanc);
 }
 
 input {
   width: -webkit-fill-available;
   height: 40px;
   border-radius: 10px;
-  padding: 0 1rem;
+  padding: 0 1rem 0 2.5rem;
 }
 
 input[type="checkbox"] {
@@ -136,6 +155,7 @@ input[type="checkbox"] {
   cursor: pointer;
   display: inline-block;
   position: relative;
+  padding: 0 1rem;
 }
 
 input[type="checkbox"]:checked {
@@ -256,6 +276,14 @@ input::placeholder {
 
 .wrap {
   flex-wrap: wrap;
+}
+
+.gap-0-5{
+  gap: 0.5rem;
+}
+
+.gap-1{
+  gap: 1rem;
 }
 
 .img-fluid {

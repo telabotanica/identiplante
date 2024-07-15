@@ -3,7 +3,7 @@
 
     <app-pagination [entetes]="observationsEntete"></app-pagination>
 
-    <div class="cards-container">
+    <div class="cards-container mt-2">
       @for (observation of observations; track observation.id_observation){
         <app-card
           [obs]="observation"

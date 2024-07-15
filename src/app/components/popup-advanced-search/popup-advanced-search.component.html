@@ -14,13 +14,17 @@
   <div class="popup-body">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" id="advanced-search-form">
       <div id="search-left">
-        <div class="form-group">
+        <div class="form-group searchbar-container">
           <label for="masque">Recherche par espèce, genre, famille, mot clé, etc...</label>
-          <input id="masque" formControlName="masque">
+          <div class="searchbar-container">
+            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="masque" formControlName="masque">
+          </div>
+
         </div>
         <div class="form-group">
           <label for="referentiel">Référentiel taxonomique</label>
-          <select id="referentiel" formControlName="referentiel">
+          <select id="referentiel" formControlName="referentiel" class="w-100">
             @for(referentiel of referentiels; ; track referentiel.code){
             <option [value]="referentiel.code">
             {{ referentiel.nom }}
@@ -30,15 +34,24 @@
         </div>
         <div class="form-group">
           <label for="famille">Famille (latin)</label>
-          <input id="famille" formControlName="famille">
+          <div class="searchbar-container">
+            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="famille" formControlName="famille">
+          </div>
         </div>
         <div class="form-group">
           <label for="genre">Genre</label>
-          <input id="genre" formControlName="genre">
+          <div class="searchbar-container">
+            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="genre" formControlName="genre">
+          </div>
         </div>
         <div class="form-group">
           <label for="ns">Espèce</label>
-          <input id="ns" formControlName="ns">
+          <div class="searchbar-container">
+            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="ns" formControlName="ns">
+          </div>
         </div>
         <div *ngIf="!useYearOnly" class="form-group">
           <label for="date">Date</label>
@@ -56,7 +69,7 @@
       <div id="search-right">
         <div class="form-group">
           <label for="pays">Pays</label>
-          <select id="pays" formControlName="pays">
+          <select id="pays" formControlName="pays" class="w-100">
             <option [value]=""></option>
             @for(pays of paysList; track pays.code_iso_3166_1){
             <option [value]="pays.code_iso_3166_1">
@@ -67,19 +80,31 @@
         </div>
         <div class="form-group">
           <label for="departement">Département français (numéro ou nom)</label>
-          <input id="departement" formControlName="departement">
+          <div class="searchbar-container">
+            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="departement" formControlName="departement">
+          </div>
         </div>
         <div class="form-group">
           <label for="commune">Commune française</label>
-          <input id="commune" formControlName="commune">
+          <div class="searchbar-container">
+            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="commune" formControlName="commune">
+          </div>
         </div>
         <div class="form-group">
           <label for="auteur">Publié par</label>
-          <input id="auteur" formControlName="auteur">
+          <div class="searchbar-container">
+            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="auteur" formControlName="auteur">
+          </div>
         </div>
         <div class="form-group">
           <label for="tag">Tags</label>
-          <input id="tag" formControlName="tag">
+          <div class="searchbar-container">
+            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="tag" formControlName="tag">
+          </div>
         </div>
         <div class="form-group-checkbox">
           <input id="pninscritsseulement" type="checkbox" formControlName="pninscritsseulement" checked>

@@ -1,5 +1,5 @@
 import {Component, inject, Input} from '@angular/core';
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {CommonService} from "../../services/common.service";
 import {FormsModule} from "@angular/forms";
 
@@ -8,7 +8,8 @@ import {FormsModule} from "@angular/forms";
   standalone: true,
   imports: [
     NgIf,
-    FormsModule
+    FormsModule,
+    NgClass
   ],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.css'
@@ -19,6 +20,8 @@ export class PaginationComponent {
 
   pas: string = "12";
   page: string = "1";
+  tri: string = "date_transmission";
+  ordre: string= "desc";
   lastPage = 1;
   private pageInputTimeout: any;
 
@@ -34,6 +37,16 @@ export class PaginationComponent {
     const pasParam = urlParams.get('pas');
     if (pasParam) {
       this.pas = pasParam ?? this.pas;
+    }
+
+    const triParam = urlParams.get('tri');
+    if (triParam) {
+      this.tri = triParam ?? this.tri
+    }
+
+    const ordreParam = urlParams.get('ordre');
+    if (ordreParam) {
+      this.ordre = ordreParam ?? this.ordre
     }
 
     this.getLastPageNumber();

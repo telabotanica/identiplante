@@ -5,7 +5,7 @@
   z-index: 25;
   background: var(--accent);
   color: var(--blanc) !important;
-  height: 70%;
+  height: 75%;
   width: 80%;
   top: 10%;
   left: 10%;
@@ -72,6 +72,7 @@
 @media (width <= 390px) {
   .popup {
     padding: 0;
+    border-radius: 10px;
   }
   #loginPopup {
     height: 65%;
