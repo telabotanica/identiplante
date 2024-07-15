@@ -80,7 +80,7 @@ p {
 
 button {
   padding: 0.5em 2em;
-  border-radius: 1rem;
+  border-radius: 5px;
   display: inline-block;
   font-size: 1rem;
   cursor: pointer;
@@ -89,6 +89,12 @@ button {
   word-wrap: break-word; /* Permet de casser les mots trop longs */
   white-space: normal;   /* Permet le retour à la ligne du texte */
   text-align: center;
+  height: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 ul {
@@ -353,6 +359,11 @@ input::placeholder {
   color: var(--blanc);
 }
 
+.button-secondary {
+  background-color: var(--background);
+  color: var(--text);
+}
+
 .button-accent {
   background-color: var(--background-blanc);
   color: var(--text);
@@ -360,4 +371,8 @@ input::placeholder {
 
 .large-button {
   max-width: 250px;
+}
+
+.icon-button {
+  margin-right: 1rem;
 }

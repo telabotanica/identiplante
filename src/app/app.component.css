@@ -13,7 +13,7 @@
 #content-div {
   width: 80%;
   height: 100vh;
-  margin: 0 10%;
+  margin: 0 5%;
 }
 
 @media (width <= 1280px){

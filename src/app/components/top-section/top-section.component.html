@@ -1,14 +1,25 @@
-<div id="top-section">
-<!--  <div id="intro-left">-->
-<!--    <p class="intro-text">Cet espace vous permet d'échanger sur la détermination d'espèces.</p>-->
-<!--    <p class="intro-text">Vous ne parvenez pas à déterminer une plante ? <br />-->
-<!--       Soumettez-la aux membres du réseau.</p>-->
-<!--    <p class="intro-text">Vous avez relevé des erreurs dans les images soumises par le réseau ? <br />-->
-<!--       Postez un commentaire ou proposez une nouvelle détermination.</p>-->
-<!--  </div>-->
-
-  <div id="intro-right">
-    <button class="button-selected"><a [href]="proposezObservationLink" target="_blank" title="Proposez une observation à déterminer">Proposez une observation à déterminer</a></button>
-    <app-search-bar class="w-100"></app-search-bar>
+<section id="top-section">
+  <div id="search-area" class="flex-between">
+    <app-search-bar id="intro-left"></app-search-bar>
+    <div id="intro-right">
+      <img id="flower-intro" src="assets/img/flower.png" alt="fleur">
+    </div>
   </div>
-</div>
+
+  <div id="determination-aide">
+    <div>
+      <button class="button-secondary">
+        <img src="assets/icons/external-link.png" class="icon-button">
+        <a [href]="proposezObservationLink" target="_blank" title="Proposez une observation à déterminer">Proposez une observation à déterminer</a>
+    </button>
+    </div>
+
+    <div>
+      <button class="button-secondary">
+        <img src="assets/icons/external-link.png" class="icon-button">
+        <a href="http://www.tela-botanica.org/page:liste_projets?id_projet=95&act=wikini" target="_blank" title="Aide">Aide</a>
+      </button>
+    </div>
+
+  </div>
+</section>
