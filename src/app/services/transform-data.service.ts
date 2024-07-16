@@ -38,6 +38,8 @@ export class TransformDataService {
           })
         }
         commentaire.score = score
+        commentaire.isHoveredLike = false
+        commentaire.isHoveredDislike = false
       })
     }
 

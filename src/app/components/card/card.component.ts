@@ -1,4 +1,4 @@
-import {Component, effect, inject, Input} from '@angular/core';
+import {Component, effect, ElementRef, inject, Input, ViewChild} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.component";
 import {CommonModule} from "@angular/common";
@@ -39,7 +39,12 @@ export class CardComponent {
   commentaires = <any>[];
   cookieName = environment.cookieName;
   voteErrorMessage = "";
-  profilUrl = ""
+  profilUrl = "";
+  @ViewChild('imageCarousel') imageCarousel!: ElementRef;
+  displayedName = "";
+  displayedCountry: any;
+  departement = "";
+  isHovered = { like: false, dislike: false };
 
   commonService = inject(CommonService)
   delService = inject(DelService)
@@ -53,6 +58,7 @@ export class CardComponent {
   extendedObs = this.commonService.extendedObs();
   userId = this.authService.userId();
   urlParamsString = this.commonService.urlParamsString();
+  pays: any[] = [];
 
   constructor() {
     effect(()=>{
@@ -69,15 +75,28 @@ export class CardComponent {
   }
 
   ngOnInit(){
+    this.commonService.resetExtendedObs()
     this.dateObservation = this.obs.date_observation ? this.commonService.formatDateString(this.obs.date_observation) : '';
     this.dateTransmission = this.obs.date_transmission ? this.commonService.formatDateString(this.obs.date_transmission) : '';
-    this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé'
-    //TODO: gérer quand plusieurs images
+    this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
+    this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
+
     this.selectedImage = this.obs.images[0]
     this.profilUrl = this.obs.auteur_id ? environment.profilUrl + this.obs.auteur_id : "";
+    this.displayedName = (this.obs.auteur_nom).trim() ? this.obs.auteur_nom : this.obs.auteur_courriel
 
     this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
-    // console.log(this.obs)
+
+    const paysList = this.commonService.paysList();
+    if (paysList) {
+      this.pays = paysList;
+    }
+
+    if (this.pays && this.obs.pays){
+      this.displayedCountry = this.pays.find(pays => pays.code_iso_3166_1 === this.obs.pays);
+    }
+
+    console.log(this.obs)
     // console.log(this.commentaires)
   }
 
@@ -137,6 +156,77 @@ export class CardComponent {
 
   onImageError(event: Event): void {
     (event.target as HTMLImageElement).src = 'assets/img/pasdephoto.jpg';
+  }
+
+  changeSelectedImage(image: any) {
+    this.selectedImage = image;
+  }
+
+  scrollImages() {
+    if (this.imageCarousel) {
+      const carousel = this.imageCarousel.nativeElement;
+      const scrollWidth = carousel.scrollWidth - ((115+20)*3); // Total width including cloned images
+      carousel.scrollTo({
+        left: carousel.scrollLeft + 145,
+        behavior: 'smooth'
+      });
+      // Reset to the beginning if scrolled past the total width
+      if (carousel.scrollLeft >= scrollWidth) {
+        carousel.scrollTo({
+          left: 0,
+          behavior: 'auto'
+        });
+      }
+    }
+  }
+
+  getVoteIconSrc(type: 'like' | 'dislike', commentaire: any): string {
+    if (type === 'like') {
+      if (commentaire.length == 0){
+        if (this.isHovered.like) {
+          return 'assets/icons/like_inactif_hover.png'
+        } else {
+          return 'assets/icons/like_inactif.png'
+        }
+      }
+
+      if (commentaire.isHoveredLike) {
+        return commentaire.userVote === '1' ? 'assets/icons/like_actif_hover.png' : 'assets/icons/like_inactif_hover.png';
+      } else {
+        return commentaire.userVote === '1' ? 'assets/icons/like_actif.png' : 'assets/icons/like_inactif.png';
+      }
+    } else if (type === 'dislike') {
+      if (commentaire.length == 0){
+        if (this.isHovered.dislike) {
+          return 'assets/icons/dislike_inactif_hover.png'
+        } else {
+          return 'assets/icons/dislike_inactif.png'
+        }
+      }
+
+      if (commentaire.isHoveredDislike) {
+        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif_hover.png' : 'assets/icons/dislike_inactif_hover.png';
+      } else {
+        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif.png' : 'assets/icons/dislike_inactif.png';
+      }
+    }
+    return '';
+  }
+
+  onHover(type: 'like' | 'dislike', commentaire: any, isHovering: boolean): void {
+    if (type === 'like') {
+      commentaire.isHoveredLike = isHovering;
+    } else if (type === 'dislike') {
+      commentaire.isHoveredDislike = isHovering;
+    }
+  }
+
+  onHoverSimple(type: 'like' | 'dislike', isHovering: boolean): void {
+    if (type === 'like') {
+      this.isHovered.like = isHovering;
+    } else if (type === 'dislike') {
+      this.isHovered.dislike = isHovering;
+    }
   }
 
 }

@@ -1,11 +1,13 @@
 :root {
   /*--text: #232323;*/
   --text: #72654F; /* texte marron*/
+  --black: #333333;
   --brown: #72654F;
   --brown30: #72654F30;
   --darkBrown: #606060;
   --background: #fcfaf5;
   --background-blanc: #ffffff;
+  --background-card: #FBF6EC;
   --primary: #a2b93b;
   --primary33: #a2b93b33;
   --primary39: #a2b93b39;

@@ -156,6 +156,10 @@ export class CommonService {
     this.extendedObs.set(extendedObsArray);
   }
 
+  resetExtendedObs(){
+    this.extendedObs.set([]);
+  }
+
   setObsAComparer(obs: any){
     this.obsAComparer.set(obs)
   }
