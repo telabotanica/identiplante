@@ -121,19 +121,8 @@
   position: relative;
   justify-content: space-between;
   flex-wrap: wrap;
-
-
 }
 
-/*.card-extended {*/
-/*  position: relative;*/
-/*  width: 100%;*/
-/*  height: 100%;*/
-/*  display: flex;*/
-/*  justify-content: space-between;*/
-/*  gap: 1rem;*/
-/*  flex-wrap: wrap;*/
-/*}*/
 
 .close-extended {
   cursor: pointer;
@@ -282,7 +271,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin: 1rem 0
+  margin: 1rem 0;
+  flex-wrap: wrap;
 }
 
 .extended-button {
@@ -309,4 +299,38 @@
 .valid-icon {
   height: 34px;
   width: 34px;
+}
+
+@media (width <= 980px){
+  #card-extended-first-container {
+    width: 80%;
+  }
+  #card-extended-second-container{
+    width: 100%;
+  }
+}
+
+@media (width <= 450px){
+  .card, .card-extended-container{
+    box-shadow: unset;
+  }
+
+  .card, .card-reduced, .card-image-div, .card-image, .card-body{
+    width: 100%;
+  }
+
+  .close-extended {
+    top: 10px;
+    right: 10px;
+  }
+
+  #card-extended-first-container {
+    width: 100%;
+    margin-top: 70px;
+  }
+
+  #card-extended-second-container{
+    min-width: 0;
+  }
+
 }
