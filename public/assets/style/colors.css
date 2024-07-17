@@ -14,7 +14,8 @@
   --primary40: #a2b93b40;
   /*--secondary: #E16E38;*/
   --secondary: #E99B77;
-  /*--accent: #b2cb43;*/
+  --green-light: #b2cb43;
+  --grey: #606060;
   --accent: #72654F;
   --error-color: hsl(12, 74%, 44%);
   --error-text: hsl(0, 0%, 100%);

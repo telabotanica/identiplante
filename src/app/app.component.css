@@ -19,6 +19,7 @@
 @media (width <= 1280px){
   #content-div {
     margin: 0 5%;
+    width: 75%
   }
 }
 
@@ -38,12 +39,13 @@
   }
 
   #content-div {
-    width: 90%
+    width: 100%;
+    margin: 0;
   }
 }
 
-@media (width <= 390px) {
-  #content-div {
-    width: 100%
-  }
-}
+/*@media (width <= 390px) {*/
+/*  #content-div {*/
+/*    width: 100%*/
+/*  }*/
+/*}*/

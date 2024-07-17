@@ -40,13 +40,14 @@
 
 @if (isCardExtended){
 <div class="card-extended-container">
-  <div class="card-extended">
-    <img (click)="reduceObs()"
-          class="close-extended"
-          alt="fermer"
-          title="Voir moins d'infos"
-          src="assets/icons/cancel_brown.png">
 
+  <img (click)="reduceObs()"
+        class="close-extended"
+        alt="fermer"
+        title="Voir moins d'infos"
+        src="assets/icons/cancel_brown.png">
+
+  <div id="card-extended-first-container">
     <div class="card-image-div-extended">
 
       <div class="card-title-extended">
@@ -60,67 +61,73 @@
       src="{{selectedImage['binaire.href']}}"
       (error)="onImageError($event)"
       alt="Image de l'observation"/>
-
-      <div class="card-image-extended-subtitles">
-        <div><img src="assets/Creative_Commons.png" alt="Logo creative commons"></div>
-        <p>Par {{displayedName}} CC BY SA 2.0</p>
-      </div>
-
-      <div id="image-carousel-wrapper">
-        <div id="image-carousel" #imageCarousel>
-          <div *ngFor="let image of obs.images; let i = index" class="thumbnail" (click)="changeSelectedImage(image)">
-            <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation">
-          </div>
-        </div>
-
-        @if(obs.images.length > 3){
-          <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
-        }
-      </div>
-
     </div>
 
-    <div id="card-extended-details-container">
+    <div class="card-image-extended-subtitles">
+      <div><img src="assets/Creative_Commons.png" alt="Logo creative commons"></div>
+      <p>Par {{displayedName}} CC BY SA 2.0</p>
+    </div>
 
-      <div id="card-extended-details">
-        <div class="card-extended-details-title">
-          <h4 class="card-extended-details-title">Détails de l'observation</h4><span> par
-          @if(profilUrl){
-            <a href="{{profilUrl}}" target="_blank">{{displayedName}}</a>
-          } @else {
-            {{displayedName}}
-          } </span>
+    <div id="image-carousel-wrapper">
+      <div id="image-carousel" #imageCarousel>
+        <div *ngFor="let image of obs.images; let i = index" class="thumbnail" (click)="changeSelectedImage(image)">
+        <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation">
+        </div>
+      </div>
+
+      @if(obs.images.length > 3){
+        <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
+      }
+    </div>
+  </div>
+
+  <div id="card-extended-second-container">
+    <div id="card-extended-details">
+
+      <div class="card-extended-details-title">
+        <h4 class="">Détails de l'observation</h4>
+        <p> par
+        @if(profilUrl){
+          <a href="{{profilUrl}}" target="_blank">{{displayedName}}</a>
+        } @else {
+          {{displayedName}}
+        } </p>
+      </div>
+
+      <div class="card-extended-details-body">
+        <div class="w-40">
+          <p>Référentiel: <span class="text-black">{{obs.determination_referentiel}}</span></p>
+          <p>Pays
+            @if(displayedCountry){
+            <span class="text-black">{{displayedCountry.nom_fr}}</span>
+            }
+          </p>
+          <p>Localité <br /><span class="text-black">{{obs.zone_geo}} ({{departement}})
+            @if(obs.station){
+              , {{obs.station}}
+            }
+            @if(obs.lieudit){ <br/>{{obs.lieudit}} }
+            @if(obs.milieu){ <br/>{{obs.milieu}} }
+          </span>
+          </p>
         </div>
 
-        <div class="card-extended-details-body">
-          <div class="w-40">
-            <p>Référentiel: <span class="text-black">{{obs.determination_referentiel}}</span></p>
-            <p>Pays
-              @if(displayedCountry){
-              <span class="text-black">{{displayedCountry.nom_fr}}</span>
-              }
-            </p>
-            <p>Localité <br /><span class="text-black">{{obs.zone_geo}} ({{departement}})
-              @if(obs.station){
-                , {{obs.station}}
-              }</span>
-            </p>
-          </div>
-
-          <div>
-            <p>Observée le <span class="text-black">{{dateObservation}}</span></p>
-            <p>Publiée le <span class="text-black">{{dateTransmission}}</span></p>
-            <p>Commentaire <br /><span class="text-black"></span></p>
-          </div>
+        <div>
+          <p>Observée le <span class="text-black">{{dateObservation}}</span></p>
+          <p>Publiée le <span class="text-black">{{dateTransmission}}</span></p>
+          <p>Commentaire <br /><span class="text-black">
+            @if(obs.commentaire){ {{obs.commentaire}} }
+          </span></p>
         </div>
+      </div>
 
-        <div class="card-extended-details-title"><h4 class="mt-1">Propositions de déterminations</h4></div>
-        <div class="propositions-layout">
-          <div>Proposition</div>
-          <div>Score</div>
-          <div>Vote</div>
+      <div class="card-extended-details-title"><h4 class="mt-1">Propositions de déterminations</h4></div>
+      <div class="propositions-layout">
+        <div>Proposition</div>
+        <div>Score</div>
+        <div>Vote</div>
 
-          @if(commentaires.length < 1){
+        @if(commentaires.length < 1){
           <div class="text-black">{{nomScientifique}}</div>
           <div class="text-black">0</div>
           <div>
@@ -140,63 +147,66 @@
                  title="voter contre cette proposition"
                  class="vote-icon">
           </div>
-          } @else {
-            @for(commentaire of commentaires; track commentaire.id_commentaire){
-              <div> <span class="text-black">{{commentaire.nom_sel}}</span>
-                @if(commentaire.texte){
-                  <p class="card-texte">{{commentaire.texte}}</p>
-                }
-              </div>
-              <div class="text-black">{{commentaire.score}}</div>
-              <div>
-                <img
-                  (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
-                  [src]="getVoteIconSrc('like', commentaire)"
-                  (mouseover)="onHover('like', commentaire, true)"
-                  (mouseout)="onHover('like', commentaire, false)"
-                  alt="vote pour"
-                  title="voter pour cette proposition"
-                  class="vote-icon">
-                <img
-                  (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
-                  [src]="getVoteIconSrc('dislike', commentaire)"
-                  (mouseover)="onHover('dislike', commentaire, true)"
-                  (mouseout)="onHover('dislike', commentaire, false)"
-                  alt="vote contre"
-                  title="voter contre cette proposition"
-                  class="vote-icon">
-                @if(commentaire.votes && commentaire.votes.length > 0){
-                  <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon">
-                }
-              </div>
-
-              @if (popupDetailVotes === commentaire.id_commentaire){
-              <app-popup-detail-votes
-                [commentaire]="commentaire"
-                [obs]="obs"
-                (closePopupEmitter)="closeDetailVotes()">
-              </app-popup-detail-votes>
+        } @else {
+          @for(commentaire of commentaires; track commentaire.id_commentaire){
+            <div>
+              @if(commentaire.proposition_retenue === "1"){
+              <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
               }
+              <span class="text-black">{{commentaire.nom_sel}}</span>
+              @if(commentaire.texte){
+                <p class="card-texte">{{commentaire.texte}}</p>
+              }
+            </div>
+            <div class="text-black">{{commentaire.score}}</div>
+            <div>
+              <img
+                (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
+                [src]="getVoteIconSrc('like', commentaire)"
+                (mouseover)="onHover('like', commentaire, true)"
+                (mouseout)="onHover('like', commentaire, false)"
+                alt="vote pour"
+                title="voter pour cette proposition"
+                class="vote-icon">
+              <img
+                (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
+                [src]="getVoteIconSrc('dislike', commentaire)"
+                (mouseover)="onHover('dislike', commentaire, true)"
+                (mouseout)="onHover('dislike', commentaire, false)"
+                alt="vote contre"
+                title="voter contre cette proposition"
+                class="vote-icon">
+              @if(commentaire.votes && commentaire.votes.length > 0){
+                <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon">
+              }
+            </div>
+
+            @if (popupDetailVotes === commentaire.id_commentaire){
+            <app-popup-detail-votes
+              [commentaire]="commentaire"
+              [obs]="obs"
+              (closePopupEmitter)="closeDetailVotes()">
+            </app-popup-detail-votes>
             }
           }
-        </div>
-
-        @if(voteErrorMessage){
-        <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>
         }
       </div>
 
-      <div id="card-extended-details-buttons">
-        <button (click)="openAddComment('determination')" class="button-primary extended-button">Proposer une détermination</button>
-        <button (click)="openAddComment('commentaire')" class="button-primary extended-button">Ajouter un commentaire</button>
-      </div>
+      @if(voteErrorMessage){
+      <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>
+      }
+    </div>
 
-      <div>
-        <a href="{{urlParamsString}}#obs~{{obs.id_observation}}">Voir l'observation en détails ({{obs.nb_commentaires || '0'}} commentaires)</a>
-      </div>
+    <div id="card-extended-details-buttons">
+      <button (click)="openAddComment('determination')" class="button-primary extended-button"><span>Proposer une détermination</span></button>
+      <button (click)="openAddComment('commentaire')" class="button-primary extended-button"><span>Ajouter un commentaire</span></button>
+    </div>
 
+    <div class="flex-end w-100">
+      <a href="{{urlParamsString}}#obs~{{obs.id_observation}}"><h6 class="see-details">Voir l'observation en détails</h6></a>
     </div>
   </div>
+
 </div>
 }
 

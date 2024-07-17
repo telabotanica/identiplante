@@ -96,7 +96,9 @@ export class CardComponent {
       this.displayedCountry = this.pays.find(pays => pays.code_iso_3166_1 === this.obs.pays);
     }
 
-    console.log(this.obs)
+    this.fixDeterminationForValidatedObs()
+
+    // console.log(this.obs)
     // console.log(this.commentaires)
   }
 
@@ -113,6 +115,16 @@ export class CardComponent {
   }
 
   extendObs(){
+    this.delService.getObservation(this.obs.id_observation).subscribe({
+      next: (data: any) => {
+        this.obs = data;
+        this.fixDeterminationForValidatedObs()
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+
     this.commonService.setExtendedObs(this.obs.id_observation)
     this.isCardExtended = true;
   }
@@ -226,6 +238,21 @@ export class CardComponent {
       this.isHovered.like = isHovering;
     } else if (type === 'dislike') {
       this.isHovered.dislike = isHovering;
+    }
+  }
+
+  // Fix bancal temporaire pour règler le problème des détails d'une obs qui disparaissent lors de la validation
+  //TODO: fixer le problème au niveau du web service
+  fixDeterminationForValidatedObs(){
+    if (!this.obs.determination_ns){
+      const validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1');
+
+      if (validatedObs){
+        this.obs.determination_ns = validatedObs.nom_sel;
+        this.obs.determination_nn = validatedObs.nom_sel_nn;
+        this.obs.determination_nt = validatedObs.nom_ret_nn;
+        this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
+      }
     }
   }
 
