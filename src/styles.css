@@ -185,6 +185,15 @@ input[type="checkbox"]:checked::after {
   transform: rotate(45deg);
 }
 
+textarea {
+  height: 80px;
+  width: calc(100% - 2rem);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 2px solid var(--black);
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -493,6 +502,10 @@ input::placeholder {
 .form-group-checkbox {
   flex-direction: row;
   align-items: center;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 @media (width <= 768px) {

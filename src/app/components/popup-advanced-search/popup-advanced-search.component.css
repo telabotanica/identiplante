@@ -1,5 +1,7 @@
 #popup-advanced-search {
   border-radius: 30px;
+  background: var(--accent);
+  color: var(--blanc) !important;
 }
 
 #advanced-search-form {

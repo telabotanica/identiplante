@@ -7,11 +7,12 @@ import {AuthService} from "../../services/auth.service";
 import {User} from "../../models/user";
 import {DelService} from "../../services/del.service";
 import {debounceTime, distinctUntilChanged, map, of, switchMap} from "rxjs";
+import {LoginComponent} from "../login/login.component";
 
 @Component({
   selector: 'app-popup-ajout-commentaire',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, NgFor],
+  imports: [ReactiveFormsModule, NgIf, NgFor, LoginComponent],
   templateUrl: './popup-ajout-commentaire.component.html',
   styleUrl: './popup-ajout-commentaire.component.css'
 })

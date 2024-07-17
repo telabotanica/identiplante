@@ -1,3 +1,19 @@
+#popup-addComment {
+  height: 95%;
+  width: 70%;
+  top: 2%;
+  left: 15%;
+}
+
+.popup-body {
+  padding: 1rem;
+}
+
+.form-container, .popup-header {
+  background-color: var(--background-blanc);
+  padding: 1rem 5rem;
+}
+
 .propositions-list {
   list-style-type: none;
   padding: 0;
@@ -16,3 +32,12 @@
 .propositions-list li:hover {
   background-color: #f0f0f0;
 }
+
+.submit-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+/*TODO*/
