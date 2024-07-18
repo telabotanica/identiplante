@@ -185,7 +185,8 @@
             <app-popup-detail-votes
               [commentaire]="commentaire"
               [obs]="obs"
-              (closePopupEmitter)="closeDetailVotes()">
+              (closePopupEmitter)="closeDetailVotes()"
+              class="blur-background">
             </app-popup-detail-votes>
             }
           }
@@ -214,7 +215,9 @@
 <app-popup-big-image
   [obs]="obs"
   [selectedImage]="selectedImage"
-  (closePopupEmitter)="closeBigImagePopup()">
+  [images]="obs.images"
+  (closePopupEmitter)="closeBigImagePopup()"
+  class="blur-background">
 </app-popup-big-image>
 }
 
@@ -222,7 +225,8 @@
 <app-popup-ajout-commentaire
   [obsId]="obs.id_observation"
   [commentType]="commentType"
-  (closePopupEmitter)="closeAddComment()">
+  (closePopupEmitter)="closeAddComment()"
+  class="blur-background">
 </app-popup-ajout-commentaire>
 }
 

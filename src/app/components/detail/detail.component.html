@@ -110,7 +110,8 @@
           <app-popup-detail-votes
             [commentaire]="commentaire"
             [obs]="obs"
-            (closePopupEmitter)="closeDetailVotes()">
+            (closePopupEmitter)="closeDetailVotes()"
+            class="blur-background">
           </app-popup-detail-votes>
         }
 
@@ -164,7 +165,8 @@
       <app-popup-ajout-commentaire
         [obsId]="obs.id_observation"
         [commentType]="commentType"
-        (closePopupEmitter)="closeAddCommentOnObs()">
+        (closePopupEmitter)="closeAddCommentOnObs()"
+        class="blur-background">
       </app-popup-ajout-commentaire>
     }
 
@@ -172,8 +174,10 @@
     <div class="warning-popup">
       <p>Etes-vous sûr de vouloir dépublier cette observation ?</p>
       <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
-      <button type="button" (click)="confirmerDepublier(obs.id_observation)">OK</button>
-      <button type="button" (click)="cancelDepublier()" class="button-selected">Annuler</button>
+      <div class="flex-between">
+        <button type="button" (click)="cancelDepublier()" class="button-secondary">Annuler</button>
+        <button type="button" (click)="confirmerDepublier(obs.id_observation)" class="button-primary">OK</button>
+      </div>
     </div>
     }
 

@@ -197,25 +197,6 @@
   display: none; /* Chrome, Safari, Opera */
 }
 
-.thumbnail {
-  flex: 0 0 auto;
-  margin: 5px;
-  cursor: pointer;
-}
-
-.thumbnail img {
-  width: 115px;
-  height: 90px;
-  object-fit: cover;
-}
-
-.scroll-icon {
-  width: 35px;
-  height: 35px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
 #card-extended-second-container {
   width: 50%;
   min-width: 370px;

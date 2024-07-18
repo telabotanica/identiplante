@@ -3,6 +3,8 @@
   width: 60%;
   top: 20%;
   left: 20%;
+  overflow-y: hidden;
+  background-color: var(--accent);
 }
 
 .connexion {

@@ -37,6 +37,7 @@ export class PopupDetailVotesComponent {
     this.votes = this.commentaire.votes
     this.nbVotes = this.votes.length
 
+    //TODO Regrouper les votes anonymes ?
     this.votes.forEach((vote: any) => {
       if (vote.vote === '1') {
         this.votesGrouped.pour.push(vote);

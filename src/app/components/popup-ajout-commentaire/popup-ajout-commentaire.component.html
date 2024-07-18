@@ -1,7 +1,4 @@
 <div id="popup-addComment" class="popup">
-<!--  <div class="popup-header">-->
-<!--    <button (click)="close()">close</button>-->
-<!--  </div>-->
 
   <div (click)="close()">
     <img class="close-popup"
@@ -10,7 +7,7 @@
          src="assets/icons/cancel_brown.png">
   </div>
 
-  <div class="popup-body">
+  <div class="popup-body-container">
     <div class="popup-header">
       <div>
         @if (commentType === 'determination'){
@@ -33,7 +30,7 @@
       </div>
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-container">
+      <div class="popup-body">
         <div class="form-group">
           <label for="nom" >Nom *</label>
           <input type="text" id="nom" formControlName="nom" required>

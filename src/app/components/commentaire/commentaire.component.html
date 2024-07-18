@@ -21,17 +21,20 @@
     [commentType]="commentType"
     [id_parent]="commentaire.id_commentaire"
     [proposition]="commentaire.proposition"
-    (closePopupEmitter)="closeAddComment()">
+    (closePopupEmitter)="closeAddComment()"
+    class="blur-background">
   </app-popup-ajout-commentaire>
   }
 
   @if(showWarningPopup && warningPopUpId == commentaire.id_commentaire){
   <div class="warning-popup">
     <p>Etes-vous sûr de vouloir supprimer ce commentaire ?</p>
-    <p>"{{commentaire.texte}}"</p>
+    <p class="text-black">"{{commentaire.texte}}"</p>
     <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
-    <button type="button" (click)="confirmerDeleteComment(commentaire.id_commentaire)">OK</button>
-    <button type="button" (click)="cancelDeleteComment()" class="button-selected">Annuler</button>
+    <div class="flex-between">
+      <button type="button" (click)="cancelDeleteComment()" class="button-secondary">Annuler</button>
+      <button type="button" (click)="confirmerDeleteComment(commentaire.id_commentaire)" class="button-primary">OK</button>
+    </div>
   </div>
   }
 </div>

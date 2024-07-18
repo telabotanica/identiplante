@@ -67,7 +67,7 @@ h5 {
 }
 
 h6 {
-  font-size: 1rem; /* 16px */
+  font-size: 0.9rem; /* 14px */
 }
 
 a {
@@ -75,7 +75,21 @@ a {
   color: var(--text);
 }
 
+.font14{
+  font-size: 0.9rem; /* 14px */
+}
 
+.font12{
+  font-size: 0.8rem
+}
+
+.font11{
+  font-size: 0.7rem
+}
+
+.font10{
+  font-size: 0.6rem
+}
 
 p {
   margin: 0 0 1rem;
@@ -506,6 +520,30 @@ input::placeholder {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.thumbnail {
+  flex: 0 0 auto;
+  margin: 5px;
+  cursor: pointer;
+  height: 90px;
+}
+
+.thumbnail img {
+  width: 115px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail.selected {
+  border: 4px solid var(--background-blanc);
+}
+
+.scroll-icon {
+  width: 35px;
+  height: 35px;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 @media (width <= 768px) {

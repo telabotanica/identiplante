@@ -1,17 +1,8 @@
 #popup-addComment {
-  height: 95%;
+  height: fit-content;
   width: 70%;
   top: 2%;
   left: 15%;
-}
-
-.popup-body {
-  padding: 1rem;
-}
-
-.form-container, .popup-header {
-  background-color: var(--background-blanc);
-  padding: 1rem 5rem;
 }
 
 .propositions-list {
