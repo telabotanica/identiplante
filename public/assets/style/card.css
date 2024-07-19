@@ -23,6 +23,32 @@
   align-items: flex-start;
 }
 
+.card-header {
+  height: 50px;
+  width: 100%;
+  z-index: 2;
+  background-color: #00000030;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.card-header-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.icon-images {
+  position: absolute;
+  top: 5px;
+  left: 1rem;
+}
+
+.icon-comments {
+  position: absolute;
+  top: 5px;
+  right: 1rem;
+}
+
 .card-image-div{
   position: absolute;
   top: 0;
@@ -48,7 +74,7 @@
   width: 300px;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
-  z-index: 2;
+  z-index: 3;
   background-color: #00000095;
   overflow: hidden;
   transition: top 0.5s ease, height 0.5s ease;

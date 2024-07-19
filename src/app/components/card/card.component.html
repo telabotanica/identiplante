@@ -1,6 +1,18 @@
 @if (!isCardExtended){
 <div class="card">
   <div class="card-reduced">
+
+    @if((obs.images && obs.images.length > 1) || commentaires.length > 0){
+      <div class="card-header">
+        @if(obs.images && obs.images.length > 1){
+        <img src="assets/icons/images.png" alt="images.png" title="{{obs.images.length}} images" class="card-header-icon icon-images">
+        }
+
+        @if(commentaires.length > 0){
+        <img src="assets/icons/ipBulles.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments">
+        }
+      </div>
+    }
     <div class="card-image-div">
       <img
         class="card-image"

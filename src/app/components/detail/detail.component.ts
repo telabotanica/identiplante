@@ -93,7 +93,6 @@ export class DetailComponent {
   }
 
   ngOnInit(): void {
-    //TODO si une proposition est déjà validée, ne plus montrer le bouton de validation
     this.route.fragment.subscribe(fragment => {
       if (fragment && fragment.startsWith('obs~')) {
         // On récupère l'obs à partir du fragment
