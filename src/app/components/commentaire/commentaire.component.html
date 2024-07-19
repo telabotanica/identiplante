@@ -1,4 +1,4 @@
-<div *ngFor="let commentaire of commentaires" [ngStyle]="{'margin-left.px': niveau * 20}">
+<div *ngFor="let commentaire of commentaires" [ngStyle]="{'margin-left.px': niveau * 20}" class="commentaire-container">
 
   @if(commentaire.texte){
   <div
@@ -9,17 +9,22 @@
         'com-libre': isComLibre
     }">
 
-    <p>Par {{commentaire['auteur.prenom']}} {{commentaire['auteur.nom']}}, le {{commentaire.date}}</p>
+    <p class="font-16 text-black">Par {{commentaire['auteur.prenom']}} {{commentaire['auteur.nom']}}, le {{commentaire.date}}</p>
 
      <p class="card-texte">{{ commentaire.texte }}</p>
 
-
     @if(userId && userId == commentaire['auteur.id'] && !commentaire.reponses){
-      <p class="pointer" (click)="affichagePopupConfirmation(commentaire.id_commentaire)">Supprimer</p>
+      <img class="delete-comment"
+           (click)="affichagePopupConfirmation(commentaire.id_commentaire)"
+           alt="menu"
+           title="Supprimer le commentaire"
+           src="assets/icons/cancel_brown.png">
     }
 
     @if(commentaire.texte ){
-      <p class="pointer" (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre</p>
+      <div class="flex-end mt-1">
+        <p class="commentaire-repondre" (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre</p>
+      </div>
     }
   </div>
   }

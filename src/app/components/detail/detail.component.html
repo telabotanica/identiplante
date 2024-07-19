@@ -1,21 +1,20 @@
 <section id="detail">
   <div class="flex-between mt-2 mb-2">
-    <div><button class="button-primary"><a href="{{urlParamsString}}" class="text-white">Retour</a></button></div>
+    <div><button class="button-primary"><a href="{{urlParamsString}}" class="text-white" title="retourner à la liste des observations">Retour</a></button></div>
 
     <div class="">
       @if(isAdmin){
-      <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected">Dépublier</button>
+      <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected" title="Dépublier cette observation">Dépublier</button>
       }
     </div>
   </div>
-<!--  @if(!isLoading){-->
+  @if(!isLoading){
 
   <div class="mb-2">
     <h2 class="mb-1">OBSERVATION DE <span class="text-black">{{nomScientifique}}</span></h2>
     <h5>Référentiel taxonomique: <span class="text-black uppercase">
-      @if(obs && obs["determination.referentiel"]){
       {{obs["determination.referentiel"]}}
-      }</span></h5>
+    </span></h5>
   </div>
 
   <div id="detail-container">
@@ -90,11 +89,10 @@
       <div id="detail-propositions" class="mt-2">
         <h5 class="uppercase mb-1">Propositions et échanges</h5>
         @if(commentaires.length < 1){
+        <div class="proposition-container">
           <div class="proposition-row">
             @if(isVerificateur && obs['determination.nn']){
-            <div (click)="validerProposition(obs.id_observation, obs['auteur.id'])" class="flex-start-column gap-0 pointer w-10">
               <img src="assets/icons/ip_valid.png"  class="detail-icon" title="Valider la proposition">
-              Valider</div>
             }
 
             <div class="propositions-layout w-80">
@@ -128,6 +126,7 @@
                        class="vote-icon">
                 </div>
             </div>
+            </div>
           </div>
 
 <!--          <div class="reponses-proposition-div">-->
@@ -144,21 +143,21 @@
 <!--          }-->
         } @else {
           @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
-            <div>
+            <div class="proposition-container">
               <div class="proposition-row">
-
-              @if(isVerificateur && commentaire.nom_sel_nn){
-                <div (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])" class="flex-start-column gap-0 pointer w-10">
-                  <img src="assets/icons/ip_valid.png"  class="detail-icon" title="Valider la proposition">
-                Valider</div>
-              }
-
                 <div class="propositions-layout w-80">
                   <div>Détermination</div>
                   <div>Score</div>
                   <div>Vote</div>
 
                   <div class="text-black">
+                    @if(isVerificateur && commentaire.nom_sel_nn && commentaire.proposition_retenue === "0"){
+                      <img src="assets/icons/ip_valid.png" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])" class="detail-icon" title="Valider la proposition">
+                    }
+
+                    @if(commentaire.proposition_retenue === "1"){
+                      <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
+                    }
                     <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black">{{commentaire.nom_sel}}</a>
 
                     @if(userId && userId == commentaire['auteur.id'] && commentaire.proposition_retenue == "0"){
@@ -194,7 +193,7 @@
                 </div>
               </div>
               <div class="reponses-proposition-div">
-                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer">Répondre à la proposition</p>
+                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase">Répondre</p>
                 @if(commentaire.reponses || commentaire.texte){
                   <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
                 }
@@ -253,7 +252,7 @@
         }
       </div>
 
-      <div id="detail-comentaires" class="mt-2">
+      <div id="detail-commentaires" class="mt-2">
         <h5 class="uppercase mb-1">Commentaires libres</h5>
         @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
           @if(commentaire.texte){
@@ -264,15 +263,15 @@
     </div>
   </div>
 
-  <div id="comparer-image">
-    <h5>Comparer cette image</h5>
-    <input #inputElement type="text">
-    <button (click)="comparer(inputElement.value)">Comparer</button>
-  </div>
+<!--  <div id="comparer-image">-->
+<!--    <h5>Comparer cette image</h5>-->
+<!--    <input #inputElement type="text">-->
+<!--    <button (click)="comparer(inputElement.value)">Comparer</button>-->
+<!--  </div>-->
 
-<!--  } @else {-->
+  } @else {
   <!--  Affichage du loader -->
-@if(isLoading){
+<!--@if(isLoading){-->
     <div class="loader-container">
       <div class="loadership_COHKO">
         <div></div>

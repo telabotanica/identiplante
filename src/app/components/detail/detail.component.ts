@@ -94,7 +94,6 @@ export class DetailComponent {
 
   ngOnInit(): void {
     //TODO si une proposition est déjà validée, ne plus montrer le bouton de validation
-
     this.route.fragment.subscribe(fragment => {
       if (fragment && fragment.startsWith('obs~')) {
         // On récupère l'obs à partir du fragment
@@ -119,6 +118,7 @@ export class DetailComponent {
             this.grouperReponses()
             this.obsToCompare = this.commonService.mapObservation(this.obs)
 
+            this.fixDeterminationForValidatedObs()
 
             // console.log(this.commentaires)
             // console.log(this.commentairesGrouped)
@@ -332,6 +332,19 @@ export class DetailComponent {
 
   scrollImages() {
     this.commonService.scrollImages(this.imageCarousel)
+  }
+
+  fixDeterminationForValidatedObs(){
+    if (!this.obs.determination_ns){
+      const validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1');
+
+      if (validatedObs){
+        this.obs.determination_ns = validatedObs.nom_sel;
+        this.obs.determination_nn = validatedObs.nom_sel_nn;
+        this.obs.determination_nt = validatedObs.nom_ret_nn;
+        this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
+      }
+    }
   }
 }
 
