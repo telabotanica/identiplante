@@ -166,79 +166,12 @@ export class CardComponent {
     this.popupDetailVotes = "";
   }
 
-  onImageError(event: Event): void {
-    (event.target as HTMLImageElement).src = 'assets/img/pasdephoto.jpg';
-  }
-
   changeSelectedImage(image: any) {
     this.selectedImage = image;
   }
 
   scrollImages() {
-    if (this.imageCarousel) {
-      const carousel = this.imageCarousel.nativeElement;
-      const scrollWidth = carousel.scrollWidth - ((115+20)*3); // Total width including cloned images
-      carousel.scrollTo({
-        left: carousel.scrollLeft + 145,
-        behavior: 'smooth'
-      });
-      // Reset to the beginning if scrolled past the total width
-      if (carousel.scrollLeft >= scrollWidth) {
-        carousel.scrollTo({
-          left: 0,
-          behavior: 'auto'
-        });
-      }
-    }
-  }
-
-  getVoteIconSrc(type: 'like' | 'dislike', commentaire: any): string {
-    if (type === 'like') {
-      if (commentaire.length == 0){
-        if (this.isHovered.like) {
-          return 'assets/icons/like_inactif_hover.png'
-        } else {
-          return 'assets/icons/like_inactif.png'
-        }
-      }
-
-      if (commentaire.isHoveredLike) {
-        return commentaire.userVote === '1' ? 'assets/icons/like_actif_hover.png' : 'assets/icons/like_inactif_hover.png';
-      } else {
-        return commentaire.userVote === '1' ? 'assets/icons/like_actif.png' : 'assets/icons/like_inactif.png';
-      }
-    } else if (type === 'dislike') {
-      if (commentaire.length == 0){
-        if (this.isHovered.dislike) {
-          return 'assets/icons/dislike_inactif_hover.png'
-        } else {
-          return 'assets/icons/dislike_inactif.png'
-        }
-      }
-
-      if (commentaire.isHoveredDislike) {
-        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif_hover.png' : 'assets/icons/dislike_inactif_hover.png';
-      } else {
-        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif.png' : 'assets/icons/dislike_inactif.png';
-      }
-    }
-    return '';
-  }
-
-  onHover(type: 'like' | 'dislike', commentaire: any, isHovering: boolean): void {
-    if (type === 'like') {
-      commentaire.isHoveredLike = isHovering;
-    } else if (type === 'dislike') {
-      commentaire.isHoveredDislike = isHovering;
-    }
-  }
-
-  onHoverSimple(type: 'like' | 'dislike', isHovering: boolean): void {
-    if (type === 'like') {
-      this.isHovered.like = isHovering;
-    } else if (type === 'dislike') {
-      this.isHovered.dislike = isHovering;
-    }
+    this.commonService.scrollImages(this.imageCarousel)
   }
 
   // Fix bancal temporaire pour règler le problème des détails d'une obs qui disparaissent lors de la validation

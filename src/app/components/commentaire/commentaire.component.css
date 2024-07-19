@@ -1,0 +1,15 @@
+.reponse, .com-libre, .proposition-com {
+  min-height: 50px;
+}
+
+.reponse {
+  background-color: var(--purple);
+}
+
+.com-libre {
+  background-color: var(--blue);
+}
+
+.proposition-com {
+  background-color: var(--rose);
+}

@@ -1,186 +1,267 @@
 <section id="detail">
-  <button><a href="{{urlParamsString}}">Retour</a></button>
-  @if(!isLoading){
+  <div class="flex-between mt-2 mb-2">
+    <div><button class="button-primary"><a href="{{urlParamsString}}" class="text-white">Retour</a></button></div>
 
-    <div class="flex-evenly mt-2">
+    <div class="">
       @if(isAdmin){
-        <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected">Dépublier</button>
+      <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected">Dépublier</button>
       }
     </div>
+  </div>
+<!--  @if(!isLoading){-->
 
-    <div id="detail-image-container">
-      <div id="detail-image-selected">
-        <img class="detail-image" alt="{{nomScientifique}}"  src="{{imageSelected['binaire.href']}}">
+  <div class="mb-2">
+    <h2 class="mb-1">OBSERVATION DE <span class="text-black">{{nomScientifique}}</span></h2>
+    <h5>Référentiel taxonomique: <span class="text-black uppercase">
+      @if(obs && obs["determination.referentiel"]){
+      {{obs["determination.referentiel"]}}
+      }</span></h5>
+  </div>
+
+  <div id="detail-container">
+    <div id="detail-left">
+      <div class="card-image-div-extended detail-image-div">
+        <img
+        (click)="openBigImage()"
+        class="card-image-extended detail-image"
+        src="{{selectedImage['binaire.href']}}"
+        (error)="commonService.onImageError($event)"
+        alt="Image de l'observation"/>
       </div>
 
-       <div id="detail-image-miniatures-container">
-          @for (image of obs.images; track image.id_image){
-            <img
-              (click)="changeSelectedImage(image)"
-              class="miniature-image"
-              alt="Image: {{image.id_image}}"
-              src="{{image['binaire.href']}}">
-          }
-       </div>
-    </div>
+      <div class="card-image-extended-subtitles detail-image-subtitles">
+        <div><img src="assets/Creative_Commons_white.png" alt="Logo creative commons"></div>
+        <p>Par {{obs['auteur.nom']}} CC BY SA 2.0</p>
+      </div>
 
-  <div id="detail-content">
-    <h5>
-    {{nomScientifique}} ({{obs["determination.referentiel"]}}) par
-    @if(profilUrl){
-      <a href="{{profilUrl}}" target="_blank">{{obs["auteur.nom"]}}</a>
-    } @else {
-    {{obs["auteur.nom"]}}
-    }
-    @if(obs['auteur.courriel']){
-      <a href="mailto:{{obs['auteur.courriel']}}" target="_blank"> ({{obs['auteur.courriel']}})</a>
-    }
-    </h5>
-
-    <p>Observée à {{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}
-    le {{dateObservation}}</p>
-
-    <p>
-    @if(obs.lieudit){ Lieu: {{obs.lieudit}} }
-    @if(obs.station){ Station: {{obs.station}} }
-    @if(obs.milieu){ Lieu: {{obs.milieu}} }
-    </p>
-
-    <!--  TODO: Faire un composant-->
-    @if(commentaires.length < 1){
-      <p class="card-texte">{{nomScientifique}}
-        <button (click)="voter('1', '0', obs.id_observation)">Pour</button>
-        <button (click)="voter('0', '0', obs.id_observation)">Contre</button>
-      </p>
-      <p class="card-texte">Score: 0</p>
-    } @else {
-      @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
-
-        <hr class="w-100"/>
-        <p class="card-texte">Proposition: {{commentaire.nom_sel}}</p>
-        <div class="flex-start">
-
-          @if(isVerificateur && commentaire.nom_sel_nn){<button (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])" class="button-selected">Valider</button>}
-
-          @if(userId && userId == commentaire['auteur.id'] && commentaire.proposition_retenue == "0"){
-            <button (click)="affichageConfirmationDeleteProposition(commentaire.id_commentaire)" class="button-selected">Supprimer la proposition</button>
-          }
+      <div class="image-carousel-wrapper detail-carousel-wrapper">
+        <div id="image-carousel" #imageCarousel>
+          <div *ngFor="let image of obs.images; let i = index" class="thumbnail" (click)="changeSelectedImage(image)">
+          <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation">
+          </div>
         </div>
 
-        <button (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre à la proposition</button>
-
-        <div class="flex-center">
-          @if (commentaire.votes){
-            <p class="card-texte">Score: {{commentaire.score}} ({{commentaire.votes.length}} vote(s))</p>
-          } @else {
-            <p class="card-texte">Score: {{commentaire.score}} (0) vote)</p>
-          }
-
-          <span
-            (click)="voter('1', commentaire.id_commentaire, obs.id_observation )"
-            [ngClass]="{'userVote': commentaire.userVote === '1'}">Pour</span>
-          <span
-            (click)="voter('0', commentaire.id_commentaire, obs.id_observation )"
-            [ngClass]="{'userVote': commentaire.userVote === '0'}">Contre</span>
-
-          @if(commentaire.votes && commentaire.votes.length > 0){
-            <span (click)="openDetailVotes(commentaire.id_commentaire)">Détail</span>
-          }
-        </div>
-
-        @if (popupAddCommentOnDetail && popupAddCommentOnDetailId === commentaire.id_commentaire){
-          <app-popup-ajout-commentaire
-            [obsId]="commentaire.observation"
-            [commentType]="commentType"
-            [id_parent]="commentaire.id_commentaire"
-            [proposition]="commentaire.proposition"
-            (closePopupEmitter)="closeAddComment()">
-          </app-popup-ajout-commentaire>
+        @if(obs.images.length > 3){
+          <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
         }
-
-        @if(commentaire.texte){
-          <p class="card-texte">Commentaire: {{commentaire.texte}}</p>
-        }
-
-        @if(commentaire.reponses){
-          <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
-        }
-
-        @if (popupDetailVotes === commentaire.id_commentaire){
-          <app-popup-detail-votes
-            [commentaire]="commentaire"
-            [obs]="obs"
-            (closePopupEmitter)="closeDetailVotes()"
-            class="blur-background">
-          </app-popup-detail-votes>
-        }
-
-        @if(warningDeleteProposition && deletePropositionId == commentaire.id_commentaire){
-        <div class="warning-popup">
-          <p>Etes-vous sûr de vouloir supprimer cette proposition ?</p>
-          <p>"{{commentaire.nom_sel}}"</p>
-          <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
-          <button type="button" (click)="confirmerDeleteProposition(commentaire.id_commentaire)">OK</button>
-          <button type="button" (click)="cancelDeleteProposition()" class="button-selected">Annuler</button>
-        </div>
-        }
-
-        @if(deletePropositionErrorMessage){
-        <div><p class="invalid-feedback">{{deletePropositionErrorMessage}}</p></div>
-        }
-
-      }
-
-      <hr class="w-100"/>
-      <hr class="w-100"/>
-
-      @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
-        @if(commentaire.texte){
-            <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
-        }
-      }
-    }
-
-    @if(voteErrorMessage){
-      <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>
-    }
-
-    @if(validationErrorMessage){
-      <div><p class="invalid-feedback">{{validationErrorMessage}}</p></div>
-    }
-
-    @if(depublierErrorMessage){
-      <div><p class="invalid-feedback">{{depublierErrorMessage}}</p></div>
-    }
-
-    <hr class="w-100"/>
-    <hr class="w-100"/>
-
-    <div>
-      <button (click)="openAddCommentOnObs('determination')">Proposer une détermination</button>
-      <button (click)="openAddCommentOnObs('commentaire')">Ajouter un commentaire</button>
-    </div>
-
-    @if (popupAddComment){
-      <app-popup-ajout-commentaire
-        [obsId]="obs.id_observation"
-        [commentType]="commentType"
-        (closePopupEmitter)="closeAddCommentOnObs()"
-        class="blur-background">
-      </app-popup-ajout-commentaire>
-    }
-
-    @if(showWarningPopup){
-    <div class="warning-popup">
-      <p>Etes-vous sûr de vouloir dépublier cette observation ?</p>
-      <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
-      <div class="flex-between">
-        <button type="button" (click)="cancelDepublier()" class="button-secondary">Annuler</button>
-        <button type="button" (click)="confirmerDepublier(obs.id_observation)" class="button-primary">OK</button>
       </div>
     </div>
-    }
 
+    <div id="detail-right">
+      <div id="detail-obs">
+        <h5 class="uppercase mb-2">Détails de l'observation</h5>
+        <div id="detail-obs-container">
+          <div id="detail-obs-left">
+            <p>Observée à: <span class="text-black">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
+            <p>Le: <span class="text-black">{{dateObservation}}</span></p>
+            <p>@if(obs.lieudit){ Lieu: <span class="text-black">{{obs.lieudit}}</span><br> }
+               @if(obs.station){ Station: <span class="text-black">{{obs.station}}</span><br> }
+               @if(obs.milieu){ Lieu: <span class="text-black">{{obs.milieu}}</span> }
+            </p>
+          </div>
+          <div id="detail-obs-right">
+            <div id="detail-transmission">
+              <p>Transmise le: <span class="text-black">{{dateTransmission}}</span></p>
+              <p>Par: <span class="text-black">
+              @if(profilUrl){
+              <a href="{{profilUrl}}" target="_blank" class="text-black">{{obs["auteur.nom"]}}</a>
+              } @else {
+              {{obs["auteur.nom"]}}
+              }
+              @if(obs['auteur.courriel']){
+              <a href="mailto:{{obs['auteur.courriel']}}" target="_blank"> ({{obs['auteur.courriel']}})</a>
+              }
+            </span></p>
+            </div>
+            <div id="detail-obs-commentaire">
+              <p>Commentaire: <span class="text-black">{{obs.commentaire}}</span></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="detail-buttons" class="flex-start w-100 gap-1">
+        <button (click)="openAddCommentOnObs('determination')" class="button-primary">Proposer une détermination</button>
+        <button (click)="openAddCommentOnObs('commentaire')" class="button-primary">Ajouter un commentaire
+        </button>
+      </div>
+
+      <div id="detail-propositions" class="mt-2">
+        <h5 class="uppercase mb-1">Propositions et échanges</h5>
+        @if(commentaires.length < 1){
+          <div class="proposition-row">
+            @if(isVerificateur && obs['determination.nn']){
+            <div (click)="validerProposition(obs.id_observation, obs['auteur.id'])" class="flex-start-column gap-0 pointer w-10">
+              <img src="assets/icons/ip_valid.png"  class="detail-icon" title="Valider la proposition">
+              Valider</div>
+            }
+
+            <div class="propositions-layout w-80">
+              <div>Détermination</div>
+              <div>Score</div>
+              <div>Vote</div>
+
+               <div class="text-black">
+                  <a href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination.nn']}}" target="_blank" title="lien vers eflore" class="text-black">{{nomScientifique}}</a>
+               </div>
+
+               <div>
+                <p class="card-texte">0</p>
+               </div>
+
+               <div>
+                  <img
+                    (click)="voter('1', '0', obs.id_observation)"
+                    [src]="commonService.getVoteIconSrc('like', [], isHovered)"
+                    (mouseover)="commonService.changeIconOnHoverSimple('like', true, isHovered)"
+                    (mouseout)="commonService.changeIconOnHoverSimple('like', false, isHovered)"
+                    alt="vote pour"
+                    title="voter pour cette proposition"
+                    class="vote-icon">
+                  <img (click)="voter('0', '0', obs.id_observation)"
+                       [src]="commonService.getVoteIconSrc('dislike', '', isHovered)"
+                       (mouseover)="commonService.changeIconOnHoverSimple('dislike', true, isHovered)"
+                       (mouseout)="commonService.changeIconOnHoverSimple('dislike', false, isHovered)"
+                       alt="vote contre"
+                       title="voter contre cette proposition"
+                       class="vote-icon">
+                </div>
+            </div>
+          </div>
+
+<!--          <div class="reponses-proposition-div">-->
+<!--            <p (click)="openAddComment('reponse', obs.id_observation)" class="pointer">Répondre à la proposition</p>-->
+<!--          </div>-->
+
+<!--          @if (popupAddCommentOnDetail && popupAddCommentOnDetailId === obs.id_observation){-->
+<!--          <app-popup-ajout-commentaire-->
+<!--            [obsId]="obs.id_observation"-->
+<!--            [commentType]="commentType"-->
+<!--            (closePopupEmitter)="closeAddComment()"-->
+<!--            class="blur-background">-->
+<!--          </app-popup-ajout-commentaire>-->
+<!--          }-->
+        } @else {
+          @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
+            <div>
+              <div class="proposition-row">
+
+              @if(isVerificateur && commentaire.nom_sel_nn){
+                <div (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])" class="flex-start-column gap-0 pointer w-10">
+                  <img src="assets/icons/ip_valid.png"  class="detail-icon" title="Valider la proposition">
+                Valider</div>
+              }
+
+                <div class="propositions-layout w-80">
+                  <div>Détermination</div>
+                  <div>Score</div>
+                  <div>Vote</div>
+
+                  <div class="text-black">
+                    <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black">{{commentaire.nom_sel}}</a>
+
+                    @if(userId && userId == commentaire['auteur.id'] && commentaire.proposition_retenue == "0"){
+                      <p (click)="affichageConfirmationDeleteProposition(commentaire.id_commentaire)" class="pointer">Supprimer la proposition</p>
+                    }
+                  </div>
+
+                  <div>
+                    <p class="card-texte">{{commentaire.score}}</p>
+                  </div>
+
+                  <div>
+                    <img
+                      (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
+                      [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
+                      (mouseover)="commonService.changeIconOnHover('like', commentaire, true)"
+                      (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
+                      alt="vote pour"
+                      title="voter pour cette proposition"
+                      class="vote-icon">
+                    <img
+                      (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
+                      [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
+                      (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)"
+                      (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
+                      alt="vote contre"
+                      title="voter contre cette proposition"
+                      class="vote-icon">
+                    @if(commentaire.votes && commentaire.votes.length > 0){
+                    <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon">
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="reponses-proposition-div">
+                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer">Répondre à la proposition</p>
+                @if(commentaire.reponses || commentaire.texte){
+                  <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
+                }
+              </div>
+            </div>
+
+        <!--    MODALS AREA     -->
+            @if (popupAddCommentOnDetail && popupAddCommentOnDetailId === commentaire.id_commentaire){
+            <app-popup-ajout-commentaire
+              [obsId]="commentaire.observation"
+              [commentType]="commentType"
+              [id_parent]="commentaire.id_commentaire"
+              [proposition]="commentaire.proposition"
+              (closePopupEmitter)="closeAddComment()"
+              class="blur-background">
+            </app-popup-ajout-commentaire>
+            }
+
+            @if (popupDetailVotes === commentaire.id_commentaire){
+            <app-popup-detail-votes
+              [commentaire]="commentaire"
+              [obs]="obs"
+              (closePopupEmitter)="closeDetailVotes()"
+              class="blur-background">
+            </app-popup-detail-votes>
+            }
+
+            @if(warningDeleteProposition && deletePropositionId == commentaire.id_commentaire){
+            <div class="warning-popup">
+              <p>Etes-vous sûr de vouloir supprimer cette proposition ?</p>
+              <p>"{{commentaire.nom_sel}}"</p>
+              <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
+              <button type="button" (click)="confirmerDeleteProposition(commentaire.id_commentaire)">OK</button>
+              <button type="button" (click)="cancelDeleteProposition()" class="button-selected">Annuler</button>
+            </div>
+            }
+
+            @if(deletePropositionErrorMessage){
+            <div><p class="invalid-feedback">{{deletePropositionErrorMessage}}</p></div>
+            }
+        <!--    END OF MODALS AREA     -->
+
+          }  <!--    END OF COMMENTAIRE FOR LOOP      -->
+        }
+
+        @if(voteErrorMessage){
+        <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>
+        }
+
+        @if(validationErrorMessage){
+        <div><p class="invalid-feedback">{{validationErrorMessage}}</p></div>
+        }
+
+        @if(depublierErrorMessage){
+        <div><p class="invalid-feedback">{{depublierErrorMessage}}</p></div>
+        }
+      </div>
+
+      <div id="detail-comentaires" class="mt-2">
+        <h5 class="uppercase mb-1">Commentaires libres</h5>
+        @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
+          @if(commentaire.texte){
+            <app-commentaire [commentaires]="[commentaire]" [niveau]="0" [isComLibre]="true"></app-commentaire>
+          }
+        }
+      </div>
+    </div>
   </div>
 
   <div id="comparer-image">
@@ -189,15 +270,46 @@
     <button (click)="comparer(inputElement.value)">Comparer</button>
   </div>
 
-  } @else {
+<!--  } @else {-->
   <!--  Affichage du loader -->
+@if(isLoading){
     <div class="loader-container">
       <div class="loadership_COHKO">
         <div></div>
         <div></div>
       </div>
     </div>
-
   }
+
+  @if (popupAddComment){
+  <app-popup-ajout-commentaire
+    [obsId]="obs.id_observation"
+    [commentType]="commentType"
+    (closePopupEmitter)="closeAddCommentOnObs()"
+    class="blur-background">
+  </app-popup-ajout-commentaire>
+  }
+
+  @if(showWarningPopup){
+  <div class="warning-popup">
+    <p>Etes-vous sûr de vouloir dépublier cette observation ?</p>
+    <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
+    <div class="flex-between">
+      <button type="button" (click)="cancelDepublier()" class="button-secondary">Annuler</button>
+      <button type="button" (click)="confirmerDepublier(obs.id_observation)" class="button-primary">OK</button>
+    </div>
+  </div>
+  }
+
+  @if (popupBigImage){
+  <app-popup-big-image
+    [obs]="obs"
+    [selectedImage]="selectedImage"
+    [images]="obs.images"
+    (closePopupEmitter)="closeBigImagePopup()"
+    class="blur-background">
+  </app-popup-big-image>
+  }
+
 </section>
 

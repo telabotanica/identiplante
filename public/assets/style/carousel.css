@@ -1,0 +1,44 @@
+.image-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+#image-carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden; /* Changed to hidden */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+#image-carousel::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.scroll-icon {
+  width: 35px;
+  height: 35px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.thumbnail {
+  flex: 0 0 auto;
+  margin: 5px;
+  cursor: pointer;
+  height: 90px;
+}
+
+.thumbnail img {
+  width: 115px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail.selected {
+  border: 4px solid var(--background-blanc);
+}

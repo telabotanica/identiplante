@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-ajout-commentaire.component";
 import {AuthService} from "../../services/auth.service";
 import {DelService} from "../../services/del.service";
+import {CommonService} from "../../services/common.service";
 
 @Component({
   selector: 'app-commentaire',
@@ -17,9 +18,11 @@ import {DelService} from "../../services/del.service";
 export class CommentaireComponent {
   @Input() commentaires: any[] = [];
   @Input() niveau: number = 0;
+  @Input() isComLibre: boolean = false;
 
   authService = inject(AuthService);
   delService = inject(DelService)
+  commonService = inject(CommonService)
 
   popupAddComment = false;
   popupAddCommentId: string | null = null;
@@ -28,11 +31,13 @@ export class CommentaireComponent {
   showWarningPopup = false;
   warningPopUpId: string | null = null;
   userId = this.authService.userId();
+  isAdmin = this.authService.isAdmin()
   deleteCommentErrorMessage = "";
 
   constructor() {
     effect(() => {
       this.userId = this.authService.userId();
+      this.isAdmin = this.authService.isAdmin();
     });
   }
 
@@ -41,6 +46,7 @@ export class CommentaireComponent {
       if (commentaire.nom_sel){
         commentaire.proposition = commentaire.id_commentaire
       }
+      commentaire.date = this.commonService.formatDateAndTimeString(commentaire.date);
     })
   }
 

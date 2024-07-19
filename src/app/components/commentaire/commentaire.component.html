@@ -1,16 +1,29 @@
 <div *ngFor="let commentaire of commentaires" [ngStyle]="{'margin-left.px': niveau * 20}">
 
-  <div class="flex-start">
-  <p class="card-texte">{{ commentaire.texte }}</p>
+  @if(commentaire.texte){
+  <div
+    class="flex-column-start mb-1"
+    [ngClass]="{
+        'reponse': niveau > 0,
+        'proposition-com': niveau == 0 && !isComLibre,
+        'com-libre': isComLibre
+    }">
 
-  @if(userId && userId == commentaire['auteur.id'] && !commentaire.reponses){
-    <button class="button-selected" (click)="affichagePopupConfirmation(commentaire.id_commentaire)">Supprimer</button>
-  }
+    <p>Par {{commentaire['auteur.prenom']}} {{commentaire['auteur.nom']}}, le {{commentaire.date}}</p>
 
-  @if(commentaire.texte ){
-    <button (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre</button>
-  }
+     <p class="card-texte">{{ commentaire.texte }}</p>
+
+
+    @if(userId && userId == commentaire['auteur.id'] && !commentaire.reponses){
+      <p class="pointer" (click)="affichagePopupConfirmation(commentaire.id_commentaire)">Supprimer</p>
+    }
+
+    @if(commentaire.texte ){
+      <p class="pointer" (click)="openAddComment('reponse', commentaire.id_commentaire)">Répondre</p>
+    }
   </div>
+  }
+
   <div *ngIf="commentaire.reponses">
     <app-commentaire [commentaires]="commentaire.reponses" [niveau]="niveau + 1"></app-commentaire>
   </div>

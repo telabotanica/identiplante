@@ -72,6 +72,12 @@ export class CommonService {
     return `${day}/${month}/${year}`;
   }
 
+  formatDateAndTimeString(dateString: string): string {
+    const [datePart, timePart] = dateString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    return `${day}/${month}/${year} à ${timePart}`;
+  }
+
   mapObservation(item: any): Observation{
     return new Observation(item["auteur.courriel"],
       item["auteur.id"],
@@ -228,6 +234,77 @@ export class CommonService {
 
   setProtocoles(protocoles: Protocole[]){
     this.protocoles.set(protocoles)
+  }
+
+  onImageError(event: Event): void {
+    (event.target as HTMLImageElement).src = 'assets/img/pasdephoto.jpg';
+  }
+
+  scrollImages(imageCarousel: any) {
+    if (imageCarousel) {
+      const carousel = imageCarousel.nativeElement;
+      const scrollWidth = carousel.scrollWidth - ((115+20)*3); // Total width including cloned images
+      carousel.scrollTo({
+        left: carousel.scrollLeft + 145,
+        behavior: 'smooth'
+      });
+      // Reset to the beginning if scrolled past the total width
+      if (carousel.scrollLeft >= scrollWidth) {
+        carousel.scrollTo({
+          left: 0,
+          behavior: 'auto'
+        });
+      }
+    }
+  }
+
+  getVoteIconSrc(type: 'like' | 'dislike', commentaire: any, isHovered: any): string {
+    if (type === 'like') {
+      if (commentaire.length == 0){
+        if (isHovered.like) {
+          return 'assets/icons/like_inactif_hover.png'
+        } else {
+          return 'assets/icons/like_inactif.png'
+        }
+      }
+
+      if (commentaire.isHoveredLike) {
+        return commentaire.userVote === '1' ? 'assets/icons/like_actif_hover.png' : 'assets/icons/like_inactif_hover.png';
+      } else {
+        return commentaire.userVote === '1' ? 'assets/icons/like_actif.png' : 'assets/icons/like_inactif.png';
+      }
+    } else if (type === 'dislike') {
+      if (commentaire.length == 0){
+        if (isHovered.dislike) {
+          return 'assets/icons/dislike_inactif_hover.png'
+        } else {
+          return 'assets/icons/dislike_inactif.png'
+        }
+      }
+
+      if (commentaire.isHoveredDislike) {
+        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif_hover.png' : 'assets/icons/dislike_inactif_hover.png';
+      } else {
+        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif.png' : 'assets/icons/dislike_inactif.png';
+      }
+    }
+    return '';
+  }
+
+  changeIconOnHover(type: 'like' | 'dislike', commentaire: any, isHovering: boolean): void {
+    if (type === 'like') {
+      commentaire.isHoveredLike = isHovering;
+    } else if (type === 'dislike') {
+      commentaire.isHoveredDislike = isHovering;
+    }
+  }
+
+  changeIconOnHoverSimple(type: 'like' | 'dislike', isHovering: boolean, isHovered: any): void {
+    if (type === 'like') {
+      isHovered.like = isHovering;
+    } else if (type === 'dislike') {
+      isHovered.dislike = isHovering;
+    }
   }
 
 }

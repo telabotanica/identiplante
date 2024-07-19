@@ -1,4 +1,4 @@
-import {Component, effect, inject} from '@angular/core';
+import {Component, effect, ElementRef, inject, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
@@ -11,6 +11,7 @@ import {CommentaireComponent} from "../commentaire/commentaire.component";
 import {CommonModule} from "@angular/common";
 import {VoteService} from "../../services/vote.service";
 import {TransformDataService} from "../../services/transform-data.service";
+import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.component";
 
 @Component({
   selector: 'app-detail',
@@ -19,7 +20,8 @@ import {TransformDataService} from "../../services/transform-data.service";
     PopupAjoutCommentaireComponent,
     PopupDetailVotesComponent,
     CommentaireComponent,
-    CommonModule
+    CommonModule,
+    PopupBigImageComponent
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.css'
@@ -38,6 +40,7 @@ export class DetailComponent {
   obsToCompare!: any;
   commentaires = <any>[];
   dateObservation = "";
+  dateTransmission = "";
   nomScientifique= '';
   selectedImage: any;
   isLoading = true;
@@ -53,11 +56,16 @@ export class DetailComponent {
   popupAddCommentOnDetailId: string | null = null;
   commentType= "";
   commentairesGrouped = <any>{ proposition: [], commentaire: [] };
-  imageSelected: any;
   showWarningPopup = false;
   warningDeleteProposition = false;
   deletePropositionId: string | null = null;
   fluxRssUrl = environment.rssUrl + '&masque.observation=';
+  popupBigImage = false;
+  displayedName = "";
+  displayedCountry: any;
+  isHovered = { like: false, dislike: false };
+  @ViewChild('imageCarousel') imageCarousel!: ElementRef;
+  telaUrl = environment.telaUrl
 
   urlParamsString = this.commonService.urlParamsString();
   userId = this.authService.userId();
@@ -96,20 +104,22 @@ export class DetailComponent {
           next: (data: any) => {
             this.obs = data;
             this.isLoading = false;
-
+            // console.log(this.obs)
             this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
 
             this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
             this.dateObservation = this.obs.date_observation ? this.commonService.formatDateString(this.obs.date_observation) : '';
+            this.dateTransmission = this.obs.date_transmission ? this.commonService.formatDateString(this.obs.date_transmission) : '';
             this.nomScientifique = this.obs["determination.ns"] ?? 'Indéterminé';
             this.profilUrl = this.obs['auteur.id'] ? environment.profilUrl + this.obs['auteur.id'] : "";
-            this.imageSelected = this.obs.images[0];
+            this.selectedImage = this.obs.images[0];
             this.fluxRssUrl += this.obs.id_observation;
+            // this.displayedName = (this.obs.auteur_nom).trim() ? this.obs.auteur_nom : this.obs.auteur_courriel
 
             this.grouperReponses()
             this.obsToCompare = this.commonService.mapObservation(this.obs)
 
-            // console.log(this.obs)
+
             // console.log(this.commentaires)
             // console.log(this.commentairesGrouped)
           },
@@ -223,7 +233,7 @@ export class DetailComponent {
   }
 
   changeSelectedImage(image: any){
-    this.imageSelected = image
+    this.selectedImage = image
   }
 
   validerProposition(propositionId: string, auteurId: string){
@@ -310,6 +320,18 @@ export class DetailComponent {
 
     const redirectUrl = `${this.urlParamsString}#comparateur`;
     this.router.navigateByUrl(redirectUrl);
+  }
+
+  openBigImage(){
+    this.popupBigImage = true;
+  }
+
+  closeBigImagePopup(){
+    this.popupBigImage = false;
+  }
+
+  scrollImages() {
+    this.commonService.scrollImages(this.imageCarousel)
   }
 }
 

@@ -314,6 +314,10 @@ input::placeholder {
   flex-wrap: wrap;
 }
 
+.gap-0 {
+  gap: 0;
+}
+
 .gap-0-5{
   gap: 0.5rem;
 }
@@ -425,6 +429,10 @@ input::placeholder {
   width: 100%;
 }
 
+.w-10 {
+  width: 10%;
+}
+
 .w-20 {
   width: 20%;
 }
@@ -522,27 +530,7 @@ input::placeholder {
   text-transform: uppercase;
 }
 
-.thumbnail {
-  flex: 0 0 auto;
-  margin: 5px;
-  cursor: pointer;
-  height: 90px;
-}
-
-.thumbnail img {
-  width: 115px;
-  height: 100%;
-  object-fit: cover;
-}
-
-.thumbnail.selected {
-  border: 4px solid var(--background-blanc);
-}
-
-.scroll-icon {
-  width: 35px;
-  height: 35px;
-  margin-left: 10px;
+.pointer {
   cursor: pointer;
 }
 

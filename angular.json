@@ -31,7 +31,9 @@
               "public/assets/style/fonts.css",
               "src/styles.css",
               "public/assets/style/loader.css",
-              "public/assets/style/popup.css"
+              "public/assets/style/popup.css",
+              "public/assets/style/card.css",
+              "public/assets/style/carousel.css"
             ],
             "scripts": []
           },

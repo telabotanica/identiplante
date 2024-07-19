@@ -22,7 +22,6 @@ export class PopupBigImageComponent {
   nomScientifique= '';
   @ViewChild('bigImageCarousel') bigImageCarousel!: ElementRef;
   carouselOverflow: boolean = false;
-  overflowRight: boolean = false;
 
   commonService = inject(CommonService)
 

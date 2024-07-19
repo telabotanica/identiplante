@@ -23,5 +23,6 @@ export const environment: any = {
   inscriptionUrl: "https://www.tela-botanica.org/inscription/",
   imagesUrl: "https://api-test.tela-botanica.org/img:",
   urlWidgetRemarques: 'https://www.tela-botanica.org/widget:reseau:remarques',
+  telaUrl : "https://beta.tela-botanica.org/",
   cookieName: 'tb_auth'
 };
