@@ -97,9 +97,9 @@ export class CardComponent {
     }
 
     this.fixDeterminationForValidatedObs()
-console.log(this.obs)
+// console.log(this.obs)
     // console.log(this.obs)
-    console.log(this.commentaires)
+    // console.log(this.commentaires)
   }
 
   changeMainPicture(imageHref: string){
