@@ -1,5 +1,5 @@
 export const environment: any = {
-  production: false,
+  production: true,
   serviceBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
   serviceUtilisateursBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
   serviceAuthBaseUrl: "https://beta.tela-botanica.org/service:annuaire:auth/",

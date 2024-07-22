@@ -1,10 +1,10 @@
-<Files *.nocache.*>
-  ExpiresActive on
-  ExpiresDefault "now"
-  Header merge Cache-Control "public, max-age=0, must-revalidate"
-</Files>
+RewriteEngine On
+RewriteBase /appli:identiplante/
 
-<Files *.cache.*>
-  ExpiresActive on
-  ExpiresDefault "now plus 1 year"
-</Files>
+# Permet l'accès direct à index.html et aux fichiers existants
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /appli:identiplante/index.html [L]
+
+#RewriteRule . index.html [L]

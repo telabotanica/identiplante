@@ -69,6 +69,27 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "beta": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2500kB",
+                  "maximumError": "5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.beta.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -81,6 +102,9 @@
             },
             "development": {
               "buildTarget": "identiplante:build:development"
+            },
+            "beta": {
+              "buildTarget": "identiplante:build:beta"
             }
           },
           "defaultConfiguration": "development"

@@ -3,6 +3,9 @@ import { environment } from '../../environments/environment';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CommonService} from "./common.service";
+import {CookieService} from "ngx-cookie-service";
+import {AuthService} from "./auth.service";
+import {switchMap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +23,32 @@ export class DelService {
   http = inject(HttpClient);
   router = inject(Router);
   commonService = inject(CommonService);
+  cookieService = inject(CookieService);
+  authService = inject(AuthService);
+
+  cookieName = environment.cookieName;
+  cookie = this.cookieService.get(this.cookieName)
 
   constructor() { }
 
-  getObservations(params: string, token?: string){
-    // let headers = new HttpHeaders();
-    // Ajouter l'en-tête Authorization si le jeton est fourni
-    // if (token) {
-    //   headers = headers.set('Authorization', token);
-    // }
+  getObservations(params: string, token?: string) {
+    params = this.commonService.mapPagination(params);
 
-    // On transforme les params page et pas en navigation.depart et navigation.limite
-    params = this.commonService.mapPagination(params)
-
-    return this.http.get<any>(this.observationsService + '?' + params);
+    if (this.commonService.selectedOnglet() == 'monactivite'){
+      let headers = new HttpHeaders();
+      if (this.cookie) {
+        return this.authService.getAuthHeader().pipe(
+          switchMap((authHeaders: HttpHeaders) => {
+            headers = authHeaders;
+            return this.http.get<any>(this.observationsService + '?' + params, { headers });
+          })
+        );
+      } else {
+        return this.http.get<any>(this.observationsService + '?' + params);
+      }
+    } else {
+      return this.http.get<any>(this.observationsService + '?' + params);
+    }
   }
 
   getObservation(id: string){
@@ -57,15 +72,47 @@ export class DelService {
     const url = this.observationsService + "/" + voteInfos.obsId + "/" + voteInfos.voteId + "/vote/";
     const body = {utilisateur: voteInfos.user, valeur: voteInfos.value}
 
-    return this.http.put<any>(url, body)
+    let headers = new HttpHeaders();
+    if (this.cookie) {
+      return this.authService.getAuthHeader().pipe(
+        switchMap((authHeaders: HttpHeaders) => {
+          headers = authHeaders;
+          return this.http.put<any>(url, body, {headers})
+        })
+      );
+    } else {
+      return this.http.put<any>(url, body, {headers})
+    }
   }
 
   saveCommentaire(commentaireInfos: any){
-    return this.http.put<any>(this.commentairesService, commentaireInfos)
+    let headers = new HttpHeaders();
+    if (this.cookie) {
+      return this.authService.getAuthHeader().pipe(
+        switchMap((authHeaders: HttpHeaders) => {
+          headers = authHeaders;
+          return this.http.put<any>(this.commentairesService, commentaireInfos, {headers})
+        })
+      );
+    } else {
+      return this.http.put<any>(this.commentairesService, commentaireInfos, {headers})
+    }
+
   }
 
   deleteComment(id: string){
-    return this.http.delete(this.commentairesService + id)
+    let headers = new HttpHeaders();
+    if (this.cookie) {
+      return this.authService.getAuthHeader().pipe(
+        switchMap((authHeaders: HttpHeaders) => {
+          headers = authHeaders;
+          return this.http.delete(this.commentairesService + id, {headers})
+        })
+      );
+    } else {
+
+    }
+    return this.http.delete(this.commentairesService + id, {headers})
   }
 
   getNomsTaxons(masque: string, referentiel: string){
@@ -73,11 +120,33 @@ export class DelService {
   }
 
   validerProposition(commentaireId: string, validationInfos: any){
-    return this.http.post(this.determinationsService + commentaireId, validationInfos)
+    let headers = new HttpHeaders();
+    if (this.cookie) {
+      return this.authService.getAuthHeader().pipe(
+        switchMap((authHeaders: HttpHeaders) => {
+          headers = authHeaders;
+          return this.http.post(this.determinationsService + commentaireId, validationInfos, {headers})
+        })
+      );
+    } else {
+      return this.http.post(this.determinationsService + commentaireId, validationInfos, {headers})
+    }
+
   }
 
   depublier(obsId: string){
-    return this.http.post(this.observationsService + "/" + obsId, {transmission:0})
+    let headers = new HttpHeaders();
+    if (this.cookie) {
+      return this.authService.getAuthHeader().pipe(
+        switchMap((authHeaders: HttpHeaders) => {
+          headers = authHeaders;
+          return this.http.post(this.observationsService + "/" + obsId, {transmission:0}, {headers})
+        })
+      );
+    } else {
+      return this.http.post(this.observationsService + "/" + obsId, {transmission:0}, {headers})
+    }
+
   }
 
   getImages(search: string, depart = 1, limite = 9){

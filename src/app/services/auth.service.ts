@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CookiesService} from "./cookies.service";
 import {User} from "../models/user";
+import {CookieService} from "ngx-cookie-service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class AuthService {
 
   http = inject(HttpClient)
   router = inject(Router)
+
+  cookieService = inject(CookieService);
+  cookieName = environment.cookieName;
+  cookie = this.cookieService.get(this.cookieName)
 
   login(username: any, password: any) {
     return this.http.get<any>(this.authUrl + 'connexion?login=' + username + '&password=' + password)
@@ -77,5 +82,30 @@ export class AuthService {
         return false
     }
   }
+
+  getAuthHeader(): Observable<HttpHeaders> {
+    let headers = new HttpHeaders();
+
+    return new Observable(observer => {
+      if (this.cookie) {
+        this.identite().subscribe({
+          next: (data: any) => {
+            let token = data.token;
+            headers = headers.set("Authorization", token);
+            observer.next(headers);
+            observer.complete();
+          },
+          error: (err: any) => {
+            console.log(err.message);
+            observer.error(err);
+          }
+        });
+      } else {
+        observer.next(headers);
+        observer.complete();
+      }
+    });
+  }
+
 
 }

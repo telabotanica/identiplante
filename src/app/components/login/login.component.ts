@@ -53,6 +53,7 @@ export class LoginComponent {
           this.user = userData
           this.displayName = this.user.prenom && this.user.nom ? this.user.prenom + " " + this.user.nom : this.user.intitule;
           this.authService.setUserId(this.user.id_utilisateur)
+          this.authService.setUser(this.user)
         })
       })
     }

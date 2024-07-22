@@ -53,7 +53,7 @@ export class ContenuComponent {
 
     // Actions lors du changement d'onglet ou de la recherche
     effect(()=> {
-      this.selectedOnglet = this.commonService.selectedOnglet();
+      // this.selectedOnglet = this.commonService.selectedOnglet();
       this.urlParamsString = this.commonService.urlParamsString();
       this.errorMessage = "";
       this.loadObservations();

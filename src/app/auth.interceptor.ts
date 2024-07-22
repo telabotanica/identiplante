@@ -19,28 +19,5 @@ export function AuthInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
   const cookieName = environment.cookieName;
   let user: User | null = authService.user();
 
-  const cookie = cookieService.get(cookieName)
-
-  if (cookie) {
-    authService.identite().subscribe({
-      next: (data: any) => {
-        let token = data.token;
-
-        const cloned = req.clone({
-          headers: req.headers.set("Authorization",
-            token)
-        });
-        return next(cloned);
-      },
-      error: (err: any) => {
-        console.log(err.message)
-        return next(req);
-      }
-    })
-  } else {
-
-    return next(req);
-  }
-
   return next(req);
 }
