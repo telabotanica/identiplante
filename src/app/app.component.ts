@@ -1,4 +1,4 @@
-import {Component, effect, inject, runInInjectionContext} from '@angular/core';
+import {Component, effect, HostListener, inject, runInInjectionContext} from '@angular/core';
 import {ActivatedRoute, RouterOutlet} from '@angular/router';
 import {FooterComponent} from "./components/footer/footer.component";
 import {LoginComponent} from "./components/login/login.component";
@@ -9,13 +9,13 @@ import {TopSectionComponent} from "./components/top-section/top-section.componen
 import {MenuComponent} from "./components/menu/menu.component";
 import {CommonService} from "./services/common.service";
 import {DetailComponent} from "./components/detail/detail.component";
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {ComparateurComponent} from "./components/comparateur/comparateur.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, LoginComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, NgIf, ComparateurComponent],
+  imports: [RouterOutlet, FooterComponent, LoginComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, NgIf, ComparateurComponent, NgClass],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -30,12 +30,19 @@ export class AppComponent {
   selectedOnglet = this.commonService.selectedOnglet();
   isDetail = false;
   isComparateur = false;
+  showUpIcon = false;
 
   constructor() {
     effect(() => {
       this.userId = this.authService.userId();
       this.selectedOnglet = this.commonService.selectedOnglet();
     });
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.showUpIcon = scrollPosition > 80; // Afficher l'icône après un scroll de 100px
   }
 
   ngOnInit() {
@@ -52,6 +59,14 @@ export class AppComponent {
         this.isComparateur = false;
       }
     });
+  }
+
+  scrollToTop() {
+    const mainDiv = document.getElementById('main')
+    if (mainDiv){
+      mainDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+
   }
 
 }

@@ -12,6 +12,7 @@ export class FooterComponent {
   currentUrl =  encodeURIComponent(window.location.href);
   urlWidgetRemarque = environment.urlWidgetRemarques + '?service=identiplante&pageSource=' + this.currentUrl;
   showMessageUrlCopied = false;
+  logoSrc = 'assets/img/logos/lr.jpg';
 
   openWindow(url: string) {
     const email = 'identiplante_remarques@tela-botanica.org';
@@ -30,5 +31,9 @@ export class FooterComponent {
     }).catch(err => {
       console.error('Could not copy text: ', err);
     });
+  }
+
+  changeLogo(isHover: boolean) {
+    this.logoSrc = isHover ? 'assets/img/logos/lr_hover.jpg' : 'assets/img/logos/lr.jpg';
   }
 }

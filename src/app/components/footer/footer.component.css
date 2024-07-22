@@ -1,40 +1,45 @@
-.logo_ue {
-  padding-bottom:59px;
-  padding-left:103px;
-  background:url('/assets/img/logos/ue.jpg');
+footer {
+  margin-top: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background-color: var(--brown);
+  color: var(--blanc);
+  min-height: 150px;
+  width: 100%;
 }
+
+.pictoplante-contact {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.pictoplante-financeurs {
+  padding: 1rem;
+  width: 40%;
+  height: 100%;
+}
+
 .logo_lr {
-  padding-bottom:59px;
-  padding-left:47px;
-  background:url('/assets/img/logos/lr.jpg');
-}
-.logo_nd {
-  padding-bottom:55px;
-  padding-left:148px;
-  background:url('/assets/img/logos/nd.jpg');
-}
-.logo_nh {
-  padding-bottom:46px;
-  padding-left:59px;
-  background:url('/assets/img/logos/fnh.png');
-}
-.logo_nh:hover {
-  padding-bottom:46px;
-  padding-left:59px;
-  background:url('/assets/img/logos/fnh-hover.png');
-}
-.logo_ue:hover {
-  background:url('/assets/img/logos/ue_hover.jpg');
-}
-.logo_lr:hover {
-  background:url('/assets/img/logos/lr_hover.jpg');
-}
-.logo_nd:hover {
-  background:url('/assets/img/logos/nd_hover.jpg');
+  /*padding-bottom:59px;*/
+  /*padding-left:47px;*/
 }
 
 .share {
   cursor: pointer;
+}
+
+.share:hover, .contact:hover {
+  border-bottom: 4px solid var(--blanc);
 }
 
 .message-url-copied {
@@ -49,12 +54,27 @@
   z-index: 1000;
 }
 
-footer {
-  padding-right: 1rem;
-}
+
 
 @media (width <= 768px) {
   footer {
     padding: 0 1rem;
+    width: auto;
   }
+}
+
+@media (width <= 768px) {
+  .pictoplante-contact, .pictoplante-financeurs {
+    width: 100%;
+  }
+
+  .pictoplante-contact {
+    justify-content: flex-start;
+  }
+
+  footer {
+    justify-content: flex-start;
+    min-height: 100px;
+  }
+
 }

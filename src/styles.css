@@ -75,8 +75,12 @@ a {
   color: var(--text);
 }
 
+.font16{
+  font-size: 1rem;
+}
+
 .font14{
-  font-size: 0.9rem; /* 14px */
+  font-size: 0.9rem;
 }
 
 .font12{
