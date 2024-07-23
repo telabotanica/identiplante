@@ -39,33 +39,49 @@ export class ContenuComponent {
   isLoading = true;
   errorMessage = "";
 
+  private loadObservationsInProgress = false;
+
   constructor() {
     this.addDefaultUrlParams()
+    this.loadObservations();
 
     // Actions lors de la connexion / deconnexion d'un utilisateur
     effect(() => {
-      this.userId = this.authService.userId();
-      if (this.selectedOnglet == 'monactivite'){
+      const newUserId = this.authService.userId();
+      if (this.userId !== newUserId) {
+        this.userId = newUserId;
+        if (this.selectedOnglet === 'monactivite') {
+          this.errorMessage = "";
+          this.loadObservations();
+        }
+      }
+    });
+
+    // Actions lors du changement d'onglet ou de la recherche
+    effect(() => {
+      const newSelectedOnglet = this.commonService.selectedOnglet();
+      const newUrlParamsString = this.commonService.urlParamsString();
+      if (this.selectedOnglet !== newSelectedOnglet || this.urlParamsString !== newUrlParamsString) {
+        this.selectedOnglet = newSelectedOnglet;
+        this.urlParamsString = newUrlParamsString;
         this.errorMessage = "";
         this.loadObservations();
       }
     });
 
-    // Actions lors du changement d'onglet ou de la recherche
-    effect(()=> {
-      // this.selectedOnglet = this.commonService.selectedOnglet();
-      this.urlParamsString = this.commonService.urlParamsString();
-      this.errorMessage = "";
-      this.loadObservations();
-    })
+    effect(() => {
+      const newExtendedObs = this.commonService.extendedObs();
+      if (this.extendedObs !== newExtendedObs) {
+        this.extendedObs = newExtendedObs;
+      }
+    });
 
-    effect(()=>{
-      this.extendedObs = this.commonService.extendedObs();
-    })
-
-    effect(()=>{
-      this.pays = this.commonService.paysList();
-    })
+    effect(() => {
+      const newPays = this.commonService.paysList();
+      if (this.pays !== newPays) {
+        this.pays = newPays;
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -98,6 +114,11 @@ export class ContenuComponent {
   }
 
   private loadObservations(): void {
+    // if (this.loadObservationsInProgress) {
+    //   return;
+    // }
+
+    this.loadObservationsInProgress = true;
     this.isLoading = true;
     this.observations = [];
     this.observationsEntete = []
@@ -117,9 +138,11 @@ export class ContenuComponent {
         this.observationsEntete = data["entete"];
         this.nbObservations = this.observationsEntete.total
         this.isLoading = false;
+        this.loadObservationsInProgress = false;
       },
       error: (err) => {
         this.isLoading = false;
+        this.loadObservationsInProgress = false;
         this.errorMessage = err.error.error
       }
     });

@@ -27,6 +27,7 @@ import {TransformDataService} from "../../services/transform-data.service";
 export class CardComponent {
   @Input() obs: any;
 
+  obsAdditionnalInfos = <any>[];
   dateObservation = "";
   dateTransmission = "";
   popupBigImage = false;
@@ -67,6 +68,7 @@ export class CardComponent {
 
     effect(() => {
       this.userId = this.authService.userId();
+      this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
     });
 
     effect(()=> {
@@ -97,7 +99,6 @@ export class CardComponent {
     }
 
     this.fixDeterminationForValidatedObs()
-// console.log(this.obs)
     // console.log(this.obs)
     // console.log(this.commentaires)
   }
@@ -117,7 +118,7 @@ export class CardComponent {
   extendObs(){
     this.delService.getObservation(this.obs.id_observation).subscribe({
       next: (data: any) => {
-        this.obs = data;
+        this.obsAdditionnalInfos = data;
         this.fixDeterminationForValidatedObs()
       },
       error: (err) => {

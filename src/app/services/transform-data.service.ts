@@ -14,6 +14,7 @@ export class TransformDataService {
   // Calcul le score des votes puis réorganise les votes du + haut score au + petit
   transformCommentaireAndVotes(obs: any, commentaires: any[], userId: string): Array<any>{
     if (obs.commentaires) {
+      commentaires = [];
       //On transforme les objets commentaires en array pour pouvoir boucler dessus
       commentaires.push(...Object.values(obs.commentaires));
 

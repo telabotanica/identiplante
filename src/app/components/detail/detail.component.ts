@@ -78,12 +78,8 @@ export class DetailComponent {
       this.isVerificateur = this.authService.isVerificateur()
       this.isAdmin = this.authService.isAdmin()
 
-      // Pour affichage du vote existant pour users connectés
-      this.commentairesGrouped.proposition.forEach((proposition: any) => {
-        const userVote = proposition.votes.find((vote: any) => vote['auteur.id'] === this.userId);
-        proposition.userVote = userVote ? userVote['vote'] : null;
-        proposition.hasUserVoted = userVote ? true : false;
-      });
+      this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
+      this.grouperReponses()
 
     });
 
@@ -131,6 +127,8 @@ export class DetailComponent {
   }
 
   grouperReponses(){
+    this.commentairesGrouped = {proposition: [], commentaire : []}
+
     this.commentaires.forEach((commentaire: any) => {
       this.commentairesGrouped.proposition.forEach((proposition: any) => {
         if (!proposition.reponses) {
