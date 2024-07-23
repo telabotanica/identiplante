@@ -78,9 +78,7 @@ export class DetailComponent {
       this.isVerificateur = this.authService.isVerificateur()
       this.isAdmin = this.authService.isAdmin()
 
-      this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
-      this.grouperReponses()
-
+      this.commentaires = this.transFormDataService.getUserVote(this.commentaires, this.userId)
     });
 
     effect(()=> {
@@ -100,6 +98,7 @@ export class DetailComponent {
             this.isLoading = false;
             // console.log(this.obs)
             this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
+            this.commentaires = this.transFormDataService.getUserVote(this.commentaires, this.userId)
 
             this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
             this.dateObservation = this.obs.date_observation ? this.commonService.formatDateString(this.obs.date_observation) : '';

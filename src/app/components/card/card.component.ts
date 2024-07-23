@@ -69,6 +69,7 @@ export class CardComponent {
     effect(() => {
       this.userId = this.authService.userId();
       this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
+      this.commentaires = this.transFormDataService.getUserVote(this.commentaires, this.userId)
     });
 
     effect(()=> {
@@ -88,6 +89,7 @@ export class CardComponent {
     this.displayedName = (this.obs.auteur_nom).trim() ? this.obs.auteur_nom : this.obs.auteur_courriel
 
     this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
+    this.commentaires = this.transFormDataService.getUserVote(this.commentaires, this.userId)
 
     const paysList = this.commonService.paysList();
     if (paysList) {

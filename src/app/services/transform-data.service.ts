@@ -44,7 +44,11 @@ export class TransformDataService {
       })
     }
 
-    // Pour affichage du vote existant pour users connectés
+    return commentaires;
+  }
+
+  // Pour affichage du vote existant pour users connectés
+  getUserVote(commentaires: any[], userId: string): Array<any>{
     commentaires.forEach((proposition: any) => {
       if (userId && proposition.votes != undefined) {
         let votesArray = [];
