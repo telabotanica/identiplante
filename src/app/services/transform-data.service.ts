@@ -57,6 +57,9 @@ export class TransformDataService {
         const userVote: any = votesArray.reverse().find((vote: any) => vote['auteur.id'] == userId);
         proposition.userVote = userVote ? userVote.vote : null;
         proposition.hasUserVoted = !!userVote;
+      } else {
+        proposition.userVote = null
+        proposition.hasUserVoted = null
       }
     });
 
