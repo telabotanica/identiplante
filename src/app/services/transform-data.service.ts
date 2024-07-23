@@ -48,7 +48,8 @@ export class TransformDataService {
       if (userId && proposition.votes != undefined) {
         let votesArray = [];
         votesArray.push(...Object.values(proposition.votes))
-        const userVote: any = votesArray.find((vote: any) => vote['auteur.id'] === userId);
+        // On recherche le dernier vote de l'utilisateur pour chaque proposition
+        const userVote: any = votesArray.reverse().find((vote: any) => vote['auteur.id'] == userId);
         proposition.userVote = userVote ? userVote.vote : null;
         proposition.hasUserVoted = !!userVote;
       }
