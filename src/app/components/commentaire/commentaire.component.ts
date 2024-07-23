@@ -46,7 +46,8 @@ export class CommentaireComponent {
       if (commentaire.nom_sel){
         commentaire.proposition = commentaire.id_commentaire
       }
-      commentaire.date = this.commonService.formatDateAndTimeString(commentaire.date);
+      // commentaire.displayDate = commentaire.date
+      commentaire.displayDate = this.commonService.formatDateAndTimeString(commentaire.date);
     })
   }
 
