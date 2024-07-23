@@ -13,9 +13,10 @@
   <app-login class=""></app-login>
 
   @if(showDescriptionText){
+  <div class="blur-background">
     <div id="popup-description-text" class="popup">
       <div (click)="hideDescription()" class="close-section">
-        <img class="close-popup" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/cancel_white.png">
+        <img class="close-popup" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/cancel_brown.png">
       </div>
 
       <p class="intro-text">Cet espace vous permet d'échanger sur la détermination d'espèces.</p>
@@ -24,5 +25,6 @@
       <p class="intro-text">Vous avez relevé des erreurs dans les images soumises par le réseau ? <br />
                             Postez un commentaire ou proposez une nouvelle détermination.</p>
     </div>
+  </div>
   }
 </header>

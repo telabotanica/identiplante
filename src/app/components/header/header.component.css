@@ -36,6 +36,13 @@ header {
   cursor: pointer;
 }
 
+#popup-description-text{
+  width: 40%;
+  height: fit-content;
+  top: 5%;
+  left: 30%;
+}
+
 @media (width <= 768px) {
   header {
     padding: 0 1rem;
@@ -48,5 +55,19 @@ header {
 
   #zoneTitre {
     order: 1;
+  }
+
+  #popup-description-text{
+    width: 70%;
+    top: 5%;
+    left: 15%;
+  }
+}
+
+@media (width <= 390px) {
+  #popup-description-text{
+    width: 80%;
+    top: 30%;
+    left: 2%;
   }
 }
