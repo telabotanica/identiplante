@@ -96,7 +96,7 @@
             }
 
             <div class="propositions-layout w-80">
-              <div>Détermination</div>
+              <div>Détermination Originale par {{obs["auteur.nom"]}}</div>
               <div>Score</div>
               <div>Vote</div>
 
@@ -146,7 +146,14 @@
             <div class="proposition-container">
               <div class="proposition-row">
                 <div class="propositions-layout w-80">
-                  <div>Détermination</div>
+                  <div>Détermination
+                    @if(commentaire.proposition_initiale === '1'){
+                      originale
+                    } @else {
+                      proposée
+                    }
+                    par {{commentaire['auteur.nom']}} le {{commentaire.date}}
+                  </div>
                   <div>Score</div>
                   <div>Vote</div>
 
