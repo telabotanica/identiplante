@@ -1,5 +1,5 @@
 #popup-addComment {
-  height: fit-content;
+  height: 80%;
   width: 70%;
   top: 2%;
   left: 15%;
@@ -29,4 +29,13 @@
   justify-content: center;
   align-items: center;
   margin: 2rem 0;
+}
+
+@media (width <= 390px) {
+  #popup-addComment {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
 }

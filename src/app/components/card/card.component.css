@@ -14,6 +14,7 @@
 
 #card-extended-details {
   width: -webkit-fill-available;
+  width: -moz-available;
   background-color: var(--background-blanc);
   padding: 1rem;
 }

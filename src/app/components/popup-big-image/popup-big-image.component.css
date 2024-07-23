@@ -60,6 +60,7 @@
   border-bottom: 2px dashed var(--background-blanc);
 
   height: -webkit-fill-available;
+  height: -moz-available;
   /*height: 100%;*/
   display: flex;
   flex-direction: column;

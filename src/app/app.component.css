@@ -23,7 +23,7 @@
   bottom: 30px;
   cursor: pointer;
   display: none; /* Par défaut, l'icône est masquée */
-  z-index: 1000;
+  z-index: 10;
 }
 
 .up-icon.visible {

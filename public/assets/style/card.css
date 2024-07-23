@@ -181,6 +181,7 @@
 
 .card-image-extended{
   width: -webkit-fill-available;
+  width: -moz-available;
   height: 80%;
   cursor: pointer;
   background-color: var(--background-blanc);

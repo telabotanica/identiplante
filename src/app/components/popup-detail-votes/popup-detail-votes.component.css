@@ -4,3 +4,12 @@
   top: 5%;
   left: 5%;
 }
+
+@media (width <= 390px) {
+  #popup-detail-vote  {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}

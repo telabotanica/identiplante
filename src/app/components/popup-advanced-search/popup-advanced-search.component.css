@@ -2,7 +2,7 @@
   border-radius: 30px;
   background: var(--accent);
   color: var(--blanc) !important;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 #advanced-search-form {
@@ -10,6 +10,10 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+}
+
+#search-left, #search-right {
+  width: 40%;
 }
 
 .searchbar-container {
@@ -41,5 +45,9 @@
     flex-direction: column;
     align-items: stretch;
     padding: 0 1rem 1rem 1rem;
+  }
+
+  #search-left, #search-right {
+    width: 100%;
   }
 }

@@ -160,6 +160,7 @@ select option:checked {
 
 input {
   width: -webkit-fill-available;
+  width: -moz-available;
   height: 40px;
   border-radius: 10px;
   padding: 0 1rem 0 2.5rem;
