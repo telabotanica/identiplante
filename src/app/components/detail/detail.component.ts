@@ -248,7 +248,6 @@ export class DetailComponent {
         this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter."
       }
     })
-    console.log(propositionId)
   }
 
   depublier(obsId: string){
