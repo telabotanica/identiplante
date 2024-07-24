@@ -120,9 +120,6 @@
 }
 
 .extend-card {
-  /*position: absolute;*/
-  /*left: 1rem;*/
-  /*bottom: 1rem;*/
   cursor: pointer;
   padding: 0 1rem;
   width: max-content;
@@ -149,7 +146,6 @@
   flex-wrap: wrap;
 }
 
-
 .close-extended {
   cursor: pointer;
   height: 50px;
@@ -163,6 +159,7 @@
   height: 400px;
   padding: 0 1rem;
   background-color: var(--brown);
+  border-top-left-radius: 16px;
 }
 
 .card-title-extended {
