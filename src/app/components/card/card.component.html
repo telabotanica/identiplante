@@ -8,8 +8,12 @@
         <img src="assets/icons/images.png" alt="images.png" title="{{obs.images.length}} images" class="card-header-icon icon-images">
         }
 
-        @if(commentaires.length > 0){
-        <img src="assets/icons/ipBulles.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments">
+        @if(commentaires.length > 0 && !validatedObs){
+        <img src="assets/icons/IPinterro_2.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments">
+        }
+
+        @if(validatedObs){
+        <img src="assets/icons/IPcheck.png" alt="Obs validée" title="Observation validée" class="card-header-icon icon-comments">
         }
       </div>
     }
