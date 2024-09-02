@@ -123,10 +123,11 @@
   cursor: pointer;
   padding: 0 1rem;
   width: max-content;
+  border-bottom: 4px solid var(--primary);
 }
 
 .extend-card:hover {
-  border-bottom: 4px solid var(--primary);
+  font-weight: bold;
 }
 
 /****************************** Card Extended *****************/

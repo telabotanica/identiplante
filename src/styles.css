@@ -503,6 +503,12 @@ input::placeholder {
   }
 }
 
+.button-link:hover {
+  span {
+    border-bottom: 4px solid var(--text);
+  };
+}
+
 .large-button {
   max-width: 250px;
 }
