@@ -32,7 +32,8 @@
 
 .detail-carousel-wrapper {
   background-color: var(--brown);
-  width: calc(100% - 2rem);
+  /*width: calc(100% - 2rem);*/
+  width: 100%;
   padding: 1rem;
 }
 
@@ -56,6 +57,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  font-size: 1rem;
 }
 
 #detail-obs-left, #detail-obs-right {

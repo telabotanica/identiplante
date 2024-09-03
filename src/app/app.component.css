@@ -10,6 +10,10 @@
   max-width: 200px;
 }
 
+#content {
+  width: 100%;
+}
+
 #content-div {
   /*width: 80%;*/
   /*height: 100vh;*/

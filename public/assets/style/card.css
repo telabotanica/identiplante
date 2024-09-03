@@ -212,6 +212,7 @@
   gap: 1rem;
   flex-wrap: nowrap;
   margin-top: 2rem;
+  font-size: 1rem;
 }
 
 .propositions-layout {
