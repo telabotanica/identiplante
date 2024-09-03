@@ -95,6 +95,15 @@
   min-height: 100px;
 }
 
+#detail-left > .card-image-div-extended {
+  border-top-right-radius: 16px;
+}
+
+.detail-carousel-wrapper {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
 @media (width <= 1080px) {
   #detail-container {
     flex-wrap: wrap;
@@ -103,6 +112,8 @@
   #detail-left, #detail-right {
     width: 100%;
   }
+
+
 }
 
 @media (width <= 768px) {
@@ -114,5 +125,7 @@
     width: -webkit-fill-available;
     width: -moz-available;
   }
+
+
 
 }
