@@ -25,15 +25,23 @@
 <!--  Advanced search-->
   <div id="advanced-search-notopened">
     <span class="text-white">Recherche avancée</span>
+    @if(!displayAdvancedPopup){
     <img (click)="openAdvancedSearchPopUp()"
          class="advanced-search-icon"
          alt="Recherche avancée"
-         title="recherche avancée"
+         title="Ouvrir l'onglet de recherche avancée"
          src="assets/icons/chevron_down.png">
-
-    <app-popup-advanced-search
-      *ngIf="displayAdvancedPopup"
-      (closePopupEmitter)="closeAdvancedSearchPopUp()" class="w-100 blur-background" >
-    </app-popup-advanced-search>
+    } @else {
+    <img (click)="openAdvancedSearchPopUp()"
+         class="advanced-search-icon"
+         alt="Recherche avancée"
+         title="Fermer l'onglet de recherche avancée"
+         src="assets/icons/chevron_up_white.png">
+    }
   </div>
+
+  <app-popup-advanced-search
+    *ngIf="displayAdvancedPopup"
+    (closePopupEmitter)="closeAdvancedSearchPopUp()" class="w-100">
+  </app-popup-advanced-search>
 </div>

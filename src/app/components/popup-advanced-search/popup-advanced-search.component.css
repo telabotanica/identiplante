@@ -1,5 +1,6 @@
 #popup-advanced-search {
-  border-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   background: var(--accent);
   color: var(--blanc) !important;
   overflow-y: auto;
@@ -31,16 +32,6 @@
 }
 
 @media (width <= 768px) {
-  #popup-advanced-search {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1250px;
-    padding: 0;
-    border-radius: 5px;
-  }
-
   #advanced-search-form {
     flex-direction: column;
     align-items: stretch;

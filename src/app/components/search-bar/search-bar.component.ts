@@ -53,7 +53,7 @@ export class SearchBarComponent {
   }
 
   openAdvancedSearchPopUp(){
-    this.displayAdvancedPopup = true
+    this.displayAdvancedPopup = !this.displayAdvancedPopup
   }
 
   closeAdvancedSearchPopUp() {
