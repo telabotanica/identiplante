@@ -1,6 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {CommonService} from "./common.service";
 import {DelService} from "./del.service";
+import {Observation} from "../models/observation";
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,21 @@ export class TransformDataService {
     });
 
     return commentaires;
+  }
+
+  replacePictureFormat(observation: Observation, format: string): Observation{
+    const FORMATS = ["XL", "S", "M"]
+
+    observation.images.forEach((image: any) => {
+      if (image["binaire.href"]) {
+        FORMATS.forEach(existingFormat => {
+          if (image["binaire.href"].includes(existingFormat)) {
+            image["binaire.href"] = image["binaire.href"].replace(existingFormat, format);
+          }
+        });
+      }
+    });
+
+    return observation;
   }
 }

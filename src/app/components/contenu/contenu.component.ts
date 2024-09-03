@@ -9,6 +9,7 @@ import {Protocole} from "../../models/protocole";
 import {CardComponent} from "../card/card.component";
 import {PaginationComponent} from "../pagination/pagination.component";
 import {CommonModule} from "@angular/common";
+import {TransformDataService} from "../../services/transform-data.service";
 
 @Component({
   selector: 'app-contenu',
@@ -25,6 +26,7 @@ export class ContenuComponent {
   authService = inject(AuthService);
   commonService = inject(CommonService)
   delService = inject(DelService)
+  transformDataService = inject(TransformDataService)
 
   userId = this.authService.userId();
   selectedOnglet = this.commonService.selectedOnglet();
@@ -130,6 +132,12 @@ export class ContenuComponent {
         const observationsData = data["resultats"];
         if (observationsData && typeof observationsData === 'object') {
           this.observations = this.mapObservations(Object.values(observationsData));
+
+          // On remplace les photos par des + petites pour optimiser le temps de chargement
+          this.observations.forEach(observation => {
+            observation = this.transformDataService.replacePictureFormat(observation, "M");
+          })
+
         } else {
           console.error('Expected object for protocoles data but got:', observationsData);
           this.observations = [];
