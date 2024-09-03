@@ -98,7 +98,8 @@ export class CardComponent {
     }
 
     if (this.pays && this.obs.pays){
-      this.displayedCountry = this.pays.find(pays => pays.code_iso_3166_1 === this.obs.pays);
+      let nomPays = this.pays.find(pays => pays.code_iso_3166_1 === this.obs.pays);
+      this.displayedCountry = nomPays?.nom_fr ?? this.obs.pays;
     }
 
     this.validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1') !== undefined;

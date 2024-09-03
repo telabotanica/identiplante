@@ -25,7 +25,9 @@
     </div>
     <div class="card-body">
       <div>
-      <h5 class="card-title w-100"><a href="{{urlParamsString}}#obs~{{obs.id_observation}}">{{nomScientifique}}</a> ({{obs.determination_referentiel}})</h5>
+      <h5 class="card-title w-100">
+        <a href="{{urlParamsString}}#obs~{{obs.id_observation}}">{{nomScientifique}}</a>
+        ({{obs.determination_referentiel}})</h5>
       <p class="card-texte">
         par
         @if(profilUrl){
@@ -34,13 +36,14 @@
           {{displayedName}}
         }
       </p>
-      <p class="card-texte">{{obs.zone_geo}}
-      @if(obs.station){
-        , {{obs.station}}
-      }
-      @if(displayedCountry){
-        ({{displayedCountry.nom_fr}})
-      }
+      <p class="card-texte">
+        @if(displayedCountry){
+          ({{displayedCountry}})
+        }
+        {{obs.zone_geo}}
+        @if(obs.station){
+          , {{obs.station}}
+        }
       </p>
 
       <p class="card-texte">Observée le {{dateObservation}}</p>
