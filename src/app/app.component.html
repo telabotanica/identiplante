@@ -1,38 +1,37 @@
-<div id="main">
-  <app-menu id="menu" class="pr-1"></app-menu>
+<section id="main">
+  <app-menu id="menu" class=""></app-menu>
 
-  <section id="content-div">
+  <section id="content">
+    <div id="content-div">
 
-    <app-header></app-header>
+      <app-header></app-header>
 
-    <app-top-section></app-top-section>
+      <app-top-section></app-top-section>
 
-    <ng-container *ngIf="isDetail; else comparateurTemplate">
-      <app-detail></app-detail>
-    </ng-container>
-
-    <ng-template #comparateurTemplate>
-      <ng-container *ngIf="isComparateur; else contenuTemplate">
-        <app-comparateur></app-comparateur>
+      <ng-container *ngIf="isDetail; else comparateurTemplate">
+        <app-detail></app-detail>
       </ng-container>
-    </ng-template>
 
-    <ng-template #contenuTemplate>
-      <app-contenu></app-contenu>
-    </ng-template>
+      <ng-template #comparateurTemplate>
+        <ng-container *ngIf="isComparateur; else contenuTemplate">
+          <app-comparateur></app-comparateur>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #contenuTemplate>
+        <app-contenu></app-contenu>
+      </ng-template>
+
+      <img src="assets/icons/chevron_up_brown.png"
+           alt="up icon"
+           title="retourner en haut de la page"
+           class="up-icon"
+           (click)="scrollToTop()"
+           [ngClass]="{'visible': showUpIcon}">
+
+    </div>
 
     <app-footer></app-footer>
-
-    <img src="assets/icons/chevron_up_brown.png"
-         alt="up icon"
-         title="retourner en haut de la page"
-         class="up-icon"
-         (click)="scrollToTop()"
-         [ngClass]="{'visible': showUpIcon}">
-
   </section>
 
-<!--  <app-footer></app-footer>-->
-</div>
-
-<!--<router-outlet />-->
+</section>

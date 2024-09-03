@@ -29,11 +29,6 @@ footer {
   height: 100%;
 }
 
-.logo_lr {
-  /*padding-bottom:59px;*/
-  /*padding-left:47px;*/
-}
-
 .share {
   cursor: pointer;
 }
@@ -54,16 +49,14 @@ footer {
   z-index: 1000;
 }
 
-
-
 @media (width <= 768px) {
   footer {
     padding: 0 1rem;
-    width: auto;
+    justify-content: flex-start;
+    min-height: 100px;
+    position: relative;
   }
-}
 
-@media (width <= 768px) {
   .pictoplante-contact, .pictoplante-financeurs {
     width: 100%;
   }
@@ -71,10 +64,4 @@ footer {
   .pictoplante-contact {
     justify-content: flex-start;
   }
-
-  footer {
-    justify-content: flex-start;
-    min-height: 100px;
-  }
-
 }
