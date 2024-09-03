@@ -2,7 +2,8 @@
   height: 300px;
   width: 300px;
   border: none;
-  box-shadow: 15px 15px 8px 0 var(--primary40), 0 6px 20px 0 var(--primary39);
+  /*box-shadow: 15px 15px 8px 0 var(--primary40), 0 6px 20px 0 var(--primary39);*/
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
   /*box-shadow: 10px 10px 4px 0 var(--brown), 0 3px 10px 0 var(--brown30);*/
   border-radius: 16px;
   display: flex;
