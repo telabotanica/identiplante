@@ -516,7 +516,7 @@ input::placeholder {
 .button-accent {
   background-color: var(--background-blanc);
   color: var(--text);
-  a:hover {
+  a:hover, span:hover {
     border-bottom: 4px solid var(--text);
   }
 }

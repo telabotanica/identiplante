@@ -5,15 +5,15 @@
     @if((obs.images && obs.images.length > 1) || commentaires.length > 0){
       <div class="card-header">
         @if(obs.images && obs.images.length > 1){
-        <img src="assets/icons/images.png" alt="images.png" title="{{obs.images.length}} images" class="card-header-icon icon-images">
+        <img src="assets/icons/images.png" alt="images icon" title="{{obs.images.length}} images" class="card-header-icon icon-images" width="40" height="40">
         }
 
         @if(commentaires.length > 0 && !validatedObs){
-        <img src="assets/icons/IPinterro_2.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments">
+        <img src="assets/icons/IPinterro_2.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments" width="40" height="40">
         }
 
         @if(validatedObs){
-        <img src="assets/icons/IPcheck.png" alt="Obs validée" title="Observation validée" class="card-header-icon icon-comments">
+        <img src="assets/icons/IPcheck.png" alt="Obs validée" title="Observation validée" class="card-header-icon icon-comments" width="40" height="40">
         }
       </div>
     }
@@ -21,7 +21,10 @@
       <img
         class="card-image"
         src="{{selectedImage['binaire.href']}}"
-        (error)="commonService.onImageError($event)"/>
+        loading="lazy"
+        alt="Image de l'observation"
+        (error)="commonService.onImageError($event)"
+      />
     </div>
     <div class="card-body">
       <div>
@@ -64,7 +67,9 @@
         class="close-extended"
         alt="fermer"
         title="Voir moins d'infos"
-        src="assets/icons/cancel_brown.png">
+        src="assets/icons/cancel_brown.png"
+        width="39"
+        height="39">
 
   <div id="card-extended-first-container">
     <div class="card-image-div-extended">
@@ -90,7 +95,7 @@
     <div class="image-carousel-wrapper">
       <div id="image-carousel" #imageCarousel>
         <div *ngFor="let image of obs.images; let i = index" class="thumbnail" (click)="changeSelectedImage(image)">
-        <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation">
+        <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation" width="35" height="35">
         </div>
       </div>
 
@@ -157,14 +162,18 @@
               (mouseout)="commonService.changeIconOnHoverSimple('like', false, isHovered)"
               alt="vote pour"
               title="voter pour cette proposition"
-              class="vote-icon">
+              class="vote-icon"
+              width="34"
+              height="34">
             <img (click)="voter('0', '0', obs.id_observation)"
                  [src]="commonService.getVoteIconSrc('dislike', '', isHovered)"
                  (mouseover)="commonService.changeIconOnHoverSimple('dislike', true, isHovered)"
                  (mouseout)="commonService.changeIconOnHoverSimple('dislike', false, isHovered)"
                  alt="vote contre"
                  title="voter contre cette proposition"
-                 class="vote-icon">
+                 class="vote-icon"
+                 width="34"
+                 height="34">
           </div>
         } @else {
           @for(commentaire of commentaires; track commentaire.id_commentaire){
@@ -180,23 +189,27 @@
             <div class="text-black">{{commentaire.score}}</div>
             <div>
               <img
-                (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
-                [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
-                (mouseover)="commonService.changeIconOnHover('like', commentaire, true)"
-                (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
-                alt="vote pour"
-                title="voter pour cette proposition"
-                class="vote-icon">
+              (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
+              [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
+              (mouseover)="commonService.changeIconOnHover('like', commentaire, true)"
+              (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
+              alt="vote pour"
+              title="voter pour cette proposition"
+              class="vote-icon"
+              width="34"
+              height="34">
               <img
-                (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
-                [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
-                (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)"
-                (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
-                alt="vote contre"
-                title="voter contre cette proposition"
-                class="vote-icon">
+              (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
+              [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
+              (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)"
+              (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
+              alt="vote contre"
+              title="voter contre cette proposition"
+              class="vote-icon"
+              width="34"
+              height="34">
               @if(commentaire.votes && commentaire.votes.length > 0){
-                <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon">
+                <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon" width="34" height="34">
               }
             </div>
 

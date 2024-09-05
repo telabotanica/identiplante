@@ -1,10 +1,10 @@
 <div class="burger-logo-div" (click)="toggleMenu()" [class.is-open]="isMenuOpen">
-  <img class="burger-logo" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/{{ isMenuOpen ? 'cancel_brown' : 'menu_black'}}.png">
+  <img class="burger-logo" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/{{ isMenuOpen ? 'cancel_brown' : 'menu_black'}}.png" width="50" height="50">
 </div>
 
 <nav class="nav-div" [class.is-open]="isMenuOpen">
   <div class="menu-div">
-    <a id="ip-image" href="{{baseUrl}}" title="Accueil"><img class="w-100" src="assets/img/logos/logo_ip.png"></a>
+    <a id="ip-image" href="{{baseUrl}}" title="Accueil"><img class="w-100" src="assets/img/logos/logo_ip.png" alt="logo d'identiplante" width="200" height="57"></a>
 
     <div class="onglets-div">
       <div [class.onglet-selected]="selectedOnglet === 'tous'"
@@ -36,16 +36,16 @@
 
     <div class="logos-section">
       <div class="logo-tela">
-        <a href="{{baseUrl}}" target="_blank">
-          <img [src]="logoTelaSrc" alt="logo_tela"
+        <a href="{{baseUrl}}" target="_blank" title="Tela Botanica">
+          <img [src]="logoTelaSrc" alt="logo_tela" width="86" height="22"
                (mouseover)="onMouseOver('tela')"
                (mouseout)="onMouseOut('tela')">
         </a>
       </div>
 
       <div class="logo-pn">
-        <a href="https://plantnet.org/" target="_blank">
-          <img [src]="logoPnSrc" alt="logo_Plantnet"
+        <a href="https://plantnet.org/" target="_blank" title="Plantnet">
+          <img [src]="logoPnSrc" alt="logo_Plantnet" width="86" height="18"
                (mouseover)="onMouseOver('pn')"
                (mouseout)="onMouseOut('pn')">
         </a>

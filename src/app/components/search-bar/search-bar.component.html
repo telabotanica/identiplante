@@ -4,7 +4,7 @@
     <label for="search-bar" class="text-white mb-1">Recherchez par espèce, genre, famille, département, commune, auteur, mot-clé.</label>
     <div id="searchBar">
       <div>
-        <img (click)="updateSearch()" class="search-icon" title="recherchez" src="assets/icons/search.png">
+        <img (click)="updateSearch()" class="search-icon" title="recherchez" src="assets/icons/search.png" alt="icone de recherche">
       </div>
       <input class="search-bar"
              id="search-bar"
@@ -15,7 +15,7 @@
       <div>
         <img (click)="resetSearch()"
              class="cancel-icon"
-             alt="X"
+             alt="cancel icon"
              title="Effacer la recherche"
              src="assets/icons/cancel_brown.png">
       </div>
@@ -28,15 +28,19 @@
     @if(!displayAdvancedPopup){
     <img (click)="openAdvancedSearchPopUp()"
          class="advanced-search-icon"
-         alt="Recherche avancée"
+         alt="Recherche avancée icone"
          title="Ouvrir l'onglet de recherche avancée"
-         src="assets/icons/chevron_down.png">
+         src="assets/icons/chevron_down.png"
+         width="50"
+         height="50">
     } @else {
     <img (click)="openAdvancedSearchPopUp()"
          class="advanced-search-icon"
-         alt="Recherche avancée"
+         alt="Recherche avancée icone"
          title="Fermer l'onglet de recherche avancée"
-         src="assets/icons/chevron_up_white.png">
+         src="assets/icons/chevron_up_white.png"
+         width="50"
+         height="50">
     }
   </div>
 
