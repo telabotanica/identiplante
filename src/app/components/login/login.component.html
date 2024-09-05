@@ -1,10 +1,10 @@
 <div id="login">
   @if(!isLoggedIn){
-    <h6 class="connexion" (click)="openLoginPopup()">Connexion</h6>
+    <h2 class="connexion font14" (click)="openLoginPopup()">Connexion</h2>
   } @else {
     <div class="flex-between no-wrap">
        <p>{{displayName}}</p>
-       <div><button class="button-primary" (click)="logout()">Se déconnecter</button></div>
+       <div><button class="button-primary" (click)="logout()"><span>Se déconnecter</span></button></div>
     </div>
   }
 
