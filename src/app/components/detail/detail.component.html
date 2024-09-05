@@ -118,14 +118,14 @@
             </div>
             <div class="flex-start">
               @if(isVerificateur && obs['determination.nn']){
-              <button class="button-accent" title="Valider la proposition">
+              <button class="button-accent button-link" title="Valider la proposition">
                 <img src="assets/icons/ip_valid.png"  class="detail-icon" >
                 <span>Valider</span>
               </button>
               }
 
               @if(isAdmin){
-              <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent" title="Dépublier cette observation">
+              <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
                 <img src="assets/icons/close_pink.png"  class="detail-icon">
                 <span>Dépublier</span>
               </button>
@@ -223,7 +223,7 @@
               </div>
 
               <div class="reponses-proposition-div">
-                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase">Répondre</p>
+                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase text-black bold">Répondre</p>
                 @if(commentaire.reponses || commentaire.texte){
                   <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
                 }
@@ -286,7 +286,9 @@
         <h5 class="uppercase mb-1">Commentaires libres</h5>
         @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
           @if(commentaire.texte){
-            <app-commentaire [commentaires]="[commentaire]" [niveau]="0" [isComLibre]="true"></app-commentaire>
+            <div class="proposition-container">
+              <app-commentaire [commentaires]="[commentaire]" [niveau]="0" [isComLibre]="true"></app-commentaire>
+            </div>
           }
         }
       </div>

@@ -258,6 +258,19 @@ input::placeholder {
   font-weight: bold;
 }
 
+
+.bg-blanc {
+  background-color: var(--background-blanc);
+}
+
+.bg {
+  background-color: var(--background);
+}
+
+.shadow {
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
@@ -511,6 +524,12 @@ input::placeholder {
 .button-link:hover {
   span {
     border-bottom: 4px solid var(--text);
+  };
+}
+
+.button-link-white:hover {
+  span {
+    border-bottom: 4px solid var(--blanc);
   };
 }
 

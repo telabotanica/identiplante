@@ -73,8 +73,9 @@
 
 .proposition-container {
   background-color: var(--background);
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
   padding: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
   border-radius: 8px;
 }
 
