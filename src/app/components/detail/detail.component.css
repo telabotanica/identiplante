@@ -72,10 +72,14 @@
 }
 
 .proposition-container {
-  background-color: var(--grey-light);
+  background-color: var(--background);
   padding: 1rem;
   margin-bottom: 0.5rem;
   border-radius: 8px;
+}
+
+.proposition-retenue {
+  border-left: 20px solid var(--primary);
 }
 
 .proposition-row{
@@ -112,8 +116,6 @@
   #detail-left, #detail-right {
     width: 100%;
   }
-
-
 }
 
 @media (width <= 768px) {
@@ -125,7 +127,4 @@
     width: -webkit-fill-available;
     width: -moz-available;
   }
-
-
-
 }

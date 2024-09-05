@@ -143,17 +143,21 @@
 <!--          }-->
         } @else {
           @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
-            <div class="proposition-container">
-              <div class="proposition-row">
+            <div class="proposition-container" [ngClass]="{'proposition-retenue': commentaire.proposition_retenue === '1'}">
+
+              <div class="text-black">
+                Détermination
+                @if(commentaire.proposition_initiale === '1'){
+                originale
+                } @else {
+                proposée
+                }
+                par {{commentaire['auteur.nom']}} le {{commentaire.displayDate}}
+              </div>
+
+              <div class="proposition-row mt-1">
                 <div class="propositions-layout w-80">
-                  <div>Détermination
-                    @if(commentaire.proposition_initiale === '1'){
-                      originale
-                    } @else {
-                      proposée
-                    }
-                    par {{commentaire['auteur.nom']}} le {{commentaire.displayDate}}
-                  </div>
+                  <div>Proposition</div>
                   <div>Score</div>
                   <div>Vote</div>
 
@@ -165,7 +169,7 @@
                     @if(commentaire.proposition_retenue === "1"){
                       <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
                     }
-                    <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black">{{commentaire.nom_sel}}</a>
+                    <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{commentaire.nom_sel}}</a>
 
                     @if(userId && userId == commentaire['auteur.id'] && commentaire.proposition_retenue == "0"){
                       <p (click)="affichageConfirmationDeleteProposition(commentaire.id_commentaire)" class="pointer">Supprimer la proposition</p>

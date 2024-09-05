@@ -546,6 +546,10 @@ input::placeholder {
   cursor: pointer;
 }
 
+.underline-green {
+  border-bottom: 4px solid var(--primary);
+}
+
 @media (width <= 768px) {
   .form-group{
     align-items: stretch;
