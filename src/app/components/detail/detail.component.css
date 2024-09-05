@@ -109,6 +109,14 @@
   border-bottom-right-radius: 16px;
 }
 
+#help-box {
+  background-color: var(--background);
+  margin: 2rem 0;
+  padding: 2rem;
+  border: 5px solid var(--brown);
+  border-radius: 16px;
+}
+
 @media (width <= 1080px) {
   #detail-container {
     flex-wrap: wrap;
