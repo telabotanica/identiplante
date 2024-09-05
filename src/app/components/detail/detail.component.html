@@ -1,11 +1,5 @@
 <section id="detail">
-  <div class="flex-between mt-2 mb-2">
-    <div class="">
-      @if(isAdmin){
-      <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected" title="Dépublier cette observation">Dépublier</button>
-      }
-    </div>
-  </div>
+
   @if(!isLoading){
 
   <div class="mb-2">
@@ -89,9 +83,7 @@
         @if(commentaires.length < 1){
         <div class="proposition-container">
           <div class="proposition-row">
-            @if(isVerificateur && obs['determination.nn']){
-              <img src="assets/icons/ip_valid.png"  class="detail-icon" title="Valider la proposition">
-            }
+
 
             <div class="propositions-layout w-80">
               <div>Détermination Originale par {{obs["auteur.nom"]}}</div>
@@ -124,6 +116,22 @@
                        class="vote-icon">
                 </div>
             </div>
+            <div class="flex-start">
+              @if(isVerificateur && obs['determination.nn']){
+              <button class="button-accent" title="Valider la proposition">
+                <img src="assets/icons/ip_valid.png"  class="detail-icon" >
+                <span>Valider</span>
+              </button>
+              }
+
+              @if(isAdmin){
+              <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent" title="Dépublier cette observation">
+                <img src="assets/icons/close_pink.png"  class="detail-icon">
+                <span>Dépublier</span>
+              </button>
+              }
+            </div>
+
             </div>
           </div>
 
@@ -160,10 +168,6 @@
                   <div>Vote</div>
 
                   <div class="text-black">
-                    @if(isVerificateur && commentaire.nom_sel_nn && commentaire.proposition_retenue === "0"){
-                      <img src="assets/icons/ip_valid.png" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])" class="detail-icon" title="Valider la proposition">
-                    }
-
                     @if(commentaire.proposition_retenue === "1"){
                       <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
                     }
@@ -201,6 +205,23 @@
                   </div>
                 </div>
               </div>
+
+              <div class="flex-start mb-2 text-black uppercase bold">
+                @if(isVerificateur && commentaire.nom_sel_nn && commentaire.proposition_retenue === "0"){
+                <button class="button-accent" title="Valider la proposition">
+                  <img src="assets/icons/ip_valid.png"  class="detail-icon" >
+                  <span>Valider</span>
+                </button>
+                }
+
+                @if(isAdmin && commentaire.proposition_initiale === "1"){
+                <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent " title="Dépublier cette observation">
+                  <img src="assets/icons/close_pink.png"  class="detail-icon">
+                  <span>Dépublier</span>
+                </button>
+                }
+              </div>
+
               <div class="reponses-proposition-div">
                 <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase">Répondre</p>
                 @if(commentaire.reponses || commentaire.texte){

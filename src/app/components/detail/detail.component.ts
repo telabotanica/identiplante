@@ -125,7 +125,7 @@ export class DetailComponent {
             });
 
             // console.log(this.commentaires)
-            // console.log(this.commentairesGrouped)
+            console.log(this.commentairesGrouped)
           },
           error: (err) => {
             console.log(err)
