@@ -7,6 +7,18 @@
   </div>
 
   <div id="determination-aide">
+
+    @if(isDetail){
+    <div>
+      <a href="{{urlParamsString}}" class="text-white" title="retourner à la liste des observations">
+        <button class="button-primary">
+          <img src="assets/icons/chevron_left_brown.png" class="icon-button">
+          <span>Retour</span>
+        </button>
+      </a>
+    </div>
+    }
+
     <div>
       <a [href]="proposezObservationLink"
          class="button-link"

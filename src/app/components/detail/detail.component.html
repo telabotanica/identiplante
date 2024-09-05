@@ -1,7 +1,5 @@
 <section id="detail">
   <div class="flex-between mt-2 mb-2">
-    <div><button class="button-primary"><a href="{{urlParamsString}}" class="text-white" title="retourner à la liste des observations">Retour</a></button></div>
-
     <div class="">
       @if(isAdmin){
       <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected" title="Dépublier cette observation">Dépublier</button>

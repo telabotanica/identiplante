@@ -114,6 +114,16 @@ export class DetailComponent {
 
             this.fixDeterminationForValidatedObs()
 
+            // On trie les propositions
+            this.commentairesGrouped.proposition.sort((a: any, b: any) => {
+              // Priorité à l'élément avec proposition_retenue === "1"
+              if (a.proposition_retenue === "1") return -1;
+              if (b.proposition_retenue === "1") return 1;
+
+              // Si aucun des deux n'a proposition_retenue === "1", trier par score décroissant
+              return b.score - a.score;
+            });
+
             // console.log(this.commentaires)
             // console.log(this.commentairesGrouped)
           },
