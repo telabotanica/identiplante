@@ -52,7 +52,7 @@
           <p><a href="https://www.tela-botanica.org/ressources/ressources-pedagogiques/cles-de-determination-en-ligne/" target="_blank" title="Clés de détermination" class="underline-green">Clés de détermination</a></p>
         </div>
       </div>
-      
+
     </div>
 
     <div id="detail-right">
@@ -89,10 +89,9 @@
 
       </div>
 
-      <div id="detail-buttons" class="flex-start w-100 gap-1">
-        <button (click)="openAddCommentOnObs('determination')" class="button-primary">Proposer une détermination</button>
-        <button (click)="openAddCommentOnObs('commentaire')" class="button-primary">Ajouter un commentaire
-        </button>
+      <div id="detail-buttons" class="flex-start w-100 gap-1 mt-2">
+        <button (click)="openAddCommentOnObs('determination')" class="button-primary"><span>Proposer une détermination</span></button>
+        <button (click)="openAddCommentOnObs('commentaire')" class="button-primary"><span>Ajouter un commentaire</span></button>
       </div>
 
       <div id="detail-propositions" class="mt-2">
@@ -136,7 +135,7 @@
             <div class="flex-start">
               @if(isVerificateur && obs['determination.nn']){
               <button class="button-accent button-link" title="Valider la proposition">
-                <img src="assets/icons/ip_valid.png"  class="detail-icon" >
+                <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon">
                 <span>Valider</span>
               </button>
               }
@@ -186,7 +185,7 @@
 
                   <div class="text-black">
                     @if(commentaire.proposition_retenue === "1"){
-                      <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
+                      <img src="assets/icons/IPcheck.png" alt="Proposition validée icon" title="Proposition validée" class="valid-icon">
                     }
                     <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{commentaire.nom_sel}}</a>
 
@@ -226,21 +225,21 @@
               <div class="flex-start mb-2 text-black uppercase bold">
                 @if(isVerificateur && commentaire.nom_sel_nn && commentaire.proposition_retenue === "0"){
                 <button class="button-accent" title="Valider la proposition">
-                  <img src="assets/icons/ip_valid.png"  class="detail-icon" >
+                  <img src="assets/icons/ip_valid.png"  class="detail-icon" alt="validate icon">
                   <span>Valider</span>
                 </button>
                 }
 
                 @if(isAdmin && commentaire.proposition_initiale === "1"){
                 <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent " title="Dépublier cette observation">
-                  <img src="assets/icons/close_pink.png"  class="detail-icon">
+                  <img src="assets/icons/close_pink.png"  class="detail-icon" alt="close icon">
                   <span>Dépublier</span>
                 </button>
                 }
               </div>
 
               <div class="reponses-proposition-div">
-                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase text-black bold">Répondre</p>
+                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase text-black bold"><span class="button-text">Répondre</span></p>
                 @if(commentaire.reponses || commentaire.texte){
                   <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
                 }
@@ -320,7 +319,6 @@
 
   } @else {
   <!--  Affichage du loader -->
-<!--@if(isLoading){-->
     <div class="loader-container">
       <div class="loadership_COHKO">
         <div></div>

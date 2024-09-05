@@ -492,7 +492,7 @@ input::placeholder {
 .button-primary {
   background-color: var(--brown);
   color: var(--blanc);
-  a:hover {
+  a:hover, span:hover {
     border-bottom: 4px solid var(--blanc);
   }
 }
@@ -500,7 +500,7 @@ input::placeholder {
 .button-selected {
   background-color: var(--secondary);
   color: var(--blanc);
-  a:hover {
+  a:hover, span:hover {
     border-bottom: 4px solid var(--blanc);
   }
 }
@@ -508,7 +508,7 @@ input::placeholder {
 .button-secondary {
   background-color: var(--background);
   color: var(--text);
-  a:hover {
+  a:hover, span:hover {
     border-bottom: 4px solid var(--text);
   }
 }
