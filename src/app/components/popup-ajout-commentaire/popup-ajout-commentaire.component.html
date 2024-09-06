@@ -34,21 +34,21 @@
         <div class="form-group">
           <label for="nom" >Nom *</label>
           <input type="text" id="nom" formControlName="nom" required>
-          <div *ngIf="form.controls['nom'].invalid && form.controls['nom'].touched" class="invalid-feedback">
+          <div *ngIf="form.controls['nom'].invalid && form.controls['nom'].touched || form.controls['nom'].invalid && submitted" class="invalid-feedback">
             Un nom est requis.
           </div>
         </div>
         <div class="form-group">
           <label for="prenom" >Prénom *</label>
           <input type="text" id="prenom" formControlName="prenom" required>
-          <div *ngIf="form.controls['prenom'].invalid && form.controls['prenom'].touched" class="invalid-feedback">
+          <div *ngIf="form.controls['prenom'].invalid && form.controls['prenom'].touched || form.controls['prenom'].invalid && submitted" class="invalid-feedback">
             Un prénom est requis.
           </div>
         </div>
         <div class="form-group">
           <label for="courriel">Email *</label>
           <input type="courriel" id="courriel" formControlName="courriel" required>
-          <div *ngIf="form.controls['courriel'].invalid && form.controls['courriel'].touched" class="invalid-feedback">
+          <div *ngIf="form.controls['courriel'].invalid && form.controls['courriel'].touched || form.controls['courriel'].invalid && submitted" class="invalid-feedback">
             Une adresse email valide est requise.
           </div>
         </div>
@@ -69,7 +69,7 @@
         <div class="form-group">
           <label for="nom_sel" >Taxon - Tapez les premières lettres d'un nom latin pour voir apparaitre des propositions *</label>
           <input type="text" id="nom_sel" formControlName="nom_sel" required (input)="clearNomSelNn()">
-          <div *ngIf="form.controls['nom_sel'].invalid && form.controls['nom_sel'].touched" class="invalid-feedback">
+          <div *ngIf="form.controls['nom_sel'].invalid && form.controls['nom_sel'].touched || form.controls['nom_sel'].invalid && submitted" class="invalid-feedback">
               Taxon est requis.
           </div>
 
@@ -92,7 +92,7 @@
 <!--          <label for="texte">Commentaire * </label>-->
           <h5 class="mt-2 uppercase">Commentaire *</h5>
           <textarea id="texte" formControlName="texte" required></textarea>
-          <div *ngIf="form.controls['texte'].invalid && form.controls['texte'].touched" class="invalid-feedback">
+          <div *ngIf="form.controls['texte'].invalid && form.controls['texte'].touched || form.controls['texte'].invalid && submitted" class="invalid-feedback">
             Un commentaire est requis.
           </div>
         </div>
@@ -110,7 +110,7 @@
         }
       </div>
       <div class="submit-section">
-        <button type="submit" [disabled]="form.invalid" class="button-primary"><span>Envoyer</span></button>
+        <button type="submit" class="button-primary"><span>Envoyer</span></button>
       </div>
 
 
