@@ -90,8 +90,8 @@
       </div>
 
       <div id="detail-buttons" class="flex-start w-100 gap-1 mt-2">
-        <button (click)="openAddCommentOnObs('determination')" class="button-primary"><span>Proposer une détermination</span></button>
-        <button (click)="openAddCommentOnObs('commentaire')" class="button-primary"><span>Ajouter un commentaire</span></button>
+        <button (click)="openAddCommentOnObs('determination')" class="button-primary button-link-white"><span>Proposer une détermination</span></button>
+        <button (click)="openAddCommentOnObs('commentaire')" class="button-primary button-link-white"><span>Ajouter un commentaire</span></button>
       </div>
 
       <div id="detail-propositions" class="mt-2">
@@ -224,14 +224,14 @@
 
               <div class="flex-start mb-2 text-black uppercase bold">
                 @if(isVerificateur && commentaire.nom_sel_nn && commentaire.proposition_retenue === "0"){
-                <button class="button-accent" title="Valider la proposition">
+                <button class="button-accent button-link" title="Valider la proposition">
                   <img src="assets/icons/ip_valid.png"  class="detail-icon" alt="validate icon">
                   <span>Valider</span>
                 </button>
                 }
 
                 @if(isAdmin && commentaire.proposition_initiale === "1"){
-                <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent " title="Dépublier cette observation">
+                <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
                   <img src="assets/icons/close_pink.png"  class="detail-icon" alt="close icon">
                   <span>Dépublier</span>
                 </button>
