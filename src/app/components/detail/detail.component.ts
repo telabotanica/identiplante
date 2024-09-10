@@ -96,7 +96,7 @@ export class DetailComponent {
           next: (data: any) => {
             this.obs = data;
             this.isLoading = false;
-            // console.log(this.obs)
+
             this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
             this.commentaires = this.transFormDataService.getUserVote(this.commentaires, this.userId)
 
@@ -124,6 +124,7 @@ export class DetailComponent {
               return b.score - a.score;
             });
 
+            // console.log(this.obs)
             // console.log(this.commentaires)
             // console.log(this.commentairesGrouped)
           },

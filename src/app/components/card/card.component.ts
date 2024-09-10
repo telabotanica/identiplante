@@ -126,6 +126,8 @@ export class CardComponent {
       next: (data: any) => {
         this.obsAdditionnalInfos = data;
         this.fixDeterminationForValidatedObs()
+        // console.log(this.obs)
+        // console.log(this.obsAdditionnalInfos)
       },
       error: (err) => {
         console.log(err)

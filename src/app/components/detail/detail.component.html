@@ -149,16 +149,24 @@
             </div>
 
             </div>
+            <div class="reponses-proposition-div">
+              <p class="uppercase"><span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition</span></p>
+            </div>
           </div>
+
+
 
 <!--          <div class="reponses-proposition-div">-->
 <!--            <p (click)="openAddComment('reponse', obs.id_observation)" class="pointer">Répondre à la proposition</p>-->
 <!--          </div>-->
 
+<!--  Proposition et id_parent doivent etre le 1er commentaire id donc a créer-->
 <!--          @if (popupAddCommentOnDetail && popupAddCommentOnDetailId === obs.id_observation){-->
 <!--          <app-popup-ajout-commentaire-->
 <!--            [obsId]="obs.id_observation"-->
-<!--            [commentType]="commentType"-->
+<!--            [commentType]="'reponse'"-->
+<!--            [id_parent]="obs.id_observation"-->
+<!--            [proposition]="obs.id_observation"-->
 <!--            (closePopupEmitter)="closeAddComment()"-->
 <!--            class="blur-background">-->
 <!--          </app-popup-ajout-commentaire>-->
