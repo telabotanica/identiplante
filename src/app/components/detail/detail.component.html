@@ -134,7 +134,7 @@
             </div>
             <div class="flex-start">
               @if(isVerificateur && obs['determination.nn']){
-              <button class="button-accent button-link" title="Valider la proposition">
+              <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(obs.id_observation, obs['auteur.id'])">
                 <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon">
                 <span>Valider</span>
               </button>
@@ -224,7 +224,7 @@
 
               <div class="flex-start mb-2 text-black uppercase bold">
                 @if(isVerificateur && commentaire.nom_sel_nn && commentaire.proposition_retenue === "0"){
-                <button class="button-accent button-link" title="Valider la proposition">
+                <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
                   <img src="assets/icons/ip_valid.png"  class="detail-icon" alt="validate icon">
                   <span>Valider</span>
                 </button>
