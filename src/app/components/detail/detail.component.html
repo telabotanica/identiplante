@@ -133,12 +133,12 @@
                 </div>
             </div>
             <div class="flex-start">
-              @if(isVerificateur && obs['determination.nn']){
-              <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(obs.id_observation, obs['auteur.id'])">
-                <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon">
-                <span>Valider</span>
-              </button>
-              }
+<!--              @if(isVerificateur && obs['determination.nn']){-->
+<!--              <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(obs.id_observation, obs['auteur.id'])">-->
+<!--                <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon">-->
+<!--                <span>Valider</span>-->
+<!--              </button>-->
+<!--              }-->
 
               @if(isAdmin){
               <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
