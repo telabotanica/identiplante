@@ -62,9 +62,9 @@
           <div id="detail-obs-left">
             <p>Observée à: <span class="text-black">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
             <p>Le: <span class="text-black">{{dateObservation}}</span></p>
-            <p>@if(obs.lieudit){ Lieu: <span class="text-black">{{obs.lieudit}}</span><br> }
+            <p>@if(obs.lieudit){ Lieu dit: <span class="text-black">{{obs.lieudit}}</span><br> }
                @if(obs.station){ Station: <span class="text-black">{{obs.station}}</span><br> }
-               @if(obs.milieu){ Lieu: <span class="text-black">{{obs.milieu}}</span> }
+               @if(obs.milieu){ Milieu: <span class="text-black">{{obs.milieu}}</span> }
             </p>
           </div>
           <div id="detail-obs-right">
