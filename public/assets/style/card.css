@@ -263,6 +263,16 @@
   width: 34px;
 }
 
+.grid-commentaire {
+  max-width: 200px;
+}
+
+@media (768px < width <= 1500px) {
+  .grid-name {
+    max-width: 230px;
+  }
+}
+
 @media (width <= 450px){
   .card, .card-extended-container{
     box-shadow: unset;

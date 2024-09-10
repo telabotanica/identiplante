@@ -121,18 +121,18 @@
 
       <div class="card-extended-details-body">
         <div class="w-40">
-          <p>Référentiel: <span class="text-black">{{obs['determination.referentiel']}}</span></p>
+          <p>Référentiel: <span class="text-black uppercase">{{obs.determination_referentiel}}</span></p>
           <p>Pays
             @if(displayedCountry){
-            <span class="text-black">{{displayedCountry.nom_fr}}</span>
+            <span class="text-black">{{displayedCountry}}</span>
             }
           </p>
           <p>Localité <br /><span class="text-black">{{obs.zone_geo}} ({{departement}})
             @if(obs.station){
               , {{obs.station}}
             }
-            @if(obs.lieudit){ <br/>{{obs.lieudit}} }
-            @if(obs.milieu){ <br/>{{obs.milieu}} }
+            @if(obsAdditionnalInfos.lieudit){ <br/>{{obsAdditionnalInfos.lieudit}} }
+            @if(obsAdditionnalInfos.milieu){ <br/>{{obsAdditionnalInfos.milieu}} }
           </span>
           </p>
         </div>
@@ -141,7 +141,7 @@
           <p>Observée le <span class="text-black">{{dateObservation}}</span></p>
           <p>Publiée le <span class="text-black">{{dateTransmission}}</span></p>
           <p>Commentaire <br /><span class="text-black">
-            @if(obs.commentaire){ {{obs.commentaire}} }
+            @if(obsAdditionnalInfos.commentaire){ {{obsAdditionnalInfos.commentaire}} }
           </span></p>
         </div>
       </div>
@@ -153,7 +153,7 @@
         <div>Vote</div>
 
         @if(commentaires.length < 1){
-          <div class="text-black">{{nomScientifique}}</div>
+          <div class="text-black grid-name">{{nomScientifique}}</div>
           <div class="text-black">0</div>
           <div>
             <img
@@ -182,9 +182,9 @@
               @if(commentaire.proposition_retenue === "1"){
               <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
               }
-              <span class="text-black">{{commentaire.nom_sel}}</span>
+              <span class="text-black grid-name">{{commentaire.nom_sel}}</span>
               @if(commentaire.texte){
-                <p class="card-texte">{{commentaire.texte}}</p>
+                <p class="card-texte grid-commentaire">{{commentaire.texte}}</p>
               }
             </div>
             <div class="text-black">{{commentaire.score}}</div>
