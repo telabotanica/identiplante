@@ -142,7 +142,7 @@
 
               @if(isAdmin){
               <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
-                <img src="assets/icons/close_pink.png"  class="detail-icon">
+                <img src="assets/icons/close_pink.png" class="detail-icon" width=30 height=30 alt="close icon">
                 <span>Dépublier</span>
               </button>
               }
@@ -240,7 +240,7 @@
 
                 @if(isAdmin && commentaire.proposition_initiale === "1"){
                 <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
-                  <img src="assets/icons/close_pink.png"  class="detail-icon" alt="close icon">
+                  <img src="assets/icons/close_pink.png"  class="detail-icon" width=30 height=30 alt="close icon">
                   <span>Dépublier</span>
                 </button>
                 }
