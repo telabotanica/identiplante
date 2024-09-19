@@ -56,11 +56,15 @@ export class CardComponent {
   router = inject(Router)
   voteService = inject(VoteService)
   transFormDataService = inject(TransformDataService)
+  elRef = inject(ElementRef);
 
   extendedObs = this.commonService.extendedObs();
   userId = this.authService.userId();
   urlParamsString = this.commonService.urlParamsString();
   pays: any[] = [];
+
+  @ViewChild('obsImage', { static: true }) obsImage!: ElementRef<HTMLImageElement>;
+  isInView: boolean = false;
 
   constructor() {
     effect(()=>{
@@ -108,6 +112,23 @@ export class CardComponent {
     // console.log(this.obs)
     // console.log(this.commentaires)
   }
+
+  ngAfterViewInit() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.isInView = true;
+          observer.unobserve(this.elRef.nativeElement);
+        }
+      });
+    }, {
+      rootMargin: '0px',
+      threshold: 0.1
+    });
+
+    observer.observe(this.elRef.nativeElement);
+  }
+
 
   changeMainPicture(imageHref: string){
     this.selectedImage = imageHref;

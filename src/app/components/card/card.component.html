@@ -5,21 +5,23 @@
     @if((obs.images && obs.images.length > 1) || commentaires.length > 0){
       <div class="card-header">
         @if(obs.images && obs.images.length > 1){
-        <img src="assets/icons/images.png" alt="images icon" title="{{obs.images.length}} images" class="card-header-icon icon-images" width="40" height="40">
+        <img src="assets/icons/images.png" alt="images icon" title="{{obs.images.length}} images" class="card-header-icon icon-images" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
         }
 
         @if(commentaires.length > 0 && !validatedObs){
-        <img src="assets/icons/IPinterro_2.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments" width="40" height="40">
+        <img src="assets/icons/IPinterro_2.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
         }
 
         @if(validatedObs){
-        <img src="assets/icons/IPcheck.png" alt="Obs validée" title="Observation validée" class="card-header-icon icon-comments" width="40" height="40">
+        <img src="assets/icons/IPcheck.png" alt="Obs validée" title="Observation validée" class="card-header-icon icon-comments" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
         }
       </div>
     }
     <div class="card-image-div">
       <img
+        #obsImage
         class="card-image"
+        [attr.loading]="isInView ? 'eager' : 'lazy'"
         src="{{selectedImage['binaire.href']}}"
         alt="Image de l'observation"
         (error)="commonService.onImageError($event)"
