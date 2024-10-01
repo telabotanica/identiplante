@@ -2,23 +2,45 @@
   <div id="search-area" class="flex-between">
     <app-search-bar id="intro-left"></app-search-bar>
     <div id="intro-right">
-      <img id="flower-intro" src="assets/img/flower.png" alt="fleur">
+      <img id="flower-intro" src="assets/img/flower.png" alt="fleur" width="105" height="110">
     </div>
   </div>
 
   <div id="determination-aide">
+
+    @if(isDetail){
     <div>
-      <button class="button-secondary">
-        <img src="assets/icons/external-link.png" class="icon-button">
-        <a [href]="proposezObservationLink" target="_blank" title="Proposez une observation à déterminer">Proposez une observation à déterminer</a>
-    </button>
+      <a href="{{urlParamsString}}" class="text-white" title="retourner à la liste des observations">
+        <button class="button-primary button-link-white">
+          <img src="assets/icons/chevron_left_brown.png" class="icon-button" alt="icon chevron left" width="25" height="25">
+          <span>Retour</span>
+        </button>
+      </a>
+    </div>
+    }
+
+    <div>
+      <a [href]="proposezObservationLink"
+         class="button-link"
+         target="_blank"
+         title="Proposez une observation à déterminer">
+        <button class="button-secondary">
+          <img src="assets/icons/external-link.png" class="icon-button" alt="icon external link" width="25" height="25">
+          <span>Proposez une observation à déterminer</span>
+        </button>
+      </a>
     </div>
 
     <div>
-      <button class="button-secondary">
-        <img src="assets/icons/external-link.png" class="icon-button">
-        <a href="http://www.tela-botanica.org/page:liste_projets?id_projet=95&act=wikini" target="_blank" title="Aide">Aide</a>
-      </button>
+      <a href="http://www.tela-botanica.org/page:liste_projets?id_projet=95&act=wikini"
+         class="button-link"
+         target="_blank"
+         title="Aide">
+        <button class="button-secondary">
+          <img src="assets/icons/external-link.png" class="icon-button" alt="icon external link" width="25" height="25">
+          <span>Aide</span>
+        </button>
+      </a>
     </div>
 
   </div>

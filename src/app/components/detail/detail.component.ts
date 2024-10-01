@@ -96,7 +96,7 @@ export class DetailComponent {
           next: (data: any) => {
             this.obs = data;
             this.isLoading = false;
-            // console.log(this.obs)
+
             this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
             this.commentaires = this.transFormDataService.getUserVote(this.commentaires, this.userId)
 
@@ -114,6 +114,17 @@ export class DetailComponent {
 
             this.fixDeterminationForValidatedObs()
 
+            // On trie les propositions
+            this.commentairesGrouped.proposition.sort((a: any, b: any) => {
+              // Priorité à l'élément avec proposition_retenue === "1"
+              if (a.proposition_retenue === "1") return -1;
+              if (b.proposition_retenue === "1") return 1;
+
+              // Si aucun des deux n'a proposition_retenue === "1", trier par score décroissant
+              return b.score - a.score;
+            });
+
+            // console.log(this.obs)
             // console.log(this.commentaires)
             // console.log(this.commentairesGrouped)
           },

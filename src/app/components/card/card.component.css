@@ -1,10 +1,11 @@
 #card-extended-first-container {
   width: 40%;
+  max-width: 400px;
 }
 
 #card-extended-second-container {
-  width: 50%;
   min-width: 370px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -29,6 +30,17 @@
   flex-wrap: wrap;
 }
 
+.card-body-adjust-width {
+  width: 40%;
+}
+
+@media (width <= 1380px){
+  #card-extended-second-container {
+    flex-grow: unset;
+    width: 50%;
+  }
+}
+
 @media (width <= 980px){
   #card-extended-first-container {
     width: 80%;
@@ -46,6 +58,10 @@
 
   #card-extended-second-container{
     min-width: 0;
+  }
+
+  .card-body-adjust-width {
+    width: 100%;
   }
 
 }

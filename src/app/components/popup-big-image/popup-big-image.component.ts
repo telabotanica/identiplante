@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild} f
 import {Observation} from "../../models/observation";
 import {CommonService} from "../../services/common.service";
 import {NgForOf} from "@angular/common";
+import {TransformDataService} from "../../services/transform-data.service";
 
 @Component({
   selector: 'app-popup-big-image',
@@ -24,8 +25,10 @@ export class PopupBigImageComponent {
   carouselOverflow: boolean = false;
 
   commonService = inject(CommonService)
+  transFormDataService = inject(TransformDataService)
 
   ngOnInit(){
+    this.obs = this.transFormDataService.replacePictureFormat(this.obs, 'O');
     this.dateTransmission = this.obs['date.transmission'] ? this.commonService.formatDateString(this.obs.date_transmission) : '';
     this.nomScientifique = this.obs['determination.ns'] ?? 'Indéterminé';
     this.checkOverflow();

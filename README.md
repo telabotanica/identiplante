@@ -1,6 +1,6 @@
 # Identiplante
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
 
 Node v20 is needed.
 
@@ -11,6 +11,12 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Beta
+
+Run `ng build --configuration beta --base-href=/appli:identiplante/` to build the project on production server. The build artifacts will be stored in the `dist/` directory.
+
+You will need to copy the content of the `dist/identiplante/browser` on your server
 
 ## Build
 

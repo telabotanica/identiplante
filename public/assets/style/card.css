@@ -2,7 +2,8 @@
   height: 300px;
   width: 300px;
   border: none;
-  box-shadow: 15px 15px 8px 0 var(--primary40), 0 6px 20px 0 var(--primary39);
+  /*box-shadow: 15px 15px 8px 0 var(--primary40), 0 6px 20px 0 var(--primary39);*/
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
   /*box-shadow: 10px 10px 4px 0 var(--brown), 0 3px 10px 0 var(--brown30);*/
   border-radius: 16px;
   display: flex;
@@ -64,6 +65,9 @@
   border-radius: 16px;
   width: 300px;
   height: 100%;
+  object-position: center;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 .card-body {
@@ -100,7 +104,7 @@
   word-break: break-word;
   width: fit-content;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -123,10 +127,11 @@
   cursor: pointer;
   padding: 0 1rem;
   width: max-content;
+  border-bottom: 4px solid var(--primary);
 }
 
 .extend-card:hover {
-  border-bottom: 4px solid var(--primary);
+  font-weight: bold;
 }
 
 /****************************** Card Extended *****************/
@@ -135,8 +140,7 @@
   min-height: 630px;
   width: 100%;
   border: none;
-  box-shadow: 15px 15px 8px 0 var(--primary40), 0 6px 20px 0 var(--primary39);
-  /*box-shadow: 10px 10px 4px 0 var(--brown), 0 3px 10px 0 var(--brown30);*/
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
   border-radius: 16px;
   display: flex;
   gap: 1rem;
@@ -148,8 +152,8 @@
 
 .close-extended {
   cursor: pointer;
-  height: 50px;
-  width: 50px;
+  height: 39px;
+  width: 39px;
   position: absolute;
   top: 20px;
   right: 20px;
@@ -183,6 +187,9 @@
   cursor: pointer;
   background-color: var(--background-blanc);
   padding: 0.5rem;
+  object-position: center;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 .card-image-extended-subtitles {
@@ -210,6 +217,7 @@
   gap: 1rem;
   flex-wrap: nowrap;
   margin-top: 2rem;
+  font-size: 1rem;
 }
 
 .propositions-layout {
@@ -255,6 +263,16 @@
   width: 34px;
 }
 
+.grid-commentaire {
+  max-width: 200px;
+}
+
+@media (768px < width <= 1500px) {
+  .grid-name {
+    max-width: 230px;
+  }
+}
+
 @media (width <= 450px){
   .card, .card-extended-container{
     box-shadow: unset;
@@ -267,5 +285,9 @@
   .close-extended {
     top: 10px;
     right: 10px;
+  }
+
+  .card-extended-details-body {
+    flex-wrap: wrap;
   }
 }

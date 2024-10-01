@@ -9,8 +9,9 @@
     <img class="icon" alt="1" title="page précédente" src="assets/icons/chevron_left_white.png">
   </div>
 
-  <p class="m-0">Page:
-  <input class="pageNumber-input" [value]="page" (keyup)="onPageInputKeyup($event)" type="number" min="1" max="{{lastPage}}" role=”navigation” aria-label=”Pagination”>
+  <p class="m-0"><label for="pageNumber-input"> Page: </label>
+
+  <input class="pageNumber-input" id="pageNumber-input" [value]="page" (keyup)="onPageInputKeyup($event)" type="number" min="1" max="{{lastPage}}" role=”navigation” aria-label=”Pagination”>
   <span> / {{lastPage}}</span></p>
 
   <div *ngIf="entetes['href.suivant']" (click)="nextPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
@@ -22,12 +23,12 @@
   </div>
 
   <div>
-    <select [ngModel]="pas" (ngModelChange)="onPasChange($event)">
+    <select id="pas" [ngModel]="pas" (ngModelChange)="onPasChange($event)">
       <option value="12">12</option>
       <option value="25">25</option>
       <option value="50">50</option>
     </select>
-    <span> par page</span>
+    <label for="pas"> par page</label>
   </div>
 
 </div>

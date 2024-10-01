@@ -4,7 +4,7 @@
     <label for="search-bar" class="text-white mb-1">Recherchez par espèce, genre, famille, département, commune, auteur, mot-clé.</label>
     <div id="searchBar">
       <div>
-        <img (click)="updateSearch()" class="search-icon" title="recherchez" src="assets/icons/search.png">
+        <img (click)="updateSearch()" class="search-icon" title="recherchez" src="assets/icons/search.png" alt="icone de recherche">
       </div>
       <input class="search-bar"
              id="search-bar"
@@ -15,7 +15,7 @@
       <div>
         <img (click)="resetSearch()"
              class="cancel-icon"
-             alt="X"
+             alt="cancel icon"
              title="Effacer la recherche"
              src="assets/icons/cancel_brown.png">
       </div>
@@ -25,15 +25,27 @@
 <!--  Advanced search-->
   <div id="advanced-search-notopened">
     <span class="text-white">Recherche avancée</span>
+    @if(!displayAdvancedPopup){
     <img (click)="openAdvancedSearchPopUp()"
          class="advanced-search-icon"
-         alt="Recherche avancée"
-         title="recherche avancée"
-         src="assets/icons/chevron_down.png">
-
-    <app-popup-advanced-search
-      *ngIf="displayAdvancedPopup"
-      (closePopupEmitter)="closeAdvancedSearchPopUp()" class="w-100 blur-background" >
-    </app-popup-advanced-search>
+         alt="Recherche avancée icone"
+         title="Ouvrir l'onglet de recherche avancée"
+         src="assets/icons/chevron_down.png"
+         width="40"
+         height="40">
+    } @else {
+    <img (click)="openAdvancedSearchPopUp()"
+         class="advanced-search-icon"
+         alt="Recherche avancée icone"
+         title="Fermer l'onglet de recherche avancée"
+         src="assets/icons/chevron_up_white.png"
+         width="40"
+         height="40">
+    }
   </div>
+
+  <app-popup-advanced-search
+    *ngIf="displayAdvancedPopup"
+    (closePopupEmitter)="closeAdvancedSearchPopUp()" class="w-100">
+  </app-popup-advanced-search>
 </div>

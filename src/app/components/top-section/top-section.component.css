@@ -18,7 +18,7 @@
 #determination-aide {
   display: flex;
   justify-content: flex-start;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
   margin-top: 2rem;
   flex-wrap: wrap;
@@ -40,6 +40,6 @@
 
 @media (width <= 768px) {
   #top-section{
-    /*padding: 0 1rem;*/
+    padding: 0 1rem;
   }
 }

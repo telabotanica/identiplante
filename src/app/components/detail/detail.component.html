@@ -1,13 +1,5 @@
 <section id="detail">
-  <div class="flex-between mt-2 mb-2">
-    <div><button class="button-primary"><a href="{{urlParamsString}}" class="text-white" title="retourner à la liste des observations">Retour</a></button></div>
 
-    <div class="">
-      @if(isAdmin){
-      <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-selected" title="Dépublier cette observation">Dépublier</button>
-      }
-    </div>
-  </div>
   @if(!isLoading){
 
   <div class="mb-2">
@@ -44,6 +36,23 @@
           <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
         }
       </div>
+
+      <div id="help-box">
+        <h5 class="uppercase mb-2">Pour vous aider</h5>
+
+        <div class="mb-2">
+          <h6 class="mb-1">Vérifier votre détermination</h6>
+          <p><a href="https://www.tela-botanica.org/flore/france-metropolitaine/" target="_blank" class="underline-green" title="eflore">eflore</a></p>
+        </div>
+
+        <div>
+          <h6 class="mb-1">Autres outils en ligne</h6>
+          <p><a href="https://www.tela-botanica.org/ressources/ressources-bibliographiques/ouvrages-numerises/" target="_blank" title="flores numérisées" class="underline-green">Flores numérisées</a></p>
+          <p><a href="https://www.tela-botanica.org/eflore/bonnierpda/Bonnier.html" target="_blank" title="Flore Bonnier interactive" class="underline-green">Flore Bonnier interactive</a></p>
+          <p><a href="https://www.tela-botanica.org/ressources/ressources-pedagogiques/cles-de-determination-en-ligne/" target="_blank" title="Clés de détermination" class="underline-green">Clés de détermination</a></p>
+        </div>
+      </div>
+
     </div>
 
     <div id="detail-right">
@@ -53,9 +62,9 @@
           <div id="detail-obs-left">
             <p>Observée à: <span class="text-black">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
             <p>Le: <span class="text-black">{{dateObservation}}</span></p>
-            <p>@if(obs.lieudit){ Lieu: <span class="text-black">{{obs.lieudit}}</span><br> }
+            <p>@if(obs.lieudit){ Lieu dit: <span class="text-black">{{obs.lieudit}}</span><br> }
                @if(obs.station){ Station: <span class="text-black">{{obs.station}}</span><br> }
-               @if(obs.milieu){ Lieu: <span class="text-black">{{obs.milieu}}</span> }
+               @if(obs.milieu){ Milieu: <span class="text-black">{{obs.milieu}}</span> }
             </p>
           </div>
           <div id="detail-obs-right">
@@ -80,10 +89,9 @@
 
       </div>
 
-      <div id="detail-buttons" class="flex-start w-100 gap-1">
-        <button (click)="openAddCommentOnObs('determination')" class="button-primary">Proposer une détermination</button>
-        <button (click)="openAddCommentOnObs('commentaire')" class="button-primary">Ajouter un commentaire
-        </button>
+      <div id="detail-buttons" class="flex-start w-100 gap-1 mt-2">
+        <button (click)="openAddCommentOnObs('determination')" class="button-primary button-link-white"><span>Proposer une détermination</span></button>
+        <button (click)="openAddCommentOnObs('commentaire')" class="button-primary button-link-white"><span>Ajouter un commentaire</span></button>
       </div>
 
       <div id="detail-propositions" class="mt-2">
@@ -91,9 +99,6 @@
         @if(commentaires.length < 1){
         <div class="proposition-container">
           <div class="proposition-row">
-            @if(isVerificateur && obs['determination.nn']){
-              <img src="assets/icons/ip_valid.png"  class="detail-icon" title="Valider la proposition">
-            }
 
             <div class="propositions-layout w-80">
               <div>Détermination Originale par {{obs["auteur.nom"]}}</div>
@@ -101,7 +106,11 @@
               <div>Vote</div>
 
                <div class="text-black">
-                  <a href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination.nn']}}" target="_blank" title="lien vers eflore" class="text-black">{{nomScientifique}}</a>
+                 @if(obs['determination.nn']){
+                   <a href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination.nn']}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{nomScientifique}}</a>
+                 } @else {
+                   <span class="text-black">{{nomScientifique}}</span>
+                 }
                </div>
 
                <div>
@@ -126,49 +135,53 @@
                        class="vote-icon">
                 </div>
             </div>
+            <div class="flex-start">
+              @if(isAdmin){
+              <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
+                <img src="assets/icons/close_pink.png" class="detail-icon" width=30 height=30 alt="close icon">
+                <span>Dépublier</span>
+              </button>
+              }
+            </div>
+
+            </div>
+            <div class="reponses-proposition-div">
+              <p class="uppercase"><span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition@if(isVerificateur){ ou la valider}.</span></p>
             </div>
           </div>
-
-<!--          <div class="reponses-proposition-div">-->
-<!--            <p (click)="openAddComment('reponse', obs.id_observation)" class="pointer">Répondre à la proposition</p>-->
-<!--          </div>-->
-
-<!--          @if (popupAddCommentOnDetail && popupAddCommentOnDetailId === obs.id_observation){-->
-<!--          <app-popup-ajout-commentaire-->
-<!--            [obsId]="obs.id_observation"-->
-<!--            [commentType]="commentType"-->
-<!--            (closePopupEmitter)="closeAddComment()"-->
-<!--            class="blur-background">-->
-<!--          </app-popup-ajout-commentaire>-->
-<!--          }-->
         } @else {
           @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
-            <div class="proposition-container">
-              <div class="proposition-row">
+            <div class="proposition-container" [ngClass]="{'proposition-retenue': commentaire.proposition_retenue === '1'}">
+
+              <div class="text-black">
+                Détermination
+                @if(commentaire.proposition_initiale === '1'){
+                originale
+                } @else {
+                proposée
+                }
+                par {{commentaire['auteur.nom']}} le {{commentaire.displayDate}}
+              </div>
+
+              <div class="proposition-row mt-1">
                 <div class="propositions-layout w-80">
-                  <div>Détermination
-                    @if(commentaire.proposition_initiale === '1'){
-                      originale
-                    } @else {
-                      proposée
-                    }
-                    par {{commentaire['auteur.nom']}} le {{commentaire.displayDate}}
-                  </div>
+                  <div>Proposition</div>
                   <div>Score</div>
                   <div>Vote</div>
 
                   <div class="text-black">
-                    @if(isVerificateur && commentaire.nom_sel_nn && commentaire.proposition_retenue === "0"){
-                      <img src="assets/icons/ip_valid.png" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])" class="detail-icon" title="Valider la proposition">
+                    @if(commentaire.proposition_retenue === "1"){
+                      <img src="assets/icons/IPcheck.png" alt="Proposition validée icon" title="Proposition validée" class="valid-icon">
                     }
 
-                    @if(commentaire.proposition_retenue === "1"){
-                      <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
+                    @if (!commentaire.nom_sel_nn){
+                      <span class="text-black">{{commentaire.nom_sel}}</span>
+                    } @else {
+                      <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{commentaire.nom_sel}}</a>
                     }
-                    <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black">{{commentaire.nom_sel}}</a>
 
                     @if(userId && userId == commentaire['auteur.id'] && commentaire.proposition_retenue == "0"){
-                      <p (click)="affichageConfirmationDeleteProposition(commentaire.id_commentaire)" class="pointer">Supprimer la proposition</p>
+<!--                      <p (click)="affichageConfirmationDeleteProposition(commentaire.id_commentaire)" class="pointer">Supprimer la proposition</p>-->
                     }
                   </div>
 
@@ -199,8 +212,30 @@
                   </div>
                 </div>
               </div>
+
+              <div class="flex-start mb-2 text-black uppercase bold">
+
+              @if(isVerificateur && commentaire.proposition_retenue === "0"){
+                @if(commentaire.nom_sel_nn){
+                  <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
+                    <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon" width=30 height=30>
+                    <span>Valider</span>
+                  </button>
+                } @else {
+                  <span>Aucun numéro taxonomique relié à cette détermination, elle n'est donc n'est pas validable</span>
+                }
+              }
+
+                @if(isAdmin && commentaire.proposition_initiale === "1"){
+                <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
+                  <img src="assets/icons/close_pink.png"  class="detail-icon" width=30 height=30 alt="close icon">
+                  <span>Dépublier</span>
+                </button>
+                }
+              </div>
+
               <div class="reponses-proposition-div">
-                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase">Répondre</p>
+                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase text-black bold"><span class="button-text">Répondre</span></p>
                 @if(commentaire.reponses || commentaire.texte){
                   <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
                 }
@@ -263,7 +298,9 @@
         <h5 class="uppercase mb-1">Commentaires libres</h5>
         @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
           @if(commentaire.texte){
-            <app-commentaire [commentaires]="[commentaire]" [niveau]="0" [isComLibre]="true"></app-commentaire>
+            <div class="proposition-container">
+              <app-commentaire [commentaires]="[commentaire]" [niveau]="0" [isComLibre]="true"></app-commentaire>
+            </div>
           }
         }
       </div>
@@ -278,7 +315,6 @@
 
   } @else {
   <!--  Affichage du loader -->
-<!--@if(isLoading){-->
     <div class="loader-container">
       <div class="loadership_COHKO">
         <div></div>

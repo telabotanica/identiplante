@@ -15,9 +15,21 @@
   /*filter: drop-shadow(-10px 30px 80px var(--primary));*/
 }
 
+@media (768px < width <= 958px) {
+  .cards-container {
+    justify-content: center;
+  }
+}
+
 @media (width <= 768px) {
   #contenu {
     padding: 0 1rem;
+  }
+}
+
+@media (width <= 678px) {
+  .cards-container {
+    justify-content: center;
   }
 }
 

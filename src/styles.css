@@ -9,6 +9,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html,
@@ -253,6 +254,23 @@ input::placeholder {
   color: var(--black);
 }
 
+.bold {
+  font-weight: bold;
+}
+
+
+.bg-blanc {
+  background-color: var(--background-blanc);
+}
+
+.bg {
+  background-color: var(--background);
+}
+
+.shadow {
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
@@ -474,7 +492,7 @@ input::placeholder {
 .button-primary {
   background-color: var(--brown);
   color: var(--blanc);
-  a:hover {
+  a:hover, span:hover {
     border-bottom: 4px solid var(--blanc);
   }
 }
@@ -482,7 +500,7 @@ input::placeholder {
 .button-selected {
   background-color: var(--secondary);
   color: var(--blanc);
-  a:hover {
+  a:hover, span:hover {
     border-bottom: 4px solid var(--blanc);
   }
 }
@@ -490,7 +508,7 @@ input::placeholder {
 .button-secondary {
   background-color: var(--background);
   color: var(--text);
-  a:hover {
+  a:hover, span:hover {
     border-bottom: 4px solid var(--text);
   }
 }
@@ -498,9 +516,21 @@ input::placeholder {
 .button-accent {
   background-color: var(--background-blanc);
   color: var(--text);
-  a:hover {
+  a:hover, span:hover {
     border-bottom: 4px solid var(--text);
   }
+}
+
+.button-link:hover {
+  span {
+    border-bottom: 4px solid var(--text);
+  };
+}
+
+.button-link-white:hover {
+  span {
+    border-bottom: 4px solid var(--blanc);
+  };
 }
 
 .large-button {
@@ -537,6 +567,10 @@ input::placeholder {
 
 .pointer {
   cursor: pointer;
+}
+
+.underline-green {
+  border-bottom: 4px solid var(--primary);
 }
 
 @media (width <= 768px) {

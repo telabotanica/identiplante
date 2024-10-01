@@ -9,15 +9,21 @@
 }
 
 .reponse {
-  background-color: var(--purple);
+  /*background-color: var(--purple);*/
+  background-color: var(--background-blanc);
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
 }
 
 .com-libre {
-  background-color: var(--blue);
+  /*background-color: var(--blue);*/
+  background-color: var(--background-blanc);
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
 }
 
 .proposition-com {
-  background-color: var(--rose);
+  /*background-color: var(--rose);*/
+  background-color: var(--background-blanc);
+  box-shadow: 10px 10px 8px 0 var(--brown40), 0 6px 20px 0 var(--brown30);
 }
 
 .commentaire-repondre {
@@ -26,6 +32,8 @@
   line-height: 25px;
   text-transform: uppercase;
   cursor: pointer;
+  text-weight: bold;
+  color: var(--black);
 }
 
 .delete-comment {

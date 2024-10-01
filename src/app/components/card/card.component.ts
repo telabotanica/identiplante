@@ -46,6 +46,7 @@ export class CardComponent {
   displayedCountry: any;
   departement = "";
   isHovered = { like: false, dislike: false };
+  validatedObs = false;
 
   commonService = inject(CommonService)
   delService = inject(DelService)
@@ -55,11 +56,15 @@ export class CardComponent {
   router = inject(Router)
   voteService = inject(VoteService)
   transFormDataService = inject(TransformDataService)
+  elRef = inject(ElementRef);
 
   extendedObs = this.commonService.extendedObs();
   userId = this.authService.userId();
   urlParamsString = this.commonService.urlParamsString();
   pays: any[] = [];
+
+  @ViewChild('obsImage', { static: true }) obsImage!: ElementRef<HTMLImageElement>;
+  isInView: boolean = false;
 
   constructor() {
     effect(()=>{
@@ -97,13 +102,33 @@ export class CardComponent {
     }
 
     if (this.pays && this.obs.pays){
-      this.displayedCountry = this.pays.find(pays => pays.code_iso_3166_1 === this.obs.pays);
+      let nomPays = this.pays.find(pays => pays.code_iso_3166_1 === this.obs.pays);
+      this.displayedCountry = nomPays?.nom_fr ?? this.obs.pays;
     }
+
+    this.validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1') !== undefined;
 
     this.fixDeterminationForValidatedObs()
     // console.log(this.obs)
     // console.log(this.commentaires)
   }
+
+  ngAfterViewInit() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.isInView = true;
+          observer.unobserve(this.elRef.nativeElement);
+        }
+      });
+    }, {
+      rootMargin: '0px',
+      threshold: 0.1
+    });
+
+    observer.observe(this.elRef.nativeElement);
+  }
+
 
   changeMainPicture(imageHref: string){
     this.selectedImage = imageHref;
@@ -122,6 +147,8 @@ export class CardComponent {
       next: (data: any) => {
         this.obsAdditionnalInfos = data;
         this.fixDeterminationForValidatedObs()
+        // console.log(this.obs)
+        // console.log(this.obsAdditionnalInfos)
       },
       error: (err) => {
         console.log(err)

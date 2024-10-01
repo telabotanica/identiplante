@@ -36,6 +36,7 @@ export class PopupAjoutCommentaireComponent {
   taxonsList: any[] = [];
   skipNextValueChange = false; // Indicateur pour ignorer le prochain changement de valeur de la recherche de taxons
   showWarningPopup = false;
+  submitted = false;
 
   constructor() {
     effect(() => {
@@ -93,6 +94,8 @@ export class PopupAjoutCommentaireComponent {
   }
 
   submitForm() {
+    this.submitted = true;
+
     interface FormData {
       "auteur.nom": string;
       "auteur.prenom": string;
