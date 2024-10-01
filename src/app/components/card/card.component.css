@@ -30,6 +30,10 @@
   flex-wrap: wrap;
 }
 
+.card-body-adjust-width {
+  width: 40%;
+}
+
 @media (width <= 1380px){
   #card-extended-second-container {
     flex-grow: unset;
@@ -54,6 +58,10 @@
 
   #card-extended-second-container{
     min-width: 0;
+  }
+
+  .card-body-adjust-width {
+    width: 100%;
   }
 
 }
