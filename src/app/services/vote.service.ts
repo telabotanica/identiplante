@@ -23,6 +23,7 @@ export class VoteService {
       },
       error: (err) => {
         console.log(err.error.error)
+        location.reload()
         voteErrorMessageSubject.next("Erreur, lors de l'enregistrement du vote")
       }
     })
