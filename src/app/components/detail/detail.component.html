@@ -146,7 +146,7 @@
 
             </div>
             <div class="reponses-proposition-div">
-              <p class="uppercase"><span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition@if(isVerificateur){ ou la valider}.</span></p>
+              <p class="uppercase"><span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition@if(isVerificateur || (obs["auteur.id"] == userId) ){ ou la valider}.</span></p>
             </div>
           </div>
         } @else {
@@ -180,9 +180,6 @@
                       <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{commentaire.nom_sel}}</a>
                     }
 
-                    @if(userId && userId == commentaire['auteur.id'] && commentaire.proposition_retenue == "0"){
-<!--                      <p (click)="affichageConfirmationDeleteProposition(commentaire.id_commentaire)" class="pointer">Supprimer la proposition</p>-->
-                    }
                   </div>
 
                   <div>
@@ -215,7 +212,7 @@
 
               <div class="flex-start mb-2 text-black uppercase bold">
 
-              @if(isVerificateur && commentaire.proposition_retenue === "0"){
+              @if((isVerificateur || (commentaire["auteur.id"] == userId)) && commentaire.proposition_retenue === "0"){
                 @if(commentaire.nom_sel_nn){
                   <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
                     <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon" width=30 height=30>
