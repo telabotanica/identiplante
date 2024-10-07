@@ -146,7 +146,7 @@
 
             </div>
             <div class="reponses-proposition-div">
-              <p class="uppercase"><span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition@if(isVerificateur){ ou la valider}.</span></p>
+              <p class="uppercase"><span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition@if(isVerificateur || (obs["auteur.id"] == userId) ){ ou la valider}.</span></p>
             </div>
           </div>
         } @else {
@@ -180,9 +180,6 @@
                       <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{commentaire.nom_sel}}</a>
                     }
 
-                    @if(userId && userId == commentaire['auteur.id'] && commentaire.proposition_retenue == "0"){
-<!--                      <p (click)="affichageConfirmationDeleteProposition(commentaire.id_commentaire)" class="pointer">Supprimer la proposition</p>-->
-                    }
                   </div>
 
                   <div>
