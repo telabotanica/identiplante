@@ -215,7 +215,7 @@
 
               <div class="flex-start mb-2 text-black uppercase bold">
 
-              @if(isVerificateur && commentaire.proposition_retenue === "0"){
+              @if((isVerificateur || (commentaire["auteur.id"] == userId)) && commentaire.proposition_retenue === "0"){
                 @if(commentaire.nom_sel_nn){
                   <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
                     <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon" width=30 height=30>
