@@ -76,7 +76,7 @@
               } @else {
               {{obs["auteur.nom"]}}
               }
-              @if(obs['auteur.courriel']){
+              @if(isAdmin && obs['auteur.courriel']){
               <a href="mailto:{{obs['auteur.courriel']}}" target="_blank"> ({{obs['auteur.courriel']}})</a>
               }
             </span></p>
