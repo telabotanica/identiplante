@@ -64,12 +64,15 @@ export class ContenuComponent {
       const newSelectedOnglet = this.commonService.selectedOnglet();
       const newUrlParamsString = this.commonService.urlParamsString();
       if (this.selectedOnglet !== newSelectedOnglet || this.urlParamsString !== newUrlParamsString) {
+        if (this.selectedOnglet !== newSelectedOnglet) {
+          this.commonService.setAnyParmam('page', '1');
+        }
         this.selectedOnglet = newSelectedOnglet;
         this.urlParamsString = newUrlParamsString;
         this.errorMessage = "";
         this.loadObservations();
       }
-    });
+    },{allowSignalWrites: true});
 
     effect(() => {
       const newExtendedObs = this.commonService.extendedObs();

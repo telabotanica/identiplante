@@ -16,6 +16,7 @@ import {FormsModule} from "@angular/forms";
 })
 export class PaginationComponent {
   @Input() entetes: any;
+  @Input() bottomPagination: any;
   commonService = inject(CommonService)
 
   pas: string = "12";

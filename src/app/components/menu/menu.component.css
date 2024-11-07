@@ -59,7 +59,7 @@
 
 .onglet-selected{
   background: var(--background-blanc);
-  border: 1px dashed var(--brown30);
+  border: 3px dashed var(--brown30);
 }
 
 .logos-section {
