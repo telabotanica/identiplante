@@ -15,6 +15,12 @@
   /*filter: drop-shadow(-10px 30px 80px var(--primary));*/
 }
 
+.bottom-pagination {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px dashed var(--brown30);
+}
+
 @media (768px < width <= 958px) {
   .cards-container {
     justify-content: center;
