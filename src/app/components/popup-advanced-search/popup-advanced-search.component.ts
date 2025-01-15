@@ -111,7 +111,7 @@ export class PopupAdvancedSearchComponent {
         value = null;
         this.commonService.deleteParam(nomParametre)
       } else {
-        this.commonService.setAnyParmam(nomParametre, encodeURI(value))
+        this.commonService.setAnyParmam(nomParametre, value)
       }
     } else if(this.urlParams.get(nomParametre)) { // s'il y avait un parametre à l'ouverture et plus au submit, on efface la recherche
       this.commonService.deleteParam(nomParametre)
