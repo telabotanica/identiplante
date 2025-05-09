@@ -27,7 +27,7 @@ export class TransformDataService {
 
         if (commentaire.votes){
           this.delService.getVoteDetail(commentaire["id_commentaire"], commentaire['observation']).subscribe((data) => {
-            votesArray.push(...Object.values(data.resultats))
+            votesArray.push(...Object.values(data))
 
             commentaire.votes = this.commonService.deleteVotesDuplicate(votesArray);
 
@@ -48,6 +48,14 @@ export class TransformDataService {
     return commentaires;
   }
 
+  // Permet de n'afficher que les propositions
+  removeCommentaireFromPropositions(commentaires: Array<any>): Array<any> {
+    return commentaires.filter(commentaire =>
+      commentaire.nom_referentiel && commentaire.nom_sel_nn
+    );
+  }
+
+
   // Pour affichage du vote existant pour users connectés
   getUserVote(commentaires: any[], userId: string): Array<any>{
     commentaires.forEach((proposition: any) => {
@@ -67,19 +75,38 @@ export class TransformDataService {
     return commentaires;
   }
 
-  replacePictureFormat(observation: Observation, format: string): Observation{
-    const FORMATS = ["XL", "S", "M"]
+  replacePictureFormat(observation: Observation, format: string): Observation {
+    const FORMATS = ["XL", "S", "M"];
+    // console.log(observation);
 
-    observation.images.forEach((image: any) => {
-      if (image["binaire.href"]) {
-        FORMATS.forEach(existingFormat => {
-          if (image["binaire.href"].includes(existingFormat)) {
-            image["binaire.href"] = image["binaire.href"].replace(existingFormat, format);
-          }
-        });
-      }
-    });
+    // Vérifier si observation.images est un objet ou un tableau
+    if (observation.images && typeof observation.images === 'object' && !Array.isArray(observation.images)) {
+      // Convertir l'objet en tableau
+      observation.images = Object.values(observation.images);
+    }
+
+    // Maintenant que nous sommes sûrs d'avoir un tableau, on peut utiliser forEach
+    if (Array.isArray(observation.images)) {
+      observation.images.forEach((image: any) => {
+        if (image["binaire.href"]) {
+          FORMATS.forEach(existingFormat => {
+            if (image["binaire.href"].includes(existingFormat)) {
+              image["binaire.href"] = image["binaire.href"].replace(existingFormat, format);
+            }
+          });
+        }
+      });
+    }
 
     return observation;
+  }
+
+  transformImageFromObjectToArray(images: Array<any>): Array<any> {
+    if (images && typeof images === 'object' && !Array.isArray(images)) {
+      // Convertir l'objet en tableau
+      images = Object.values(images);
+    }
+
+    return images;
   }
 }

@@ -12,11 +12,11 @@ import {switchMap} from "rxjs";
 })
 export class DelService {
 
-  private protocolesService = environment.serviceBaseUrl + "protocoles";
-  private ontologieService = environment.serviceBaseUrl + "ontologie/pays/";
+  private protocolesService = environment.oldServiceBaseUrl + "protocoles";
+  private ontologieService = environment.serviceBaseUrl + "ontologie/pays";
   private observationsService = environment.serviceBaseUrl + "observations";
   private commentairesService = environment.serviceBaseUrl + "commentaires/";
-  private nomsTaxonsService = environment.serviceBaseUrl + "nomstaxons";
+  private nomsTaxonsService = environment.oldServiceBaseUrl + "nomstaxons";
   private determinationsService = environment.serviceBaseUrl + "determinations/valider-determination/";
   private imagesService = environment.serviceBaseUrl + "images";
 
@@ -64,12 +64,12 @@ export class DelService {
   }
 
   getVoteDetail(voteId: string, obsId: string){
-    const url = this.observationsService + "/" + obsId + "/" + voteId + "/vote/";
+    const url = this.observationsService + "/vote/proposition/" + obsId + "/" + voteId;
     return this.http.get<any>(url);
   }
 
   saveVote(voteInfos: {obsId: string, voteId: string, user: string, value: string}){
-    const url = this.observationsService + "/" + voteInfos.obsId + "/" + voteInfos.voteId + "/vote/";
+    const url = this.observationsService + "/" + voteInfos.obsId + "/" + voteInfos.voteId + "/vote";
     const body = {utilisateur: voteInfos.user, valeur: voteInfos.value}
 
     let headers = new HttpHeaders();

@@ -31,7 +31,7 @@ export class PopupDetailVotesComponent {
   ngOnInit(){
     this.obsId = this.obs.id_observation
     this.commentaireId = this.commentaire.id_commentaire
-    this.dateTransmission = this.commentaire.date ? this.commonService.formatDateString(this.commentaire.date) : '';
+    this.dateTransmission = this.commentaire.date ? this.commonService.formatDateStringWithoutT(this.commentaire.date) : '';
     this.nomScientifique = this.commentaire.nom_sel ?? 'Indéterminé'
 
     this.votes = this.commentaire.votes

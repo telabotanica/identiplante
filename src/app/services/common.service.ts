@@ -66,8 +66,14 @@ export class CommonService {
     this.urlParamsString.set(params)
   }
 
-  formatDateString(dateString: string): string {
+  formatDateStringWithoutT(dateString: string): string {
     const [datePart, timePart] = dateString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
+  formatDateString(dateString: string): string {
+    const [datePart, timePart] = dateString.split('T');
     const [year, month, day] = datePart.split('-');
     return `${day}/${month}/${year}`;
   }

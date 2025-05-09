@@ -95,6 +95,10 @@ export class DetailComponent {
         this.delService.getObservation(this.obsId).subscribe({
           next: (data: any) => {
             this.obs = data;
+            if (this.obs.images) {
+              this.obs.images = this.transFormDataService.transformImageFromObjectToArray(this.obs.images);
+            }
+
             this.isLoading = false;
 
             this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
