@@ -46,7 +46,7 @@ export class PopupDetailVotesComponent {
         this.votesGrouped.contre.push(vote);
         this.contreCount++
       }
-      vote.date = vote.date ? this.commonService.formatDateString(vote.date) : '';
+      vote.date = vote.date ? this.commonService.formatDateStringWithoutT(vote.date) : '';
     });
 
     this.pourStat = ((this.pourCount / this.nbVotes)*100).toFixed(2).replace('.', ',');

@@ -313,4 +313,8 @@ export class CommonService {
     }
   }
 
+  findValidatedObs(commentaires: any[]): any {
+    return commentaires.find((commentaire: any) => commentaire.proposition_retenue === 1) ;
+  }
+
 }

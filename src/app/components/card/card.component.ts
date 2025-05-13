@@ -108,7 +108,7 @@ export class CardComponent {
       this.displayedCountry = nomPays?.nom_fr ?? this.obs.pays;
     }
 
-    this.validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1') !== undefined;
+    this.validatedObs = this.commonService.findValidatedObs(this.commentaires);
 
     this.fixDeterminationForValidatedObs()
     // console.log(this.obs)
@@ -210,7 +210,7 @@ export class CardComponent {
   //TODO: fixer le problème au niveau du web service
   fixDeterminationForValidatedObs(){
     if (!this.obs.determination_ns){
-      const validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1');
+      const validatedObs = this.commonService.findValidatedObs(this.commentaires);
 
       if (validatedObs){
         this.obs.determination_ns = validatedObs.nom_sel;

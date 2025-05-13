@@ -346,7 +346,7 @@ export class DetailComponent {
 
   fixDeterminationForValidatedObs(){
     if (!this.obs.determination_ns){
-      const validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1');
+      const validatedObs = this.commonService.findValidatedObs(this.commentaires);
 
       if (validatedObs){
         this.obs.determination_ns = validatedObs.nom_sel;
