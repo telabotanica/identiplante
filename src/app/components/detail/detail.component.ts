@@ -127,7 +127,6 @@ export class DetailComponent {
               // Si aucun des deux n'a proposition_retenue === "1", trier par score décroissant
               return b.score - a.score;
             });
-
             // console.log(this.obs)
             // console.log(this.commentaires)
             // console.log(this.commentairesGrouped)
@@ -255,12 +254,12 @@ export class DetailComponent {
 
     this.delService.validerProposition(propositionId, validationInfos).subscribe({
       next: (data) => {
-        console.log(data)
+        console.info(data)
         location.reload()
       },
       error: (err) => {
-        console.log(err)
-        this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter."
+        console.error(err.error.message)
+        this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter. Erreur: " + err.error.message
       }
     })
   }
@@ -355,6 +354,13 @@ export class DetailComponent {
         this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
       }
     }
+  }
+
+  isAllowedToValidate(commentaire: any){
+    if (!this.userId){
+      return false;
+    }
+    return (this.isVerificateur || (commentaire["auteur.id"] == this.userId)) && commentaire.proposition_retenue === 0;
   }
 }
 

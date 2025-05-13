@@ -156,9 +156,9 @@
               <div class="text-black">
                 Détermination
                 @if(commentaire.proposition_initiale === 1){
-                originale
+                  originale
                 } @else {
-                proposée
+                  proposée
                 }
                 par {{commentaire['auteur.nom']}} le {{commentaire.displayDate}}
               </div>
@@ -212,15 +212,17 @@
 
               <div class="flex-start mb-2 text-black uppercase bold">
 
-              @if((isVerificateur || (commentaire["auteur.id"] == userId)) && commentaire.proposition_retenue === 0){
+              @if(isAllowedToValidate(commentaire)){
+
                 @if(commentaire.nom_sel_nn){
                   <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
                     <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon" width=30 height=30>
-                    <span>Valider</span>
+                    <span>Valider1</span>
                   </button>
                 } @else {
                   <span>Aucun numéro taxonomique relié à cette détermination, elle n'est donc n'est pas validable</span>
                 }
+
               }
 
                 @if(isAdmin && commentaire.proposition_initiale === 1){
