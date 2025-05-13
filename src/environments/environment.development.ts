@@ -1,9 +1,9 @@
 export const environment: any = {
   production: false,
-  serviceBaseUrl: "http://127.0.0.1:8000/",
-  serviceUtilisateursBaseUrl: "http://127.0.0.1:8000/",
-  // serviceBaseUrl: "https://api-ip-test.tela-botanica.org/",
-  // serviceUtilisateursBaseUrl: "https://api-ip-test.tela-botanica.org/",
+  // serviceBaseUrl: "http://127.0.0.1:8000/",
+  // serviceUtilisateursBaseUrl: "http://127.0.0.1:8000/",
+  serviceBaseUrl: "https://api-ip-test.tela-botanica.org/",
+  serviceUtilisateursBaseUrl: "https://api-ip-test.tela-botanica.org/",
   oldServiceBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
   // serviceBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
   // serviceUtilisateursBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
@@ -25,7 +25,7 @@ export const environment: any = {
   iconeTagBaseUrl: "https://www.tela-botanica.org/del/appli/img/icones_tags/",
   profilUrl: "https://beta.tela-botanica.org/profil:",
   inscriptionUrl: "https://beta.tela-botanica.org/inscription/",
-  imagesUrl: "https://api-test.tela-botanica.org/img:",
+  imagesUrl: "https://api-test2.tela-botanica.org/img:",
   urlWidgetRemarques: 'https://www.tela-botanica.org/widget:reseau:remarques',
   telaUrl : "https://beta.tela-botanica.org/",
   cookieName: 'tb_auth_beta_test'

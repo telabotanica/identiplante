@@ -90,7 +90,7 @@ export class CardComponent {
     this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
     this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
 
-    this.selectedImage = this.obs.images[0]
+    this.selectedImage = this.obs.images ? this.obs.images[0] : '';
     this.profilUrl = this.obs.auteur_id ? environment.profilUrl + this.obs.auteur_id : "";
     this.displayedName = (this.obs.auteur_nom).trim() ? this.obs.auteur_nom : this.obs.auteur_courriel
 

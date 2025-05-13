@@ -109,7 +109,7 @@ export class DetailComponent {
             this.dateTransmission = this.obs.date_transmission ? this.commonService.formatDateString(this.obs.date_transmission) : '';
             this.nomScientifique = this.obs["determination.ns"] ?? 'Indéterminé';
             this.profilUrl = this.obs['auteur.id'] ? environment.profilUrl + this.obs['auteur.id'] : "";
-            this.selectedImage = this.obs.images[0];
+            this.selectedImage = this.obs.images ? this.obs.images[0] : '';
             this.fluxRssUrl += this.obs.id_observation;
             // this.displayedName = (this.obs.auteur_nom).trim() ? this.obs.auteur_nom : this.obs.auteur_courriel
 

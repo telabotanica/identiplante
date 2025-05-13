@@ -102,7 +102,7 @@
         </div>
       </div>
 
-      @if(obs.images.length > 3){
+      @if(obs.images && obs.images.length > 3){
         <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
       }
     </div>
