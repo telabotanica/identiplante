@@ -39,7 +39,7 @@ export class PopupDetailVotesComponent {
 
     //TODO Regrouper les votes anonymes ?
     this.votes.forEach((vote: any) => {
-      if (vote.vote === '1') {
+      if (vote.vote === 1) {
         this.votesGrouped.pour.push(vote);
         this.pourCount++
       } else {
