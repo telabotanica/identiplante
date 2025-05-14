@@ -275,9 +275,9 @@ export class CommonService {
       }
 
       if (commentaire.isHoveredLike) {
-        return commentaire.userVote === '1' ? 'assets/icons/like_actif_hover.png' : 'assets/icons/like_inactif_hover.png';
+        return commentaire.userVote == 1 ? 'assets/icons/like_actif_hover.png' : 'assets/icons/like_inactif_hover.png';
       } else {
-        return commentaire.userVote === '1' ? 'assets/icons/like_actif.png' : 'assets/icons/like_inactif.png';
+        return commentaire.userVote == 1 ? 'assets/icons/like_actif.png' : 'assets/icons/like_inactif.png';
       }
     } else if (type === 'dislike') {
       if (commentaire.length == 0){
@@ -289,9 +289,9 @@ export class CommonService {
       }
 
       if (commentaire.isHoveredDislike) {
-        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif_hover.png' : 'assets/icons/dislike_inactif_hover.png';
+        return commentaire.userVote == 0 ? 'assets/icons/dislike_actif_hover.png' : 'assets/icons/dislike_inactif_hover.png';
       } else {
-        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif.png' : 'assets/icons/dislike_inactif.png';
+        return commentaire.userVote == 0 ? 'assets/icons/dislike_actif.png' : 'assets/icons/dislike_inactif.png';
       }
     }
     return '';

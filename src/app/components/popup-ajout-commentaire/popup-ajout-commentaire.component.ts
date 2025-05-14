@@ -107,7 +107,7 @@ export class PopupAjoutCommentaireComponent {
       nom_sel: string;
       nom_sel_nn: string;
       id_parent: string;
-      proposition: string;
+      proposition: number;
     }
 
     let formData: FormData = {
@@ -121,7 +121,7 @@ export class PopupAjoutCommentaireComponent {
       nom_sel: "",
       nom_sel_nn: "",
       id_parent: "",
-      proposition: "",
+      proposition: 0,
     }
 
     // On ajoute les infos supplémentaire pour le cas d'une proposition de détermination
@@ -135,7 +135,7 @@ export class PopupAjoutCommentaireComponent {
     }
     if (this.commentType == 'reponse'){
       formData.id_parent = this.id_parent
-      formData.proposition = this.proposition
+      formData.proposition = Number(this.proposition)
     }
 
     if (this.user){
@@ -153,7 +153,8 @@ export class PopupAjoutCommentaireComponent {
             location.reload()
           },
           error: (err) => {
-            console.log(err)
+            console.error(err.message)
+            this.commentErrorMessage = "une erreur s'est produite durant l'envoi de votre commentaire, veuillez réessayer ultérieurement. Erreur: " + err.message
           }
         })
     }
