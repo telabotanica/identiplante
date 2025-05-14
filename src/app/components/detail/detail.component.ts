@@ -258,7 +258,7 @@ export class DetailComponent {
         location.reload()
       },
       error: (err) => {
-        console.error(err.error.message)
+        console.error(err)
         this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter. Erreur: " + err.error.message
       }
     })
