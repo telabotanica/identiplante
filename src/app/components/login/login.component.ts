@@ -64,10 +64,10 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value.username, this.loginForm.value.password)
         .subscribe({
           next: (data: any) => {
-            let token = data.token ?? ""
+            let token = data.token ?? "";
             this.authService.getUser(token).subscribe((userData)=>{
               this.user = userData
-              this.isLoggedIn = this.user.connecte
+              this.isLoggedIn = true
               this.displayName = this.user.prenom && this.user.nom ? this.user.prenom + " " + this.user.nom : this.user.intitule;
               this.authService.setUserId(this.user.id_utilisateur)
               this.authService.setUser(this.user)
@@ -89,7 +89,7 @@ export class LoginComponent {
       }
       this.authService.getUser("").subscribe((userData)=>{
         this.user = userData
-        this.isLoggedIn = this.user.connecte
+        this.isLoggedIn = false
         this.displayName = "";
         this.authService.setUserId("")
         this.authService.setUser(null)

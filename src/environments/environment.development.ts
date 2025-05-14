@@ -8,6 +8,7 @@ export const environment: any = {
   // serviceBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
   // serviceUtilisateursBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
   serviceAuthBaseUrl: "https://beta.tela-botanica.org/service:annuaire:auth/",
+  // serviceAuthBaseUrl: "https://localhost:8002/service:annuaire:auth/",
   bogueUrl: "http://taiga.tela-botanica.net",
   commentaireUrl: "https://www.tela-botanica.org/wikini/eflore-test/wakka.php?wiki=AideDelCommentaire",
   delUrl: "https://beta.tela-botanica.org/del/war/del.html",
