@@ -28,9 +28,7 @@ export class PopupBigImageComponent {
   transFormDataService = inject(TransformDataService)
 
   ngOnInit(){
-    this.obs = this.transFormDataService.replacePictureFormat(this.obs, 'O');
-    this.dateTransmission = this.obs['date.transmission'] ? this.commonService.formatDateString(this.obs.date_transmission) : '';
-    this.nomScientifique = this.obs['determination.ns'] ?? 'Indéterminé';
+    this.obs = this.transFormDataService.replacePictureFormat(this.obs, 'O');this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
     this.checkOverflow();
   }
 
