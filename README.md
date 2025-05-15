@@ -18,6 +18,8 @@ Run `ng build --configuration beta --base-href=/appli:identiplante/` to build th
 
 You will need to copy the content of the `dist/identiplante/browser` on your server
 
+Or authorize ssh connection and create a script `./deploy.sh beta`
+
 ## Build
 
 Run `ng build --configuration production --base-href=/appli:identiplante/` to build the project on production server. The build artifacts will be stored in the `dist/` directory.

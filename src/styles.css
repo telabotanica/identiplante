@@ -477,7 +477,7 @@ input::placeholder {
 }
 
 .invalid-feedback{
-  height: 30px;
+  min-height: 30px;
   background-color: var(--error-color);
   padding: 0.5rem;
   color: var(--error-text);

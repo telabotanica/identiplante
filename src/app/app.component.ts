@@ -36,6 +36,16 @@ export class AppComponent {
     effect(() => {
       this.userId = this.authService.userId();
       this.selectedOnglet = this.commonService.selectedOnglet();
+
+      // On met à jour la date de dernière consultation d'évènement de l'utilisateur
+      if (this.userId != ""){
+        console.log("Update last event date")
+        this.authService.identite().subscribe({
+          next: (data: any) => {
+            this.authService.getUser(data.token)
+          }
+        });
+      }
     });
   }
 

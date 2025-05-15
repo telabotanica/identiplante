@@ -102,7 +102,7 @@
         </div>
       </div>
 
-      @if(obs.images.length > 3){
+      @if(obs.images && obs.images.length > 3){
         <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
       }
     </div>
@@ -181,7 +181,7 @@
         } @else {
           @for(commentaire of commentaires; track commentaire.id_commentaire){
             <div>
-              @if(commentaire.proposition_retenue === "1"){
+              @if(commentaire.proposition_retenue === 1){
               <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
               }
               <span class="text-black grid-name">{{commentaire.nom_sel}}</span>

@@ -95,6 +95,10 @@ export class DetailComponent {
         this.delService.getObservation(this.obsId).subscribe({
           next: (data: any) => {
             this.obs = data;
+            if (this.obs.images) {
+              this.obs.images = this.transFormDataService.transformImageFromObjectToArray(this.obs.images);
+            }
+
             this.isLoading = false;
 
             this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
@@ -105,7 +109,7 @@ export class DetailComponent {
             this.dateTransmission = this.obs.date_transmission ? this.commonService.formatDateString(this.obs.date_transmission) : '';
             this.nomScientifique = this.obs["determination.ns"] ?? 'Indéterminé';
             this.profilUrl = this.obs['auteur.id'] ? environment.profilUrl + this.obs['auteur.id'] : "";
-            this.selectedImage = this.obs.images[0];
+            this.selectedImage = this.obs.images ? this.obs.images[0] : '';
             this.fluxRssUrl += this.obs.id_observation;
             // this.displayedName = (this.obs.auteur_nom).trim() ? this.obs.auteur_nom : this.obs.auteur_courriel
 
@@ -117,13 +121,12 @@ export class DetailComponent {
             // On trie les propositions
             this.commentairesGrouped.proposition.sort((a: any, b: any) => {
               // Priorité à l'élément avec proposition_retenue === "1"
-              if (a.proposition_retenue === "1") return -1;
-              if (b.proposition_retenue === "1") return 1;
+              if (a.proposition_retenue === 1) return -1;
+              if (b.proposition_retenue === 1) return 1;
 
               // Si aucun des deux n'a proposition_retenue === "1", trier par score décroissant
               return b.score - a.score;
             });
-
             // console.log(this.obs)
             // console.log(this.commentaires)
             // console.log(this.commentairesGrouped)
@@ -251,12 +254,12 @@ export class DetailComponent {
 
     this.delService.validerProposition(propositionId, validationInfos).subscribe({
       next: (data) => {
-        console.log(data)
+        console.info(data)
         location.reload()
       },
       error: (err) => {
-        console.log(err)
-        this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter."
+        console.error(err)
+        this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter. Erreur: " + err.error.message
       }
     })
   }
@@ -342,7 +345,7 @@ export class DetailComponent {
 
   fixDeterminationForValidatedObs(){
     if (!this.obs.determination_ns){
-      const validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1');
+      const validatedObs = this.commonService.findValidatedObs(this.commentaires);
 
       if (validatedObs){
         this.obs.determination_ns = validatedObs.nom_sel;
@@ -351,6 +354,13 @@ export class DetailComponent {
         this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
       }
     }
+  }
+
+  isAllowedToValidate(commentaire: any){
+    if (!this.userId){
+      return false;
+    }
+    return (this.isVerificateur || (commentaire["auteur.id"] == this.userId)) && commentaire.proposition_retenue === 0;
   }
 }
 

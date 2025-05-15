@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        @if(obs.images.length > 3){
+        @if(obs.images && obs.images.length > 3){
           <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
         }
       </div>
@@ -151,14 +151,14 @@
           </div>
         } @else {
           @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
-            <div class="proposition-container" [ngClass]="{'proposition-retenue': commentaire.proposition_retenue === '1'}">
+            <div class="proposition-container" [ngClass]="{'proposition-retenue': commentaire.proposition_retenue === 1}">
 
               <div class="text-black">
                 Détermination
-                @if(commentaire.proposition_initiale === '1'){
-                originale
+                @if(commentaire.proposition_initiale === 1){
+                  originale
                 } @else {
-                proposée
+                  proposée
                 }
                 par {{commentaire['auteur.nom']}} le {{commentaire.displayDate}}
               </div>
@@ -170,7 +170,7 @@
                   <div>Vote</div>
 
                   <div class="text-black">
-                    @if(commentaire.proposition_retenue === "1"){
+                    @if(commentaire.proposition_retenue === 1){
                       <img src="assets/icons/IPcheck.png" alt="Proposition validée icon" title="Proposition validée" class="valid-icon">
                     }
 
@@ -212,7 +212,8 @@
 
               <div class="flex-start mb-2 text-black uppercase bold">
 
-              @if((isVerificateur || (commentaire["auteur.id"] == userId)) && commentaire.proposition_retenue === "0"){
+              @if(isAllowedToValidate(commentaire)){
+
                 @if(commentaire.nom_sel_nn){
                   <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
                     <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon" width=30 height=30>
@@ -221,9 +222,10 @@
                 } @else {
                   <span>Aucun numéro taxonomique relié à cette détermination, elle n'est donc n'est pas validable</span>
                 }
+
               }
 
-                @if(isAdmin && commentaire.proposition_initiale === "1"){
+                @if(isAdmin && commentaire.proposition_initiale == 1){
                 <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
                   <img src="assets/icons/close_pink.png"  class="detail-icon" width=30 height=30 alt="close icon">
                   <span>Dépublier</span>

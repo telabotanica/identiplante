@@ -74,6 +74,7 @@ export class CardComponent {
     effect(() => {
       this.userId = this.authService.userId();
       this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
+      this.commentaires = this.transFormDataService.removeCommentaireFromPropositions(this.commentaires)
       this.commentaires = this.transFormDataService.getUserVote(this.commentaires, this.userId)
     });
 
@@ -89,11 +90,12 @@ export class CardComponent {
     this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
     this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
 
-    this.selectedImage = this.obs.images[0]
+    this.selectedImage = this.obs.images ? this.obs.images[0] : '';
     this.profilUrl = this.obs.auteur_id ? environment.profilUrl + this.obs.auteur_id : "";
     this.displayedName = (this.obs.auteur_nom).trim() ? this.obs.auteur_nom : this.obs.auteur_courriel
 
     this.commentaires = this.transFormDataService.transformCommentaireAndVotes(this.obs, this.commentaires, this.userId)
+    this.commentaires = this.transFormDataService.removeCommentaireFromPropositions(this.commentaires)
     this.commentaires = this.transFormDataService.getUserVote(this.commentaires, this.userId)
 
     const paysList = this.commonService.paysList();
@@ -106,7 +108,7 @@ export class CardComponent {
       this.displayedCountry = nomPays?.nom_fr ?? this.obs.pays;
     }
 
-    this.validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1') !== undefined;
+    this.validatedObs = this.commonService.findValidatedObs(this.commentaires);
 
     this.fixDeterminationForValidatedObs()
     // console.log(this.obs)
@@ -208,7 +210,7 @@ export class CardComponent {
   //TODO: fixer le problème au niveau du web service
   fixDeterminationForValidatedObs(){
     if (!this.obs.determination_ns){
-      const validatedObs = this.commentaires.find((commentaire: any) => commentaire.proposition_retenue === '1');
+      const validatedObs = this.commonService.findValidatedObs(this.commentaires);
 
       if (validatedObs){
         this.obs.determination_ns = validatedObs.nom_sel;

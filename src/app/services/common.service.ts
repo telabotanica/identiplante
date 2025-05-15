@@ -66,8 +66,14 @@ export class CommonService {
     this.urlParamsString.set(params)
   }
 
-  formatDateString(dateString: string): string {
+  formatDateStringWithoutT(dateString: string): string {
     const [datePart, timePart] = dateString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
+  formatDateString(dateString: string): string {
+    const [datePart, timePart] = dateString.split('T');
     const [year, month, day] = datePart.split('-');
     return `${day}/${month}/${year}`;
   }
@@ -269,9 +275,9 @@ export class CommonService {
       }
 
       if (commentaire.isHoveredLike) {
-        return commentaire.userVote === '1' ? 'assets/icons/like_actif_hover.png' : 'assets/icons/like_inactif_hover.png';
+        return commentaire.userVote == 1 ? 'assets/icons/like_actif_hover.png' : 'assets/icons/like_inactif_hover.png';
       } else {
-        return commentaire.userVote === '1' ? 'assets/icons/like_actif.png' : 'assets/icons/like_inactif.png';
+        return commentaire.userVote == 1 ? 'assets/icons/like_actif.png' : 'assets/icons/like_inactif.png';
       }
     } else if (type === 'dislike') {
       if (commentaire.length == 0){
@@ -283,9 +289,9 @@ export class CommonService {
       }
 
       if (commentaire.isHoveredDislike) {
-        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif_hover.png' : 'assets/icons/dislike_inactif_hover.png';
+        return commentaire.userVote == 0 ? 'assets/icons/dislike_actif_hover.png' : 'assets/icons/dislike_inactif_hover.png';
       } else {
-        return commentaire.userVote === '0' ? 'assets/icons/dislike_actif.png' : 'assets/icons/dislike_inactif.png';
+        return commentaire.userVote == 0 ? 'assets/icons/dislike_actif.png' : 'assets/icons/dislike_inactif.png';
       }
     }
     return '';
@@ -305,6 +311,10 @@ export class CommonService {
     } else if (type === 'dislike') {
       isHovered.dislike = isHovering;
     }
+  }
+
+  findValidatedObs(commentaires: any[]): any {
+    return commentaires.find((commentaire: any) => commentaire.proposition_retenue === 1) ;
   }
 
 }

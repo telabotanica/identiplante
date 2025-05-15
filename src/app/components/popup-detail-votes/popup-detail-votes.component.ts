@@ -31,7 +31,7 @@ export class PopupDetailVotesComponent {
   ngOnInit(){
     this.obsId = this.obs.id_observation
     this.commentaireId = this.commentaire.id_commentaire
-    this.dateTransmission = this.commentaire.date ? this.commonService.formatDateString(this.commentaire.date) : '';
+    this.dateTransmission = this.commentaire.date ? this.commonService.formatDateStringWithoutT(this.commentaire.date) : '';
     this.nomScientifique = this.commentaire.nom_sel ?? 'Indéterminé'
 
     this.votes = this.commentaire.votes
@@ -39,14 +39,14 @@ export class PopupDetailVotesComponent {
 
     //TODO Regrouper les votes anonymes ?
     this.votes.forEach((vote: any) => {
-      if (vote.vote === '1') {
+      if (vote.vote === 1) {
         this.votesGrouped.pour.push(vote);
         this.pourCount++
       } else {
         this.votesGrouped.contre.push(vote);
         this.contreCount++
       }
-      vote.date = vote.date ? this.commonService.formatDateString(vote.date) : '';
+      vote.date = vote.date ? this.commonService.formatDateStringWithoutT(vote.date) : '';
     });
 
     this.pourStat = ((this.pourCount / this.nbVotes)*100).toFixed(2).replace('.', ',');
