@@ -5,7 +5,7 @@
   <div class="mb-2">
     <h2 class="mb-1">OBSERVATION DE <span class="text-black">{{nomScientifique}}</span></h2>
     <h5>Référentiel taxonomique: <span class="text-black uppercase">
-      {{obs["determination.referentiel"]}}
+      {{obs["determination_referentiel"]}}
     </span></h5>
   </div>
 
@@ -22,7 +22,7 @@
 
       <div class="card-image-extended-subtitles detail-image-subtitles">
         <div><img src="assets/Creative_Commons_white.png" alt="Logo creative commons"></div>
-        <p>Par {{obs['auteur.nom']}} CC BY SA 2.0</p>
+        <p>Par {{obs['auteur_nom']}} CC BY SA 2.0</p>
       </div>
 
       <div class="image-carousel-wrapper detail-carousel-wrapper">
@@ -72,12 +72,12 @@
               <p>Transmise le: <span class="text-black">{{dateTransmission}}</span></p>
               <p>Par: <span class="text-black">
               @if(profilUrl){
-              <a href="{{profilUrl}}" target="_blank" class="text-black">{{obs["auteur.nom"]}}</a>
+              <a href="{{profilUrl}}" target="_blank" class="text-black">{{obs["auteur_nom"]}}</a>
               } @else {
               {{obs["auteur.nom"]}}
               }
               @if(isAdmin && obs['auteur.courriel']){
-              <a href="mailto:{{obs['auteur.courriel']}}" target="_blank"> ({{obs['auteur.courriel']}})</a>
+              <a href="mailto:{{obs['auteur_courriel']}}" target="_blank"> ({{obs['auteur_courriel']}})</a>
               }
             </span></p>
             </div>
@@ -106,8 +106,8 @@
               <div>Vote</div>
 
                <div class="text-black">
-                 @if(obs['determination.nn']){
-                   <a href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination.nn']}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{nomScientifique}}</a>
+                 @if(obs['determination_nn']){
+                   <a href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination_nn']}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{nomScientifique}}</a>
                  } @else {
                    <span class="text-black">{{nomScientifique}}</span>
                  }
@@ -146,7 +146,11 @@
 
             </div>
             <div class="reponses-proposition-div">
-              <p class="uppercase"><span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition@if(isVerificateur || (obs["auteur.id"] == userId) ){ ou la valider}.</span></p>
+              <p class="uppercase">
+                <span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition
+                    @if(isVerificateur || (obs["auteur_id"] == userId) ){ ou la valider}
+                .</span>
+              </p>
             </div>
           </div>
         } @else {

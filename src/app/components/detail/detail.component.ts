@@ -94,7 +94,7 @@ export class DetailComponent {
         this.obsId = obsPart.split(/[?&]/)[0];
         this.delService.getObservation(this.obsId).subscribe({
           next: (data: any) => {
-            this.obs = data;
+            this.obs = this.mapObservation(data)
             if (this.obs.images) {
               this.obs.images = this.transFormDataService.transformImageFromObjectToArray(this.obs.images);
             }
@@ -107,8 +107,8 @@ export class DetailComponent {
             this.departement = this.obs.id_zone_geo ? this.obs.id_zone_geo.slice(0,2) : "";
             this.dateObservation = this.obs.date_observation ? this.commonService.formatDateString(this.obs.date_observation) : '';
             this.dateTransmission = this.obs.date_transmission ? this.commonService.formatDateString(this.obs.date_transmission) : '';
-            this.nomScientifique = this.obs["determination.ns"] ?? 'Indéterminé';
-            this.profilUrl = this.obs['auteur.id'] ? environment.profilUrl + this.obs['auteur.id'] : "";
+            this.nomScientifique = this.obs.determination_ns ?? 'Indéterminé';
+            this.profilUrl = this.obs.auteur_id ? environment.profilUrl + this.obs.auteur_id : "";
             this.selectedImage = this.obs.images ? this.obs.images[0] : '';
             this.fluxRssUrl += this.obs.id_observation;
             // this.displayedName = (this.obs.auteur_nom).trim() ? this.obs.auteur_nom : this.obs.auteur_courriel
@@ -361,6 +361,34 @@ export class DetailComponent {
       return false;
     }
     return (this.isVerificateur || (commentaire["auteur.id"] == this.userId)) && commentaire.proposition_retenue === 0;
+  }
+
+  private mapObservation(item: any): Observation{
+    return new Observation(
+      item["auteur.courriel"],
+      item["auteur.id"],
+      item["auteur.nom"],
+      item["commentaires"],
+      item["date_observation"],
+      item["date_transmission"],
+      item["determination.famille"],
+      item["determination.nn"],
+      item["determination.ns"],
+      item["determination.nt"],
+      item["determination.referentiel"],
+      item["hauteur"],
+      item["id_image"],
+      item["id_observation"],
+      item["id_zone_geo"],
+      item["images"],
+      item["largeur"],
+      item["mots_cles_texte"],
+      item["nb_commentaires"],
+      item["nom_original"],
+      item["pays"],
+      item["station"],
+      item["zone_geo"]
+    )
   }
 }
 
