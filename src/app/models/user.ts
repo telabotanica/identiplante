@@ -4,13 +4,13 @@ export class User {
   intitule: string;
   nom: string;
   prenom: string;
-  admin: string;
+  admin: number;
   connecte: boolean;
   date_derniere_consultation_evenements: string;
   session_id: string;
 
 
-  constructor(id_utilisateur: string, courriel: string, intitule: string, nom: string, prenom: string, admin: string, connecte: boolean, date_derniere_consultation_evenements: string, session_id: string) {
+  constructor(id_utilisateur: string, courriel: string, intitule: string, nom: string, prenom: string, admin: number, connecte: boolean, date_derniere_consultation_evenements: string, session_id: string) {
     this.id_utilisateur = id_utilisateur;
     this.courriel = courriel;
     this.intitule = intitule;

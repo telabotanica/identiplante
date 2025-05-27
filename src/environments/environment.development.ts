@@ -1,14 +1,14 @@
 export const environment: any = {
   production: false,
-  // serviceBaseUrl: "http://127.0.0.1:8000/",
-  // serviceUtilisateursBaseUrl: "http://127.0.0.1:8000/",
-  serviceBaseUrl: "https://api-ip-test.tela-botanica.org/",
-  serviceUtilisateursBaseUrl: "https://api-ip-test.tela-botanica.org/",
+  serviceBaseUrl: "http://127.0.0.1:8000/",
+  serviceUtilisateursBaseUrl: "http://127.0.0.1:8000/",
+  // serviceBaseUrl: "https://api-ip-test.tela-botanica.org/",
+  // serviceUtilisateursBaseUrl: "https://api-ip-test.tela-botanica.org/",
   oldServiceBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
   // serviceBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
   // serviceUtilisateursBaseUrl: "https://api-test.tela-botanica.org/service:del:0.1/",
-  serviceAuthBaseUrl: "https://beta.tela-botanica.org/service:annuaire:auth/",
-  // serviceAuthBaseUrl: "https://localhost:8002/service:annuaire:auth/",
+  // serviceAuthBaseUrl: "https://beta.tela-botanica.org/service:annuaire:auth/",
+  serviceAuthBaseUrl: "http://localhost:8002/service:annuaire:auth/",
   bogueUrl: "http://taiga.tela-botanica.net",
   commentaireUrl: "https://www.tela-botanica.org/wikini/eflore-test/wakka.php?wiki=AideDelCommentaire",
   delUrl: "https://beta.tela-botanica.org/del/war/del.html",
@@ -29,5 +29,5 @@ export const environment: any = {
   imagesUrl: "https://api-test2.tela-botanica.org/img:",
   urlWidgetRemarques: 'https://www.tela-botanica.org/widget:reseau:remarques',
   telaUrl : "https://beta.tela-botanica.org/",
-  cookieName: 'tb_auth_beta_test'
+  cookieName: 'tb_auth'
 };
