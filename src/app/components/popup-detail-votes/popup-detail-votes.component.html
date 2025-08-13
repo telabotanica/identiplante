@@ -15,7 +15,18 @@
          Une pondération s'opère pour le calcul des votes: vote en tant que membre identifié (3 points) / non identifié (1 point).</p>
     </div>
     <div class="popup-body">
-      <h6 class="uppercase mb-2">Votes contre ({{contreStat}}%)</h6>
+     <div class="flex-start gap-0-5 mb-2">
+       <h6 class="uppercase">Votes contre ({{contreStat}}%)</h6>
+       <img
+         [src]="commonService.getVoteIconSrc('dislike', [], { like: false, dislike: false })"
+         alt="vote contre"
+         title="votes contre cette proposition"
+         class="vote-icon"
+         width="34"
+         height="34"
+         style="cursor: auto">
+     </div>
+
       @for (vote of votesGrouped.contre; track vote['vote.id']){
       <p class="font14">
         @if(!vote['auteur.nom']){
@@ -25,7 +36,18 @@
       </p>
       }
 
-      <h6 class="uppercase mt-2 mb-2">Votes pour ({{pourStat}}%)</h6>
+      <div class="flex-start gap-0-5 mb-2">
+        <h6 class="uppercase mt-2 mb-2">Votes pour ({{pourStat}}%)</h6>
+        <img
+          [src]="commonService.getVoteIconSrc('like', [], { like: false, dislike: false })"
+          alt="vote pour"
+          title="votes pour cette proposition"
+          class="vote-icon"
+          width="34"
+          height="34"
+          style="cursor: auto">
+      </div>
+
       @for (vote of votesGrouped.pour; track vote['vote.id']){
       <p class="font14">
         @if(!vote['auteur.nom']){

@@ -19,7 +19,7 @@ export class LoginComponent {
 
   globalError = "";
   isLoggedIn = false;
-  user = new User("", "", "", "", "", "", false, "", "");
+  user = new User("", "", "", "", "", 0, false, "", "");
   displayName = "";
   cookieName = environment.cookieName;
   inscriptionUrl = environment.inscriptionUrl

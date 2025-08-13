@@ -56,10 +56,10 @@ export class AuthService {
     }
 
     switch (user.admin){
-      case '0':
+      case 0:
         return false;
-      case '1':
-      case '2':
+      case 1:
+      case 2:
         return true;
       default:
         return false
@@ -73,10 +73,10 @@ export class AuthService {
     }
 
     switch (user.admin){
-      case '0':
-      case '1':
+      case 0:
+      case 1:
         return false;
-      case '2':
+      case 2:
         return true;
       default:
         return false
