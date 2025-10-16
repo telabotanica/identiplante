@@ -11,8 +11,8 @@
         <div class="form-group searchbar-container">
           <label for="masque">Recherche rapide par espèce ou famille</label>
           <div class="searchbar-container">
-            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="masque" formControlName="masque">
+            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="masque" formControlName="masque" placeholder="exemple: Acer campestre">
           </div>
 
         </div>
@@ -29,22 +29,22 @@
         <div class="form-group">
           <label for="famille">Famille (latin)</label>
           <div class="searchbar-container">
-            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="famille" formControlName="famille">
+            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="famille" formControlName="famille" placeholder="exemple: Pinaceae">
           </div>
         </div>
+<!--        <div class="form-group">-->
+<!--          <label for="genre">Genre</label>-->
+<!--          <div class="searchbar-container">-->
+<!--            <img class="search-icon" title="recherchez" src="assets/icons/search.png">-->
+<!--            <input id="genre" formControlName="genre">-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="form-group">
-          <label for="genre">Genre</label>
+          <label for="ns">Espèce (numéro taxonomique)</label>
           <div class="searchbar-container">
-            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="genre" formControlName="genre">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="ns">Espèce</label>
-          <div class="searchbar-container">
-            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="ns" formControlName="ns">
+            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="ns" formControlName="ns" placeholder="exemple: 141">
           </div>
         </div>
         <div *ngIf="!useYearOnly" class="form-group">
@@ -73,31 +73,31 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="departement">Département français (numéro ou nom)</label>
+          <label for="departement">Département français (numéro)</label>
           <div class="searchbar-container">
-            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="departement" formControlName="departement">
+            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="departement" formControlName="departement" placeholder="exemple: 34">
           </div>
         </div>
         <div class="form-group">
           <label for="commune">Commune française</label>
           <div class="searchbar-container">
-            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="commune" formControlName="commune">
+            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="commune" formControlName="commune" placeholder="exemple: Montpellier ou 34000">
           </div>
         </div>
         <div class="form-group">
           <label for="auteur">Publié par</label>
           <div class="searchbar-container">
-            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="auteur" formControlName="auteur">
+            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="auteur" formControlName="auteur" placeholder="exemple: Tela Botanica">
           </div>
         </div>
         <div class="form-group">
           <label for="tag">Tags</label>
           <div class="searchbar-container">
-            <img class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="tag" formControlName="tag">
+            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+            <input id="tag" formControlName="tag" placeholder="exemple: DefiPhoto">
           </div>
         </div>
         <div class="form-group-checkbox">
