@@ -107,7 +107,10 @@ export class CommonService {
       item["nom_original"],
       item["pays"],
       item["station"],
-      item["zone_geo"])
+      item["zone_geo"],
+      item["certitude"],
+      item["input_source"]
+    )
   }
 
   mapPagination(params: any){
