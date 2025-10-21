@@ -26,6 +26,8 @@ Run `ng build --configuration production --base-href=/appli:identiplante/` to bu
 
 You will need to copy the content of the `dist/identiplante/browser` on your server
 
+Or authorize ssh connection and create a script `./deploy.sh production`
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

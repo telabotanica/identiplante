@@ -54,6 +54,7 @@
 
       <p class="card-texte">Observée le {{dateObservation}}</p>
       <p class="card-texte">Publiée le {{dateTransmission}}</p>
+      <p class="card-texte">Certitude: {{obs.certitude}}</p>
       </div>
       <div>
         <p (click)="extendObs()" class="extend-card">Voir + d'infos</p>
@@ -142,6 +143,8 @@
         <div>
           <p>Observée le <span class="text-black">{{dateObservation}}</span></p>
           <p>Publiée le <span class="text-black">{{dateTransmission}}</span></p>
+          <p>Certitude: <span class="text-black">{{obs.certitude}}</span></p>
+          <p>Source de l'observation: <span class="text-black">{{obs.input_source}}</span></p>
           <p>Commentaire <br /><span class="text-black">
             @if(obsAdditionnalInfos.commentaire){ {{obsAdditionnalInfos.commentaire}} }
           </span></p>
