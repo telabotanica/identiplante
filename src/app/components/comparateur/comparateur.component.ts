@@ -5,11 +5,10 @@ import {environment} from "../../../environments/environment";
 import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.component";
 
 @Component({
-  selector: 'app-comparateur',
-  standalone: true,
-  imports: [PopupBigImageComponent,],
-  templateUrl: './comparateur.component.html',
-  styleUrl: './comparateur.component.css'
+    selector: 'app-comparateur',
+    imports: [PopupBigImageComponent,],
+    templateUrl: './comparateur.component.html',
+    styleUrl: './comparateur.component.css'
 })
 export class ComparateurComponent {
   commonService = inject(CommonService)

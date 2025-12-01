@@ -12,15 +12,14 @@ import {CommonModule} from "@angular/common";
 import {TransformDataService} from "../../services/transform-data.service";
 
 @Component({
-  selector: 'app-contenu',
-  standalone: true,
-  imports: [
-    CardComponent,
-    PaginationComponent,
-    CommonModule
-  ],
-  templateUrl: './contenu.component.html',
-  styleUrl: './contenu.component.css'
+    selector: 'app-contenu',
+    imports: [
+        CardComponent,
+        PaginationComponent,
+        CommonModule
+    ],
+    templateUrl: './contenu.component.html',
+    styleUrl: './contenu.component.css'
 })
 export class ContenuComponent {
   authService = inject(AuthService);

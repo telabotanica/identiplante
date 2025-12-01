@@ -13,16 +13,15 @@ import {VoteService} from "../../services/vote.service";
 import {TransformDataService} from "../../services/transform-data.service";
 
 @Component({
-  selector: 'app-card',
-  standalone: true,
-  imports: [
-    PopupBigImageComponent,
-    CommonModule,
-    PopupAjoutCommentaireComponent,
-    PopupDetailVotesComponent
-  ],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+    selector: 'app-card',
+    imports: [
+        PopupBigImageComponent,
+        CommonModule,
+        PopupAjoutCommentaireComponent,
+        PopupDetailVotesComponent
+    ],
+    templateUrl: './card.component.html',
+    styleUrl: './card.component.css'
 })
 export class CardComponent {
   @Input() obs: any;

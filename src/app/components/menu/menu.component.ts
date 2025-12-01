@@ -1,15 +1,13 @@
 import {Component, effect, inject} from '@angular/core';
-import {LoginComponent} from "../login/login.component";
 import {CommonService} from "../../services/common.service";
 import {AuthService} from "../../services/auth.service";
 import {environment} from "../../../environments/environment";
 
 @Component({
-  selector: 'app-menu',
-  standalone: true,
-  imports: [LoginComponent],
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css'
+    selector: 'app-menu',
+    imports: [],
+    templateUrl: './menu.component.html',
+    styleUrl: './menu.component.css'
 })
 export class MenuComponent {
   commonService = inject(CommonService)

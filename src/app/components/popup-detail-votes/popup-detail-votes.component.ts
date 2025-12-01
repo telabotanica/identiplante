@@ -3,11 +3,10 @@ import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
 
 @Component({
-  selector: 'app-popup-detail-votes',
-  standalone: true,
-  imports: [],
-  templateUrl: './popup-detail-votes.component.html',
-  styleUrl: './popup-detail-votes.component.css'
+    selector: 'app-popup-detail-votes',
+    imports: [],
+    templateUrl: './popup-detail-votes.component.html',
+    styleUrl: './popup-detail-votes.component.css'
 })
 export class PopupDetailVotesComponent {
   @Output() closePopupEmitter = new EventEmitter<void>()

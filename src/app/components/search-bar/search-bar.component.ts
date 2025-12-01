@@ -4,14 +4,13 @@ import {PopupAdvancedSearchComponent} from "../popup-advanced-search/popup-advan
 import {NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-search-bar',
-  standalone: true,
-  imports: [
-    PopupAdvancedSearchComponent,
-    NgIf
-  ],
-  templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.css'
+    selector: 'app-search-bar',
+    imports: [
+        PopupAdvancedSearchComponent,
+        NgIf
+    ],
+    templateUrl: './search-bar.component.html',
+    styleUrl: './search-bar.component.css'
 })
 export class SearchBarComponent {
   search = "";

@@ -6,14 +6,13 @@ import {DelService} from "../../services/del.service";
 import {CommonService} from "../../services/common.service";
 
 @Component({
-  selector: 'app-commentaire',
-  standalone: true,
-  imports: [
-    CommonModule,
-    PopupAjoutCommentaireComponent
-  ],
-  templateUrl: './commentaire.component.html',
-  styleUrl: './commentaire.component.css'
+    selector: 'app-commentaire',
+    imports: [
+        CommonModule,
+        PopupAjoutCommentaireComponent
+    ],
+    templateUrl: './commentaire.component.html',
+    styleUrl: './commentaire.component.css'
 })
 export class CommentaireComponent {
   @Input() commentaires: any[] = [];

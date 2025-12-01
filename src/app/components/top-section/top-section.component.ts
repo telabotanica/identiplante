@@ -5,13 +5,12 @@ import {ActivatedRoute} from "@angular/router";
 import {CommonService} from "../../services/common.service";
 
 @Component({
-  selector: 'app-top-section',
-  standalone: true,
-  imports: [
-    SearchBarComponent
-  ],
-  templateUrl: './top-section.component.html',
-  styleUrl: './top-section.component.css'
+    selector: 'app-top-section',
+    imports: [
+        SearchBarComponent
+    ],
+    templateUrl: './top-section.component.html',
+    styleUrl: './top-section.component.css'
 })
 export class TopSectionComponent {
   route = inject(ActivatedRoute)

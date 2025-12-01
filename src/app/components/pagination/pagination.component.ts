@@ -4,15 +4,14 @@ import {CommonService} from "../../services/common.service";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-pagination',
-  standalone: true,
-  imports: [
-    NgIf,
-    FormsModule,
-    NgClass
-  ],
-  templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.css'
+    selector: 'app-pagination',
+    imports: [
+        NgIf,
+        FormsModule,
+        NgClass
+    ],
+    templateUrl: './pagination.component.html',
+    styleUrl: './pagination.component.css'
 })
 export class PaginationComponent {
   @Input() entetes: any;

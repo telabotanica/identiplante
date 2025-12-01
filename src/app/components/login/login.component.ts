@@ -9,11 +9,10 @@ import {CookiesService} from "../../services/cookies.service";
 import {CommonService} from "../../services/common.service";
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    imports: [ReactiveFormsModule, CommonModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
@@ -49,6 +48,8 @@ export class LoginComponent {
     if (cookie){
       this.isLoggedIn = true;
       this.authService.identite().subscribe((data) => {
+        let token = data.token ?? "";
+        this.authService.token.set(token)
         this.authService.getUser(data.token).subscribe((userData) => {
           this.user = userData
           this.displayName = this.user.prenom && this.user.nom ? this.user.prenom + " " + this.user.nom : this.user.intitule;
@@ -65,6 +66,7 @@ export class LoginComponent {
         .subscribe({
           next: (data: any) => {
             let token = data.token ?? "";
+            this.authService.token.set(token)
             this.authService.getUser(token).subscribe((userData)=>{
               this.user = userData
               this.isLoggedIn = true
@@ -72,7 +74,6 @@ export class LoginComponent {
               this.authService.setUserId(this.user.id_utilisateur)
               this.authService.setUser(this.user)
               this.loginPopup = false;
-              // console.log(token)
             })
           },
           error: (err : any) => {
@@ -87,6 +88,7 @@ export class LoginComponent {
       if (this.selectedOnglet == "monactivite"){
         this.commonService.setOnglet("adeterminer")
       }
+      this.authService.token.set("")
       this.authService.getUser("").subscribe((userData)=>{
         this.user = userData
         this.isLoggedIn = false
