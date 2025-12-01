@@ -20,9 +20,9 @@
           <label for="referentiel">Référentiel taxonomique</label>
           <select id="referentiel" formControlName="referentiel" class="w-100">
             @for(referentiel of referentiels; ; track referentiel.code){
-            <option [value]="referentiel.code">
-            {{ referentiel.nom }}
-            </option>
+              <option [value]="referentiel.code">
+                {{ referentiel.nom }}
+              </option>
             }
           </select>
         </div>
@@ -33,79 +33,83 @@
             <input id="famille" formControlName="famille" placeholder="exemple: Pinaceae">
           </div>
         </div>
-<!--        <div class="form-group">-->
-<!--          <label for="genre">Genre</label>-->
-<!--          <div class="searchbar-container">-->
-<!--            <img class="search-icon" title="recherchez" src="assets/icons/search.png">-->
-<!--            <input id="genre" formControlName="genre">-->
-<!--          </div>-->
-<!--        </div>-->
-        <div class="form-group">
-          <label for="ns">Espèce (numéro taxonomique)</label>
-          <div class="searchbar-container">
-            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="ns" formControlName="ns" placeholder="exemple: 141">
-          </div>
-        </div>
-        <div *ngIf="!useYearOnly" class="form-group">
-          <label for="date">Date</label>
-          <input id="date" formControlName="date" type="date">
-        </div>
-        <div *ngIf="useYearOnly" class="form-group">
-          <label for="year">Année</label>
-          <input id="year" formControlName="year" type="number">
-        </div>
-        <div class="form-group-checkbox">
-          <input id="useYearOnly" type="checkbox" (change)="toggleUseYearOnly()" [checked]="useYearOnly">
-          <label for="useYearOnly">Rechercher seulement par année</label>
-        </div>
+        <!--        <div class="form-group">-->
+        <!--          <label for="genre">Genre</label>-->
+        <!--          <div class="searchbar-container">-->
+        <!--            <img class="search-icon" title="recherchez" src="assets/icons/search.png">-->
+        <!--            <input id="genre" formControlName="genre">-->
+      <!--          </div>-->
+    <!--        </div>-->
+    <div class="form-group">
+      <label for="ns">Espèce (numéro taxonomique)</label>
+      <div class="searchbar-container">
+        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+        <input id="ns" formControlName="ns" placeholder="exemple: 141">
       </div>
-      <div id="search-right">
-        <div class="form-group">
-          <label for="pays">Pays</label>
-          <select id="pays" formControlName="pays" class="w-100">
-            <option [value]=""></option>
-            @for(pays of paysList; track pays.code_iso_3166_1){
-            <option [value]="pays.code_iso_3166_1">
-            {{ pays.nom_fr }}
-            </option>
-            }
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="departement">Département français (numéro)</label>
-          <div class="searchbar-container">
-            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="departement" formControlName="departement" placeholder="exemple: 34">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="commune">Commune française</label>
-          <div class="searchbar-container">
-            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="commune" formControlName="commune" placeholder="exemple: Montpellier ou 34000">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="auteur">Publié par</label>
-          <div class="searchbar-container">
-            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="auteur" formControlName="auteur" placeholder="exemple: Tela Botanica">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="tag">Tags</label>
-          <div class="searchbar-container">
-            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="tag" formControlName="tag" placeholder="exemple: DefiPhoto">
-          </div>
-        </div>
-        <div class="form-group-checkbox">
-          <input id="pninscritsseulement" type="checkbox" formControlName="pninscritsseulement" checked>
-          <label for="pninscritsseulement">Masquer les observations anonymes envoyées via smartphone</label>
-        </div>
-        <button type="submit" class="button-link"><span class="button-text">Rechercher</span></button>
+    </div>
+    @if (!useYearOnly) {
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input id="date" formControlName="date" type="date">
       </div>
-    </form>
+    }
+    @if (useYearOnly) {
+      <div class="form-group">
+        <label for="year">Année</label>
+        <input id="year" formControlName="year" type="number">
+      </div>
+    }
+    <div class="form-group-checkbox">
+      <input id="useYearOnly" type="checkbox" (change)="toggleUseYearOnly()" [checked]="useYearOnly">
+      <label for="useYearOnly">Rechercher seulement par année</label>
+    </div>
   </div>
+  <div id="search-right">
+    <div class="form-group">
+      <label for="pays">Pays</label>
+      <select id="pays" formControlName="pays" class="w-100">
+        <option [value]=""></option>
+        @for(pays of paysList; track pays.code_iso_3166_1){
+          <option [value]="pays.code_iso_3166_1">
+            {{ pays.nom_fr }}
+          </option>
+        }
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="departement">Département français (numéro)</label>
+      <div class="searchbar-container">
+        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+        <input id="departement" formControlName="departement" placeholder="exemple: 34">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="commune">Commune française</label>
+      <div class="searchbar-container">
+        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+        <input id="commune" formControlName="commune" placeholder="exemple: Montpellier ou 34000">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="auteur">Publié par</label>
+      <div class="searchbar-container">
+        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+        <input id="auteur" formControlName="auteur" placeholder="exemple: Tela Botanica">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="tag">Tags</label>
+      <div class="searchbar-container">
+        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
+        <input id="tag" formControlName="tag" placeholder="exemple: DefiPhoto">
+      </div>
+    </div>
+    <div class="form-group-checkbox">
+      <input id="pninscritsseulement" type="checkbox" formControlName="pninscritsseulement" checked>
+      <label for="pninscritsseulement">Masquer les observations anonymes envoyées via smartphone</label>
+    </div>
+    <button type="submit" class="button-link"><span class="button-text">Rechercher</span></button>
+  </div>
+</form>
+</div>
 </div>

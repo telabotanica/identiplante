@@ -1,94 +1,94 @@
 @if (!isCardExtended){
-<div class="card">
-  <div class="card-reduced">
+  <div class="card">
+    <div class="card-reduced">
 
-    @if((obs.images && obs.images.length > 1) || commentaires.length > 0){
-      <div class="card-header">
-        @if(obs.images && obs.images.length > 1){
-        <img src="assets/icons/images.png" alt="images icon" title="{{obs.images.length}} images" class="card-header-icon icon-images" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
-        }
+      @if((obs.images && obs.images.length > 1) || commentaires.length > 0){
+        <div class="card-header">
+          @if(obs.images && obs.images.length > 1){
+            <img src="assets/icons/images.png" alt="images icon" title="{{obs.images.length}} images" class="card-header-icon icon-images" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
+          }
 
-        @if(commentaires.length > 0 && !validatedObs){
-        <img src="assets/icons/IPinterro_2.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
-        }
+          @if(commentaires.length > 0 && !validatedObs){
+            <img src="assets/icons/IPinterro_2.png" alt="icone commentaires" title="{{obs.nb_commentaires}} commentaire(s) et/ou vote(s)" class="card-header-icon icon-comments" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
+          }
 
-        @if(validatedObs){
-        <img src="assets/icons/IPcheck.png" alt="Obs validée" title="Observation validée" class="card-header-icon icon-comments" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
-        }
+          @if(validatedObs){
+            <img src="assets/icons/IPcheck.png" alt="Obs validée" title="Observation validée" class="card-header-icon icon-comments" width="40" height="40" [attr.loading]="isInView ? 'eager' : 'lazy'">
+          }
+        </div>
+      }
+      <div class="card-image-div">
+        <img
+          #obsImage
+          class="card-image"
+          [attr.loading]="isInView ? 'eager' : 'lazy'"
+          src="{{selectedImage['binaire.href']}}"
+          alt="Image de l'observation"
+          (error)="commonService.onImageError($event)"
+          width="300"
+          height="300"
+          />
       </div>
-    }
-    <div class="card-image-div">
-      <img
-        #obsImage
-        class="card-image"
-        [attr.loading]="isInView ? 'eager' : 'lazy'"
-        src="{{selectedImage['binaire.href']}}"
-        alt="Image de l'observation"
-        (error)="commonService.onImageError($event)"
-        width="300"
-        height="300"
-      />
-    </div>
-    <div class="card-body">
-      <div>
-      <h5 class="card-title w-100">
-        <a href="{{urlParamsString}}#obs~{{obs.id_observation}}">{{nomScientifique}}</a>
-        ({{obs.determination_referentiel}})</h5>
-      <p class="card-texte">
-        par
-        @if(profilUrl){
-          <a href="{{profilUrl}}" target="_blank">{{displayedName}}</a>
-        } @else {
-          {{displayedName}}
-        }
-      </p>
-      <p class="card-texte">
-        @if(displayedCountry){
-          ({{displayedCountry}})
-        }
-        {{obs.zone_geo}}
-        @if(obs.station){
-          , {{obs.station}}
-        }
-      </p>
+      <div class="card-body">
+        <div>
+          <h5 class="card-title w-100">
+            <a href="{{urlParamsString}}#obs~{{obs.id_observation}}">{{nomScientifique}}</a>
+          ({{obs.determination_referentiel}})</h5>
+          <p class="card-texte">
+            par
+            @if(profilUrl){
+              <a href="{{profilUrl}}" target="_blank">{{displayedName}}</a>
+            } @else {
+              {{displayedName}}
+            }
+          </p>
+          <p class="card-texte">
+            @if(displayedCountry){
+              ({{displayedCountry}})
+            }
+            {{obs.zone_geo}}
+            @if(obs.station){
+              , {{obs.station}}
+            }
+          </p>
 
-      <p class="card-texte">Observée le {{dateObservation}}</p>
-      <p class="card-texte">Publiée le {{dateTransmission}}</p>
-      <p class="card-texte">Certitude: {{obs.certitude}}</p>
-      </div>
-      <div>
-        <p (click)="extendObs()" class="extend-card">Voir + d'infos</p>
+          <p class="card-texte">Observée le {{dateObservation}}</p>
+          <p class="card-texte">Publiée le {{dateTransmission}}</p>
+          <p class="card-texte">Certitude: {{obs.certitude}}</p>
+        </div>
+        <div>
+          <p (click)="extendObs()" class="extend-card">Voir + d'infos</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 }
 
 @if (isCardExtended){
-<div class="card-extended-container">
+  <div class="card-extended-container">
 
-  <img (click)="reduceObs()"
-        class="close-extended"
-        alt="fermer"
-        title="Voir moins d'infos"
-        src="assets/icons/cancel_brown.png"
-        width="39"
-        height="39">
+    <img (click)="reduceObs()"
+      class="close-extended"
+      alt="fermer"
+      title="Voir moins d'infos"
+      src="assets/icons/cancel_brown.png"
+      width="39"
+      height="39">
 
-  <div id="card-extended-first-container">
-    <div class="card-image-div-extended">
+    <div id="card-extended-first-container">
+      <div class="card-image-div-extended">
 
-      <div class="card-title-extended">
-        <h5 class="card-title"><a href="{{urlParamsString}}#obs~{{obs.id_observation}}">{{nomScientifique}}</a>
+        <div class="card-title-extended">
+          <h5 class="card-title"><a href="{{urlParamsString}}#obs~{{obs.id_observation}}">{{nomScientifique}}</a>
         </h5>
       </div>
 
       <img
-      (click)="openBigImage()"
-      class="card-image-extended"
-      src="{{selectedImage['binaire.href']}}"
-      (error)="commonService.onImageError($event)"
-      alt="Image de l'observation"/>
+        (click)="openBigImage()"
+        class="card-image-extended"
+        src="{{selectedImage['binaire.href']}}"
+        (error)="commonService.onImageError($event)"
+        alt="Image de l'observation"/>
     </div>
 
     <div class="card-image-extended-subtitles">
@@ -98,9 +98,11 @@
 
     <div class="image-carousel-wrapper">
       <div id="image-carousel" #imageCarousel>
-        <div *ngFor="let image of obs.images; let i = index" class="thumbnail" (click)="changeSelectedImage(image)">
-        <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation" width="35" height="35">
-        </div>
+        @for (image of obs.images; track image; let i = $index) {
+          <div class="thumbnail" (click)="changeSelectedImage(image)">
+            <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation" width="35" height="35">
+          </div>
+        }
       </div>
 
       @if(obs.images && obs.images.length > 3){
@@ -115,157 +117,157 @@
       <div class="card-extended-details-title">
         <h4 class="">Détails de l'observation</h4>
         <p> par
-        @if(profilUrl){
-          <a href="{{profilUrl}}" target="_blank">{{displayedName}}</a>
-        } @else {
-          {{displayedName}}
-        } </p>
-      </div>
-
-      <div class="card-extended-details-body">
-        <div class="card-body-adjust-width">
-          <p>Référentiel: <span class="text-black uppercase">{{obs.determination_referentiel}}</span></p>
-          <p>Pays
-            @if(displayedCountry){
-            <span class="text-black">{{displayedCountry}}</span>
-            }
-          </p>
-          <p>Localité <br /><span class="text-black">{{obs.zone_geo}} ({{departement}})
-            @if(obs.station){
-              , {{obs.station}}
-            }
-            @if(obsAdditionnalInfos.lieudit){ <br/>{{obsAdditionnalInfos.lieudit}} }
-            @if(obsAdditionnalInfos.milieu){ <br/>{{obsAdditionnalInfos.milieu}} }
-          </span>
-          </p>
+          @if(profilUrl){
+            <a href="{{profilUrl}}" target="_blank">{{displayedName}}</a>
+          } @else {
+            {{displayedName}}
+          } </p>
         </div>
 
-        <div>
-          <p>Observée le <span class="text-black">{{dateObservation}}</span></p>
-          <p>Publiée le <span class="text-black">{{dateTransmission}}</span></p>
-          <p>Certitude: <span class="text-black">{{obs.certitude}}</span></p>
-          <p>Source de l'observation: <span class="text-black">{{obs.input_source}}</span></p>
-          <p>Commentaire <br /><span class="text-black">
-            @if(obsAdditionnalInfos.commentaire){ {{obsAdditionnalInfos.commentaire}} }
-          </span></p>
-        </div>
-      </div>
+        <div class="card-extended-details-body">
+          <div class="card-body-adjust-width">
+            <p>Référentiel: <span class="text-black uppercase">{{obs.determination_referentiel}}</span></p>
+            <p>Pays
+              @if(displayedCountry){
+                <span class="text-black">{{displayedCountry}}</span>
+              }
+            </p>
+            <p>Localité <br /><span class="text-black">{{obs.zone_geo}} ({{departement}})
+              @if(obs.station){
+                , {{obs.station}}
+              }
+              @if(obsAdditionnalInfos.lieudit){ <br/>{{obsAdditionnalInfos.lieudit}} }
+                @if(obsAdditionnalInfos.milieu){ <br/>{{obsAdditionnalInfos.milieu}} }
+                </span>
+              </p>
+            </div>
 
-      <div class="card-extended-details-title"><h4 class="mt-1">Propositions de déterminations</h4></div>
-      <div class="propositions-layout">
-        <div>Proposition</div>
-        <div>Score</div>
-        <div>Vote</div>
+            <div>
+              <p>Observée le <span class="text-black">{{dateObservation}}</span></p>
+              <p>Publiée le <span class="text-black">{{dateTransmission}}</span></p>
+              <p>Certitude: <span class="text-black">{{obs.certitude}}</span></p>
+              <p>Source de l'observation: <span class="text-black">{{obs.input_source}}</span></p>
+              <p>Commentaire <br /><span class="text-black">
+                @if(obsAdditionnalInfos.commentaire){ {{obsAdditionnalInfos.commentaire}} }
+                </span></p>
+              </div>
+            </div>
 
-        @if(commentaires.length < 1){
-          <div class="text-black grid-name">{{nomScientifique}}</div>
-          <div class="text-black">0</div>
-          <div>
-            <img
-              (click)="voter('1', '0', obs.id_observation)"
-              [src]="commonService.getVoteIconSrc('like', [], isHovered)"
-              (mouseover)="commonService.changeIconOnHoverSimple('like', true, isHovered)"
-              (mouseout)="commonService.changeIconOnHoverSimple('like', false, isHovered)"
-              alt="vote pour"
-              title="voter pour cette proposition"
-              class="vote-icon"
-              width="34"
-              height="34">
-            <img (click)="voter('0', '0', obs.id_observation)"
-                 [src]="commonService.getVoteIconSrc('dislike', '', isHovered)"
-                 (mouseover)="commonService.changeIconOnHoverSimple('dislike', true, isHovered)"
-                 (mouseout)="commonService.changeIconOnHoverSimple('dislike', false, isHovered)"
-                 alt="vote contre"
-                 title="voter contre cette proposition"
-                 class="vote-icon"
-                 width="34"
-                 height="34">
+            <div class="card-extended-details-title"><h4 class="mt-1">Propositions de déterminations</h4></div>
+            <div class="propositions-layout">
+              <div>Proposition</div>
+              <div>Score</div>
+              <div>Vote</div>
+
+              @if(commentaires.length < 1){
+                <div class="text-black grid-name">{{nomScientifique}}</div>
+                <div class="text-black">0</div>
+                <div>
+                  <img
+                    (click)="voter('1', '0', obs.id_observation)"
+                    [src]="commonService.getVoteIconSrc('like', [], isHovered)"
+                    (mouseover)="commonService.changeIconOnHoverSimple('like', true, isHovered)"
+                    (mouseout)="commonService.changeIconOnHoverSimple('like', false, isHovered)"
+                    alt="vote pour"
+                    title="voter pour cette proposition"
+                    class="vote-icon"
+                    width="34"
+                    height="34">
+                  <img (click)="voter('0', '0', obs.id_observation)"
+                    [src]="commonService.getVoteIconSrc('dislike', '', isHovered)"
+                    (mouseover)="commonService.changeIconOnHoverSimple('dislike', true, isHovered)"
+                    (mouseout)="commonService.changeIconOnHoverSimple('dislike', false, isHovered)"
+                    alt="vote contre"
+                    title="voter contre cette proposition"
+                    class="vote-icon"
+                    width="34"
+                    height="34">
+                </div>
+              } @else {
+                @for(commentaire of commentaires; track commentaire.id_commentaire){
+                  <div>
+                    @if(commentaire.proposition_retenue === 1){
+                      <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
+                    }
+                    <span class="text-black grid-name">{{commentaire.nom_sel}}</span>
+                    @if(commentaire.texte){
+                      <p class="card-texte grid-commentaire">{{commentaire.texte}}</p>
+                    }
+                  </div>
+                  <div class="text-black">{{commentaire.score}}</div>
+                  <div>
+                    <img
+                      (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
+                      [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
+                      (mouseover)="commonService.changeIconOnHover('like', commentaire, true)"
+                      (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
+                      alt="vote pour"
+                      title="voter pour cette proposition"
+                      class="vote-icon"
+                      width="34"
+                      height="34">
+                    <img
+                      (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
+                      [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
+                      (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)"
+                      (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
+                      alt="vote contre"
+                      title="voter contre cette proposition"
+                      class="vote-icon"
+                      width="34"
+                      height="34">
+                    @if(commentaire.votes && commentaire.votes.length > 0){
+                      <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon" width="34" height="34">
+                    }
+                  </div>
+
+                  @if (popupDetailVotes === commentaire.id_commentaire){
+                    <app-popup-detail-votes
+                      [commentaire]="commentaire"
+                      [obs]="obs"
+                      (closePopupEmitter)="closeDetailVotes()"
+                      class="blur-background">
+                    </app-popup-detail-votes>
+                  }
+                }
+              }
+            </div>
+
+            <!--      @if(voteErrorMessage){-->
+            <!--      <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>-->
+            <!--      }-->
           </div>
-        } @else {
-          @for(commentaire of commentaires; track commentaire.id_commentaire){
-            <div>
-              @if(commentaire.proposition_retenue === 1){
-              <img src="assets/icons/IPcheck.png" alt="Proposition validée" title="Proposition validée" class="valid-icon">
-              }
-              <span class="text-black grid-name">{{commentaire.nom_sel}}</span>
-              @if(commentaire.texte){
-                <p class="card-texte grid-commentaire">{{commentaire.texte}}</p>
-              }
-            </div>
-            <div class="text-black">{{commentaire.score}}</div>
-            <div>
-              <img
-              (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
-              [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
-              (mouseover)="commonService.changeIconOnHover('like', commentaire, true)"
-              (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
-              alt="vote pour"
-              title="voter pour cette proposition"
-              class="vote-icon"
-              width="34"
-              height="34">
-              <img
-              (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
-              [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
-              (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)"
-              (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
-              alt="vote contre"
-              title="voter contre cette proposition"
-              class="vote-icon"
-              width="34"
-              height="34">
-              @if(commentaire.votes && commentaire.votes.length > 0){
-                <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon" width="34" height="34">
-              }
-            </div>
 
-            @if (popupDetailVotes === commentaire.id_commentaire){
-            <app-popup-detail-votes
-              [commentaire]="commentaire"
-              [obs]="obs"
-              (closePopupEmitter)="closeDetailVotes()"
-              class="blur-background">
-            </app-popup-detail-votes>
-            }
-          }
-        }
+          <div id="card-extended-details-buttons">
+            <button (click)="openAddComment('determination')" class="button-primary extended-button"><span>Proposer une détermination</span></button>
+            <button (click)="openAddComment('commentaire')" class="button-primary extended-button"><span>Ajouter un commentaire</span></button>
+          </div>
+
+          <div class="flex-end w-100">
+            <a href="{{urlParamsString}}#obs~{{obs.id_observation}}"><h6 class="see-details">Voir l'observation en détails</h6></a>
+          </div>
+        </div>
+
       </div>
+    }
 
-<!--      @if(voteErrorMessage){-->
-<!--      <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>-->
-<!--      }-->
-    </div>
+    @if (popupBigImage){
+      <app-popup-big-image
+        [obs]="obs"
+        [selectedImage]="selectedImage"
+        [images]="obs.images"
+        (closePopupEmitter)="closeBigImagePopup()"
+        class="blur-background">
+      </app-popup-big-image>
+    }
 
-    <div id="card-extended-details-buttons">
-      <button (click)="openAddComment('determination')" class="button-primary extended-button"><span>Proposer une détermination</span></button>
-      <button (click)="openAddComment('commentaire')" class="button-primary extended-button"><span>Ajouter un commentaire</span></button>
-    </div>
-
-    <div class="flex-end w-100">
-      <a href="{{urlParamsString}}#obs~{{obs.id_observation}}"><h6 class="see-details">Voir l'observation en détails</h6></a>
-    </div>
-  </div>
-
-</div>
-}
-
-@if (popupBigImage){
-<app-popup-big-image
-  [obs]="obs"
-  [selectedImage]="selectedImage"
-  [images]="obs.images"
-  (closePopupEmitter)="closeBigImagePopup()"
-  class="blur-background">
-</app-popup-big-image>
-}
-
-@if (popupAddComment){
-<app-popup-ajout-commentaire
-  [obsId]="obs.id_observation"
-  [commentType]="commentType"
-  (closePopupEmitter)="closeAddComment()"
-  class="blur-background">
-</app-popup-ajout-commentaire>
-}
+    @if (popupAddComment){
+      <app-popup-ajout-commentaire
+        [obsId]="obs.id_observation"
+        [commentType]="commentType"
+        (closePopupEmitter)="closeAddComment()"
+        class="blur-background">
+      </app-popup-ajout-commentaire>
+    }
 
 

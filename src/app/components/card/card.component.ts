@@ -1,7 +1,6 @@
 import {Component, effect, ElementRef, inject, Input, ViewChild} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.component";
-import {CommonModule} from "@angular/common";
 import {DelService} from "../../services/del.service";
 import {AuthService} from "../../services/auth.service";
 import {CookieService} from "ngx-cookie-service";
@@ -15,11 +14,10 @@ import {TransformDataService} from "../../services/transform-data.service";
 @Component({
     selector: 'app-card',
     imports: [
-        PopupBigImageComponent,
-        CommonModule,
-        PopupAjoutCommentaireComponent,
-        PopupDetailVotesComponent
-    ],
+    PopupBigImageComponent,
+    PopupAjoutCommentaireComponent,
+    PopupDetailVotesComponent
+],
     templateUrl: './card.component.html',
     styleUrl: './card.component.css'
 })

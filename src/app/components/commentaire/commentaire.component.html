@@ -1,61 +1,57 @@
-<div *ngFor="let commentaire of commentaires" [ngStyle]="{'margin-left.px': niveau * 20}" class="commentaire-container">
-
-  @if(commentaire.texte){
-  <div
-    class="flex-column-start mb-1"
+@for (commentaire of commentaires; track commentaire) {
+  <div [ngStyle]="{'margin-left.px': niveau * 20}" class="commentaire-container">
+    @if(commentaire.texte){
+      <div
+        class="flex-column-start mb-1"
     [ngClass]="{
         'reponse': niveau > 0,
         'proposition-com': niveau == 0 && !isComLibre,
         'com-libre': isComLibre
     }">
-
-    <p class="font-16 text-black">Par {{commentaire['auteur.prenom']}} {{commentaire['auteur.nom']}}, le {{commentaire.displayDate}}</p>
-
-     <p class="card-texte">{{ commentaire.texte }}</p>
-
-    @if(userId && userId == commentaire['auteur.id'] && !commentaire.reponses){
-      <img class="delete-comment"
-           (click)="affichagePopupConfirmation(commentaire.id_commentaire)"
-           alt="menu"
-           title="Supprimer le commentaire"
-           src="assets/icons/cancel_brown.png">
+        <p class="font-16 text-black">Par {{commentaire['auteur.prenom']}} {{commentaire['auteur.nom']}}, le {{commentaire.displayDate}}</p>
+        <p class="card-texte">{{ commentaire.texte }}</p>
+        @if(userId && userId == commentaire['auteur.id'] && !commentaire.reponses){
+          <img class="delete-comment"
+            (click)="affichagePopupConfirmation(commentaire.id_commentaire)"
+            alt="menu"
+            title="Supprimer le commentaire"
+            src="assets/icons/cancel_brown.png">
+          }
+          @if(commentaire.texte ){
+            <div class="flex-end mt-1">
+              <p class="commentaire-repondre" (click)="openAddComment('reponse', commentaire.id_commentaire)"><span class="button-text">Répondre</span></p>
+            </div>
+          }
+        </div>
+      }
+      @if (commentaire.reponses) {
+        <div>
+          <app-commentaire [commentaires]="commentaire.reponses" [niveau]="niveau + 1"></app-commentaire>
+        </div>
+      }
+      @if (popupAddComment && popupAddCommentId == commentaire.id_commentaire){
+        <app-popup-ajout-commentaire
+          [obsId]="commentaire.observation"
+          [commentType]="commentType"
+          [id_parent]="commentaire.id_commentaire"
+          [proposition]="commentaire.proposition"
+          (closePopupEmitter)="closeAddComment()"
+          class="blur-background">
+      </app-popup-ajout-commentaire>
     }
-
-    @if(commentaire.texte ){
-      <div class="flex-end mt-1">
-        <p class="commentaire-repondre" (click)="openAddComment('reponse', commentaire.id_commentaire)"><span class="button-text">Répondre</span></p>
+    @if(showWarningPopup && warningPopUpId == commentaire.id_commentaire){
+      <div class="warning-popup">
+        <p>Etes-vous sûr de vouloir supprimer ce commentaire ?</p>
+        <p class="text-black">"{{commentaire.texte}}"</p>
+        <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
+        <div class="flex-between">
+          <button type="button" (click)="cancelDeleteComment()" class="button-secondary">Annuler</button>
+          <button type="button" (click)="confirmerDeleteComment(commentaire.id_commentaire)" class="button-primary">OK</button>
+        </div>
       </div>
     }
   </div>
-  }
-
-  <div *ngIf="commentaire.reponses">
-    <app-commentaire [commentaires]="commentaire.reponses" [niveau]="niveau + 1"></app-commentaire>
-  </div>
-
-  @if (popupAddComment && popupAddCommentId == commentaire.id_commentaire){
-  <app-popup-ajout-commentaire
-    [obsId]="commentaire.observation"
-    [commentType]="commentType"
-    [id_parent]="commentaire.id_commentaire"
-    [proposition]="commentaire.proposition"
-    (closePopupEmitter)="closeAddComment()"
-    class="blur-background">
-  </app-popup-ajout-commentaire>
-  }
-
-  @if(showWarningPopup && warningPopUpId == commentaire.id_commentaire){
-  <div class="warning-popup">
-    <p>Etes-vous sûr de vouloir supprimer ce commentaire ?</p>
-    <p class="text-black">"{{commentaire.texte}}"</p>
-    <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
-    <div class="flex-between">
-      <button type="button" (click)="cancelDeleteComment()" class="button-secondary">Annuler</button>
-      <button type="button" (click)="confirmerDeleteComment(commentaire.id_commentaire)" class="button-primary">OK</button>
-    </div>
-  </div>
-  }
-</div>
+}
 
 @if(deleteCommentErrorMessage){
   <div><p class="invalid-feedback">{{deleteCommentErrorMessage}}</p></div>

@@ -3,14 +3,12 @@ import {Ontologie} from "../../models/ontologie";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Referentiel} from "../../models/referentiel";
 import {CommonService} from "../../services/common.service";
-import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-popup-advanced-search',
     imports: [
-        ReactiveFormsModule,
-        NgIf
-    ],
+    ReactiveFormsModule
+],
     templateUrl: './popup-advanced-search.component.html',
     styleUrl: './popup-advanced-search.component.css'
 })

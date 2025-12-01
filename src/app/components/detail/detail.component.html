@@ -2,84 +2,86 @@
 
   @if(!isLoading){
 
-  <div class="mb-2">
-    <h2 class="mb-1">OBSERVATION DE <span class="text-black">{{nomScientifique}}</span></h2>
-    <h5>Référentiel taxonomique: <span class="text-black uppercase">
-      {{obs["determination_referentiel"]}}
-    </span></h5>
-  </div>
+    <div class="mb-2">
+      <h2 class="mb-1">OBSERVATION DE <span class="text-black">{{nomScientifique}}</span></h2>
+      <h5>Référentiel taxonomique: <span class="text-black uppercase">
+        {{obs["determination_referentiel"]}}
+      </span></h5>
+    </div>
 
-  <div id="detail-container">
-    <div id="detail-left">
-      <div class="card-image-div-extended detail-image-div">
-        <img
-        (click)="openBigImage()"
-        class="card-image-extended detail-image"
-        src="{{selectedImage['binaire.href']}}"
-        (error)="commonService.onImageError($event)"
-        alt="Image de l'observation"/>
-      </div>
+    <div id="detail-container">
+      <div id="detail-left">
+        <div class="card-image-div-extended detail-image-div">
+          <img
+            (click)="openBigImage()"
+            class="card-image-extended detail-image"
+            src="{{selectedImage['binaire.href']}}"
+            (error)="commonService.onImageError($event)"
+            alt="Image de l'observation"/>
+        </div>
 
-      <div class="card-image-extended-subtitles detail-image-subtitles">
-        <div><img src="assets/Creative_Commons_white.png" alt="Logo creative commons"></div>
-        <p>Par {{obs['auteur_nom']}} CC BY SA 2.0</p>
-      </div>
+        <div class="card-image-extended-subtitles detail-image-subtitles">
+          <div><img src="assets/Creative_Commons_white.png" alt="Logo creative commons"></div>
+          <p>Par {{obs['auteur_nom']}} CC BY SA 2.0</p>
+        </div>
 
-      <div class="image-carousel-wrapper detail-carousel-wrapper">
-        <div id="image-carousel" #imageCarousel>
-          <div *ngFor="let image of obs.images; let i = index" class="thumbnail" (click)="changeSelectedImage(image)">
-          <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation">
+        <div class="image-carousel-wrapper detail-carousel-wrapper">
+          <div id="image-carousel" #imageCarousel>
+            @for (image of obs.images; track image; let i = $index) {
+              <div class="thumbnail" (click)="changeSelectedImage(image)">
+                <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation">
+              </div>
+            }
+          </div>
+
+          @if(obs.images && obs.images.length > 3){
+            <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
+          }
+        </div>
+
+        <div id="help-box">
+          <h5 class="uppercase mb-2">Pour vous aider</h5>
+
+          <div class="mb-2">
+            <h6 class="mb-1">Vérifier votre détermination</h6>
+            <p><a href="https://www.tela-botanica.org/flore/france-metropolitaine/" target="_blank" class="underline-green" title="eflore">eflore</a></p>
+          </div>
+
+          <div>
+            <h6 class="mb-1">Autres outils en ligne</h6>
+            <p><a href="https://www.tela-botanica.org/ressources/ressources-bibliographiques/ouvrages-numerises/" target="_blank" title="flores numérisées" class="underline-green">Flores numérisées</a></p>
+            <p><a href="https://www.tela-botanica.org/eflore/bonnierpda/Bonnier.html" target="_blank" title="Flore Bonnier interactive" class="underline-green">Flore Bonnier interactive</a></p>
+            <p><a href="https://www.tela-botanica.org/ressources/ressources-pedagogiques/cles-de-determination-en-ligne/" target="_blank" title="Clés de détermination" class="underline-green">Clés de détermination</a></p>
           </div>
         </div>
 
-        @if(obs.images && obs.images.length > 3){
-          <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
-        }
       </div>
 
-      <div id="help-box">
-        <h5 class="uppercase mb-2">Pour vous aider</h5>
-
-        <div class="mb-2">
-          <h6 class="mb-1">Vérifier votre détermination</h6>
-          <p><a href="https://www.tela-botanica.org/flore/france-metropolitaine/" target="_blank" class="underline-green" title="eflore">eflore</a></p>
-        </div>
-
-        <div>
-          <h6 class="mb-1">Autres outils en ligne</h6>
-          <p><a href="https://www.tela-botanica.org/ressources/ressources-bibliographiques/ouvrages-numerises/" target="_blank" title="flores numérisées" class="underline-green">Flores numérisées</a></p>
-          <p><a href="https://www.tela-botanica.org/eflore/bonnierpda/Bonnier.html" target="_blank" title="Flore Bonnier interactive" class="underline-green">Flore Bonnier interactive</a></p>
-          <p><a href="https://www.tela-botanica.org/ressources/ressources-pedagogiques/cles-de-determination-en-ligne/" target="_blank" title="Clés de détermination" class="underline-green">Clés de détermination</a></p>
-        </div>
-      </div>
-
-    </div>
-
-    <div id="detail-right">
-      <div id="detail-obs">
-        <h5 class="uppercase mb-2">Détails de l'observation</h5>
-        <div id="detail-obs-container">
-          <div id="detail-obs-left">
-            <p>Observée à: <span class="text-black">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
-            <p>Le: <span class="text-black">{{dateObservation}}</span></p>
-            <p>@if(obs.lieudit){ Lieu dit: <span class="text-black">{{obs.lieudit}}</span><br> }
-               @if(obs.station){ Station: <span class="text-black">{{obs.station}}</span><br> }
-               @if(obs.milieu){ Milieu: <span class="text-black">{{obs.milieu}}</span> }
+      <div id="detail-right">
+        <div id="detail-obs">
+          <h5 class="uppercase mb-2">Détails de l'observation</h5>
+          <div id="detail-obs-container">
+            <div id="detail-obs-left">
+              <p>Observée à: <span class="text-black">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
+              <p>Le: <span class="text-black">{{dateObservation}}</span></p>
+              <p>@if(obs.lieudit){ Lieu dit: <span class="text-black">{{obs.lieudit}}</span><br> }
+              @if(obs.station){ Station: <span class="text-black">{{obs.station}}</span><br> }
+              @if(obs.milieu){ Milieu: <span class="text-black">{{obs.milieu}}</span> }
             </p>
           </div>
           <div id="detail-obs-right">
             <div id="detail-transmission">
               <p>Transmise le: <span class="text-black">{{dateTransmission}}</span></p>
               <p>Par: <span class="text-black">
-              @if(profilUrl){
-              <a href="{{profilUrl}}" target="_blank" class="text-black">{{obs["auteur_nom"]}}</a>
-              } @else {
-              {{obs["auteur.nom"]}}
-              }
-              @if(isAdmin && obs['auteur.courriel']){
-              <a href="mailto:{{obs['auteur_courriel']}}" target="_blank"> ({{obs['auteur_courriel']}})</a>
-              }
-            </span></p>
+                @if(profilUrl){
+                  <a href="{{profilUrl}}" target="_blank" class="text-black">{{obs["auteur_nom"]}}</a>
+                } @else {
+                  {{obs["auteur.nom"]}}
+                }
+                @if(isAdmin && obs['auteur.courriel']){
+                  <a href="mailto:{{obs['auteur_courriel']}}" target="_blank"> ({{obs['auteur_courriel']}})</a>
+                }
+              </span></p>
             </div>
             <div id="detail-obs-commentaire">
               <p>Commentaire: <span class="text-black">{{obs.commentaire}}</span></p>
@@ -97,27 +99,27 @@
       <div id="detail-propositions" class="mt-2">
         <h5 class="uppercase mb-1">Propositions et échanges</h5>
         @if(commentaires.length < 1){
-        <div class="proposition-container">
-          <div class="proposition-row">
+          <div class="proposition-container">
+            <div class="proposition-row">
 
-            <div class="propositions-layout w-80">
-              <div>Détermination Originale par {{obs["auteur.nom"]}}</div>
-              <div>Score</div>
-              <div>Vote</div>
+              <div class="propositions-layout w-80">
+                <div>Détermination Originale par {{obs["auteur.nom"]}}</div>
+                <div>Score</div>
+                <div>Vote</div>
 
-               <div class="text-black">
-                 @if(obs['determination_nn']){
-                   <a href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination_nn']}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{nomScientifique}}</a>
-                 } @else {
-                   <span class="text-black">{{nomScientifique}}</span>
-                 }
-               </div>
+                <div class="text-black">
+                  @if(obs['determination_nn']){
+                    <a href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination_nn']}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{nomScientifique}}</a>
+                  } @else {
+                    <span class="text-black">{{nomScientifique}}</span>
+                  }
+                </div>
 
-               <div>
-                <p class="card-texte">0</p>
-               </div>
+                <div>
+                  <p class="card-texte">0</p>
+                </div>
 
-               <div>
+                <div>
                   <img
                     (click)="voter('1', '0', obs.id_observation)"
                     [src]="commonService.getVoteIconSrc('like', [], isHovered)"
@@ -127,197 +129,197 @@
                     title="voter pour cette proposition"
                     class="vote-icon">
                   <img (click)="voter('0', '0', obs.id_observation)"
-                       [src]="commonService.getVoteIconSrc('dislike', '', isHovered)"
-                       (mouseover)="commonService.changeIconOnHoverSimple('dislike', true, isHovered)"
-                       (mouseout)="commonService.changeIconOnHoverSimple('dislike', false, isHovered)"
-                       alt="vote contre"
-                       title="voter contre cette proposition"
-                       class="vote-icon">
+                    [src]="commonService.getVoteIconSrc('dislike', '', isHovered)"
+                    (mouseover)="commonService.changeIconOnHoverSimple('dislike', true, isHovered)"
+                    (mouseout)="commonService.changeIconOnHoverSimple('dislike', false, isHovered)"
+                    alt="vote contre"
+                    title="voter contre cette proposition"
+                    class="vote-icon">
                 </div>
-            </div>
-            <div class="flex-start">
-              @if(isAdmin){
-              <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
-                <img src="assets/icons/close_pink.png" class="detail-icon" width=30 height=30 alt="close icon">
-                <span>Dépublier</span>
-              </button>
-              }
-            </div>
+              </div>
+              <div class="flex-start">
+                @if(isAdmin){
+                  <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
+                    <img src="assets/icons/close_pink.png" class="detail-icon" width=30 height=30 alt="close icon">
+                    <span>Dépublier</span>
+                  </button>
+                }
+              </div>
 
             </div>
             <div class="reponses-proposition-div">
               <p class="uppercase">
                 <span class="">Veuillez voter afin de pouvoir ajouter un commentaire lié à cette proposition
-                    @if(isVerificateur || (obs["auteur_id"] == userId) ){ ou la valider}
-                .</span>
-              </p>
-            </div>
-          </div>
-        } @else {
-          @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
-            <div class="proposition-container" [ngClass]="{'proposition-retenue': commentaire.proposition_retenue === 1}">
-
-              <div class="text-black">
-                Détermination
-                @if(commentaire.proposition_initiale === 1){
-                  originale
-                } @else {
-                  proposée
-                }
-                par {{commentaire['auteur.nom']}} le {{commentaire.displayDate}}
+                  @if(isVerificateur || (obs["auteur_id"] == userId) ){ ou la valider}
+                  .</span>
+                </p>
               </div>
+            </div>
+          } @else {
+            @for(commentaire of commentairesGrouped.proposition; track commentaire.id_commentaire){
+              <div class="proposition-container" [ngClass]="{'proposition-retenue': commentaire.proposition_retenue === 1}">
 
-              <div class="proposition-row mt-1">
-                <div class="propositions-layout w-80">
-                  <div>Proposition</div>
-                  <div>Score</div>
-                  <div>Vote</div>
+                <div class="text-black">
+                  Détermination
+                  @if(commentaire.proposition_initiale === 1){
+                    originale
+                  } @else {
+                    proposée
+                  }
+                  par {{commentaire['auteur.nom']}} le {{commentaire.displayDate}}
+                </div>
 
-                  <div class="text-black">
-                    @if(commentaire.proposition_retenue === 1){
-                      <img src="assets/icons/IPcheck.png" alt="Proposition validée icon" title="Proposition validée" class="valid-icon">
-                    }
+                <div class="proposition-row mt-1">
+                  <div class="propositions-layout w-80">
+                    <div>Proposition</div>
+                    <div>Score</div>
+                    <div>Vote</div>
 
-                    @if (!commentaire.nom_sel_nn){
-                      <span class="text-black">{{commentaire.nom_sel}}</span>
+                    <div class="text-black">
+                      @if(commentaire.proposition_retenue === 1){
+                        <img src="assets/icons/IPcheck.png" alt="Proposition validée icon" title="Proposition validée" class="valid-icon">
+                      }
+
+                      @if (!commentaire.nom_sel_nn){
+                        <span class="text-black">{{commentaire.nom_sel}}</span>
+                      } @else {
+                        <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{commentaire.nom_sel}}</a>
+                      }
+
+                    </div>
+
+                    <div>
+                      <p class="card-texte">{{commentaire.score}}</p>
+                    </div>
+
+                    <div>
+                      <img
+                        (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
+                        [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
+                        (mouseover)="commonService.changeIconOnHover('like', commentaire, true)"
+                        (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
+                        alt="vote pour"
+                        title="voter pour cette proposition"
+                        class="vote-icon">
+                      <img
+                        (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
+                        [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
+                        (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)"
+                        (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
+                        alt="vote contre"
+                        title="voter contre cette proposition"
+                        class="vote-icon">
+                      @if(commentaire.votes && commentaire.votes.length > 0){
+                        <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon">
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex-start mb-2 text-black uppercase bold">
+
+                  @if(isAllowedToValidate(commentaire)){
+
+                    @if(commentaire.nom_sel_nn){
+                      <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
+                        <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon" width=30 height=30>
+                        <span>Valider</span>
+                      </button>
                     } @else {
-                      <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{commentaire.nom_sel}}</a>
+                      <span>Aucun numéro taxonomique relié à cette détermination, elle n'est donc n'est pas validable</span>
                     }
 
-                  </div>
+                  }
 
-                  <div>
-                    <p class="card-texte">{{commentaire.score}}</p>
-                  </div>
+                  @if(isAdmin && commentaire.proposition_initiale == 1){
+                    <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
+                      <img src="assets/icons/close_pink.png"  class="detail-icon" width=30 height=30 alt="close icon">
+                      <span>Dépublier</span>
+                    </button>
+                  }
+                </div>
 
-                  <div>
-                    <img
-                      (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
-                      [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
-                      (mouseover)="commonService.changeIconOnHover('like', commentaire, true)"
-                      (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
-                      alt="vote pour"
-                      title="voter pour cette proposition"
-                      class="vote-icon">
-                    <img
-                      (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
-                      [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
-                      (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)"
-                      (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
-                      alt="vote contre"
-                      title="voter contre cette proposition"
-                      class="vote-icon">
-                    @if(commentaire.votes && commentaire.votes.length > 0){
-                    <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon">
-                    }
-                  </div>
+                <div class="reponses-proposition-div">
+                  <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase text-black bold"><span class="button-text">Répondre</span></p>
+                  @if(commentaire.reponses || commentaire.texte){
+                    <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
+                  }
                 </div>
               </div>
 
-              <div class="flex-start mb-2 text-black uppercase bold">
-
-              @if(isAllowedToValidate(commentaire)){
-
-                @if(commentaire.nom_sel_nn){
-                  <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
-                    <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon" width=30 height=30>
-                    <span>Valider</span>
-                  </button>
-                } @else {
-                  <span>Aucun numéro taxonomique relié à cette détermination, elle n'est donc n'est pas validable</span>
-                }
-
+              <!--    MODALS AREA     -->
+              @if (popupAddCommentOnDetail && popupAddCommentOnDetailId === commentaire.id_commentaire){
+                <app-popup-ajout-commentaire
+                  [obsId]="commentaire.observation"
+                  [commentType]="commentType"
+                  [id_parent]="commentaire.id_commentaire"
+                  [proposition]="commentaire.proposition"
+                  (closePopupEmitter)="closeAddComment()"
+                  class="blur-background">
+                </app-popup-ajout-commentaire>
               }
 
-                @if(isAdmin && commentaire.proposition_initiale == 1){
-                <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
-                  <img src="assets/icons/close_pink.png"  class="detail-icon" width=30 height=30 alt="close icon">
-                  <span>Dépublier</span>
-                </button>
-                }
-              </div>
+              @if (popupDetailVotes === commentaire.id_commentaire){
+                <app-popup-detail-votes
+                  [commentaire]="commentaire"
+                  [obs]="obs"
+                  (closePopupEmitter)="closeDetailVotes()"
+                  class="blur-background">
+                </app-popup-detail-votes>
+              }
 
-              <div class="reponses-proposition-div">
-                <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase text-black bold"><span class="button-text">Répondre</span></p>
-                @if(commentaire.reponses || commentaire.texte){
-                  <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
-                }
-              </div>
-            </div>
+              @if(warningDeleteProposition && deletePropositionId == commentaire.id_commentaire){
+                <div class="warning-popup">
+                  <p>Etes-vous sûr de vouloir supprimer cette proposition ?</p>
+                  <p>"{{commentaire.nom_sel}}"</p>
+                  <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
+                  <button type="button" (click)="confirmerDeleteProposition(commentaire.id_commentaire)">OK</button>
+                  <button type="button" (click)="cancelDeleteProposition()" class="button-selected">Annuler</button>
+                </div>
+              }
 
-        <!--    MODALS AREA     -->
-            @if (popupAddCommentOnDetail && popupAddCommentOnDetailId === commentaire.id_commentaire){
-            <app-popup-ajout-commentaire
-              [obsId]="commentaire.observation"
-              [commentType]="commentType"
-              [id_parent]="commentaire.id_commentaire"
-              [proposition]="commentaire.proposition"
-              (closePopupEmitter)="closeAddComment()"
-              class="blur-background">
-            </app-popup-ajout-commentaire>
+              @if(deletePropositionErrorMessage){
+                <div><p class="invalid-feedback">{{deletePropositionErrorMessage}}</p></div>
+              }
+              <!--    END OF MODALS AREA     -->
+
+              }  <!--    END OF COMMENTAIRE FOR LOOP      -->
             }
 
-            @if (popupDetailVotes === commentaire.id_commentaire){
-            <app-popup-detail-votes
-              [commentaire]="commentaire"
-              [obs]="obs"
-              (closePopupEmitter)="closeDetailVotes()"
-              class="blur-background">
-            </app-popup-detail-votes>
+            <!--        @if(voteErrorMessage){-->
+            <!--        <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>-->
+            <!--        }-->
+
+            @if(validationErrorMessage){
+              <div><p class="invalid-feedback">{{validationErrorMessage}}</p></div>
             }
 
-            @if(warningDeleteProposition && deletePropositionId == commentaire.id_commentaire){
-            <div class="warning-popup">
-              <p>Etes-vous sûr de vouloir supprimer cette proposition ?</p>
-              <p>"{{commentaire.nom_sel}}"</p>
-              <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
-              <button type="button" (click)="confirmerDeleteProposition(commentaire.id_commentaire)">OK</button>
-              <button type="button" (click)="cancelDeleteProposition()" class="button-selected">Annuler</button>
-            </div>
+            @if(depublierErrorMessage){
+              <div><p class="invalid-feedback">{{depublierErrorMessage}}</p></div>
             }
+          </div>
 
-            @if(deletePropositionErrorMessage){
-            <div><p class="invalid-feedback">{{deletePropositionErrorMessage}}</p></div>
+          <div id="detail-commentaires" class="mt-2">
+            <h5 class="uppercase mb-1">Commentaires libres</h5>
+            @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
+              @if(commentaire.texte){
+                <div class="proposition-container">
+                  <app-commentaire [commentaires]="[commentaire]" [niveau]="0" [isComLibre]="true"></app-commentaire>
+                </div>
+              }
             }
-        <!--    END OF MODALS AREA     -->
-
-          }  <!--    END OF COMMENTAIRE FOR LOOP      -->
-        }
-
-<!--        @if(voteErrorMessage){-->
-<!--        <div><p class="invalid-feedback">{{voteErrorMessage}}</p></div>-->
-<!--        }-->
-
-        @if(validationErrorMessage){
-        <div><p class="invalid-feedback">{{validationErrorMessage}}</p></div>
-        }
-
-        @if(depublierErrorMessage){
-        <div><p class="invalid-feedback">{{depublierErrorMessage}}</p></div>
-        }
+          </div>
+        </div>
       </div>
 
-      <div id="detail-commentaires" class="mt-2">
-        <h5 class="uppercase mb-1">Commentaires libres</h5>
-        @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
-          @if(commentaire.texte){
-            <div class="proposition-container">
-              <app-commentaire [commentaires]="[commentaire]" [niveau]="0" [isComLibre]="true"></app-commentaire>
-            </div>
-          }
-        }
-      </div>
-    </div>
-  </div>
-
-<!--  <div id="comparer-image">-->
-<!--    <h5>Comparer cette image</h5>-->
-<!--    <input #inputElement type="text">-->
-<!--    <button (click)="comparer(inputElement.value)">Comparer</button>-->
-<!--  </div>-->
+      <!--  <div id="comparer-image">-->
+      <!--    <h5>Comparer cette image</h5>-->
+      <!--    <input #inputElement type="text">-->
+      <!--    <button (click)="comparer(inputElement.value)">Comparer</button>-->
+    <!--  </div>-->
 
   } @else {
-  <!--  Affichage du loader -->
+    <!--  Affichage du loader -->
     <div class="loader-container">
       <div class="loadership_COHKO">
         <div></div>
@@ -327,33 +329,33 @@
   }
 
   @if (popupAddComment){
-  <app-popup-ajout-commentaire
-    [obsId]="obs.id_observation"
-    [commentType]="commentType"
-    (closePopupEmitter)="closeAddCommentOnObs()"
-    class="blur-background">
-  </app-popup-ajout-commentaire>
+    <app-popup-ajout-commentaire
+      [obsId]="obs.id_observation"
+      [commentType]="commentType"
+      (closePopupEmitter)="closeAddCommentOnObs()"
+      class="blur-background">
+    </app-popup-ajout-commentaire>
   }
 
   @if(showWarningPopup){
-  <div class="warning-popup">
-    <p>Etes-vous sûr de vouloir dépublier cette observation ?</p>
-    <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
-    <div class="flex-between">
-      <button type="button" (click)="cancelDepublier()" class="button-secondary">Annuler</button>
-      <button type="button" (click)="confirmerDepublier(obs.id_observation)" class="button-primary">OK</button>
+    <div class="warning-popup">
+      <p>Etes-vous sûr de vouloir dépublier cette observation ?</p>
+      <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
+      <div class="flex-between">
+        <button type="button" (click)="cancelDepublier()" class="button-secondary">Annuler</button>
+        <button type="button" (click)="confirmerDepublier(obs.id_observation)" class="button-primary">OK</button>
+      </div>
     </div>
-  </div>
   }
 
   @if (popupBigImage){
-  <app-popup-big-image
-    [obs]="obs"
-    [selectedImage]="selectedImage"
-    [images]="obs.images"
-    (closePopupEmitter)="closeBigImagePopup()"
-    class="blur-background">
-  </app-popup-big-image>
+    <app-popup-big-image
+      [obs]="obs"
+      [selectedImage]="selectedImage"
+      [images]="obs.images"
+      (closePopupEmitter)="closeBigImagePopup()"
+      class="blur-background">
+    </app-popup-big-image>
   }
 
 </section>
