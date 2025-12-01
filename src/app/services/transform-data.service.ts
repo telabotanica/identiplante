@@ -13,7 +13,7 @@ export class TransformDataService {
   constructor() { }
 
   // Calcul le score des votes puis réorganise les votes du + haut score au + petit
-  transformCommentaireAndVotes(obs: any, commentaires: any[], userId: string): Array<any>{
+  transformCommentaireAndVotes(obs: any, commentaires: any[], userId: string): any[]{
     if (obs.commentaires) {
       commentaires = [];
       //On transforme les objets commentaires en array pour pouvoir boucler dessus
@@ -21,7 +21,7 @@ export class TransformDataService {
 
       // Idem pour les votes de chaque commentaire
       commentaires.forEach((commentaire: any) => {
-        let votesArray = <any>[];
+        const votesArray = [] as any;
         let score = 0;
         commentaire.score = score
 
@@ -49,7 +49,7 @@ export class TransformDataService {
   }
 
   // Permet de n'afficher que les propositions
-  removeCommentaireFromPropositions(commentaires: Array<any>): Array<any> {
+  removeCommentaireFromPropositions(commentaires: any[]): any[] {
     return commentaires.filter(commentaire =>
       commentaire.nom_referentiel && commentaire.nom_sel_nn
     );
@@ -57,10 +57,10 @@ export class TransformDataService {
 
 
   // Pour affichage du vote existant pour users connectés
-  getUserVote(commentaires: any[], userId: string): Array<any>{
+  getUserVote(commentaires: any[], userId: string): any[]{
     commentaires.forEach((proposition: any) => {
       if (userId && proposition.votes != undefined) {
-        let votesArray = [];
+        const votesArray = [];
         votesArray.push(...Object.values(proposition.votes))
         // On recherche le dernier vote de l'utilisateur pour chaque proposition
         const userVote: any = votesArray.reverse().find((vote: any) => vote['auteur.id'] == userId);
@@ -101,7 +101,7 @@ export class TransformDataService {
     return observation;
   }
 
-  transformImageFromObjectToArray(images: Array<any>): Array<any> {
+  transformImageFromObjectToArray(images: any[]): any[] {
     if (images && typeof images === 'object' && !Array.isArray(images)) {
       // Convertir l'objet en tableau
       images = Object.values(images);

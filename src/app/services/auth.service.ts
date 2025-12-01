@@ -14,9 +14,9 @@ export class AuthService {
 
   private authUrl = environment.serviceAuthBaseUrl;
   private delUser = environment.serviceUtilisateursBaseUrl;
-  userId = signal("");
-  user = signal<User | null>(null);
-  token = signal("")
+  readonly userId = signal("");
+  readonly user = signal<User | null>(null);
+  readonly token = signal("")
 
   http = inject(HttpClient)
   router = inject(Router)
@@ -91,7 +91,7 @@ export class AuthService {
       if (this.cookie) {
         this.identite().subscribe({
           next: (data: any) => {
-            let token = data.token;
+            const token = data.token;
             headers = headers.set("Authorization", token);
             observer.next(headers);
             observer.complete();

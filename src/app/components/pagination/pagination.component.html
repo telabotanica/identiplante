@@ -2,31 +2,31 @@
   <p style="margin: 0">{{entetes.total}} résultats</p>
 
   @if (entetes['href.precedent']) {
-    <div (click)="goToFirstPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
-      <img class="icon" alt="1" title="1er page" src="assets/icons/first_page_white.png">
+    <div aria-label=”Pagination” class="icon-div" role=”navigation” (click)="goToFirstPage()">
+      <img alt="1" class="icon" src="assets/icons/first_page_white.png" title="1er page">
     </div>
   }
 
   @if (entetes['href.precedent']) {
-    <div (click)="previousPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
-      <img class="icon" alt="1" title="page précédente" src="assets/icons/chevron_left_white.png">
+    <div aria-label=”Pagination” class="icon-div" role=”navigation” (click)="previousPage()">
+      <img alt="1" class="icon" src="assets/icons/chevron_left_white.png" title="page précédente">
     </div>
   }
 
   <p class="m-0"><label for="pageNumber-input"> Page: </label>
 
-  <input class="pageNumber-input" id="pageNumber-input" [value]="page" (keyup)="onPageInputKeyup($event)" type="number" min="1" max="{{lastPage}}" role=”navigation” aria-label=”Pagination”>
+  <input aria-label=”Pagination” class="pageNumber-input" id="pageNumber-input" max="{{lastPage}}" min="1" role=”navigation” type="number" [value]="page" (keyup)="onPageInputKeyup($event)">
   <span> / {{lastPage}}</span></p>
 
   @if (entetes['href.suivant']) {
-    <div (click)="nextPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
-      <img class="icon" alt="1" title="page précédente" src="assets/icons/chevron_right_white.png">
+    <div aria-label=”Pagination” class="icon-div" role=”navigation” (click)="nextPage()">
+      <img alt="1" class="icon" src="assets/icons/chevron_right_white.png" title="page précédente">
     </div>
   }
 
   @if (entetes['href.suivant']) {
-    <div (click)="goToLastPage()" role=”navigation” aria-label=”Pagination” class="icon-div">
-      <img class="icon" alt="1" title="page précédente" src="assets/icons/last_page_white.png">
+    <div aria-label=”Pagination” class="icon-div" role=”navigation” (click)="goToLastPage()">
+      <img alt="1" class="icon" src="assets/icons/last_page_white.png" title="page précédente">
     </div>
   }
 
@@ -42,10 +42,10 @@
 </div>
 @if (!bottomPagination) {
   <div class="flex-start tri-div">
-    <div (click)="commonService.sortObsBy('date_observation')" class="flex-center gap-0-5">
+    <div class="flex-center gap-0-5" (click)="commonService.sortObsBy('date_observation')">
       <span class="tri"
-        [ngClass]="{'active-tri': tri === 'date_observation'}"
-        title="tri par date d'observation">
+        title="tri par date d'observation"
+        [ngClass]="{'active-tri': tri === 'date_observation'}">
         @if(tri !== 'date_observation' || ordre === 'desc'){
           Récemment observées
         } @else {
@@ -54,15 +54,15 @@
       </span>
       @if (tri === 'date_observation') {
         <img
-          [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
           class="ordre-icon"
+          [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
           [title]="ordre === 'desc' ? 'tri par ordre décroissant' : 'tri par ordre croissant'">
       }
     </div>
-    <div (click)="commonService.sortObsBy('date_transmission')" class="flex-center gap-0-5">
+    <div class="flex-center gap-0-5" (click)="commonService.sortObsBy('date_transmission')">
       <span class="tri"
-        [ngClass]="{'active-tri': tri === 'date_transmission'}"
-        title="tri par date de transmission">
+        title="tri par date de transmission"
+        [ngClass]="{'active-tri': tri === 'date_transmission'}">
         @if(tri !== 'date_transmission' || ordre === 'desc'){
           Récemment transmises
         } @else {
@@ -71,15 +71,15 @@
       </span>
       @if (tri === 'date_transmission') {
         <img
-          [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
           class="ordre-icon"
+          [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
           [title]="ordre === 'desc' ? 'tri par ordre décroissant' : 'tri par ordre croissant'">
       }
     </div>
-    <div (click)="commonService.sortObsBy('nb_commentaires')" class="flex-center gap-0-5">
+    <div class="flex-center gap-0-5" (click)="commonService.sortObsBy('nb_commentaires')">
       <span class="tri"
-        [ngClass]="{'active-tri': tri === 'nb_commentaires'}"
-        title="tri par le nombre de commentaires">
+        title="tri par le nombre de commentaires"
+        [ngClass]="{'active-tri': tri === 'nb_commentaires'}">
         @if(tri !== 'nb_commentaires' || ordre === 'desc'){
           Le + de commentaires
         } @else {
@@ -88,8 +88,8 @@
       </span>
       @if (tri === 'nb_commentaires') {
         <img
-          [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
           class="ordre-icon"
+          [src]="ordre === 'desc' ? 'assets/icons/keyboard_arrow_down_green.png' : 'assets/icons/keyboard_arrow_up_green.png'"
           [title]="ordre === 'desc' ? 'tri par ordre décroissant' : 'tri par ordre croissant'">
       }
     </div>

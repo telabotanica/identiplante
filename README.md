@@ -1,6 +1,6 @@
 # Identiplante
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3, updated to Angular 20.3.14.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3, updated to Angular 21.0.1.
 
 Node v20 is needed.
 

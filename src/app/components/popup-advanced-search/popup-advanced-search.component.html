@@ -1,4 +1,4 @@
-<div id="popup-advanced-search" class="">
+<div class="" id="popup-advanced-search">
   <div class="close-section">
     <div class="button-link">
       <button (click)="clearSearch()"><span class="button-text">vider</span></button>
@@ -6,19 +6,19 @@
   </div>
 
   <div class="">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" id="advanced-search-form">
+    <form id="advanced-search-form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div id="search-left">
         <div class="form-group searchbar-container">
           <label for="masque">Recherche rapide par espèce ou famille</label>
           <div class="searchbar-container">
-            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="masque" formControlName="masque" placeholder="exemple: Acer campestre">
+            <img alt="search-icon" class="search-icon" src="assets/icons/search.png" title="recherchez">
+            <input formControlName="masque" id="masque" placeholder="exemple: Acer campestre">
           </div>
 
         </div>
         <div class="form-group">
           <label for="referentiel">Référentiel taxonomique</label>
-          <select id="referentiel" formControlName="referentiel" class="w-100">
+          <select class="w-100" formControlName="referentiel" id="referentiel">
             @for(referentiel of referentiels; ; track referentiel.code){
               <option [value]="referentiel.code">
                 {{ referentiel.nom }}
@@ -29,8 +29,8 @@
         <div class="form-group">
           <label for="famille">Famille (latin)</label>
           <div class="searchbar-container">
-            <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-            <input id="famille" formControlName="famille" placeholder="exemple: Pinaceae">
+            <img alt="search-icon" class="search-icon" src="assets/icons/search.png" title="recherchez">
+            <input formControlName="famille" id="famille" placeholder="exemple: Pinaceae">
           </div>
         </div>
         <!--        <div class="form-group">-->
@@ -43,31 +43,31 @@
     <div class="form-group">
       <label for="ns">Espèce (numéro taxonomique)</label>
       <div class="searchbar-container">
-        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-        <input id="ns" formControlName="ns" placeholder="exemple: 141">
+        <img alt="search-icon" class="search-icon" src="assets/icons/search.png" title="recherchez">
+        <input formControlName="ns" id="ns" placeholder="exemple: 141">
       </div>
     </div>
     @if (!useYearOnly) {
       <div class="form-group">
         <label for="date">Date</label>
-        <input id="date" formControlName="date" type="date">
+        <input formControlName="date" id="date" type="date">
       </div>
     }
     @if (useYearOnly) {
       <div class="form-group">
         <label for="year">Année</label>
-        <input id="year" formControlName="year" type="number">
+        <input formControlName="year" id="year" type="number">
       </div>
     }
     <div class="form-group-checkbox">
-      <input id="useYearOnly" type="checkbox" (change)="toggleUseYearOnly()" [checked]="useYearOnly">
+      <input id="useYearOnly" type="checkbox" [checked]="useYearOnly" (change)="toggleUseYearOnly()">
       <label for="useYearOnly">Rechercher seulement par année</label>
     </div>
   </div>
   <div id="search-right">
     <div class="form-group">
       <label for="pays">Pays</label>
-      <select id="pays" formControlName="pays" class="w-100">
+      <select class="w-100" formControlName="pays" id="pays">
         <option [value]=""></option>
         @for(pays of paysList; track pays.code_iso_3166_1){
           <option [value]="pays.code_iso_3166_1">
@@ -79,36 +79,36 @@
     <div class="form-group">
       <label for="departement">Département français (numéro)</label>
       <div class="searchbar-container">
-        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-        <input id="departement" formControlName="departement" placeholder="exemple: 34">
+        <img alt="search-icon" class="search-icon" src="assets/icons/search.png" title="recherchez">
+        <input formControlName="departement" id="departement" placeholder="exemple: 34">
       </div>
     </div>
     <div class="form-group">
       <label for="commune">Commune française</label>
       <div class="searchbar-container">
-        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-        <input id="commune" formControlName="commune" placeholder="exemple: Montpellier ou 34000">
+        <img alt="search-icon" class="search-icon" src="assets/icons/search.png" title="recherchez">
+        <input formControlName="commune" id="commune" placeholder="exemple: Montpellier ou 34000">
       </div>
     </div>
     <div class="form-group">
       <label for="auteur">Publié par</label>
       <div class="searchbar-container">
-        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-        <input id="auteur" formControlName="auteur" placeholder="exemple: Tela Botanica">
+        <img alt="search-icon" class="search-icon" src="assets/icons/search.png" title="recherchez">
+        <input formControlName="auteur" id="auteur" placeholder="exemple: Tela Botanica">
       </div>
     </div>
     <div class="form-group">
       <label for="tag">Tags</label>
       <div class="searchbar-container">
-        <img alt="search-icon" class="search-icon" title="recherchez" src="assets/icons/search.png">
-        <input id="tag" formControlName="tag" placeholder="exemple: DefiPhoto">
+        <img alt="search-icon" class="search-icon" src="assets/icons/search.png" title="recherchez">
+        <input formControlName="tag" id="tag" placeholder="exemple: DefiPhoto">
       </div>
     </div>
     <div class="form-group-checkbox">
-      <input id="pninscritsseulement" type="checkbox" formControlName="pninscritsseulement" checked>
+      <input checked formControlName="pninscritsseulement" id="pninscritsseulement" type="checkbox">
       <label for="pninscritsseulement">Masquer les observations anonymes envoyées via smartphone</label>
     </div>
-    <button type="submit" class="button-link"><span class="button-text">Rechercher</span></button>
+    <button class="button-link" type="submit"><span class="button-text">Rechercher</span></button>
   </div>
 </form>
 </div>

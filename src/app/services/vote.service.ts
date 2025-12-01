@@ -13,7 +13,7 @@ export class VoteService {
   constructor() { }
 
   voteUtilisateur(voteInfos: any): BehaviorSubject<string>{
-    let voteErrorMessageSubject = new BehaviorSubject<string>("");
+    const voteErrorMessageSubject = new BehaviorSubject<string>("");
 
     this.delService.saveVote(voteInfos).subscribe({
       next: (data) => {

@@ -1,4 +1,4 @@
-import {Component, effect, inject, signal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {User} from "../../models/user";
@@ -13,7 +13,7 @@ import {CommonService} from "../../services/common.service";
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   globalError = "";
   isLoggedIn = false;
@@ -42,12 +42,12 @@ export class LoginComponent {
   }
 
   ngOnInit(){
-    let cookie = this.cookieService.get(this.cookieName)
+    const cookie = this.cookieService.get(this.cookieName)
 
     if (cookie){
       this.isLoggedIn = true;
       this.authService.identite().subscribe((data) => {
-        let token = data.token ?? "";
+        const token = data.token ?? "";
         this.authService.token.set(token)
         this.authService.getUser(data.token).subscribe((userData) => {
           this.user = userData
@@ -64,7 +64,7 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value.username, this.loginForm.value.password)
         .subscribe({
           next: (data: any) => {
-            let token = data.token ?? "";
+            const token = data.token ?? "";
             this.authService.token.set(token)
             this.authService.getUser(token).subscribe((userData)=>{
               this.user = userData

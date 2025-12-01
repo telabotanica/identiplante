@@ -1,4 +1,4 @@
-import {Component, effect, inject} from '@angular/core';
+import {Component, effect, inject, OnInit} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
 import {environment} from "../../../environments/environment";
@@ -10,7 +10,7 @@ import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.compone
     templateUrl: './comparateur.component.html',
     styleUrl: './comparateur.component.css'
 })
-export class ComparateurComponent {
+export class ComparateurComponent implements OnInit {
   commonService = inject(CommonService)
   delService = inject(DelService)
 

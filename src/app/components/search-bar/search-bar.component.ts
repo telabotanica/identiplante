@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {PopupAdvancedSearchComponent} from "../popup-advanced-search/popup-advanced-search.component";
 
@@ -10,7 +10,7 @@ import {PopupAdvancedSearchComponent} from "../popup-advanced-search/popup-advan
     templateUrl: './search-bar.component.html',
     styleUrl: './search-bar.component.css'
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit {
   search = "";
   private pageInputTimeout: any;
   displayAdvancedPopup = false;

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
 
@@ -8,14 +8,14 @@ import {DelService} from "../../services/del.service";
     templateUrl: './popup-detail-votes.component.html',
     styleUrl: './popup-detail-votes.component.css'
 })
-export class PopupDetailVotesComponent {
+export class PopupDetailVotesComponent implements OnInit {
   @Output() closePopupEmitter = new EventEmitter<void>()
   @Input() commentaire: any;
   @Input() obs: any;
 
   obsId = "";
   commentaireId = "";
-  votes = <any>[];
+  votes = [] as any;
   dateTransmission = "";
   nomScientifique= '';
   pourCount = 0;
@@ -23,7 +23,7 @@ export class PopupDetailVotesComponent {
   contreCount = 0;
   contreStat = "";
   nbVotes = 0;
-  votesGrouped = <any>{ pour: [], contre: [] };
+  votesGrouped = { pour: [], contre: [] } as any;
 
   commonService = inject(CommonService)
 

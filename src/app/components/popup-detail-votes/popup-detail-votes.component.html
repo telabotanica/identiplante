@@ -1,9 +1,9 @@
-<div id="popup-detail-vote" class="popup">
+<div class="popup" id="popup-detail-vote">
   <div (click)="close()">
-    <img class="close-popup"
-         alt="close"
-         title="Fermer le détail des votes"
-         src="assets/icons/cancel_brown.png">
+    <img alt="close"
+         class="close-popup"
+         src="assets/icons/cancel_brown.png"
+         title="Fermer le détail des votes">
   </div>
 
   <div class="popup-body-container">
@@ -18,13 +18,13 @@
      <div class="flex-start gap-0-5 mb-2">
        <h6 class="uppercase">Votes contre ({{contreStat}}%)</h6>
        <img
-         [src]="commonService.getVoteIconSrc('dislike', [], { like: false, dislike: false })"
          alt="vote contre"
-         title="votes contre cette proposition"
          class="vote-icon"
-         width="34"
          height="34"
-         style="cursor: auto">
+         style="cursor: auto"
+         title="votes contre cette proposition"
+         width="34"
+         [src]="commonService.getVoteIconSrc('dislike', [], { like: false, dislike: false })">
      </div>
 
       @for (vote of votesGrouped.contre; track vote['vote.id']){
@@ -39,13 +39,13 @@
       <div class="flex-start gap-0-5 mb-2">
         <h6 class="uppercase mt-2 mb-2">Votes pour ({{pourStat}}%)</h6>
         <img
-          [src]="commonService.getVoteIconSrc('like', [], { like: false, dislike: false })"
           alt="vote pour"
-          title="votes pour cette proposition"
           class="vote-icon"
-          width="34"
           height="34"
-          style="cursor: auto">
+          style="cursor: auto"
+          title="votes pour cette proposition"
+          width="34"
+          [src]="commonService.getVoteIconSrc('like', [], { like: false, dislike: false })">
       </div>
 
       @for (vote of votesGrouped.pour; track vote['vote.id']){

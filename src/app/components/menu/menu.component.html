@@ -1,33 +1,33 @@
-<div class="burger-logo-div" (click)="toggleMenu()" [class.is-open]="isMenuOpen">
-  <img class="burger-logo" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/{{ isMenuOpen ? 'cancel_brown' : 'menu_black'}}.png" width="50" height="50">
+<div class="burger-logo-div" [class.is-open]="isMenuOpen" (click)="toggleMenu()">
+  <img alt="menu" class="burger-logo" height="50" src="assets/icons/{{ isMenuOpen ? 'cancel_brown' : 'menu_black'}}.png" title="Ouvrir/Fermer le menu" width="50">
 </div>
 
 <nav class="nav-div" [class.is-open]="isMenuOpen">
   <div class="menu-div">
-    <a id="ip-image" href="{{baseUrl}}" title="Accueil"><img class="w-100" src="assets/img/logos/logo_ip.png" alt="logo d'identiplante" width="200" height="57"></a>
+    <a href="{{baseUrl}}" id="ip-image" title="Accueil"><img alt="logo d'identiplante" class="w-100" height="57" src="assets/img/logos/logo_ip.png" width="200"></a>
 
     <div class="onglets-div">
-      <div [class.onglet-selected]="selectedOnglet === 'tous'"
-           class="onglet"
+      <div class="onglet"
+           [class.onglet-selected]="selectedOnglet === 'tous'"
            (click)="handleButtonClick('tous')">Toutes les observations
       </div>
-      <div [class.onglet-selected]="selectedOnglet === 'adeterminer' || selectedOnglet === ''"
-           class="onglet"
+      <div class="onglet"
+           [class.onglet-selected]="selectedOnglet === 'adeterminer' || selectedOnglet === ''"
            (click)="handleButtonClick('adeterminer')">A determiner
       </div>
-      <div [class.onglet-selected]="selectedOnglet === 'aconfirmer'"
-           class="onglet"
+      <div class="onglet"
+           [class.onglet-selected]="selectedOnglet === 'aconfirmer'"
            (click)="handleButtonClick('aconfirmer')">
         A vérifier
       </div>
-      <div [class.onglet-selected]="selectedOnglet === 'validees'"
-           class="onglet"
+      <div class="onglet"
+           [class.onglet-selected]="selectedOnglet === 'validees'"
            (click)="handleButtonClick('validees')">
         Vérifiées
       </div>
       @if (userId){
-      <div [class.onglet-selected]="selectedOnglet === 'monactivite'"
-            class="onglet"
+      <div class="onglet"
+            [class.onglet-selected]="selectedOnglet === 'monactivite'"
             (click)="handleButtonClick('monactivite')">
           Mon activité
       </div>
@@ -37,17 +37,17 @@
     <div class="logos-section">
       <div class="logo-tela">
         <a href="{{baseUrl}}" target="_blank" title="Tela Botanica">
-          <img [src]="logoTelaSrc" alt="logo_tela" width="86" height="22"
-               (mouseover)="onMouseOver('tela')"
-               (mouseout)="onMouseOut('tela')">
+          <img alt="logo_tela" height="22" width="86" [src]="logoTelaSrc"
+               (mouseout)="onMouseOut('tela')"
+               (mouseover)="onMouseOver('tela')">
         </a>
       </div>
 
       <div class="logo-pn">
         <a href="https://plantnet.org/" target="_blank" title="Plantnet">
-          <img [src]="logoPnSrc" alt="logo_Plantnet" width="86" height="18"
-               (mouseover)="onMouseOver('pn')"
-               (mouseout)="onMouseOut('pn')">
+          <img alt="logo_Plantnet" height="18" width="86" [src]="logoPnSrc"
+               (mouseout)="onMouseOut('pn')"
+               (mouseover)="onMouseOver('pn')">
         </a>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Observation} from "../../models/observation";
 import {CommonService} from "../../services/common.service";
 import {TransformDataService} from "../../services/transform-data.service";
@@ -9,7 +9,7 @@ import {TransformDataService} from "../../services/transform-data.service";
     templateUrl: './popup-big-image.component.html',
     styleUrl: './popup-big-image.component.css'
 })
-export class PopupBigImageComponent {
+export class PopupBigImageComponent implements OnInit, AfterViewInit {
   @Output() closePopupEmitter = new EventEmitter<void>()
   @Input() obs: any;
   @Input() selectedImage: any;
@@ -18,7 +18,7 @@ export class PopupBigImageComponent {
   dateTransmission = "";
   nomScientifique= '';
   @ViewChild('bigImageCarousel') bigImageCarousel!: ElementRef;
-  carouselOverflow: boolean = false;
+  carouselOverflow = false;
 
   commonService = inject(CommonService)
   transFormDataService = inject(TransformDataService)

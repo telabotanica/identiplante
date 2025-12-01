@@ -1,36 +1,36 @@
 <section id="main">
-  <app-menu id="menu" class=""></app-menu>
+  <app-menu class="" id="menu" />
 
   <section id="content">
     <div id="content-div">
 
-      <app-header></app-header>
+      <app-header />
 
-      <app-top-section></app-top-section>
+      <app-top-section />
 
       @if (isDetail) {
-        <app-detail></app-detail>
+        <app-detail />
       } @else {
         @if (isComparateur) {
-          <app-comparateur></app-comparateur>
+          <app-comparateur />
         } @else {
-          <app-contenu></app-contenu>
+          <app-contenu />
         }
       }
 
 
 
-      <img src="assets/icons/chevron_up_brown.png"
-        alt="up icon"
-        title="retourner en haut de la page"
+      <img alt="up icon"
         class="up-icon"
-        (click)="scrollToTop()"
-        [ngClass]="{'visible': showUpIcon}">
+        src="assets/icons/chevron_up_brown.png"
+        title="retourner en haut de la page"
+        [ngClass]="{'visible': showUpIcon}"
+        (click)="scrollToTop()">
 
     </div>
 
     @defer (on immediate){
-    <app-footer></app-footer>
+    <app-footer />
   }
 </section>
 

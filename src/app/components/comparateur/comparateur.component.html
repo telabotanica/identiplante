@@ -1,15 +1,15 @@
-<section id="comparateur" class="flex-center">
+<section class="flex-center" id="comparateur">
   <button class="button-selected"><a href="{{urlParamsString}}#obs~{{obs.id_observation}}" title="retour au détail de l'observation">Retour</a></button>
   <div id="comparateur-gauche">
     <div class="comparateur-image-container">
       <div class="comparateur-image-selected">
         @if(imageSelected){
         <img
-          (click)="openBigImage()"
-          class="comparateur-image"
           alt="{{nomScientifique}}"
+          class="comparateur-image"
           src="{{imageSelected['binaire.href']}}"
-          style="cursor: pointer;">
+          style="cursor: pointer;"
+          (click)="openBigImage()">
         }
         <p>{{nomScientifique}} observée le {{dateObservation}} par {{obs.auteur_nom}}</p>
 
@@ -23,7 +23,7 @@
 <!--     TODO carousel-->
       <div class="comparateur-image-selected">
         @if (imagesList.length > 0){
-          <img class="comparateur-image" alt=""  src="{{imagesList[0]['binaire.href']}}">
+          <img alt="" class="comparateur-image"  src="{{imagesList[0]['binaire.href']}}">
           <p>{{imagesList[0]["observation"]["determination.ns"]}} observée par {{imagesList[0]["observation"]["auteur.nom"]}}</p>
         }
       </div>
@@ -34,8 +34,7 @@
   <app-popup-big-image
     [obs]="obs"
     [selectedImage]="imageSelected"
-    (closePopupEmitter)="closeBigImagePopup()">
-  </app-popup-big-image>
+    (closePopupEmitter)="closeBigImagePopup()" />
   }
 
 

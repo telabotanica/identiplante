@@ -1,4 +1,4 @@
-import {Component, effect, inject, input} from '@angular/core';
+import {Component, effect, inject, input, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
@@ -21,7 +21,7 @@ import {TransformDataService} from "../../services/transform-data.service";
     templateUrl: './contenu.component.html',
     styleUrl: './contenu.component.css'
 })
-export class ContenuComponent {
+export class ContenuComponent implements OnInit {
   authService = inject(AuthService);
   commonService = inject(CommonService)
   delService = inject(DelService)
@@ -103,7 +103,7 @@ export class ContenuComponent {
         // On convertir les données reçu au format de notre objet
         const protocolesData = data[1]["resultats"];
         if (protocolesData && typeof protocolesData === 'object') {
-          let protocoles = this.mapProtocoles(Object.values(protocolesData));
+          const protocoles = this.mapProtocoles(Object.values(protocolesData));
           this.commonService.setProtocoles(protocoles)
         } else {
           console.error('Expected object for protocoles data but got:', protocolesData);
