@@ -1,15 +1,14 @@
 import {Component, inject, Input} from '@angular/core';
-import {NgClass, NgIf} from "@angular/common";
+import { NgClass } from "@angular/common";
 import {CommonService} from "../../services/common.service";
 import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-pagination',
     imports: [
-        NgIf,
-        FormsModule,
-        NgClass
-    ],
+    FormsModule,
+    NgClass
+],
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.css'
 })

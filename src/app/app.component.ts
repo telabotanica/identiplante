@@ -8,12 +8,12 @@ import {TopSectionComponent} from "./components/top-section/top-section.componen
 import {MenuComponent} from "./components/menu/menu.component";
 import {CommonService} from "./services/common.service";
 import {DetailComponent} from "./components/detail/detail.component";
-import {NgClass, NgIf} from "@angular/common";
+import { NgClass } from "@angular/common";
 import {ComparateurComponent} from "./components/comparateur/comparateur.component";
 
 @Component({
     selector: 'app-root',
-    imports: [FooterComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, NgIf, ComparateurComponent, NgClass],
+    imports: [FooterComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, ComparateurComponent, NgClass],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })

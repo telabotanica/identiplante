@@ -1,14 +1,11 @@
 import {Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild} from '@angular/core';
 import {Observation} from "../../models/observation";
 import {CommonService} from "../../services/common.service";
-import {NgForOf} from "@angular/common";
 import {TransformDataService} from "../../services/transform-data.service";
 
 @Component({
     selector: 'app-popup-big-image',
-    imports: [
-        NgForOf
-    ],
+    imports: [],
     templateUrl: './popup-big-image.component.html',
     styleUrl: './popup-big-image.component.css'
 })

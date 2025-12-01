@@ -1,7 +1,6 @@
 import {Component, effect, inject, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
-import {CommonModule} from "@angular/common";
 import {User} from "../../models/user";
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../environments/environment';
@@ -10,7 +9,7 @@ import {CommonService} from "../../services/common.service";
 
 @Component({
     selector: 'app-login',
-    imports: [ReactiveFormsModule, CommonModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css'
 })

@@ -2,125 +2,139 @@
 
   <div (click)="close()">
     <img class="close-popup"
-         alt="menu"
-         title="Ouvrir/Fermer la recherche avancée"
-         src="assets/icons/cancel_brown.png">
-  </div>
-
-  <div class="popup-body-container">
-    <div class="popup-header">
-      <div>
-        @if (commentType === 'determination'){
-        <h5>Proposer une détermination</h5>
-        } @else {
-        <h5>Ajouter un commentaire</h5>
-        }
-        <p>Les informations obligatoires sont indiquées par une astérisque</p>
-      </div>
-
-      <div>
-        <h5 class="uppercase">Vous</h5>
-        @if(user){
-        <p>Vous êtes connecté.e en tant que {{user.intitule}} </p>
-        } @else {
-        <p>Vous n'êtes pas connecté.e.</p>
-  <!--      <p><app-login class=""></app-login> ou remplissez les informations suivantes</p>-->
-        <p>Connectez-vous ou remplissez les informations suivantes</p>
-        }
-      </div>
+      alt="menu"
+      title="Ouvrir/Fermer la recherche avancée"
+      src="assets/icons/cancel_brown.png">
     </div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="popup-body">
-        <div class="form-group">
-          <label for="nom" >Nom *</label>
-          <input type="text" id="nom" formControlName="nom" required>
-          <div *ngIf="form.controls['nom'].invalid && form.controls['nom'].touched || form.controls['nom'].invalid && submitted" class="invalid-feedback">
-            Un nom est requis.
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="prenom" >Prénom *</label>
-          <input type="text" id="prenom" formControlName="prenom" required>
-          <div *ngIf="form.controls['prenom'].invalid && form.controls['prenom'].touched || form.controls['prenom'].invalid && submitted" class="invalid-feedback">
-            Un prénom est requis.
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="courriel">Email *</label>
-          <input type="courriel" id="courriel" formControlName="courriel" required>
-          <div *ngIf="form.controls['courriel'].invalid && form.controls['courriel'].touched || form.controls['courriel'].invalid && submitted" class="invalid-feedback">
-            Une adresse email valide est requise.
-          </div>
-        </div>
 
-        @if (commentType === 'determination'){
-        <h5 class="mt-2 mb-1 uppercase">Proposer un nom de plante</h5>
-        <div class="form-group">
-          <label for="referentiel">Référentiel taxonomique</label>
-          <select id="referentiel" formControlName="referentiel">
-            @for(referentiel of referentiels; ; track referentiel.code){
-              <option [value]="referentiel.code">
-                {{ referentiel.nom }}
-              </option>
-            }
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="nom_sel" >Taxon - Tapez les premières lettres d'un nom latin pour voir apparaitre des propositions *</label>
-          <input type="text" id="nom_sel" formControlName="nom_sel" required (input)="clearNomSelNn()">
-          <div *ngIf="form.controls['nom_sel'].invalid && form.controls['nom_sel'].touched || form.controls['nom_sel'].invalid && submitted" class="invalid-feedback">
-              Taxon est requis.
-          </div>
-
-           <ul *ngIf="taxonsList && taxonsList.length > 0" class="propositions-list">
-              <li *ngFor="let proposition of taxonsList" (click)="selectProposition(proposition)">
-              {{ proposition.ns }}
-              </li>
-          </ul>
-
-          </div>
-
-          <div >
-<!--            <label for="texte">Commentaire :</label>-->
-            <h5 class="mt-2 uppercase">Commentaire</h5>
-            <textarea id="texte" formControlName="texte"></textarea>
-          </div>
-
-        } @else {
+    <div class="popup-body-container">
+      <div class="popup-header">
         <div>
-<!--          <label for="texte">Commentaire * </label>-->
-          <h5 class="mt-2 uppercase">Commentaire *</h5>
-          <textarea id="texte" formControlName="texte" required></textarea>
-          <div *ngIf="form.controls['texte'].invalid && form.controls['texte'].touched || form.controls['texte'].invalid && submitted" class="invalid-feedback">
-            Un commentaire est requis.
+          @if (commentType === 'determination'){
+            <h5>Proposer une détermination</h5>
+          } @else {
+            <h5>Ajouter un commentaire</h5>
+          }
+          <p>Les informations obligatoires sont indiquées par une astérisque</p>
+        </div>
+
+        <div>
+          <h5 class="uppercase">Vous</h5>
+          @if(user){
+            <p>Vous êtes connecté.e en tant que {{user.intitule}} </p>
+          } @else {
+            <p>Vous n'êtes pas connecté.e.</p>
+            <!--      <p><app-login class=""></app-login> ou remplissez les informations suivantes</p>-->
+            <p>Connectez-vous ou remplissez les informations suivantes</p>
+          }
+        </div>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="popup-body">
+          <div class="form-group">
+            <label for="nom" >Nom *</label>
+            <input type="text" id="nom" formControlName="nom" required>
+            @if (form.controls['nom'].invalid && form.controls['nom'].touched || form.controls['nom'].invalid && submitted) {
+              <div class="invalid-feedback">
+                Un nom est requis.
+              </div>
+            }
           </div>
+          <div class="form-group">
+            <label for="prenom" >Prénom *</label>
+            <input type="text" id="prenom" formControlName="prenom" required>
+            @if (form.controls['prenom'].invalid && form.controls['prenom'].touched || form.controls['prenom'].invalid && submitted) {
+              <div class="invalid-feedback">
+                Un prénom est requis.
+              </div>
+            }
+          </div>
+          <div class="form-group">
+            <label for="courriel">Email *</label>
+            <input type="courriel" id="courriel" formControlName="courriel" required>
+            @if (form.controls['courriel'].invalid && form.controls['courriel'].touched || form.controls['courriel'].invalid && submitted) {
+              <div class="invalid-feedback">
+                Une adresse email valide est requise.
+              </div>
+            }
+          </div>
+
+          @if (commentType === 'determination'){
+            <h5 class="mt-2 mb-1 uppercase">Proposer un nom de plante</h5>
+            <div class="form-group">
+              <label for="referentiel">Référentiel taxonomique</label>
+              <select id="referentiel" formControlName="referentiel">
+                @for(referentiel of referentiels; ; track referentiel.code){
+                  <option [value]="referentiel.code">
+                    {{ referentiel.nom }}
+                  </option>
+                }
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="nom_sel" >Taxon - Tapez les premières lettres d'un nom latin pour voir apparaitre des propositions *</label>
+              <input type="text" id="nom_sel" formControlName="nom_sel" required (input)="clearNomSelNn()">
+              @if (form.controls['nom_sel'].invalid && form.controls['nom_sel'].touched || form.controls['nom_sel'].invalid && submitted) {
+                <div class="invalid-feedback">
+                  Taxon est requis.
+                </div>
+              }
+
+              @if (taxonsList && taxonsList.length > 0) {
+                <ul class="propositions-list">
+                  @for (proposition of taxonsList; track proposition) {
+                    <li (click)="selectProposition(proposition)">
+                      {{ proposition.ns }}
+                    </li>
+                  }
+                </ul>
+              }
+
+            </div>
+
+            <div >
+              <!--            <label for="texte">Commentaire :</label>-->
+              <h5 class="mt-2 uppercase">Commentaire</h5>
+              <textarea id="texte" formControlName="texte"></textarea>
+            </div>
+
+          } @else {
+            <div>
+              <!--          <label for="texte">Commentaire * </label>-->
+              <h5 class="mt-2 uppercase">Commentaire *</h5>
+              <textarea id="texte" formControlName="texte" required></textarea>
+              @if (form.controls['texte'].invalid && form.controls['texte'].touched || form.controls['texte'].invalid && submitted) {
+                <div class="invalid-feedback">
+                  Un commentaire est requis.
+                </div>
+              }
+            </div>
+          }
+
+          @if(showWarningPopup){
+            <div class="warning-popup">
+              <p>Attention : le taxon saisi n'est pas lié à un élément du référentiel.
+                La proposition pourra être votée mais pas acceptée par l'auteur de l'observation.
+              Avez-vous sélectionné le nom à partir de l'auto completion ?</p>
+              <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour corriger votre proposition.</p>
+              <button type="button" (click)="confirmSubmit()">OK</button>
+              <button type="button" (click)="cancelSubmit()" class="button-selected">Annuler</button>
+            </div>
+          }
         </div>
+        <div class="submit-section">
+          <button type="submit" class="button-primary"><span>Envoyer</span></button>
+        </div>
+
+
+        @if(commentErrorMessage){
+          <div><p class="invalid-feedback">{{commentErrorMessage}}</p></div>
         }
 
-        @if(showWarningPopup){
-        <div class="warning-popup">
-          <p>Attention : le taxon saisi n'est pas lié à un élément du référentiel.
-             La proposition pourra être votée mais pas acceptée par l'auteur de l'observation.
-             Avez-vous sélectionné le nom à partir de l'auto completion ?</p>
-          <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour corriger votre proposition.</p>
-          <button type="button" (click)="confirmSubmit()">OK</button>
-          <button type="button" (click)="cancelSubmit()" class="button-selected">Annuler</button>
-        </div>
-        }
-      </div>
-      <div class="submit-section">
-        <button type="submit" class="button-primary"><span>Envoyer</span></button>
-      </div>
+
+      </form>
 
 
-      @if(commentErrorMessage){
-      <div><p class="invalid-feedback">{{commentErrorMessage}}</p></div>
-      }
-
-
-    </form>
-
-
+    </div>
   </div>
-</div>

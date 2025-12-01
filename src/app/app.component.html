@@ -8,32 +8,30 @@
 
       <app-top-section></app-top-section>
 
-      <ng-container *ngIf="isDetail; else comparateurTemplate">
+      @if (isDetail) {
         <app-detail></app-detail>
-      </ng-container>
-
-      <ng-template #comparateurTemplate>
-        <ng-container *ngIf="isComparateur; else contenuTemplate">
+      } @else {
+        @if (isComparateur) {
           <app-comparateur></app-comparateur>
-        </ng-container>
-      </ng-template>
+        } @else {
+          <app-contenu></app-contenu>
+        }
+      }
 
-      <ng-template #contenuTemplate>
-        <app-contenu></app-contenu>
-      </ng-template>
+
 
       <img src="assets/icons/chevron_up_brown.png"
-           alt="up icon"
-           title="retourner en haut de la page"
-           class="up-icon"
-           (click)="scrollToTop()"
-           [ngClass]="{'visible': showUpIcon}">
+        alt="up icon"
+        title="retourner en haut de la page"
+        class="up-icon"
+        (click)="scrollToTop()"
+        [ngClass]="{'visible': showUpIcon}">
 
     </div>
 
     @defer (on immediate){
     <app-footer></app-footer>
-    }
-  </section>
+  }
+</section>
 
 </section>

@@ -3,65 +3,68 @@
     <h2 class="connexion font14" (click)="openLoginPopup()">Connexion</h2>
   } @else {
     <div class="flex-between no-wrap">
-       <p>{{displayName}}</p>
-       <div><button class="button-primary" (click)="logout()"><span>Se déconnecter</span></button></div>
+      <p>{{displayName}}</p>
+      <div><button class="button-primary" (click)="logout()"><span>Se déconnecter</span></button></div>
     </div>
   }
 
-  <div *ngIf="loginPopup" class="blur-background">
-    <div *ngIf="loginPopup" id="loginPopup" class="popup">
-
-      <div (click)="closeLoginPopup()" class="close-section">
-        <img class="close-popup" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/cancel_white.png">
-      </div>
-
-      <form class="flex-center-column"
+  @if (loginPopup) {
+    <div class="blur-background">
+      @if (loginPopup) {
+        <div id="loginPopup" class="popup">
+          <div (click)="closeLoginPopup()" class="close-section">
+            <img class="close-popup" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/cancel_white.png">
+          </div>
+          <form class="flex-center-column"
             [formGroup]="loginForm"
             (ngSubmit)="f.form.valid && onSubmit()"
             #f="ngForm">
-        <h4 class="mb-1">Connectez vous !</h4>
-
-        <div class="w-80 flex-between no-wrap">
-          <input name="username"
-                 type="username"
-                 formControlName="username"
-                 placeholder="email"
-                 class="input-text"
-                 [class.input-filled]="loginForm.get('username')?.value"
-                 [class.input-empty]="!loginForm.get('username')?.value">
-          <div *ngIf="!loginForm.get('username')?.valid && f.submitted" class="invalid-feedback w-100">
-            Le nom d'utilisateur est obligatoire !
+            <h4 class="mb-1">Connectez vous !</h4>
+            <div class="w-80 flex-between no-wrap">
+              <input name="username"
+                type="username"
+                formControlName="username"
+                placeholder="email"
+                class="input-text"
+                [class.input-filled]="loginForm.get('username')?.value"
+                [class.input-empty]="!loginForm.get('username')?.value">
+              @if (!loginForm.get('username')?.valid && f.submitted) {
+                <div class="invalid-feedback w-100">
+                  Le nom d'utilisateur est obligatoire !
+                </div>
+              }
+            </div>
+            <div class="w-80 flex-between no-wrap">
+              <input type="password"
+                formControlName="password"
+                placeholder="Mot de passe"
+                class="input-text"
+                [class.input-filled]="loginForm.get('password')?.value"
+                [class.input-empty]="!loginForm.get('password')?.value">
+              @if (!loginForm.get('password')?.valid && f.submitted) {
+                <div class="invalid-feedback w-100">
+                  Un mot de passe est obligatoire !
+                </div>
+              }
+            </div>
+            <div class="w-80 flex-center no-wrap">
+              <button class="button-accent"><span>Se connecter</span></button>
+              @if (f.submitted && globalError) {
+                <div class="invalid-feedback">
+                  <p>{{globalError}}, veuillez vérifier vos identifiants</p>
+                </div>
+              }
+            </div>
+          </form>
+          <hr class="mt-2">
+          <div class="flex-center-column">
+            <h4 class="mb-1">Pas encore de compte ?</h4>
+            <div>
+              <button class="button-accent"><a href="{{inscriptionUrl}}" target="_blank">S'inscrire</a></button>
+            </div>
           </div>
         </div>
-
-        <div class="w-80 flex-between no-wrap">
-          <input type="password"
-                 formControlName="password"
-                 placeholder="Mot de passe"
-                 class="input-text"
-                 [class.input-filled]="loginForm.get('password')?.value"
-                 [class.input-empty]="!loginForm.get('password')?.value">
-          <div *ngIf="!loginForm.get('password')?.valid && f.submitted" class="invalid-feedback w-100">
-            Un mot de passe est obligatoire !
-          </div>
-        </div>
-
-        <div class="w-80 flex-center no-wrap">
-          <button class="button-accent"><span>Se connecter</span></button>
-
-          <div *ngIf="f.submitted && globalError" class="invalid-feedback">
-            <p>{{globalError}}, veuillez vérifier vos identifiants</p>
-          </div>
-        </div>
-      </form>
-
-      <hr class="mt-2">
-      <div class="flex-center-column">
-        <h4 class="mb-1">Pas encore de compte ?</h4>
-        <div>
-        <button class="button-accent"><a href="{{inscriptionUrl}}" target="_blank">S'inscrire</a></button>
-        </div>
-      </div>
+      }
     </div>
-  </div>
+  }
 </div>

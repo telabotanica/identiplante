@@ -2,7 +2,6 @@ import {Component, effect, ElementRef, EventEmitter, inject, Input, Output, sign
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonService} from "../../services/common.service";
 import {Referentiel} from "../../models/referentiel";
-import {NgFor, NgIf} from "@angular/common";
 import {AuthService} from "../../services/auth.service";
 import {User} from "../../models/user";
 import {DelService} from "../../services/del.service";
@@ -10,7 +9,7 @@ import {debounceTime, distinctUntilChanged, map, of, switchMap} from "rxjs";
 
 @Component({
     selector: 'app-popup-ajout-commentaire',
-    imports: [ReactiveFormsModule, NgIf, NgFor],
+    imports: [ReactiveFormsModule],
     templateUrl: './popup-ajout-commentaire.component.html',
     styleUrl: './popup-ajout-commentaire.component.css'
 })

@@ -1,14 +1,12 @@
 import {Component, inject} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {PopupAdvancedSearchComponent} from "../popup-advanced-search/popup-advanced-search.component";
-import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-search-bar',
     imports: [
-        PopupAdvancedSearchComponent,
-        NgIf
-    ],
+    PopupAdvancedSearchComponent
+],
     templateUrl: './search-bar.component.html',
     styleUrl: './search-bar.component.css'
 })
