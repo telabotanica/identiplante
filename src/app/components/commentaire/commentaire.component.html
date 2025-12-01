@@ -1,5 +1,5 @@
 @for (commentaire of commentaires; track commentaire) {
-  <div [ngStyle]="{'margin-left.px': niveau * 20}" class="commentaire-container">
+  <div class="commentaire-container" [ngStyle]="{'margin-left.px': niveau * 20}">
     @if(commentaire.texte){
       <div
         class="flex-column-start mb-1"
@@ -11,11 +11,11 @@
         <p class="font-16 text-black">Par {{commentaire['auteur.prenom']}} {{commentaire['auteur.nom']}}, le {{commentaire.displayDate}}</p>
         <p class="card-texte">{{ commentaire.texte }}</p>
         @if(userId && userId == commentaire['auteur.id'] && !commentaire.reponses){
-          <img class="delete-comment"
-            (click)="affichagePopupConfirmation(commentaire.id_commentaire)"
-            alt="menu"
+          <img alt="menu"
+            class="delete-comment"
+            src="assets/icons/cancel_brown.png"
             title="Supprimer le commentaire"
-            src="assets/icons/cancel_brown.png">
+            (click)="affichagePopupConfirmation(commentaire.id_commentaire)">
           }
           @if(commentaire.texte ){
             <div class="flex-end mt-1">
@@ -26,18 +26,17 @@
       }
       @if (commentaire.reponses) {
         <div>
-          <app-commentaire [commentaires]="commentaire.reponses" [niveau]="niveau + 1"></app-commentaire>
+          <app-commentaire [commentaires]="commentaire.reponses" [niveau]="niveau + 1" />
         </div>
       }
       @if (popupAddComment && popupAddCommentId == commentaire.id_commentaire){
         <app-popup-ajout-commentaire
-          [obsId]="commentaire.observation"
+          class="blur-background"
           [commentType]="commentType"
           [id_parent]="commentaire.id_commentaire"
+          [obsId]="commentaire.observation"
           [proposition]="commentaire.proposition"
-          (closePopupEmitter)="closeAddComment()"
-          class="blur-background">
-      </app-popup-ajout-commentaire>
+          (closePopupEmitter)="closeAddComment()" />
     }
     @if(showWarningPopup && warningPopUpId == commentaire.id_commentaire){
       <div class="warning-popup">
@@ -45,8 +44,8 @@
         <p class="text-black">"{{commentaire.texte}}"</p>
         <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
         <div class="flex-between">
-          <button type="button" (click)="cancelDeleteComment()" class="button-secondary">Annuler</button>
-          <button type="button" (click)="confirmerDeleteComment(commentaire.id_commentaire)" class="button-primary">OK</button>
+          <button class="button-secondary" type="button" (click)="cancelDeleteComment()">Annuler</button>
+          <button class="button-primary" type="button" (click)="confirmerDeleteComment(commentaire.id_commentaire)">OK</button>
         </div>
       </div>
     }

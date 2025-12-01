@@ -1,10 +1,10 @@
-<div id="popup-addComment" class="popup">
+<div class="popup" id="popup-addComment">
 
   <div (click)="close()">
-    <img class="close-popup"
-      alt="menu"
-      title="Ouvrir/Fermer la recherche avancée"
-      src="assets/icons/cancel_brown.png">
+    <img alt="menu"
+      class="close-popup"
+      src="assets/icons/cancel_brown.png"
+      title="Ouvrir/Fermer la recherche avancée">
     </div>
 
     <div class="popup-body-container">
@@ -33,7 +33,7 @@
         <div class="popup-body">
           <div class="form-group">
             <label for="nom" >Nom *</label>
-            <input type="text" id="nom" formControlName="nom" required>
+            <input formControlName="nom" id="nom" required type="text">
             @if (form.controls['nom'].invalid && form.controls['nom'].touched || form.controls['nom'].invalid && submitted) {
               <div class="invalid-feedback">
                 Un nom est requis.
@@ -42,7 +42,7 @@
           </div>
           <div class="form-group">
             <label for="prenom" >Prénom *</label>
-            <input type="text" id="prenom" formControlName="prenom" required>
+            <input formControlName="prenom" id="prenom" required type="text">
             @if (form.controls['prenom'].invalid && form.controls['prenom'].touched || form.controls['prenom'].invalid && submitted) {
               <div class="invalid-feedback">
                 Un prénom est requis.
@@ -51,7 +51,7 @@
           </div>
           <div class="form-group">
             <label for="courriel">Email *</label>
-            <input type="courriel" id="courriel" formControlName="courriel" required>
+            <input formControlName="courriel" id="courriel" required type="courriel">
             @if (form.controls['courriel'].invalid && form.controls['courriel'].touched || form.controls['courriel'].invalid && submitted) {
               <div class="invalid-feedback">
                 Une adresse email valide est requise.
@@ -63,7 +63,7 @@
             <h5 class="mt-2 mb-1 uppercase">Proposer un nom de plante</h5>
             <div class="form-group">
               <label for="referentiel">Référentiel taxonomique</label>
-              <select id="referentiel" formControlName="referentiel">
+              <select formControlName="referentiel" id="referentiel">
                 @for(referentiel of referentiels; ; track referentiel.code){
                   <option [value]="referentiel.code">
                     {{ referentiel.nom }}
@@ -74,7 +74,7 @@
 
             <div class="form-group">
               <label for="nom_sel" >Taxon - Tapez les premières lettres d'un nom latin pour voir apparaitre des propositions *</label>
-              <input type="text" id="nom_sel" formControlName="nom_sel" required (input)="clearNomSelNn()">
+              <input formControlName="nom_sel" id="nom_sel" required type="text" (input)="clearNomSelNn()">
               @if (form.controls['nom_sel'].invalid && form.controls['nom_sel'].touched || form.controls['nom_sel'].invalid && submitted) {
                 <div class="invalid-feedback">
                   Taxon est requis.
@@ -96,14 +96,14 @@
             <div >
               <!--            <label for="texte">Commentaire :</label>-->
               <h5 class="mt-2 uppercase">Commentaire</h5>
-              <textarea id="texte" formControlName="texte"></textarea>
+              <textarea formControlName="texte" id="texte"></textarea>
             </div>
 
           } @else {
             <div>
               <!--          <label for="texte">Commentaire * </label>-->
               <h5 class="mt-2 uppercase">Commentaire *</h5>
-              <textarea id="texte" formControlName="texte" required></textarea>
+              <textarea formControlName="texte" id="texte" required></textarea>
               @if (form.controls['texte'].invalid && form.controls['texte'].touched || form.controls['texte'].invalid && submitted) {
                 <div class="invalid-feedback">
                   Un commentaire est requis.
@@ -119,12 +119,12 @@
               Avez-vous sélectionné le nom à partir de l'auto completion ?</p>
               <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour corriger votre proposition.</p>
               <button type="button" (click)="confirmSubmit()">OK</button>
-              <button type="button" (click)="cancelSubmit()" class="button-selected">Annuler</button>
+              <button class="button-selected" type="button" (click)="cancelSubmit()">Annuler</button>
             </div>
           }
         </div>
         <div class="submit-section">
-          <button type="submit" class="button-primary"><span>Envoyer</span></button>
+          <button class="button-primary" type="submit"><span>Envoyer</span></button>
         </div>
 
 

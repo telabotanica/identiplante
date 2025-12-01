@@ -1,20 +1,19 @@
 <section id="contenu">
   @if(!isLoading){
 
-    <app-pagination [entetes]="observationsEntete"></app-pagination>
+    <app-pagination [entetes]="observationsEntete" />
 
     <div class="cards-container mt-2">
       @for (observation of observations; track observation.id_observation){
         <app-card
-          [obs]="observation"
           id="{{observation.id_observation}}"
-          [ngClass]="{'w-100': extendedObs.includes(observation.id_observation)}">
-        </app-card>
+          [ngClass]="{'w-100': extendedObs.includes(observation.id_observation)}"
+          [obs]="observation" />
       }
     </div>
 
   <div class="bottom-pagination">
-    <app-pagination [entetes]="observationsEntete" [bottomPagination]="true"></app-pagination>
+    <app-pagination [bottomPagination]="true" [entetes]="observationsEntete" />
   </div>
 
 

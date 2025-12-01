@@ -8,14 +8,14 @@ import {Protocole} from "../models/protocole";
   providedIn: 'root'
 })
 export class CommonService {
-  selectedOnglet = signal("");
+  readonly selectedOnglet = signal("");
   url = new URL(window.location.href)
-  urlParamsString = signal(this.url.search)
-  extendedObs = signal<string[]>([]);
-  obsAComparer = signal<any>([]);
-  comparerImage = signal("")
-  paysList = signal<Ontologie[]>([])
-  protocoles = signal<Protocole[]>([])
+  readonly urlParamsString = signal(this.url.search)
+  readonly extendedObs = signal<string[]>([]);
+  readonly obsAComparer = signal<any>([]);
+  readonly comparerImage = signal("")
+  readonly paysList = signal<Ontologie[]>([])
+  readonly protocoles = signal<Protocole[]>([])
 
   constructor() { }
 
@@ -41,7 +41,7 @@ export class CommonService {
 
   setAnyParmam(param: string, value: string){
     this.updateUrlParameter(param, value);
-    let url = new URL(window.location.href)
+    const url = new URL(window.location.href)
     this.setUrlParamsString(url.search)
   }
 
@@ -160,7 +160,7 @@ export class CommonService {
   }
 
   setExtendedObs(id: string){
-    let extendedObsArray = this.extendedObs();
+    const extendedObsArray = this.extendedObs();
     extendedObsArray.push(id)
     this.extendedObs.set(extendedObsArray);
   }
@@ -185,7 +185,7 @@ export class CommonService {
 
   deleteVotesDuplicate(votesArray: []){
     // Regrouper les votes par auteur.id
-    const groupedVotes: { [key: string]: any[] } = votesArray.reduce((acc: any, vote: any) => {
+    const groupedVotes: Record<string, any[]> = votesArray.reduce((acc: any, vote: any) => {
       if (!acc[vote['auteur.id']]) {
         acc[vote['auteur.id']] = [];
       }

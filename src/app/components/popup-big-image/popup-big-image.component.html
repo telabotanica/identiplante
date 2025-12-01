@@ -1,46 +1,46 @@
-<div id="popup-bigImage" class="popup">
+<div class="popup" id="popup-bigImage">
 
   <div (click)="close()">
-    <img class="close-popup"
-      alt="menu"
-      title="Ouvrir/Fermer la recherche avancée"
-      src="assets/icons/cancel_white.png">
+    <img alt="menu"
+      class="close-popup"
+      src="assets/icons/cancel_white.png"
+      title="Ouvrir/Fermer la recherche avancée">
     </div>
 
     <div id="bigImage-body-container">
       <div id="bigImage-upper-section">
         <div id="bigImage-left-section">
           @if(obs.images.length > 1){
-            <img class="bigImage-chevron"
-              alt="chevron gauche"
-              title="Image précédente"
+            <img alt="chevron gauche"
+              class="bigImage-chevron"
               src="assets/icons/chevron_left_white.svg"
+              title="Image précédente"
               (click)="scrollSelectedImage('left')">
           }
         </div>
 
         <div id="bigImage-centre-section">
           <div id="bigImage-image-section">
-            <a target="_blank" href="{{selectedImage['binaire.href']}}" title="cliquez pour ouvrir l'image originale dans un nouvel onglet" class="h-100">
+            <a class="h-100" href="{{selectedImage['binaire.href']}}" target="_blank" title="cliquez pour ouvrir l'image originale dans un nouvel onglet">
               <img
-                class="popup-full-image"
                 alt="{{obs.determination_ns}}"
+                class="popup-full-image"
                 src="{{selectedImage['binaire.href']}}"
                 (error)="onImageError($event)">
             </a>
           </div>
           <div id="bigImage-image-subtitles-section">
-            <div><img src="assets/Creative_Commons.png" alt="Logo creative commons"></div>
+            <div><img alt="Logo creative commons" src="assets/Creative_Commons.png"></div>
             <p class="text-white m-0 w-80">Image {{selectedImage['id_image']}}, {{nomScientifique}} par {{obs.auteur_nom}}, licence CC BY SA 2.0</p>
           </div>
         </div>
 
         <div id="bigImage-right-section">
           @if(obs.images.length > 1){
-            <img class="bigImage-chevron"
-              alt="chevron droite"
-              title="Image suivante"
+            <img alt="chevron droite"
+              class="bigImage-chevron"
               src="assets/icons/chevron_right_white.svg"
+              title="Image suivante"
               (click)="scrollSelectedImage('right')">
           }
         </div>
@@ -48,22 +48,22 @@
 
       <div id="bigImage-lower-section">
         @if(carouselOverflow){
-          <img src="assets/icons/chevron_left_white.svg" alt="Scroll left" class="scroll-icon" (click)="scrollImages('left')">
+          <img alt="Scroll left" class="scroll-icon" src="assets/icons/chevron_left_white.svg" (click)="scrollImages('left')">
         }
 
-        <div id="bigImage-carousel" #bigImageCarousel>
+        <div #bigImageCarousel id="bigImage-carousel">
           @for (image of images; track image; let i = $index) {
             <div
               class="thumbnail"
-              (click)="changeSelectedImage(image)"
-              [class.selected]="image === selectedImage">
-              <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation">
+              [class.selected]="image === selectedImage"
+              (click)="changeSelectedImage(image)">
+              <img alt="Image de l'observation" height="90" width="115" [src]="image['binaire.href']">
             </div>
           }
         </div>
 
         @if(carouselOverflow){
-          <img src="assets/icons/chevron_right_white.svg" alt="Scroll right" class="scroll-icon" (click)="scrollImages('right')">
+          <img alt="Scroll right" class="scroll-icon" src="assets/icons/chevron_right_white.svg" (click)="scrollImages('right')">
         }
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {Component, effect, inject} from '@angular/core';
+import {Component, effect, inject, OnInit} from '@angular/core';
 import { environment } from '../../../environments/environment';
 import {SearchBarComponent} from "../search-bar/search-bar.component";
 import {ActivatedRoute} from "@angular/router";
@@ -12,7 +12,7 @@ import {CommonService} from "../../services/common.service";
     templateUrl: './top-section.component.html',
     styleUrl: './top-section.component.css'
 })
-export class TopSectionComponent {
+export class TopSectionComponent implements OnInit {
   route = inject(ActivatedRoute)
   commonService = inject(CommonService)
 

@@ -11,23 +11,23 @@
   @if (loginPopup) {
     <div class="blur-background">
       @if (loginPopup) {
-        <div id="loginPopup" class="popup">
-          <div (click)="closeLoginPopup()" class="close-section">
-            <img class="close-popup" alt="menu" title="Ouvrir/Fermer le menu" src="assets/icons/cancel_white.png">
+        <div class="popup" id="loginPopup">
+          <div class="close-section" (click)="closeLoginPopup()">
+            <img alt="menu" class="close-popup" src="assets/icons/cancel_white.png" title="Ouvrir/Fermer le menu">
           </div>
-          <form class="flex-center-column"
+          <form #f="ngForm"
+            class="flex-center-column"
             [formGroup]="loginForm"
-            (ngSubmit)="f.form.valid && onSubmit()"
-            #f="ngForm">
+            (ngSubmit)="f.form.valid && onSubmit()">
             <h4 class="mb-1">Connectez vous !</h4>
             <div class="w-80 flex-between no-wrap">
-              <input name="username"
-                type="username"
+              <input class="input-text"
                 formControlName="username"
+                name="username"
                 placeholder="email"
-                class="input-text"
-                [class.input-filled]="loginForm.get('username')?.value"
-                [class.input-empty]="!loginForm.get('username')?.value">
+                type="username"
+                [class.input-empty]="!loginForm.get('username')?.value"
+                [class.input-filled]="loginForm.get('username')?.value">
               @if (!loginForm.get('username')?.valid && f.submitted) {
                 <div class="invalid-feedback w-100">
                   Le nom d'utilisateur est obligatoire !
@@ -35,12 +35,12 @@
               }
             </div>
             <div class="w-80 flex-between no-wrap">
-              <input type="password"
+              <input class="input-text"
                 formControlName="password"
                 placeholder="Mot de passe"
-                class="input-text"
-                [class.input-filled]="loginForm.get('password')?.value"
-                [class.input-empty]="!loginForm.get('password')?.value">
+                type="password"
+                [class.input-empty]="!loginForm.get('password')?.value"
+                [class.input-filled]="loginForm.get('password')?.value">
               @if (!loginForm.get('password')?.valid && f.submitted) {
                 <div class="invalid-feedback w-100">
                   Un mot de passe est obligatoire !

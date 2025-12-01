@@ -13,29 +13,29 @@
       <div id="detail-left">
         <div class="card-image-div-extended detail-image-div">
           <img
-            (click)="openBigImage()"
+            alt="Image de l'observation"
             class="card-image-extended detail-image"
             src="{{selectedImage['binaire.href']}}"
-            (error)="commonService.onImageError($event)"
-            alt="Image de l'observation"/>
+            (click)="openBigImage()"
+            (error)="commonService.onImageError($event)"/>
         </div>
 
         <div class="card-image-extended-subtitles detail-image-subtitles">
-          <div><img src="assets/Creative_Commons_white.png" alt="Logo creative commons"></div>
+          <div><img alt="Logo creative commons" src="assets/Creative_Commons_white.png"></div>
           <p>Par {{obs['auteur_nom']}} CC BY SA 2.0</p>
         </div>
 
         <div class="image-carousel-wrapper detail-carousel-wrapper">
-          <div id="image-carousel" #imageCarousel>
+          <div #imageCarousel id="image-carousel">
             @for (image of obs.images; track image; let i = $index) {
               <div class="thumbnail" (click)="changeSelectedImage(image)">
-                <img [src]="image['binaire.href']" width="115" height="90" alt="Image de l'observation">
+                <img alt="Image de l'observation" height="90" width="115" [src]="image['binaire.href']">
               </div>
             }
           </div>
 
           @if(obs.images && obs.images.length > 3){
-            <img src="assets/icons/chevron_right_brown.png" alt="Scroll right" class="scroll-icon" (click)="scrollImages()">
+            <img alt="Scroll right" class="scroll-icon" src="assets/icons/chevron_right_brown.png" (click)="scrollImages()">
           }
         </div>
 
@@ -44,14 +44,14 @@
 
           <div class="mb-2">
             <h6 class="mb-1">Vérifier votre détermination</h6>
-            <p><a href="https://www.tela-botanica.org/flore/france-metropolitaine/" target="_blank" class="underline-green" title="eflore">eflore</a></p>
+            <p><a class="underline-green" href="https://www.tela-botanica.org/flore/france-metropolitaine/" target="_blank" title="eflore">eflore</a></p>
           </div>
 
           <div>
             <h6 class="mb-1">Autres outils en ligne</h6>
-            <p><a href="https://www.tela-botanica.org/ressources/ressources-bibliographiques/ouvrages-numerises/" target="_blank" title="flores numérisées" class="underline-green">Flores numérisées</a></p>
-            <p><a href="https://www.tela-botanica.org/eflore/bonnierpda/Bonnier.html" target="_blank" title="Flore Bonnier interactive" class="underline-green">Flore Bonnier interactive</a></p>
-            <p><a href="https://www.tela-botanica.org/ressources/ressources-pedagogiques/cles-de-determination-en-ligne/" target="_blank" title="Clés de détermination" class="underline-green">Clés de détermination</a></p>
+            <p><a class="underline-green" href="https://www.tela-botanica.org/ressources/ressources-bibliographiques/ouvrages-numerises/" target="_blank" title="flores numérisées">Flores numérisées</a></p>
+            <p><a class="underline-green" href="https://www.tela-botanica.org/eflore/bonnierpda/Bonnier.html" target="_blank" title="Flore Bonnier interactive">Flore Bonnier interactive</a></p>
+            <p><a class="underline-green" href="https://www.tela-botanica.org/ressources/ressources-pedagogiques/cles-de-determination-en-ligne/" target="_blank" title="Clés de détermination">Clés de détermination</a></p>
           </div>
         </div>
 
@@ -74,7 +74,7 @@
               <p>Transmise le: <span class="text-black">{{dateTransmission}}</span></p>
               <p>Par: <span class="text-black">
                 @if(profilUrl){
-                  <a href="{{profilUrl}}" target="_blank" class="text-black">{{obs["auteur_nom"]}}</a>
+                  <a class="text-black" href="{{profilUrl}}" target="_blank">{{obs["auteur_nom"]}}</a>
                 } @else {
                   {{obs["auteur.nom"]}}
                 }
@@ -91,12 +91,12 @@
 
       </div>
 
-      <div id="detail-buttons" class="flex-start w-100 gap-1 mt-2">
-        <button (click)="openAddCommentOnObs('determination')" class="button-primary button-link-white"><span>Proposer une détermination</span></button>
-        <button (click)="openAddCommentOnObs('commentaire')" class="button-primary button-link-white"><span>Ajouter un commentaire</span></button>
+      <div class="flex-start w-100 gap-1 mt-2" id="detail-buttons">
+        <button class="button-primary button-link-white" (click)="openAddCommentOnObs('determination')"><span>Proposer une détermination</span></button>
+        <button class="button-primary button-link-white" (click)="openAddCommentOnObs('commentaire')"><span>Ajouter un commentaire</span></button>
       </div>
 
-      <div id="detail-propositions" class="mt-2">
+      <div class="mt-2" id="detail-propositions">
         <h5 class="uppercase mb-1">Propositions et échanges</h5>
         @if(commentaires.length < 1){
           <div class="proposition-container">
@@ -109,7 +109,7 @@
 
                 <div class="text-black">
                   @if(obs['determination_nn']){
-                    <a href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination_nn']}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{nomScientifique}}</a>
+                    <a class="text-black underline-green" href="{{telaUrl}}{{obs['determination.referentiel']}}-nn-{{obs['determination_nn']}}" target="_blank" title="lien vers eflore">{{nomScientifique}}</a>
                   } @else {
                     <span class="text-black">{{nomScientifique}}</span>
                   }
@@ -121,26 +121,26 @@
 
                 <div>
                   <img
-                    (click)="voter('1', '0', obs.id_observation)"
-                    [src]="commonService.getVoteIconSrc('like', [], isHovered)"
-                    (mouseover)="commonService.changeIconOnHoverSimple('like', true, isHovered)"
-                    (mouseout)="commonService.changeIconOnHoverSimple('like', false, isHovered)"
                     alt="vote pour"
+                    class="vote-icon"
                     title="voter pour cette proposition"
-                    class="vote-icon">
-                  <img (click)="voter('0', '0', obs.id_observation)"
-                    [src]="commonService.getVoteIconSrc('dislike', '', isHovered)"
-                    (mouseover)="commonService.changeIconOnHoverSimple('dislike', true, isHovered)"
-                    (mouseout)="commonService.changeIconOnHoverSimple('dislike', false, isHovered)"
-                    alt="vote contre"
+                    [src]="commonService.getVoteIconSrc('like', [], isHovered)"
+                    (click)="voter('1', '0', obs.id_observation)"
+                    (mouseout)="commonService.changeIconOnHoverSimple('like', false, isHovered)"
+                    (mouseover)="commonService.changeIconOnHoverSimple('like', true, isHovered)">
+                  <img alt="vote contre"
+                    class="vote-icon"
                     title="voter contre cette proposition"
-                    class="vote-icon">
+                    [src]="commonService.getVoteIconSrc('dislike', '', isHovered)"
+                    (click)="voter('0', '0', obs.id_observation)"
+                    (mouseout)="commonService.changeIconOnHoverSimple('dislike', false, isHovered)"
+                    (mouseover)="commonService.changeIconOnHoverSimple('dislike', true, isHovered)">
                 </div>
               </div>
               <div class="flex-start">
                 @if(isAdmin){
-                  <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
-                    <img src="assets/icons/close_pink.png" class="detail-icon" width=30 height=30 alt="close icon">
+                  <button class="button-accent button-link" title="Dépublier cette observation" (click)="affichagePopupConfirmation(obs.id_observation)">
+                    <img alt="close icon" class="detail-icon" height=30 src="assets/icons/close_pink.png" width=30>
                     <span>Dépublier</span>
                   </button>
                 }
@@ -177,13 +177,13 @@
 
                     <div class="text-black">
                       @if(commentaire.proposition_retenue === 1){
-                        <img src="assets/icons/IPcheck.png" alt="Proposition validée icon" title="Proposition validée" class="valid-icon">
+                        <img alt="Proposition validée icon" class="valid-icon" src="assets/icons/IPcheck.png" title="Proposition validée">
                       }
 
                       @if (!commentaire.nom_sel_nn){
                         <span class="text-black">{{commentaire.nom_sel}}</span>
                       } @else {
-                        <a href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore" class="text-black underline-green">{{commentaire.nom_sel}}</a>
+                        <a class="text-black underline-green" href="{{telaUrl}}{{commentaire.nom_referentiel}}-nn-{{commentaire.nom_sel_nn}}" target="_blank" title="lien vers eflore">{{commentaire.nom_sel}}</a>
                       }
 
                     </div>
@@ -194,23 +194,23 @@
 
                     <div>
                       <img
-                        (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
-                        [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
-                        (mouseover)="commonService.changeIconOnHover('like', commentaire, true)"
-                        (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
                         alt="vote pour"
+                        class="vote-icon"
                         title="voter pour cette proposition"
-                        class="vote-icon">
+                        [src]="commonService.getVoteIconSrc('like', commentaire, isHovered)"
+                        (click)="voter('1', commentaire.id_commentaire, obs.id_observation)"
+                        (mouseout)="commonService.changeIconOnHover('like', commentaire, false)"
+                        (mouseover)="commonService.changeIconOnHover('like', commentaire, true)">
                       <img
-                        (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
-                        [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
-                        (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)"
-                        (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
                         alt="vote contre"
+                        class="vote-icon"
                         title="voter contre cette proposition"
-                        class="vote-icon">
+                        [src]="commonService.getVoteIconSrc('dislike', commentaire,isHovered)"
+                        (click)="voter('0', commentaire.id_commentaire, obs.id_observation)"
+                        (mouseout)="commonService.changeIconOnHover('dislike', commentaire, false)"
+                        (mouseover)="commonService.changeIconOnHover('dislike', commentaire, true)">
                       @if(commentaire.votes && commentaire.votes.length > 0){
-                        <img (click)="openDetailVotes(commentaire.id_commentaire)" src="assets/icons/ipBulles_brown.png" alt="Détail des votes" title="Voir le détail des {{commentaire.votes.length}} vote(s)" class="vote-icon vote-detail-icon">
+                        <img alt="Détail des votes" class="vote-icon vote-detail-icon" src="assets/icons/ipBulles_brown.png" title="Voir le détail des {{commentaire.votes.length}} vote(s)" (click)="openDetailVotes(commentaire.id_commentaire)">
                       }
                     </div>
                   </div>
@@ -222,7 +222,7 @@
 
                     @if(commentaire.nom_sel_nn){
                       <button class="button-accent button-link" title="Valider la proposition" (click)="validerProposition(commentaire.id_commentaire, commentaire['auteur.id'])">
-                        <img src="assets/icons/ip_valid.png" class="detail-icon" alt="validate icon" width=30 height=30>
+                        <img alt="validate icon" class="detail-icon" height=30 src="assets/icons/ip_valid.png" width=30>
                         <span>Valider</span>
                       </button>
                     } @else {
@@ -232,17 +232,17 @@
                   }
 
                   @if(isAdmin && commentaire.proposition_initiale == 1){
-                    <button (click)="affichagePopupConfirmation(obs.id_observation)" class="button-accent button-link" title="Dépublier cette observation">
-                      <img src="assets/icons/close_pink.png"  class="detail-icon" width=30 height=30 alt="close icon">
+                    <button class="button-accent button-link" title="Dépublier cette observation" (click)="affichagePopupConfirmation(obs.id_observation)">
+                      <img alt="close icon"  class="detail-icon" height=30 src="assets/icons/close_pink.png" width=30>
                       <span>Dépublier</span>
                     </button>
                   }
                 </div>
 
                 <div class="reponses-proposition-div">
-                  <p (click)="openAddComment('reponse', commentaire.id_commentaire)" class="pointer uppercase text-black bold"><span class="button-text">Répondre</span></p>
+                  <p class="pointer uppercase text-black bold" (click)="openAddComment('reponse', commentaire.id_commentaire)"><span class="button-text">Répondre</span></p>
                   @if(commentaire.reponses || commentaire.texte){
-                    <app-commentaire [commentaires]="[commentaire]" [niveau]="0"></app-commentaire>
+                    <app-commentaire [commentaires]="[commentaire]" [niveau]="0" />
                   }
                 </div>
               </div>
@@ -250,22 +250,20 @@
               <!--    MODALS AREA     -->
               @if (popupAddCommentOnDetail && popupAddCommentOnDetailId === commentaire.id_commentaire){
                 <app-popup-ajout-commentaire
-                  [obsId]="commentaire.observation"
+                  class="blur-background"
                   [commentType]="commentType"
                   [id_parent]="commentaire.id_commentaire"
+                  [obsId]="commentaire.observation"
                   [proposition]="commentaire.proposition"
-                  (closePopupEmitter)="closeAddComment()"
-                  class="blur-background">
-                </app-popup-ajout-commentaire>
+                  (closePopupEmitter)="closeAddComment()" />
               }
 
               @if (popupDetailVotes === commentaire.id_commentaire){
                 <app-popup-detail-votes
+                  class="blur-background"
                   [commentaire]="commentaire"
                   [obs]="obs"
-                  (closePopupEmitter)="closeDetailVotes()"
-                  class="blur-background">
-                </app-popup-detail-votes>
+                  (closePopupEmitter)="closeDetailVotes()" />
               }
 
               @if(warningDeleteProposition && deletePropositionId == commentaire.id_commentaire){
@@ -274,7 +272,7 @@
                   <p>"{{commentaire.nom_sel}}"</p>
                   <p>Cliquez sur OK pour le supprimer malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
                   <button type="button" (click)="confirmerDeleteProposition(commentaire.id_commentaire)">OK</button>
-                  <button type="button" (click)="cancelDeleteProposition()" class="button-selected">Annuler</button>
+                  <button class="button-selected" type="button" (click)="cancelDeleteProposition()">Annuler</button>
                 </div>
               }
 
@@ -299,12 +297,12 @@
             }
           </div>
 
-          <div id="detail-commentaires" class="mt-2">
+          <div class="mt-2" id="detail-commentaires">
             <h5 class="uppercase mb-1">Commentaires libres</h5>
             @for(commentaire of commentairesGrouped.commentaire; track commentaire.id_commentaire){
               @if(commentaire.texte){
                 <div class="proposition-container">
-                  <app-commentaire [commentaires]="[commentaire]" [niveau]="0" [isComLibre]="true"></app-commentaire>
+                  <app-commentaire [commentaires]="[commentaire]" [isComLibre]="true" [niveau]="0" />
                 </div>
               }
             }
@@ -330,11 +328,10 @@
 
   @if (popupAddComment){
     <app-popup-ajout-commentaire
-      [obsId]="obs.id_observation"
+      class="blur-background"
       [commentType]="commentType"
-      (closePopupEmitter)="closeAddCommentOnObs()"
-      class="blur-background">
-    </app-popup-ajout-commentaire>
+      [obsId]="obs.id_observation"
+      (closePopupEmitter)="closeAddCommentOnObs()" />
   }
 
   @if(showWarningPopup){
@@ -342,20 +339,19 @@
       <p>Etes-vous sûr de vouloir dépublier cette observation ?</p>
       <p>Cliquez sur OK pour valider malgré tout, ou sur Annuler pour retourner sur le détail de l'observation.</p>
       <div class="flex-between">
-        <button type="button" (click)="cancelDepublier()" class="button-secondary">Annuler</button>
-        <button type="button" (click)="confirmerDepublier(obs.id_observation)" class="button-primary">OK</button>
+        <button class="button-secondary" type="button" (click)="cancelDepublier()">Annuler</button>
+        <button class="button-primary" type="button" (click)="confirmerDepublier(obs.id_observation)">OK</button>
       </div>
     </div>
   }
 
   @if (popupBigImage){
     <app-popup-big-image
+      class="blur-background"
+      [images]="obs.images"
       [obs]="obs"
       [selectedImage]="selectedImage"
-      [images]="obs.images"
-      (closePopupEmitter)="closeBigImagePopup()"
-      class="blur-background">
-    </app-popup-big-image>
+      (closePopupEmitter)="closeBigImagePopup()" />
   }
 
 </section>

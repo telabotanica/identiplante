@@ -1,16 +1,16 @@
 <footer>
   <div class="pictoplante-contact">
     <h5>
-      <a href="{{urlWidgetRemarque}}"
-          [attr.data-urlrapport]="urlWidgetRemarque"
+      <a class="text-white uppercase contact"
+          href="{{urlWidgetRemarque}}"
           target="_blank"
-          (click)="openWindow(urlWidgetRemarque)"
-          class="text-white uppercase contact">
+          [attr.data-urlrapport]="urlWidgetRemarque"
+          (click)="openWindow(urlWidgetRemarque)">
       Contactez-nous
       </a>
     </h5>
 
-    <h5 (click)="copyUrl()" class="share uppercase m-0">Partager cette page</h5>
+    <h5 class="share uppercase m-0" (click)="copyUrl()">Partager cette page</h5>
 
   </div>
 
@@ -18,15 +18,15 @@
     <p class="text-white font16">Projet financ&eacute; par</p>
     <p>
       <a class="logo_lr" href="https://www.ecologie.gouv.fr/" target="_blank">
-        <img [src]="logoSrc"
-             alt="logo_ministere"
-             title="Aller sur le site du ministère de la transition écologique"
+        <img alt="logo_ministere"
              class="logo_lr"
-             loading="lazy"
-             width="92"
              height="72"
-             (mouseover)="changeLogo(true)"
-             (mouseout)="changeLogo(false)">
+             loading="lazy"
+             title="Aller sur le site du ministère de la transition écologique"
+             width="92"
+             [src]="logoSrc"
+             (mouseout)="changeLogo(false)"
+             (mouseover)="changeLogo(true)">
       </a>
     </p>
   </div>

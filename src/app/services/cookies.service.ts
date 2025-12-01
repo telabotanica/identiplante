@@ -12,12 +12,12 @@ export class CookiesService {
   constructor(private cookieService: CookieService) { }
 
   checkUserLoggedIn(){
-    let token = this.cookieService.get(this.cookieName);
+    const token = this.cookieService.get(this.cookieName);
     return !!token;
   }
 
   userInfos(){
-    let token = this.cookieService.get(this.cookieName);
+    const token = this.cookieService.get(this.cookieName);
     return token ? this.decodeToken(token) : null;
   }
 

@@ -17,7 +17,7 @@ export function AuthInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
   const authService = inject(AuthService);
   const cookieService = inject(CookieService);
   const cookieName = environment.cookieName;
-  let user: User | null = authService.user();
+  const user: User | null = authService.user();
 
   return next(req);
 }

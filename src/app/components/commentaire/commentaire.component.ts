@@ -1,4 +1,4 @@
-import {Component, effect, inject, Input} from '@angular/core';
+import {Component, effect, inject, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-ajout-commentaire.component";
 import {AuthService} from "../../services/auth.service";
@@ -14,10 +14,10 @@ import {CommonService} from "../../services/common.service";
     templateUrl: './commentaire.component.html',
     styleUrl: './commentaire.component.css'
 })
-export class CommentaireComponent {
+export class CommentaireComponent implements OnInit {
   @Input() commentaires: any[] = [];
-  @Input() niveau: number = 0;
-  @Input() isComLibre: boolean = false;
+  @Input() niveau = 0;
+  @Input() isComLibre = false;
 
   authService = inject(AuthService);
   delService = inject(DelService)

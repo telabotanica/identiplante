@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import { NgClass } from "@angular/common";
 import {CommonService} from "../../services/common.service";
 import {FormsModule} from "@angular/forms";
@@ -12,15 +12,15 @@ import {FormsModule} from "@angular/forms";
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.css'
 })
-export class PaginationComponent {
+export class PaginationComponent implements OnInit {
   @Input() entetes: any;
   @Input() bottomPagination: any;
   commonService = inject(CommonService)
 
-  pas: string = "12";
-  page: string = "1";
-  tri: string = "date_transmission";
-  ordre: string= "desc";
+  pas = "12";
+  page = "1";
+  tri = "date_transmission";
+  ordre= "desc";
   lastPage = 1;
   private pageInputTimeout: any;
 

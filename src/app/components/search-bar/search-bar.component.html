@@ -1,23 +1,23 @@
 <div id="search-section">
   <!--  search + label-->
   <div id="search-with-label">
-    <label for="search-bar" class="text-white mb-1">Recherchez par espèce, genre, famille, département, commune, auteur, mot-clé.</label>
+    <label class="text-white mb-1" for="search-bar">Recherchez par espèce, genre, famille, département, commune, auteur, mot-clé.</label>
     <div id="searchBar">
       <div>
-        <img (click)="updateSearch()" class="search-icon" title="recherchez" src="assets/icons/search.png" alt="icone de recherche">
+        <img alt="icone de recherche" class="search-icon" src="assets/icons/search.png" title="recherchez" (click)="updateSearch()">
       </div>
       <input class="search-bar"
         id="search-bar"
-        [value]="search"
-        (keyup)="onPageInputKeyup($event)"
+        placeholder="Recherchez une plante à identifier"
         type="text"
-        placeholder="Recherchez une plante à identifier">
+        [value]="search"
+        (keyup)="onPageInputKeyup($event)">
       <div>
-        <img (click)="resetSearch()"
+        <img alt="cancel icon"
           class="cancel-icon"
-          alt="cancel icon"
+          src="assets/icons/cancel_brown.png"
           title="Effacer la recherche"
-          src="assets/icons/cancel_brown.png">
+          (click)="resetSearch()">
         </div>
       </div>
     </div>
@@ -26,27 +26,26 @@
     <div id="advanced-search-notopened">
       <span class="text-white">Recherche avancée</span>
       @if(!displayAdvancedPopup){
-        <img (click)="openAdvancedSearchPopUp()"
+        <img alt="Recherche avancée icone"
           class="advanced-search-icon"
-          alt="Recherche avancée icone"
-          title="Ouvrir l'onglet de recherche avancée"
+          height="40"
           src="assets/icons/chevron_down.png"
+          title="Ouvrir l'onglet de recherche avancée"
           width="40"
-          height="40">
+          (click)="openAdvancedSearchPopUp()">
       } @else {
-        <img (click)="openAdvancedSearchPopUp()"
+        <img alt="Recherche avancée icone"
           class="advanced-search-icon"
-          alt="Recherche avancée icone"
-          title="Fermer l'onglet de recherche avancée"
+          height="40"
           src="assets/icons/chevron_up_white.png"
+          title="Fermer l'onglet de recherche avancée"
           width="40"
-          height="40">
+          (click)="openAdvancedSearchPopUp()">
       }
     </div>
 
     @if (displayAdvancedPopup) {
       <app-popup-advanced-search
-        (closePopupEmitter)="closeAdvancedSearchPopUp()" class="w-100">
-      </app-popup-advanced-search>
+        class="w-100" (closePopupEmitter)="closeAdvancedSearchPopUp()" />
     }
   </div>

@@ -1,4 +1,4 @@
-import {Component, effect, ElementRef, EventEmitter, inject, Input, Output, signal} from '@angular/core';
+import {Component, effect, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonService} from "../../services/common.service";
 import {Referentiel} from "../../models/referentiel";
@@ -13,12 +13,12 @@ import {debounceTime, distinctUntilChanged, map, of, switchMap} from "rxjs";
     templateUrl: './popup-ajout-commentaire.component.html',
     styleUrl: './popup-ajout-commentaire.component.css'
 })
-export class PopupAjoutCommentaireComponent {
+export class PopupAjoutCommentaireComponent implements OnInit, OnDestroy {
   @Output() closePopupEmitter = new EventEmitter<void>()
   @Input() obsId: any;
   @Input() commentType: any;
-  @Input() id_parent: string = "";
-  @Input() proposition: string = "";
+  @Input() id_parent = "";
+  @Input() proposition = "";
 
   fb = inject(FormBuilder)
   commonService = inject(CommonService)

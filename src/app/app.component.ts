@@ -1,4 +1,4 @@
-import {Component, effect, HostListener, inject, runInInjectionContext} from '@angular/core';
+import {Component, effect, HostListener, inject, OnInit, runInInjectionContext} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FooterComponent} from "./components/footer/footer.component";
 import {HeaderComponent} from "./components/header/header.component";
@@ -17,7 +17,7 @@ import {ComparateurComponent} from "./components/comparateur/comparateur.compone
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'identiplante';
 
   authService = inject(AuthService);

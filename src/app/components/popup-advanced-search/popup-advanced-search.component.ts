@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Output} from '@angular/core';
+import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {Ontologie} from "../../models/ontologie";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Referentiel} from "../../models/referentiel";
@@ -12,7 +12,7 @@ import {CommonService} from "../../services/common.service";
     templateUrl: './popup-advanced-search.component.html',
     styleUrl: './popup-advanced-search.component.css'
 })
-export class PopupAdvancedSearchComponent {
+export class PopupAdvancedSearchComponent implements OnInit {
   @Output() closePopupEmitter = new EventEmitter<void>()
 
   commonService = inject(CommonService)
@@ -21,7 +21,7 @@ export class PopupAdvancedSearchComponent {
   paysList: Ontologie[] = this.commonService.paysList();
   form!: FormGroup;
   referentiels: Referentiel[] = [];
-  useYearOnly: boolean = false;
+  useYearOnly = false;
   url = new URL(window.location.href);
   urlParams = new URLSearchParams(this.url.searchParams);
   dateValue = "";
@@ -101,7 +101,7 @@ export class PopupAdvancedSearchComponent {
   }
 
   updateParamsInUrl(key: string, value: any){
-    let nomParametre = key === 'masque' ? key : 'masque.' + key
+    const nomParametre = key === 'masque' ? key : 'masque.' + key
     if (value && typeof value === 'string' && value !== ""){ // Si on a des données
       if (key === 'referentiel' && value === 'tous'){ // Si tous les référentiels sont sélectionnés on ne veut pas de paramètre de recherche spécifique
         value = null;

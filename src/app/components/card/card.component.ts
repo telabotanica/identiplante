@@ -1,4 +1,4 @@
-import {Component, effect, ElementRef, inject, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, ElementRef, inject, Input, OnInit, ViewChild} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.component";
 import {DelService} from "../../services/del.service";
@@ -21,10 +21,10 @@ import {TransformDataService} from "../../services/transform-data.service";
     templateUrl: './card.component.html',
     styleUrl: './card.component.css'
 })
-export class CardComponent {
+export class CardComponent implements OnInit, AfterViewInit {
   @Input() obs: any;
 
-  obsAdditionnalInfos = <any>[];
+  obsAdditionnalInfos = [] as any;
   dateObservation = "";
   dateTransmission = "";
   popupBigImage = false;
@@ -34,7 +34,7 @@ export class CardComponent {
   selectedImage: any;
   nomScientifique= '';
   isCardExtended = false;
-  commentaires = <any>[];
+  commentaires = [] as any;
   cookieName = environment.cookieName;
   voteErrorMessage = "";
   profilUrl = "";
@@ -61,7 +61,7 @@ export class CardComponent {
   pays: any[] = [];
 
   @ViewChild('obsImage', { static: true }) obsImage!: ElementRef<HTMLImageElement>;
-  isInView: boolean = false;
+  isInView = false;
 
   constructor() {
     effect(()=>{
@@ -101,7 +101,7 @@ export class CardComponent {
     }
 
     if (this.pays && this.obs.pays){
-      let nomPays = this.pays.find(pays => pays.code_iso_3166_1 === this.obs.pays);
+      const nomPays = this.pays.find(pays => pays.code_iso_3166_1 === this.obs.pays);
       this.displayedCountry = nomPays?.nom_fr ?? this.obs.pays;
     }
 
@@ -164,7 +164,7 @@ export class CardComponent {
   }
 
   voter(value: string, comId: string, obsId: string) {
-    let voteInfos = {
+    const voteInfos = {
       obsId: obsId,
       voteId: comId,
       user: this.userId,

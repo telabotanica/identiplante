@@ -1,4 +1,4 @@
-import {Component, effect, ElementRef, inject, ViewChild} from '@angular/core';
+import {Component, effect, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
@@ -25,7 +25,7 @@ import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.compone
     templateUrl: './detail.component.html',
     styleUrl: './detail.component.css'
 })
-export class DetailComponent {
+export class DetailComponent implements OnInit {
   route = inject(ActivatedRoute)
   commonService = inject(CommonService)
   delService = inject(DelService)
@@ -34,10 +34,10 @@ export class DetailComponent {
   voteService = inject(VoteService)
   transFormDataService = inject(TransformDataService)
 
-  obsId: string = "";
+  obsId = "";
   obs!: any;
   obsToCompare!: any;
-  commentaires = <any>[];
+  commentaires = [] as any;
   dateObservation = "";
   dateTransmission = "";
   nomScientifique= '';
@@ -54,7 +54,7 @@ export class DetailComponent {
   popupAddCommentOnDetail = false;
   popupAddCommentOnDetailId: string | null = null;
   commentType= "";
-  commentairesGrouped = <any>{ proposition: [], commentaire: [] };
+  commentairesGrouped = { proposition: [], commentaire: [] } as any;
   showWarningPopup = false;
   warningDeleteProposition = false;
   deletePropositionId: string | null = null;
@@ -120,8 +120,8 @@ export class DetailComponent {
             // On trie les propositions
             this.commentairesGrouped.proposition.sort((a: any, b: any) => {
               // Priorité à l'élément avec proposition_retenue === "1"
-              if (a.proposition_retenue === 1) return -1;
-              if (b.proposition_retenue === 1) return 1;
+              if (a.proposition_retenue === 1) {return -1;}
+              if (b.proposition_retenue === 1) {return 1;}
 
               // Si aucun des deux n'a proposition_retenue === "1", trier par score décroissant
               return b.score - a.score;
@@ -168,7 +168,7 @@ export class DetailComponent {
             ** Si id_parent == proposition -> on met direct dans réponses
             ** Sinon on va chercher un niveau au dessous et ainsi de suite
              */
-            let parent = this.trouverParent(this.commentairesGrouped.proposition, commentaire.id_parent)
+            const parent = this.trouverParent(this.commentairesGrouped.proposition, commentaire.id_parent)
             if (!parent.reponses){
               parent.reponses = []
             }
@@ -176,7 +176,7 @@ export class DetailComponent {
 
           } else { //C'est un commentaire non lié à une détermination
             // On recherche niveau par niveau si id_parent == id_commentaire
-            let parent = this.trouverParent(this.commentairesGrouped.commentaire, commentaire.id_parent)
+            const parent = this.trouverParent(this.commentairesGrouped.commentaire, commentaire.id_parent)
             if (!parent.reponses){
               parent.reponses = []
             }
@@ -189,16 +189,16 @@ export class DetailComponent {
 
   trouverParent(commentaires: any, idParent: any): any{
     for (const node of commentaires){
-      if (node.id_commentaire == idParent) return node
+      if (node.id_commentaire == idParent) {return node}
       if (node.reponses){
         const parent = this.trouverParent(node.reponses, idParent);
-        if (parent) return parent;
+        if (parent) {return parent;}
       }
     }
   }
 
   voter(value: string, comId: string, obsId: string) {
-    let voteInfos = {
+    const voteInfos = {
       obsId: obsId,
       voteId: comId,
       user: this.userId,
@@ -246,7 +246,7 @@ export class DetailComponent {
   }
 
   validerProposition(propositionId: string, auteurId: string){
-    let validationInfos = {
+    const validationInfos = {
       ['auteur.id']: auteurId,
       ['validateur.id']: this.userId
     }

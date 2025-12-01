@@ -1,4 +1,4 @@
-import {Component, effect, inject} from '@angular/core';
+import {Component, effect, inject, OnInit} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {AuthService} from "../../services/auth.service";
 import {environment} from "../../../environments/environment";
@@ -9,7 +9,7 @@ import {environment} from "../../../environments/environment";
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.css'
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
   commonService = inject(CommonService)
   authService = inject(AuthService);
 
@@ -18,8 +18,8 @@ export class MenuComponent {
   userId = this.authService.userId();
 
   baseUrl = environment.identiplanteUrl
-  logoTelaSrc: string = 'assets/img/logos/logo_tela.png';
-  logoPnSrc: string = 'assets/img/logos/logo_pn.png';
+  logoTelaSrc = 'assets/img/logos/logo_tela.png';
+  logoPnSrc = 'assets/img/logos/logo_pn.png';
 
   constructor() {
     effect(() => {
@@ -29,7 +29,7 @@ export class MenuComponent {
   }
 
   ngOnInit(): void {
-    let urlParams: { name: string, value: string }[] = this.commonService.readUrlParameters()
+    const urlParams: { name: string, value: string }[] = this.commonService.readUrlParameters()
     const masqueTypeParam = urlParams.find((param: { name: string, value: string }) => param.name === 'masque.type');
     if (masqueTypeParam) {
       this.commonService.setOnglet(masqueTypeParam.value)
