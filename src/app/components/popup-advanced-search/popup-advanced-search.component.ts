@@ -3,18 +3,16 @@ import {Ontologie} from "../../models/ontologie";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Referentiel} from "../../models/referentiel";
 import {CommonService} from "../../services/common.service";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-popup-advanced-search',
-  standalone: true,
-  imports: [
-    NgForOf,
-    ReactiveFormsModule,
-    NgIf
-  ],
-  templateUrl: './popup-advanced-search.component.html',
-  styleUrl: './popup-advanced-search.component.css'
+    selector: 'app-popup-advanced-search',
+    imports: [
+        ReactiveFormsModule,
+        NgIf
+    ],
+    templateUrl: './popup-advanced-search.component.html',
+    styleUrl: './popup-advanced-search.component.css'
 })
 export class PopupAdvancedSearchComponent {
   @Output() closePopupEmitter = new EventEmitter<void>()

@@ -129,6 +129,7 @@ export class DelService {
         })
       );
     } else {
+      headers = headers.set("Authorization", this.authService.token());
       return this.http.post(this.determinationsService + commentaireId, validationInfos, {headers})
     }
 

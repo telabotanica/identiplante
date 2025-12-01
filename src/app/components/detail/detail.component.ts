@@ -14,17 +14,16 @@ import {TransformDataService} from "../../services/transform-data.service";
 import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.component";
 
 @Component({
-  selector: 'app-detail',
-  standalone: true,
-  imports: [
-    PopupAjoutCommentaireComponent,
-    PopupDetailVotesComponent,
-    CommentaireComponent,
-    CommonModule,
-    PopupBigImageComponent
-  ],
-  templateUrl: './detail.component.html',
-  styleUrl: './detail.component.css'
+    selector: 'app-detail',
+    imports: [
+        PopupAjoutCommentaireComponent,
+        PopupDetailVotesComponent,
+        CommentaireComponent,
+        CommonModule,
+        PopupBigImageComponent
+    ],
+    templateUrl: './detail.component.html',
+    styleUrl: './detail.component.css'
 })
 export class DetailComponent {
   route = inject(ActivatedRoute)
@@ -259,7 +258,7 @@ export class DetailComponent {
       },
       error: (err) => {
         console.error(err)
-        this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter. Erreur: " + err.error.message
+        this.validationErrorMessage = "Une erreur s'est produite durant la validation, veuillez réessayer ultérieurement ou essayer de vous reconnecter. Erreur: " + err.error.message + ", " + err.error.error
       }
     })
   }

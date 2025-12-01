@@ -3,11 +3,10 @@ import {environment} from "../../../environments/environment";
 import {LoginComponent} from "../login/login.component";
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [LoginComponent],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+    selector: 'app-header',
+    imports: [LoginComponent],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.css'
 })
 export class HeaderComponent {
   showDescriptionText = false;

@@ -5,13 +5,12 @@ import {NgForOf} from "@angular/common";
 import {TransformDataService} from "../../services/transform-data.service";
 
 @Component({
-  selector: 'app-popup-big-image',
-  standalone: true,
-  imports: [
-    NgForOf
-  ],
-  templateUrl: './popup-big-image.component.html',
-  styleUrl: './popup-big-image.component.css'
+    selector: 'app-popup-big-image',
+    imports: [
+        NgForOf
+    ],
+    templateUrl: './popup-big-image.component.html',
+    styleUrl: './popup-big-image.component.css'
 })
 export class PopupBigImageComponent {
   @Output() closePopupEmitter = new EventEmitter<void>()

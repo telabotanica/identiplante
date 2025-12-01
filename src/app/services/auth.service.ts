@@ -16,6 +16,7 @@ export class AuthService {
   private delUser = environment.serviceUtilisateursBaseUrl;
   userId = signal("");
   user = signal<User | null>(null);
+  token = signal("")
 
   http = inject(HttpClient)
   router = inject(Router)

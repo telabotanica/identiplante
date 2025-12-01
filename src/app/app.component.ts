@@ -1,7 +1,6 @@
 import {Component, effect, HostListener, inject, runInInjectionContext} from '@angular/core';
-import {ActivatedRoute, RouterOutlet} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {FooterComponent} from "./components/footer/footer.component";
-import {LoginComponent} from "./components/login/login.component";
 import {HeaderComponent} from "./components/header/header.component";
 import {AuthService} from "./services/auth.service";
 import {ContenuComponent} from "./components/contenu/contenu.component";
@@ -13,11 +12,10 @@ import {NgClass, NgIf} from "@angular/common";
 import {ComparateurComponent} from "./components/comparateur/comparateur.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, FooterComponent, LoginComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, NgIf, ComparateurComponent, NgClass],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [FooterComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, NgIf, ComparateurComponent, NgClass],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'identiplante';
