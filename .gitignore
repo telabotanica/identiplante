@@ -43,5 +43,4 @@ Thumbs.db
 
 /src/environments/environment.prod.ts
 ~/
-package-lock.json
 deploy.sh
