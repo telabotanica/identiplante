@@ -126,7 +126,7 @@ export class DetailComponent implements OnInit {
               // Si aucun des deux n'a proposition_retenue === "1", trier par score décroissant
               return b.score - a.score;
             });
-            // console.log(this.obs)
+            console.log(this.obs)
             // console.log(this.commentaires)
             // console.log(this.commentairesGrouped)
           },

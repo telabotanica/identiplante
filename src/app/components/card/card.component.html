@@ -126,32 +126,37 @@
 
         <div class="card-extended-details-body">
           <div class="card-body-adjust-width">
-            <p>Référentiel: <span class="text-black uppercase">{{obs.determination_referentiel}}</span></p>
-            <p>Pays
+            <p>Référentiel: <span class="text-black uppercase bold">{{obs.determination_referentiel}}</span></p>
+            <p>Pays:
               @if(displayedCountry){
-                <span class="text-black">{{displayedCountry}}</span>
+                <span class="text-black bold">{{displayedCountry}}</span>
               }
             </p>
-            <p>Localité <br /><span class="text-black">{{obs.zone_geo}} ({{departement}})
+            <p>Localité: <br /><span class="text-black bold">{{obs.zone_geo}} ({{departement}})
               @if(obs.station){
                 , {{obs.station}}
               }
               @if(obsAdditionnalInfos.lieudit){ <br/>{{obsAdditionnalInfos.lieudit}} }
                 @if(obsAdditionnalInfos.milieu){ <br/>{{obsAdditionnalInfos.milieu}} }
                 </span>
-              </p>
-            </div>
+            </p>
+            <p>@if (obs.mots_cles_texte) {
+              Tags: <span class="text-black bold">{{obs.mots_cles_texte}}</span>
+            }</p>
+          </div>
 
-            <div>
-              <p>Observée le <span class="text-black">{{dateObservation}}</span></p>
-              <p>Publiée le <span class="text-black">{{dateTransmission}}</span></p>
-              <p>Certitude: <span class="text-black">{{obs.certitude}}</span></p>
-              <p>Source de l'observation: <span class="text-black">{{obs.input_source}}</span></p>
-              <p>Commentaire <br /><span class="text-black">
-                @if(obsAdditionnalInfos.commentaire){ {{obsAdditionnalInfos.commentaire}} }
-                </span></p>
-              </div>
+          <div>
+            <p>Observée le <span class="text-black bold">{{dateObservation}}</span></p>
+            <p>Publiée le <span class="text-black bold">{{dateTransmission}}</span></p>
+            <p>Certitude: <span class="text-black bold">{{obs.certitude}}</span></p>
+            <p>Source de l'observation: <span class="text-black bold">{{obs.input_source}}</span></p>
+            <p>Commentaire: <br /><span class="text-black bold">
+              @if(obsAdditionnalInfos.commentaire){
+                <span class="text-black bold">{{obsAdditionnalInfos.commentaire}} </span>
+              }
+              </span></p>
             </div>
+          </div>
 
             <div class="card-extended-details-title"><h4 class="mt-1">Propositions de déterminations</h4></div>
             <div class="propositions-layout">

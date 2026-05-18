@@ -62,17 +62,7 @@
           <h5 class="uppercase mb-2">Détails de l'observation</h5>
           <div id="detail-obs-container">
             <div id="detail-obs-left">
-              <p>Observée à: <span class="text-black">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
-              <p>Le: <span class="text-black">{{dateObservation}}</span></p>
-              <p>@if(obs.lieudit){ Lieu dit: <span class="text-black">{{obs.lieudit}}</span><br> }
-              @if(obs.station){ Station: <span class="text-black">{{obs.station}}</span><br> }
-              @if(obs.milieu){ Milieu: <span class="text-black">{{obs.milieu}}</span> }
-            </p>
-          </div>
-          <div id="detail-obs-right">
-            <div id="detail-transmission">
-              <p>Transmise le: <span class="text-black">{{dateTransmission}}</span></p>
-              <p>Par: <span class="text-black">
+              <p>Auteur: <span class="text-black">
                 @if(profilUrl){
                   <a class="text-black" href="{{profilUrl}}" target="_blank">{{obs["auteur_nom"]}}</a>
                 } @else {
@@ -82,6 +72,22 @@
                   <a href="mailto:{{obs['auteur_courriel']}}" target="_blank"> ({{obs['auteur_courriel']}})</a>
                 }
               </span></p>
+              <p>Lieu: <span class="text-black">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
+              <p>
+                @if(obs.lieudit){ Lieu dit: <span class="text-black bold">{{obs.lieudit}}</span><br> }
+                @if(obs.station){ Station: <span class="text-black bold">{{obs.station}}</span><br> }
+                @if(obs.milieu){ Milieu: <span class="text-black bold">{{obs.milieu}}</span> }
+              </p>
+              <p>Source de l'observation: <span class="text-black bold">{{obs.input_source}}</span></p>
+              <p>@if (obs.mots_cles_texte) {
+                Tags: <span class="text-black bold">{{obs.mots_cles_texte}}</span>
+              }</p>
+          </div>
+          <div id="detail-obs-right">
+            <div id="detail-transmission">
+              <p>Observée le <span class="text-black bold">{{dateObservation}}</span></p>
+              <p>Publiée le <span class="text-black bold">{{dateTransmission}}</span></p>
+              <p>Certitude: <span class="text-black bold">{{obs.certitude}}</span></p>
             </div>
             <div id="detail-obs-commentaire">
               <p>Commentaire: <span class="text-black">{{obs.commentaire}}</span></p>
