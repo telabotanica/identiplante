@@ -64,7 +64,7 @@
             <div id="detail-obs-left">
               <p>Auteur: <span class="text-black">
                 @if(profilUrl){
-                  <a class="text-black" href="{{profilUrl}}" target="_blank">{{obs["auteur_nom"]}}</a>
+                  <a class="text-black bold" href="{{profilUrl}}" target="_blank">{{obs["auteur_nom"]}}</a>
                 } @else {
                   {{obs["auteur.nom"]}}
                 }
@@ -72,7 +72,7 @@
                   <a href="mailto:{{obs['auteur_courriel']}}" target="_blank"> ({{obs['auteur_courriel']}})</a>
                 }
               </span></p>
-              <p>Lieu: <span class="text-black">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
+              <p>Lieu: <span class="text-black bold">{{obs.zone_geo}} @if(obs.id_zone_geo){ ({{departement}}) }, {{obs.pays}}</span></p>
               <p>
                 @if(obs.lieudit){ Lieu dit: <span class="text-black bold">{{obs.lieudit}}</span><br> }
                 @if(obs.station){ Station: <span class="text-black bold">{{obs.station}}</span><br> }
