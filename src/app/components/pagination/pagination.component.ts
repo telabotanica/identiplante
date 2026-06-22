@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import { NgClass } from "@angular/common";
 import {CommonService} from "../../services/common.service";
 import {FormsModule} from "@angular/forms";
@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
     NgClass
 ],
     templateUrl: './pagination.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './pagination.component.css'
 })
 export class PaginationComponent implements OnInit {

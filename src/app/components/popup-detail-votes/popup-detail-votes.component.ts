@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
 
@@ -6,6 +6,7 @@ import {DelService} from "../../services/del.service";
     selector: 'app-popup-detail-votes',
     imports: [],
     templateUrl: './popup-detail-votes.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './popup-detail-votes.component.css'
 })
 export class PopupDetailVotesComponent implements OnInit {

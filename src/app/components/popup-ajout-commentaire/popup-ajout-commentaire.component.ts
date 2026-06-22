@@ -1,4 +1,4 @@
-import {Component, effect, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, signal} from '@angular/core';
+import {Component, effect, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, signal, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonService} from "../../services/common.service";
 import {Referentiel} from "../../models/referentiel";
@@ -11,6 +11,7 @@ import {debounceTime, distinctUntilChanged, map, of, switchMap} from "rxjs";
     selector: 'app-popup-ajout-commentaire',
     imports: [ReactiveFormsModule],
     templateUrl: './popup-ajout-commentaire.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './popup-ajout-commentaire.component.css'
 })
 export class PopupAjoutCommentaireComponent implements OnInit, OnDestroy {

@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {PopupAdvancedSearchComponent} from "../popup-advanced-search/popup-advanced-search.component";
 
@@ -8,6 +8,7 @@ import {PopupAdvancedSearchComponent} from "../popup-advanced-search/popup-advan
     PopupAdvancedSearchComponent
 ],
     templateUrl: './search-bar.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './search-bar.component.css'
 })
 export class SearchBarComponent implements OnInit {

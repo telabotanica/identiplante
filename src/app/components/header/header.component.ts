@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {LoginComponent} from "../login/login.component";
 
@@ -6,6 +6,7 @@ import {LoginComponent} from "../login/login.component";
     selector: 'app-header',
     imports: [LoginComponent],
     templateUrl: './header.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './header.component.css'
 })
 export class HeaderComponent {

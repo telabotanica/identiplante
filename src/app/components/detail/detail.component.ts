@@ -1,4 +1,4 @@
-import {Component, effect, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
+import {Component, effect, ElementRef, inject, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
@@ -23,6 +23,7 @@ import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.compone
         PopupBigImageComponent
     ],
     templateUrl: './detail.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './detail.component.css'
 })
 export class DetailComponent implements OnInit {

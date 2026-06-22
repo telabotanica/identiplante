@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit} from '@angular/core';
+import {Component, effect, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import { environment } from '../../../environments/environment';
 import {SearchBarComponent} from "../search-bar/search-bar.component";
 import {ActivatedRoute} from "@angular/router";
@@ -10,6 +10,7 @@ import {CommonService} from "../../services/common.service";
         SearchBarComponent
     ],
     templateUrl: './top-section.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './top-section.component.css'
 })
 export class TopSectionComponent implements OnInit {

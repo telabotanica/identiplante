@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit} from '@angular/core';
+import {Component, effect, inject, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {AuthService} from "../../services/auth.service";
 import {environment} from "../../../environments/environment";
@@ -7,6 +7,7 @@ import {environment} from "../../../environments/environment";
     selector: 'app-menu',
     imports: [],
     templateUrl: './menu.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit {
