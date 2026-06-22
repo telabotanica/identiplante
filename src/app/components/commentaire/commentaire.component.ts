@@ -1,4 +1,4 @@
-import {Component, effect, inject, Input, OnInit} from '@angular/core';
+import {Component, effect, inject, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {PopupAjoutCommentaireComponent} from "../popup-ajout-commentaire/popup-ajout-commentaire.component";
 import {AuthService} from "../../services/auth.service";
@@ -12,6 +12,7 @@ import {CommonService} from "../../services/common.service";
         PopupAjoutCommentaireComponent
     ],
     templateUrl: './commentaire.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './commentaire.component.css'
 })
 export class CommentaireComponent implements OnInit {

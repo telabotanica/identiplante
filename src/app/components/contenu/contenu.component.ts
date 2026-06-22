@@ -1,4 +1,4 @@
-import {Component, effect, inject, input, OnInit} from '@angular/core';
+import {Component, effect, inject, input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {CommonService} from "../../services/common.service";
 import {DelService} from "../../services/del.service";
@@ -19,6 +19,7 @@ import {TransformDataService} from "../../services/transform-data.service";
         CommonModule
     ],
     templateUrl: './contenu.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './contenu.component.css'
 })
 export class ContenuComponent implements OnInit {

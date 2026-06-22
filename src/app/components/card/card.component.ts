@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, effect, ElementRef, inject, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, effect, ElementRef, inject, Input, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {CommonService} from "../../services/common.service";
 import {PopupBigImageComponent} from "../popup-big-image/popup-big-image.component";
 import {DelService} from "../../services/del.service";
@@ -19,6 +19,7 @@ import {TransformDataService} from "../../services/transform-data.service";
     PopupDetailVotesComponent
 ],
     templateUrl: './card.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './card.component.css'
 })
 export class CardComponent implements OnInit, AfterViewInit {

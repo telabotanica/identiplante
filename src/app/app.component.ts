@@ -1,4 +1,4 @@
-import {Component, effect, HostListener, inject, OnInit, runInInjectionContext} from '@angular/core';
+import {Component, effect, HostListener, inject, OnInit, runInInjectionContext, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FooterComponent} from "./components/footer/footer.component";
 import {HeaderComponent} from "./components/header/header.component";
@@ -15,6 +15,7 @@ import {ComparateurComponent} from "./components/comparateur/comparateur.compone
     selector: 'app-root',
     imports: [FooterComponent, HeaderComponent, ContenuComponent, TopSectionComponent, MenuComponent, DetailComponent, ComparateurComponent, NgClass],
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {

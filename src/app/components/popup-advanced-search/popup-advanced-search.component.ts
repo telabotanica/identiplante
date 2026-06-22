@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, inject, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {Ontologie} from "../../models/ontologie";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Referentiel} from "../../models/referentiel";
@@ -10,6 +10,7 @@ import {CommonService} from "../../services/common.service";
     ReactiveFormsModule
 ],
     templateUrl: './popup-advanced-search.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './popup-advanced-search.component.css'
 })
 export class PopupAdvancedSearchComponent implements OnInit {

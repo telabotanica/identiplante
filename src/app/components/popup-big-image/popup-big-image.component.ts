@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {Observation} from "../../models/observation";
 import {CommonService} from "../../services/common.service";
 import {TransformDataService} from "../../services/transform-data.service";
@@ -7,6 +7,7 @@ import {TransformDataService} from "../../services/transform-data.service";
     selector: 'app-popup-big-image',
     imports: [],
     templateUrl: './popup-big-image.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './popup-big-image.component.css'
 })
 export class PopupBigImageComponent implements OnInit, AfterViewInit {
